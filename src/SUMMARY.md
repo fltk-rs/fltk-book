@@ -29,3 +29,4 @@
 - [Dialogs](Dialogs.md)
 - [Custom widgets](Custom-Widgets.md)
 - [Animations](Animations.md)
+- [FAQ](FAQ.md)

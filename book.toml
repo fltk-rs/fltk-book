@@ -1,0 +1,6 @@
+[book]
+authors = ["MoAlyousef"]
+language = "en"
+multilingual = false
+src = "src"
+title = "fltk-book"

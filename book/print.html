@@ -1,0 +1,3438 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>fltk-book</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="Cross-Compiling.html"><strong aria-hidden="true">1.2.</strong> Cross Compiling</a></li><li class="chapter-item expanded "><a href="Fluid.html"><strong aria-hidden="true">1.3.</strong> Fluid</a></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">1.4.</strong> The App struct</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">1.5.</strong> Windows</a></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">1.6.</strong> Widgets</a></li><li class="chapter-item expanded "><a href="Buttons.html"><strong aria-hidden="true">1.7.</strong> Buttons</a></li><li class="chapter-item expanded "><a href="Labels.html"><strong aria-hidden="true">1.8.</strong> Labels</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">1.9.</strong> Events</a></li><li class="chapter-item expanded "><a href="Drag-&-Drop.html"><strong aria-hidden="true">1.10.</strong> Drag &amp; Drop</a></li><li class="chapter-item expanded "><a href="State-Management.html"><strong aria-hidden="true">1.11.</strong> State Management</a></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">1.12.</strong> Layouts</a></li><li class="chapter-item expanded "><a href="Colors.html"><strong aria-hidden="true">1.13.</strong> Colors</a></li><li class="chapter-item expanded "><a href="Fonts.html"><strong aria-hidden="true">1.14.</strong> Fonts</a></li><li class="chapter-item expanded "><a href="Drawing.html"><strong aria-hidden="true">1.15.</strong> Drawing things</a></li><li class="chapter-item expanded "><a href="Styling.html"><strong aria-hidden="true">1.16.</strong> Styling</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">1.17.</strong> Images</a></li><li class="chapter-item expanded "><a href="Group-widgets.html"><strong aria-hidden="true">1.18.</strong> Group widgets</a></li><li class="chapter-item expanded "><a href="Menus.html"><strong aria-hidden="true">1.19.</strong> Menus</a></li><li class="chapter-item expanded "><a href="Input-&-Output.html"><strong aria-hidden="true">1.20.</strong> Input &amp; Output</a></li><li class="chapter-item expanded "><a href="Valuators.html"><strong aria-hidden="true">1.21.</strong> Valuators</a></li><li class="chapter-item expanded "><a href="Text.html"><strong aria-hidden="true">1.22.</strong> Text</a></li><li class="chapter-item expanded "><a href="Browsers.html"><strong aria-hidden="true">1.23.</strong> Browsers</a></li><li class="chapter-item expanded "><a href="Trees.html"><strong aria-hidden="true">1.24.</strong> Trees</a></li><li class="chapter-item expanded "><a href="Tables.html"><strong aria-hidden="true">1.25.</strong> Tables</a></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">1.26.</strong> Dialogs</a></li><li class="chapter-item expanded "><a href="Custom-Widgets.html"><strong aria-hidden="true">1.27.</strong> Custom widgets</a></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">1.28.</strong> Animations</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">fltk-book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Welcome to the fltk-rs wiki!</p>
+<p>This is a work in progress for written tutorials targeting the fltk crate.</p>
+<p>FLTK is a cross-platform lightweight gui library.
+The library itself is written in C++98, which is highly-portable. This crate is written in Rust, and uses FFI to call into the FLTK wrapper written in C89 and C++11.</p>
+<p>The library has a minimalist architecture, and would be familiar to developers used to Object-Oriented gui libraries. The wrapper itself follows the same model which simplifies the documentation, since method names are identical or similar to their C++ equivalents. This makes referring the FLTK C++ documentation quite simpler since the methods basically map to each other.</p>
+<pre><code class="language-c++">int main() {
+    auto wind = new Fl_Window(100, 100, 400, 300, &quot;My Window&quot;);
+    wind-&gt;end();
+    wind-&gt;show();
+}
+</code></pre>
+<p>maps to:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    wind.end();
+    wind.show();
+}
+</code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><p>Rust (version &gt; 1.45), CMake (version &gt; 3.11), Git and a C++11 compiler need to be installed and in your PATH for a crossplatform build from source. This crate also offers a bundled form of fltk on selected platforms, this can be enabled using the fltk-bundled feature flag (which requires curl and tar to download and unpack the bundled libraries). If you have ninja-build installed, you can enable it using the &quot;use-ninja&quot; feature. This should accelerate build times significantly.</p>
+<ul>
+<li>Windows: No dependencies.</li>
+<li>MacOS: No dependencies.</li>
+<li>Linux: X11 and OpenGL development headers need to be installed for development. The libraries themselves are available on linux distros with a graphical user interface.</li>
+</ul>
+<p>For Debian-based GUI distributions, that means running:</p>
+<pre><code>$ sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
+</code></pre>
+<p>For RHEL-based GUI distributions, that means running:</p>
+<pre><code>$ sudo yum groupinstall &quot;X Software Development&quot; &amp;&amp; yum install pango-devel libXinerama-devel
+</code></pre>
+<p>For Arch-based GUI distributions, that means running:</p>
+<pre><code>$ sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
+</code></pre>
+<p>For Alpine linux:</p>
+<pre><code>$ apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
+</code></pre>
+<ul>
+<li>Android: Android Studio, Android Sdk, Android Ndk.</li>
+</ul>
+<h2 id="detailed-setup"><a class="header" href="#detailed-setup">Detailed setup</a></h2>
+<p>This section assumes you don't even have Rust installed, and is separated into different environments:</p>
+<h3 id="windows-msvc-toolchain"><a class="header" href="#windows-msvc-toolchain">Windows (MSVC toolchain)</a></h3>
+<ul>
+<li>Go to https://www.rust-lang.org/learn/get-started</li>
+<li>Follow the link to <code>Visual Studio C++ Build tools</code> and download the MSVC compiler and Windows sdk.</li>
+<li>Using the installer, install:</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/37966791/116013495-2dff8800-a639-11eb-8e4c-8c6228e00abc.png" alt="image" /></p>
+<p>and make sure the following are checked:</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/116013520-48d1fc80-a639-11eb-934a-fac6609135b4.png" alt="image" /></p>
+<ul>
+<li>You can also check CMake in the previous list, or download CMake from:
+https://cmake.org/download/</li>
+<li>If you don't have <code>git</code>, make sure to get it from:
+https://git-scm.com/downloads</li>
+<li>From the rust-lang.org website, download the correct rustup installer for your architecture.</li>
+<li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
+</ul>
+<h3 id="windows-gnu-toolchain"><a class="header" href="#windows-gnu-toolchain">Windows (gnu toolchain)</a></h3>
+<p>If you don't already have msys2, you can get it from:
+https://www.msys2.org/</p>
+<ul>
+<li>You can get the Rust toolchain via the pacman package manager, or via rustup as described previously. The installation process however would require specifying the use of the gnu toolchain (not choosing the default which would install the MSVC toolchain). 
+The toolchain should also reflect the architecture of your machine. For example, a 64bit machine should install the x86_64-pc-windows-gnu toolchain.
+If you decide to get Rust via the package manager, make sure you're getting the mingw variant, and with the correct MINGW_PACKAGE_PREFIX (for 64bits, that env variable would equate to mingw-w64-x86_64).</li>
+<li>Assuming you're installing everything via pacman, open the mingw shell (not the msys2 shell, it can be found bundled in the msys2 install directory) and run the following:</li>
+</ul>
+<pre><code>$ pacman -S curl tar git $MINGW_PACKAGE_PREFIX-rust $MINGW_PACKAGE_PREFIX-gcc $MINGW_PACKAGE_PREFIX-cmake $MINGW_PACKAGE_PREFIX-make --needed
+</code></pre>
+<p>You can replace $MINGW_PACKAGE_PREFIX-make with $MINGW_PACKAGE_PREFIX-ninja.</p>
+<ul>
+<li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
+</ul>
+<h3 id="macos"><a class="header" href="#macos">MacOS</a></h3>
+<ul>
+<li>To get the Xcode Command Line Tools (which have the C++ compiler), run:</li>
+</ul>
+<pre><code>$ xcode-select --install
+</code></pre>
+<p>Follow the instructions. Alternatively you can install clang or gcc from homebrew.</p>
+<ul>
+<li>To get CMake, you can get it from:
+https://cmake.org/download/
+Or from homebrew as well.</li>
+<li>To get the Rust toolchain:</li>
+</ul>
+<pre><code>$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre>
+<p>And follow the default instructions.</p>
+<ul>
+<li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
+</ul>
+<h3 id="linux"><a class="header" href="#linux">Linux</a></h3>
+<ul>
+<li>Use your package manager to get a C++ compiler, CMake, make, git.
+Taking Debian/Ubuntu as an example:</li>
+</ul>
+<pre><code>$ sudo apt-get install g++ cmake git make
+</code></pre>
+<ul>
+<li>To get the dev dependencies for FLTK, you can also use your package manager:
+For Debian-based GUI distributions, that means running:</li>
+</ul>
+<pre><code>$ sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
+</code></pre>
+<p>For RHEL-based GUI distributions, that means running:</p>
+<pre><code>$ sudo yum groupinstall &quot;X Software Development&quot; &amp;&amp; yum install pango-devel libXinerama-devel
+</code></pre>
+<p>For Arch-based GUI distributions, that means running:</p>
+<pre><code>$ sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
+</code></pre>
+<p>For Alpine linux:</p>
+<pre><code>$ apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
+</code></pre>
+<ul>
+<li>To get the Rust toolchain:</li>
+</ul>
+<pre><code>$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre>
+<p>And follow the default instructions.</p>
+<ul>
+<li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cross-compiling"><a class="header" href="#cross-compiling">Cross-compiling</a></h1>
+<h2 id="using-cargo-cross"><a class="header" href="#using-cargo-cross">Using cargo-cross</a></h2>
+<p>If you have Docker installed, you can try https://github.com/rust-embedded/cross</p>
+<pre><code>$ cargo install cross
+$ cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docker daemon has to be running, no need to add via rustup
+</code></pre>
+<h2 id="using-a-prebuilt-bundle"><a class="header" href="#using-a-prebuilt-bundle">Using a prebuilt bundle</a></h2>
+<p>If the target you're compiling to, already has a prebuilt package:</p>
+<ul>
+<li>x86_64-pc-windows-gnu</li>
+<li>x86_64-pc-windows-msvc</li>
+<li>x86_64-apple-darwin</li>
+<li>x86_64-unknown-linux-gnu</li>
+</ul>
+<p>Add the target via rustup, then invoke the build:</p>
+<pre><code>$ rustup target add &lt;your target&gt; # replace with one of the targets above
+$ cargo build --target=&lt;your target&gt; --features=fltk-bundled
+</code></pre>
+<h2 id="using-a-cross-compiling-cc-toolchain"><a class="header" href="#using-a-cross-compiling-cc-toolchain">Using a cross-compiling C/C++ toolchain</a></h2>
+<p>The idea is that you need a C/C++ cross-compiler and a Rust target installed via <code>rustup target add</code> as mentioned in the previous scenario.</p>
+<p>Assuming you would like to cross-compile from Linux to 64-bit Windows, and are already able to build on your host machine:</p>
+<ul>
+<li>You'll need to add the Rust target using:</li>
+</ul>
+<pre><code>$ rustup target add x86_64-pc-windows-gnu # depending on the arch
+</code></pre>
+<ul>
+<li>Install a C/C++ cross-compiler like the Mingw toolchain. On Debian-based distros, you can run:</li>
+</ul>
+<pre><code>$ apt-get install mingw-w64 # or gcc-mingw-w64-x86-64
+</code></pre>
+<p>On RHEL-based distros:</p>
+<pre><code>$ dnf install mingw64-gcc
+</code></pre>
+<p>On Arch:</p>
+<pre><code>$ pacman -S mingw-w64-gcc
+</code></pre>
+<p>On Alpine:</p>
+<pre><code>$ apk add mingw-w64-gcc
+</code></pre>
+<ul>
+<li>Add a <code>.cargo/config.toml</code> in your project root (or HOME dir if you want the setting to be global), and specify the cross-linker and the archiver:</li>
+</ul>
+<pre><code class="language-toml"># .cargo/config.toml
+[target.x86_64-pc-windows-gnu]
+linker = &quot;x86_64-w64-mingw32-gcc&quot;
+ar = &quot;x86_64-w64-mingw32-gcc-ar&quot;
+</code></pre>
+<ul>
+<li>Run the build:</li>
+</ul>
+<pre><code>$ cargo build --target=x86_64-pc-windows-gnu
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><p>FLTK offers a GUI WYSIWYG rapid application development tool called FLUID which allows creating GUI applications.
+Currently there is a video tutorial on youtube on using it with Rust:
+<a href="https://www.youtube.com/watch?v=k_P0wG3-dNk">Use FLUID (RAD tool) with Rust</a></p>
+<p>The fl2rust crate translates the Fluid generated .fl files into Rust code to be compiled into your app.
+For more information, you can check the project's <a href="https://github.com/MoAlyousef/fl2rust">repo</a>.</p>
+<p>You can get FLUID via fltk-fluid and fl2rust crates using cargo install:</p>
+<pre><code>$ cargo install fltk-fluid
+$ cargo install fl2rust
+</code></pre>
+<p>And run using:</p>
+<pre><code>$ fltk-fluid &amp;
+</code></pre>
+<p>Another option to get Fluid is to download it via your system's package manager, it comes as a separate package or part of the fltk package.</p>
+<p>fl2rust is added as a build-dependency to your project:</p>
+<pre><code class="language-toml"># Cargo.toml
+[dependencies]
+fltk = &quot;1&quot;
+
+[build-dependencies]
+fl2rust = &quot;0.4&quot;
+</code></pre>
+<p>Then it can be used in the build.rs file (which is run pre-build) to generate Rust code:</p>
+<pre><pre class="playground"><code class="language-rust">// build.rs
+fn main() {
+    use std::path::PathBuf;
+    use std::env;
+    println!(&quot;cargo:rerun-if-changed=src/myuifile.fl&quot;);
+    let g = fl2rust::Generator::default();
+    let out_path = PathBuf::from(env::var(&quot;OUT_DIR&quot;).unwrap());
+    g.in_out(&quot;src/myuifile.fl&quot;, out_path.join(&quot;myuifile.rs&quot;).to_str().unwrap()).expect(&quot;Failed to generate rust from fl file!&quot;);
+}
+</code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><p>The crate offers an App struct in the app module. Initializing the App struct initializes all the internal styles, fonts and supported image types. It also initializes the multithreaded environment in which the app will run.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::*;
+
+fn main() {
+    let app = app::App::default();
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>The run methods runs the event loop of the gui application.
+To have fine grained control of events, you can use the wait() method.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::*;
+
+fn main() {
+    let app = app::App::default();
+    while app.wait() {
+        // handle events
+    }
+}
+</code></pre></pre>
+<p>Furthermore, the App struct allows you to set the global scheme of your application using the with_scheme() initializer:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::*;
+
+fn main() {
+    let app = app::App::default().with_scheme(app::Scheme::Gtk);
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>This will give your application a Gtk app appearance. There are other built-in schemes: Basic, Plastic and Gleam.</p>
+<p>The App struct is also responsible for loading system fonts at the start of the application using the load_system_fonts() method. </p>
+<p>A typical fltk-rs application will construct the App struct prior to creating any widgets and showing the main window. </p>
+<p>Any logic added after calling the run() method, will be executed after the event loop is terminated (typically by closing the all windows of your application, or by calling the quit() method). That logic could include respawning the app if needed. </p>
+<p>In addition to the App struct, the app module itself contains structs and free functions pertaining to the global state of your app. These include visuals like setting background and foreground colors and default fontface and size, screen functions, clipboard functions, global handlers, app events, channels (Sender and Receiver) and timeouts. </p>
+<p>Some of these will be discussed elsewhere in the wiki. </p>
+<div style="break-before: page; page-break-before: always;"></div><p>FLTK calls the native window on each platform it supports, then basically does its own drawing. This means it calls an HWND on windows, NSWindow on MacOS and an XWindow on X11 systems (linux, BSD).</p>
+<p>The windows themselves have the same interface as the other widgets provided by FLTK, the WidgetExt trait, which will be discussed in the next page. </p>
+<p>Lets use what we've seen so far to create a window.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    my_window.end();
+    my_window.show();
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/100937363-f82ffa80-3503-11eb-8f3a-9afe34bdad59.jpg" alt="img1" /></p>
+<p>The new() call takes 5 parameters:</p>
+<ul>
+<li><code>x</code> which is the horizontal distance from the left of the screen.</li>
+<li><code>y</code> which is the vertical distance from the top of the screen.</li>
+<li><code>width</code> which is the window's width.</li>
+<li><code>height</code> which is the window's height.</li>
+<li><code>title</code> which is the window's title.</li>
+</ul>
+<p>Next notice the call to end(). Windows, among other types of widgets, implement the GroupExt trait. These widgets will own/parent any widget created between the call begin() (which is implicit here with the creation of the window) and the call end().
+The next call show() basically raises the window so it appears on the display.</p>
+<p>Windows can be embedded inside other windows:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut my_window2 = window::Window::new(10, 10, 380, 280, &quot;&quot;);
+    my_window2.set_color(Color::Black);
+    my_window2.end();
+    my_window.end();
+    my_window.show();
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/100937446-139b0580-3504-11eb-8738-1e4161175d0b.jpg" alt="embed" /></p>
+<p>Here the 2nd window, my_window2, is embedded inside the 1st window, my_window. We've given it the color black so it appears to us. Notice that its parent is the first window. Creating the 2nd window outside of the parent will basically create 2 separate windows, and will require a call to show():</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    my_window.end();
+    my_window.show();
+    let mut my_window2 = window::Window::new(10, 10, 380, 280, &quot;&quot;);
+    my_window2.end();
+    my_window2.show();
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>Windows can also be borderless using the my_window.set_border(false) method.</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/100937639-565cdd80-3504-11eb-8cf6-e135243c38b0.png" alt="image" /></p>
+<p>The set_border(bool) method is part of the WindowExt trait, implemented by all window types in FLTK, in addition to the WidgetExt and GroupExt traits.
+The list of traits can be found in the prelude module of the crate:</p>
+<p><a href="https://docs.rs/fltk/*/fltk/prelude/index.html">docs</a></p>
+<div style="break-before: page; page-break-before: always;"></div><p>FLTK offers around 80 widgets. These widgets all implement the basic set of traits WidgetBase and WidgetExt. We've already come across our first widget, the Window widget.
+As we've seen with the Window widget, widgets can also implement other traits depending on their functionality.
+Lets add a button to our previous example.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png" alt="image" /></p>
+<p>Notice that the button's parent is my_window since it's created between the implicit begin() and end() calls.
+Another way to add a widget is using the add(widget) method that's offered by widgets implementing the GroupExt trait:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    my_window.end();
+    my_window.show();
+
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.add(&amp;but);
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>Another thing to notice is the initialization of the button which basically has the same constructor as the Window, that's because it's part of the WidgetBase trait. However, although the Window's x and y coordinates are relative to the screen, the button's x and y coordinates are relative to the window which contains the button. This also applies to our embedded window in the previous page if you hadn't noticed.</p>
+<p>The button also implements the ButtonExt trait, which offers some helpful methods like setting shortcuts to trigger our button among other methods.</p>
+<p>Constructing widgets can also be done using a builder pattern:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let but1 = Button::new(10, 10, 80, 40, &quot;Button 1&quot;);
+// OR
+let but1 = Button::default()
+    .with_pos(10, 10)
+    .with_size(80, 40)
+    .with_label(&quot;Button 1&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Which basically have the same effect.</p>
+<p>As it stands, our application shows a window with a button, the button is clickable but does nothing!
+So lets add some action in there in the next page! </p>
+<div style="break-before: page; page-break-before: always;"></div><p>Button widgets serve multiple purposes and come in several forms:</p>
+<ul>
+<li>Button</li>
+<li>RadioButton</li>
+<li>ToggleButton</li>
+<li>RoundButton</li>
+<li>CheckButton</li>
+<li>LightButton</li>
+<li>RepeatButton</li>
+<li>RadioLightButton</li>
+<li>RadioRoundButton</li>
+</ul>
+<p>These can be found in the button module.
+The simplest of which is the Button widget, which basically runs some action when clicked. This applies to all buttons as well:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = Window::default().with_size(400, 300);
+    let mut frame = Frame::default().with_size(200, 100).center_of(&amp;wind);
+    let mut but = Button::new(160, 210, 80, 40, &quot;Click me!&quot;);
+    wind.end();
+    wind.show();
+
+    but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>However other buttons can have other value.
+CheckButton, ToggleButton, LightButton for example hold their current value, i.e. whether they were toggled or not:</p>
+<p>Radio buttons (RadioRoundButton, RadioLightButton and RadioButton) also hold their value, but only one can be toggled in the parent group (any widget implementing GroupExt). So they are aware of the values of other radio buttons:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
+    // only one can be toggled by the user at a time, the other will be automatically untoggled
+    let btn1 = button::RadioRoundButton::default().with_label(&quot;Option 1&quot;);
+    let btn2 = button::RadioRoundButton::default().with_label(&quot;Option 2&quot;); 
+    flex.end();
+    win.end();
+    win.show();
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>(The focus box can be removed using the clear_visible_focus() method <code>btn1.clear_visible_focus()</code>).
+<img src="https://user-images.githubusercontent.com/37966791/145727291-8be40de6-8ec6-4e57-bb29-fa0f0ac3b251.png" alt="image" /></p>
+<p>Other toggle-able buttons don't have this property.</p>
+<p>You can query whether a button is toggled or not using the ButtonExt::value() method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
+    let btn1 = button::CheckButton::default().with_label(&quot;Option 1&quot;);
+    let btn2 = button::CheckButton::default().with_label(&quot;Option 2&quot;);
+    let mut btn3 = button::Button::default().with_label(&quot;Submit&quot;);
+    flex.end();
+    win.end();
+    win.show();
+
+    btn3.set_callback(move |btn3| {
+        if btn1.value() {
+            println!(&quot;btn1 is checked&quot;);
+        }
+        if btn2.value() {
+            println!(&quot;btn1 is checked&quot;);
+        }
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>CheckButton also provides a convenience method is_checked(), while radio buttons provide an is_toggled().</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727325-7e5bb45f-674e-4bb2-81c8-27d0ee391d34.png" alt="image" /></p>
+<p>By default, toggle-able buttons are created untoggled, however this can be overridden using set_value(), or the convenience methods set_checked() (for CheckButton) and set_toggled() (for radio buttons):</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
+    let mut btn1 = button::CheckButton::default().with_label(&quot;Option 1&quot;);
+    btn1.set_value(true);
+    // Similarly you can use btn1.set_checked(true)
+    let btn2 = button::CheckButton::default().with_label(&quot;Option 2&quot;);
+    let mut btn3 = button::Button::default().with_label(&quot;Submit&quot;);
+    flex.end();
+    win.end();
+    win.show();
+
+    btn3.set_callback(move |btn3| {
+        if btn1.value() {
+            println!(&quot;btn1 is checked&quot;);
+        }
+        if btn2.value() {
+            println!(&quot;btn1 is checked&quot;);
+        }
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727352-bf6dba5c-1a0c-4da4-8296-093e10470f0c.png" alt="image" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>FLTK doesn't have a Label widget. So if you would just like to show text, you can use a Frame widget and give it a label. </p>
+<p>All widgets takes a label in the ::new() constructor or using with_label() or set_label():</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let btn = button::Button::new(160, 200, 80, 30, &quot;Click&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>This button has a label showing the text &quot;click&quot;.</p>
+<p>Similarly we can use set_label() or with_label():</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let btn = button::Button::default().with_label(&quot;Click&quot;);
+// or
+let mut btn = button::Button::default();
+btn.set_label(&quot;Click&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>However, the ::new() constructor takes in reality an optional to a static str, so the following would fail:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let label = String::from(&quot;Click&quot;); // label is not a static str
+let mut btn = button::Button::new(160, 200, 80, 30, &amp;label);
+<span class="boring">}
+</span></code></pre></pre>
+<p>You would want to use <code>btn.set_label(&amp;label);</code> in this case. The reason is that FLTK expects a <code>const char *</code> label, which is the equivalent of Rust's <code>&amp;'static str</code>. These strings live in the program's code segment. If you disassemble an application, it would show all these static strings. And since these have a static lifetime, FLTK by default doesn't store them. 
+While using set_label() and with_label() calls FLTK's Fl_Widget::copy_label() method which actually stores the string.</p>
+<p>You are also not limited to text labels, FLTK has predefined symbols which translate into images:</p>
+<p><img src="https://www.fltk.org/doc-1.4/symbols.png" alt="symbols" /></p>
+<p>The @ sign may also be followed by the following optional &quot;formatting&quot; characters, in this order:</p>
+<ul>
+<li>'#' forces square scaling, rather than distortion to the widget's shape.</li>
+<li>+[1-9] or -[1-9] tweaks the scaling a little bigger or smaller.</li>
+<li>'$' flips the symbol horizontally, '%' flips it vertically.</li>
+<li>[0-9] - rotates by a multiple of 45 degrees. '5' and '6' do no rotation while the others point in the direction of that key on a numeric keypad. '0', followed by four more digits rotates the symbol by that amount in degrees.</li>
+</ul>
+<p>Thus, to show a very large arrow pointing downward you would use the label string &quot;@+92-&gt;&quot;.</p>
+<p>Symbols and text can be combined in a label, however the symbol must be at the beginning and/or at the end of the text. If the text spans multiple lines, the symbol or symbols will scale up to match the height of all the lines:</p>
+<p><img src="https://www.fltk.org/doc-1.4/symbol-examples.png" alt="ex" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>In the previously mentioned examples, you have seen callbacks mostly, and although that is one way of handling events, FLTK offers multiple ways to handle events:</p>
+<ul>
+<li>We can use the set_callback() method, which is automatically triggered with a click to our button.</li>
+<li>We can use the handle() method for fine-grained event handling.</li>
+<li>We can use the emit() method which takes a sender and a message, this allows us to handle events in the event loop.</li>
+<li>We can define our own event, which can be handled within another widget's handle method.</li>
+</ul>
+<h3 id="setting-the-callback"><a class="header" href="#setting-the-callback">Setting the callback</a></h3>
+<p>Part of the WidgetExt trait is the set_callback method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+    but.set_callback(|_| println!(&quot;The button was clicked!&quot;));
+    app.run().unwrap();
+}
+</code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+    but.set_callback(|b| b.set_label(&quot;Clicked!&quot;));
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>The set_callback() methods have default triggers varying by the type of the widget. For buttons it's clicking or pressing enter when the button has focus.
+This can be changed using the set_trigger() method. For buttons this might not make much sense, however for input widgets, the trigger can be set to &quot;CallbackTrigger::Changed&quot; and this will cause changes in the input widget to trigger the callback.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut inp = input::Input::new(/* params */);
+inp.set_trigger(CallbackTrigger::Changed);
+inp.set_callback(|i| println!(&quot;my current value is: {}&quot;, i.value());
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="using-the-handle-method"><a class="header" href="#using-the-handle-method">Using the handle method</a></h3>
+<p>The handle method takes a closure whose parameter is an Event, and returns a bool for handled events. The bool lets FLTK know whether the event was handled or not.
+The call looks like this:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+
+    but.handle(|_, event| {
+        println!(&quot;The event: {:?}&quot;, event);
+        false
+    });
+    
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>This prints the event, and doesn't handle it since we return false. Obviously we would like to do something useful, so change the handle call to:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    but.handle(|_, event| match event {
+        Event::Push =&gt; {
+            println!(&quot;I was pushed!&quot;);
+            true
+        },
+        _ =&gt; false,
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here we handle the Push event by doing something useful then  returning true, all other events are ignored and we return false.</p>
+<p>Another example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    but.handle(|b, event| match event {
+        Event::Push =&gt; {
+            b.set_label(&quot;Pushed&quot;);
+            true
+        },
+        _ =&gt; false,
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="using-messages"><a class="header" href="#using-messages">Using messages</a></h3>
+<p>This allows us to create channels and a Sender and Receiver structs, we can then emit messages (which have to be Send + Sync safe) to be handled in our event loop. The advantage is that we avoid having to wrap our types in smart pointers when we need to pass them into closures or into spawned threads.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+
+    let (s, r) = app::channel();
+    
+    but.emit(s, true);
+    // This is equivalent to calling but.set_callback(move |_| s.send(true)); 
+
+    while app.wait() {
+        if let Some(msg) = r.recv() {
+            match msg {
+                true =&gt; println!(&quot;Clicked&quot;),
+                false =&gt; (), // Here we basically do nothing
+            }
+        }
+    }
+}
+</code></pre></pre>
+<p>Messages can be received in the event loop like in the previous example, otherwise you can receive messages in a background thread or in app::add_idle()' s callback:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    app::add_idle(move || {
+        if let Some(msg) = r.recv() {
+            match msg {
+                true =&gt; println!(&quot;Clicked&quot;),
+                false =&gt; (), // Here we basically do nothing
+            }
+        }
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<p>You're also not limited to using fltk channels, you can use any channel. For example, this uses the std channel:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let (s, r) = std::sync::mpsc::channel::&lt;Message&gt;();
+btn.set_callback(move |_| {
+    s.send(Message::SomeMessage).unwrap();
+});
+<span class="boring">}
+</span></code></pre></pre>
+<p>You can also define a method which applies to all widgets, similar to the emit() method:</p>
+<pre><pre class="playground"><code class="language-rust">use std::sync::mpsc::Sender;
+
+pub trait SenderWidget&lt;W, T&gt;
+where
+    W: WidgetExt,
+    T: Send + Sync + Clone + 'static,
+{
+    fn send(&amp;mut self, sender: Sender&lt;T&gt;, msg: T);
+}
+
+impl&lt;W, T&gt; SenderWidget&lt;W, T&gt; for W
+where
+    W: WidgetExt,
+    T: Send + Sync + Clone + 'static,
+{
+    fn send(&amp;mut self, sender: Sender&lt;T&gt;, msg: T) {
+        self.set_callback(move |_| {
+            sender.send(msg.clone()).unwrap();
+        });
+    }
+}
+
+fn main() {
+    let btn = button::Button::default();
+    let (s, r) = std::sync::mpsc::channel::&lt;Message&gt;();
+    btn.send(s.clone(), Message::SomeMessage);
+}
+</code></pre></pre>
+<h3 id="creating-our-own-events"><a class="header" href="#creating-our-own-events">Creating our own events</a></h3>
+<p>FLTK recognizes 29 events which are listed in enums::Event. However it allows us to create our own events using the app::handle(impl Into<i32>, window) call. The handle function takes an arbitrary i32 (&gt; 30) value as a signal, ideally the values should be predefined, which can be handled within another widget's handle() method, the other widget needs to be within the window that was passed to app::handle.
+In the following example, we create a window with a frame and a button. The button's callback sends a CHANGED Event through the app::handle_main function. The CHANGED signal is queried in the frame's handle method.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::*, enums::*, frame::*, group::*, prelude::*, window::*};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+pub struct MyEvent;
+
+impl MyEvent {
+    const CHANGED: i32 = 40;
+}
+
+#[derive(Clone)]
+pub struct Counter {
+    count: Rc&lt;RefCell&lt;i32&gt;&gt;,
+}
+
+impl Counter {
+    pub fn new(val: i32) -&gt; Self {
+        Counter {
+            count: Rc::from(RefCell::from(val)),
+        }
+    }
+
+    pub fn increment(&amp;mut self) {
+        *self.count.borrow_mut() += 1;
+        app::handle_main(MyEvent::CHANGED).unwrap();
+    }
+
+    pub fn decrement(&amp;mut self) {
+        *self.count.borrow_mut() -= 1;
+        app::handle_main(MyEvent::CHANGED).unwrap();
+    }
+
+    pub fn value(&amp;self) -&gt; i32 {
+        *self.count.borrow()
+    }
+}
+
+fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    let app = app::App::default();
+    let counter = Counter::new(0);
+    let mut wind = Window::default().with_size(160, 200).with_label(&quot;Counter&quot;);
+    let mut pack = Pack::default().with_size(120, 140).center_of(&amp;wind);
+    pack.set_spacing(10);
+    let mut but_inc = Button::default().with_size(0, 40).with_label(&quot;+&quot;);
+    let mut frame = Frame::default()
+        .with_size(0, 40)
+        .with_label(&amp;counter.clone().value().to_string());
+    let mut but_dec = Button::default().with_size(0, 40).with_label(&quot;-&quot;);
+    pack.end();
+    wind.end();
+    wind.show();
+
+    but_inc.set_callback({
+        let mut c = counter.clone();
+        move |_| c.increment()
+    });
+
+    but_dec.set_callback({
+        let mut c = counter.clone();
+        move |_| c.decrement()
+    });
+    
+    frame.handle(move |f, ev| {
+        if ev == MyEvent::CHANGED.into() {
+            f.set_label(&amp;counter.clone().value().to_string());
+            true
+        } else {
+            false
+        }
+    });
+
+    Ok(app.run()?)
+}
+</code></pre></pre>
+<p>The sent i32 signal can be created on the fly, or added to a const local or global, or within an enum. </p>
+<h4 id="advantages"><a class="header" href="#advantages">Advantages:</a></h4>
+<ul>
+<li>No overhead.</li>
+<li>The signal is dealt with like any fltk event.</li>
+<li>the app::handle function returns a bool which indicates whether the event was handled or not.</li>
+<li>Allows handling of custom signals/events outside the event loop.</li>
+<li>Allows an MVC or SVU architecture to your application.</li>
+</ul>
+<h4 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages:</a></h4>
+<ul>
+<li>The signal can only be handled in a widget's handle method.</li>
+<li>The signal is inaccessible within the event loop (for that, you might want to use WidgetExt::emit or channels described previously in this page). </li>
+</ul>
+<h3 id="fltk-evented-crate"><a class="header" href="#fltk-evented-crate">fltk-evented crate</a></h3>
+<p>For an alternative <code>on_&lt;event&gt;</code> method of handling events, check the <a href="https://crates.io/crates/fltk-evented">fltk-evented crate</a> whose Listener widget can handle events in the event loop, so you can avoid sending things into closures and worrying about lifetimes:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::Button, enums::Color, frame::Frame, group::Flex, prelude::*, window::Window};
+use fltk_evented::Listener;
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gtk);
+    app::set_font_size(20);
+
+    let mut wind = Window::default()
+        .with_size(160, 200)
+        .center_screen()
+        .with_label(&quot;Counter&quot;);
+    let flex = Flex::default()
+        .with_size(120, 160)
+        .center_of_parent()
+        .column();
+    let mut but_inc: Listener&lt;_&gt; = Button::default().with_label(&quot;+&quot;).into();
+    let mut frame = Frame::default();
+    let mut but_dec: Listener&lt;_&gt; = Button::default().with_label(&quot;-&quot;).into();
+    flex.end();
+    wind.end();
+    wind.show();
+
+    but_inc.on_hover(|b| {
+        b.set_color(Color::Red);
+    });
+
+    let mut val = 0;
+
+    while a.wait() {
+        if but_inc.triggered() {
+            val += 1;
+        }
+
+        if but_inc.hovered() {
+            but_inc.set_color(Color::White);
+        }
+
+        if but_inc.left() {
+            but_inc.set_color(Color::BackGround);
+        }
+
+        if but_dec.triggered() {
+            val -= 1;
+        }
+
+        if but_dec.hovered() {
+            but_dec.set_color(Color::White);
+        }
+
+        if but_dec.left() {
+            but_dec.set_color(Color::BackGround);
+        }
+
+        frame.set_label(&amp;val.to_string());
+    }
+}
+</code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><p>Drag and Drop are Event types supported by FLTK. You can drag widgets around if you implement these events, and you can drag outside files into an FLTK application. You might also want to implement drawing over widgets which would require handling Event::Drag at least.</p>
+<h2 id="dragging-widgets"><a class="header" href="#dragging-widgets">Dragging widgets</a></h2>
+<p>Here we'll implement dragging for the window itself. We'll create a window without a border. Normally you can drag windows around using the border:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 400);
+    wind.set_color(enums::Color::White);
+    wind.set_border(false);
+    wind.end();
+    wind.show();
+
+    wind.handle({
+        let mut x = 0;
+        let mut y = 0;
+        move |w, ev| match ev {
+            enums::Event::Push =&gt; {
+                let coords = app::event_coords();
+                x = coords.0;
+                y = coords.1;
+                true
+            }
+            enums::Event::Drag =&gt; {
+                w.set_pos(app::event_x_root() - x, app::event_y_root() - y);
+                true
+            }
+            _ =&gt; false,
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<h2 id="dragging-files"><a class="header" href="#dragging-files">Dragging Files</a></h2>
+<p>Dragging a file into an application basically invokes the Paste event, and fills the app::event_text() with the path of the file. So when we handle dragging, we want to capture the path in Event::Paste, check if the file exists, read its content and fill our text widget:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, enums::Event, *};
+
+fn main() {
+    let app = app::App::default();
+    let buf = text::TextBuffer::default();
+    let mut wind = window::Window::default().with_size(400, 400);
+    let mut disp = text::TextDisplay::default_fill();
+    wind.end();
+    wind.show();
+
+    disp.set_buffer(buf.clone());
+    disp.handle({
+        let mut dnd = false;
+        let mut released = false;
+        let mut buf = buf.clone();
+        move |_, ev| match ev {
+            Event::DndEnter =&gt; {
+                dnd = true;
+                true
+            }
+            Event::DndDrag =&gt; true,
+            Event::DndRelease =&gt; {
+                released = true;
+                true
+            }
+            Event::Paste =&gt; {
+                if dnd &amp;&amp; released {
+                    let path = app::event_text();
+                    let path = std::path::Path::new(&amp;path);
+                    assert!(path.exists());
+                    buf.load_file(&amp;path).unwrap();
+                    dnd = false;
+                    released = false;
+                    true
+                } else {
+                    false
+                }
+            }
+            Event::DndLeave =&gt; {
+                dnd = false;
+                released = false;
+                true
+            }
+            _ =&gt; false,
+        }
+    });
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>If you're not interested in the contents of the file, you can just take the path and show it to the user:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, enums::Event, *};
+
+fn main() {
+    let app = app::App::default();
+    let buf = text::TextBuffer::default();
+    let mut wind = window::Window::default().with_size(400, 400);
+    let mut disp = text::TextDisplay::default_fill();
+    wind.end();
+    wind.show();
+
+    disp.set_buffer(buf.clone());
+    disp.handle({
+        let mut dnd = false;
+        let mut released = false;
+        let mut buf = buf.clone();
+        move |_, ev| match ev {
+            Event::DndEnter =&gt; {
+                dnd = true;
+                true
+            }
+            Event::DndDrag =&gt; true,
+            Event::DndRelease =&gt; {
+                released = true;
+                true
+            }
+            Event::Paste =&gt; {
+                if dnd &amp;&amp; released {
+                    let path = app::event_text();
+                    buf.append(&amp;path);
+                    dnd = false;
+                    released = false;
+                    true
+                } else {
+                    false
+                }
+            }
+            Event::DndLeave =&gt; {
+                dnd = false;
+                released = false;
+                true
+            }
+            _ =&gt; false,
+        }
+    });
+    app.run().unwrap();
+}
+</code></pre></pre>
+<h2 id="dragging-to-draw"><a class="header" href="#dragging-to-draw">Dragging to draw</a></h2>
+<p>You can draw inside events, but you'll want to use offscreen drawing. In the widgets draw method, you just copy the offscreen content into the widget. A more detailed example can be seen here:
+https://github.com/fltk-rs/fltk-rs/wiki/drawing#offscreen-drawing</p>
+<div style="break-before: page; page-break-before: always;"></div><p>FLTK doesn't impose a certain form of state management or app architecture. This is left to the user. All the examples in the fltk-rs repo and this wiki already use either callbacks or messages, you'll find many examples of both methods.
+Those were discussed in the <a href="https://github.com/fltk-rs/fltk-rs/wiki/events">events page</a>.</p>
+<p>Also all the examples might appear to handle everything in the main function, this is only for simplicity. You can create your own App struct, include the main window in it and the state of your app:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+#[derive(Copy, Clone)]
+enum Message {
+    Inc,
+    Dec,
+}
+
+struct MyApp {
+    app: app::App,
+    main_win: window::Window,
+    frame: frame::Frame,
+    count: i32,
+    receiver: app::Receiver&lt;Message&gt;,
+}
+
+impl MyApp {
+    pub fn new() -&gt; Self {
+        let count = 0;
+        let app = app::App::default();
+        let (s, receiver) = app::channel();
+        let mut main_win = window::Window::default().with_size(400, 300);
+        let col = group::Flex::default()
+            .with_size(100, 200)
+            .column()
+            .center_of_parent();
+        let mut inc = button::Button::default().with_label(&quot;+&quot;);
+        inc.emit(s, Message::Inc);
+        let frame = frame::Frame::default().with_label(&amp;count.to_string());
+        let mut dec = button::Button::default().with_label(&quot;-&quot;);
+        dec.emit(s, Message::Dec);
+        col.end();
+        main_win.end();
+        main_win.show();
+        Self {
+            app,
+            main_win,
+            frame,
+            count,
+            receiver,
+        }
+    }
+
+    pub fn run(mut self) {
+        while self.app.wait() {
+            if let Some(msg) = self.receiver.recv() {
+                match msg {
+                    Message::Inc =&gt; self.count += 1,
+                    Message::Dec =&gt; self.count -= 1,
+                }
+                self.frame.set_label(&amp;self.count.to_string());
+            }
+        }
+    }
+}
+
+fn main() {
+    let a = MyApp::new();
+    a.run();
+}
+</code></pre></pre>
+<h2 id="helper-crates"><a class="header" href="#helper-crates">Helper crates</a></h2>
+<p>The crates ecosystem offers many crates which provide state management. Also there are 2 crates under the fltk-rs org which offer means of architecting your app and managing its state:</p>
+<ul>
+<li><a href="https://github.com/fltk-rs/flemish">flemish</a>:</li>
+</ul>
+<p>Offers an Elm like SVU architecture. This is reactive, immutable in essence, and tears down the view which each Message.</p>
+<ul>
+<li><a href="https://github.com/fltk-rs/fltk-evented">fltk-evented</a>:</li>
+</ul>
+<p>This resembles immediate-mode guis in that all events are handled in the event loop. In reality it's also reactive but mutable and stateless. This doesn't cause a redraw with triggers.</p>
+<p>Both crates avoid the use of callbacks since these can be a pain in Rust in terms of lifetimes and borrowing. You need to use shared smart pointers with interior mutability to be able to borrow into a callback.</p>
+<p>You can take a look at both crates for inspiration.</p>
+<p>A sample counter in both:</p>
+<h2 id="flemish"><a class="header" href="#flemish">Flemish</a></h2>
+<pre><pre class="playground"><code class="language-rust">use flemish::{
+    button::Button, color_themes, frame::Frame, group::Flex, prelude::*, OnEvent, Sandbox, Settings,
+};
+
+pub fn main() {
+    Counter::new().run(Settings {
+        size: (300, 100),
+        resizable: true,
+        color_map: Some(color_themes::BLACK_THEME),
+        ..Default::default()
+    })
+}
+
+#[derive(Default)]
+struct Counter {
+    value: i32,
+}
+
+#[derive(Debug, Clone, Copy)]
+enum Message {
+    IncrementPressed,
+    DecrementPressed,
+}
+
+impl Sandbox for Counter {
+    type Message = Message;
+
+    fn new() -&gt; Self {
+        Self::default()
+    }
+
+    fn title(&amp;self) -&gt; String {
+        String::from(&quot;Counter - fltk-rs&quot;)
+    }
+
+    fn update(&amp;mut self, message: Message) {
+        match message {
+            Message::IncrementPressed =&gt; {
+                self.value += 1;
+            }
+            Message::DecrementPressed =&gt; {
+                self.value -= 1;
+            }
+        }
+    }
+
+    fn view(&amp;mut self) {
+        let col = Flex::default_fill().column();
+        Button::default()
+            .with_label(&quot;Increment&quot;)
+            .on_event(Message::IncrementPressed);
+        Frame::default().with_label(&amp;self.value.to_string());
+        Button::default()
+            .with_label(&quot;Decrement&quot;)
+            .on_event(Message::DecrementPressed);
+        col.end();
+    }
+}
+</code></pre></pre>
+<h2 id="fltk-evented"><a class="header" href="#fltk-evented">fltk-evented</a></h2>
+<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::Button, frame::Frame, group::Flex, prelude::*, window::Window};
+use fltk_evented::Listener;
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gtk);
+    app::set_font_size(20);
+
+    let mut wind = Window::default()
+        .with_size(160, 200)
+        .center_screen()
+        .with_label(&quot;Counter&quot;);
+    let flex = Flex::default()
+        .with_size(120, 160)
+        .center_of_parent()
+        .column();
+    let but_inc: Listener&lt;_&gt; = Button::default().with_label(&quot;+&quot;).into();
+    let mut frame = Frame::default();
+    let but_dec: Listener&lt;_&gt; = Button::default().with_label(&quot;-&quot;).into();
+    flex.end();
+    wind.end();
+    wind.show();
+
+    let mut val = 0;
+
+    while a.wait() {
+        if but_inc.triggered() {
+            val += 1;
+        }
+
+        if but_dec.triggered() {
+            val -= 1;
+        }
+
+        frame.set_label(&amp;val.to_string());
+    }
+}
+</code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><p>Out of the box, fltk-rs offers:</p>
+<ul>
+<li>A Flex widget</li>
+<li>Packs and Grids</li>
+<li>Widget relative positioning.</li>
+</ul>
+<h3 id="flex"><a class="header" href="#flex">Flex</a></h3>
+<p>The Flex widget allows flexbox layouts. It's in group module and implements the GroupExt trait. There are 2 forms of Flex widgets, which can be specified using the set_type or with_type methods. These are the column and row:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gtk);
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut flex = Flex::new(0, 0, 400, 300, None);
+    flex.set_type(group::FlexType::Column);
+    let expanding = button::Button::default().with_label(&quot;Expanding&quot;);
+    let mut normal = button::Button::default().with_label(&quot;Normal&quot;);
+    flex.set_size(&amp;mut normal, 30);
+    flex.end();
+    win.end();
+    win.show();
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>The set_size method takes another widget and fixes its size to the value passed, in the example it's 30. Since this is a column, the 30 represents the height of the widget to be set.
+The other widget will be expandable since no size is set for it. A full example can be found here:</p>
+<p>https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs</p>
+<p><img src="https://github.com/osen/FL_Flex/raw/main/doc/login.png" alt="image" /></p>
+<h3 id="packs-and-grids"><a class="header" href="#packs-and-grids">Packs and Grids</a></h3>
+<p>Packs &amp; Grids (HGrid and VGrid) are widgets in the group module which also implement the GroupExt trait. There are 2 forms of packs, Vertical and Horizontal packs, Vertical being the default. Vertical packs only require the height of its children widgets, while horizontal packs only require the width of its children widgets, like in the example below:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    
+    let mut my_window = window::Window::default().with_size(400, 300);
+    let mut hpack = group::Pack::default().with_size(190, 40).center_of(&amp;my_window);
+    hpack.set_type(group::PackType::Horizontal);
+    hpack.set_spacing(30);
+    let _but1 = button::Button::default().with_size(80, 0).with_label(&quot;Button1&quot;);
+    let _but2 = button::Button::default().with_size(80, 0).with_label(&quot;Button2&quot;);
+    hpack.end();
+    my_window.end();
+    my_window.show();
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>This creates a pack widget inside the window, and fills it with 2 buttons. Notice that the x and y coordinates are no longer needed for the buttons. You can also embed packs inside packs like in the calculator example in the repo. 
+You can also use the Pack::auto_layout() method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    
+    let mut my_window = window::Window::default().with_size(400, 300);
+    let mut hpack = group::Pack::new(0, 200, 400, 100, &quot;&quot;);
+    hpack.set_type(group::PackType::Horizontal);
+    hpack.set_spacing(30);
+    let _but1 = button::Button::default().with_label(&quot;Button1&quot;);
+    let _but2 = button::Button::default().with_label(&quot;Button2&quot;);
+    hpack.end();
+    hpack.auto_layout();
+    my_window.end();
+    my_window.show();
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>In which case we don't even need the size of the buttons.</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/100937983-ef8bf400-3504-11eb-9da1-09c5ac1aade4.png" alt="image" /></p>
+<h3 id="relative-positioning"><a class="header" href="#relative-positioning">Relative positioning</a></h3>
+<p>The WidgetExt trait offers several constructor methods which allow us to construct widgets relative to other widgets size and position. This is similar to Qml's anchoring.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default()
+        .with_size(160, 200)
+        .center_screen()
+        .with_label(&quot;Counter&quot;);
+    let mut frame = frame::Frame::default()
+        .with_size(100, 40)
+        .center_of(&amp;wind)
+        .with_label(&quot;0&quot;);
+    let mut but_inc = button::Button::default()
+        .size_of(&amp;frame)
+        .above_of(&amp;frame, 0)
+        .with_label(&quot;+&quot;);
+    let mut but_dec = button::Button::default()
+        .size_of(&amp;frame)
+        .below_of(&amp;frame, 0)
+        .with_label(&quot;-&quot;);
+    wind.end();
+    wind.show();
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://github.com/MoAlyousef/fltk-rs/blob/master/screenshots/counter.jpg" alt="counter" /></p>
+<p>(With some skipped theming)</p>
+<p>These methods are namely:</p>
+<ul>
+<li>above_of()</li>
+<li>below_of()</li>
+<li>right_of()</li>
+<li>left_of()</li>
+<li>center_of()</li>
+<li>size_of()</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><p>FLTK can handle <a href="https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)">true color</a>. Some convenience colors are made available in the enums::Color enum:</p>
+<ul>
+<li>Black</li>
+<li>White</li>
+<li>Red</li>
+<li>Blue</li>
+<li>Cyan
+...etc.</li>
+</ul>
+<p>You can also construct your colors using Color methods:</p>
+<ul>
+<li>by_index(). This uses fltk's colormap. Values range from 0 to 255:</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let red = Color::by_index(88);
+<span class="boring">}
+</span></code></pre></pre>
+<p><img src="https://www.fltk.org/doc-1.3/fltk-colormap.png" alt="colormap" /></p>
+<ul>
+<li>from_hex(). This takes a 24-bit hex value in the form RGB:</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>const RED: Color = Color::from_hex(0xff0000); // notice it's a const functions
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li>from_rgb(). This takes 3 values r, g, b:</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>const RED: Color = Color::from_rgb(255, 0, 0); // notice it's a const functions
+<span class="boring">}
+</span></code></pre></pre>
+<p>The Color enum also offers some convenience methods to generate different shades of the chosen color, using .darker(), .lighter(), .inactive() methods and others:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let col = Color::from_rgb(176, 100, 50).lighter();
+<span class="boring">}
+</span></code></pre></pre>
+<p>If you prefer html hex string colors, you can use the from_hex_str() method:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let col = Color::from_hex_str(&quot;#ff0000&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><p>FLTK has already 16 fonts which can be found in enums::Font:</p>
+<ul>
+<li>Helvetica</li>
+<li>HelveticaBold</li>
+<li>HelveticaItalic</li>
+<li>HelveticaBoldItalic</li>
+<li>Courier</li>
+<li>CourierBold</li>
+<li>CourierItalic</li>
+<li>CourierBoldItalic</li>
+<li>Times</li>
+<li>TimesBold</li>
+<li>TimesItalic </li>
+<li>TimesBoldItalic </li>
+<li>Symbol </li>
+<li>Screen </li>
+<li>ScreenBold </li>
+<li>Zapfdingbats</li>
+</ul>
+<p>It also allows loading system and bundled fonts.</p>
+<p>System fonts depend on the system, and are not loaded by default. These can be loaded using the App::load_system_fonts() method.
+The fonts can then be acquired using the app::fonts() function or be queried using the app::font_count(), app::font_name() and app::font_index() functions.
+And then can be used using the Font::by_index() or Font::by_name() methods.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default().load_system_fonts();
+    // To load a font by path, check the app::load_font() function
+    let fonts = app::fonts();
+    // println!(&quot;{:?}&quot;, fonts);
+    let mut wind = window::Window::default().with_size(400, 300);
+    let mut frame = frame::Frame::default().size_of(&amp;wind);
+    frame.set_label_size(30);
+    wind.set_color(enums::Color::White);
+    wind.end();
+    wind.show();
+    println!(&quot;The system has {} fonts!\nStarting slideshow!&quot;, fonts.len());
+    let mut i = 0;
+    while app.wait() {
+        if i == fonts.len() {
+            i = 0;
+        }
+        frame.set_label(&amp;format!(&quot;[{}]&quot;, fonts[i]));
+        frame.set_label_font(enums::Font::by_index(i));
+        app::sleep(0.5);
+        i += 1;
+    }
+}
+</code></pre></pre>
+<p>If you would like to load a bundled font without it being in the system, you can alternatively use Font::load_font() and Font::set_font():</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{app, enums::Font, button::Button, frame::Frame, prelude::*, window::Window};
+
+fn main() {
+    let app = app::App::default();
+
+    let font = Font::load_font(&quot;angelina.ttf&quot;).unwrap();
+    Font::set_font(Font::Helvetica, &amp;font);
+    app::set_font_size(24);
+
+    let mut wind = Window::default().with_size(400, 300);
+    let mut frame = Frame::default().with_size(200, 100).center_of(&amp;wind);
+    let mut but = Button::new(160, 210, 80, 40, &quot;Click me!&quot;);
+    wind.end();
+    wind.show();
+
+    but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>load_font() loads the font from the .ttf file, set_font() replaces Font::Helvetica (FLTK's default font) with our loaded font.</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/145735197-130f7dd6-a31f-4bc6-a362-90a13493a556.png" alt="image" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>fltk-rs provides free functions in the draw module which allow you to draw custom elements. The drawing works only if the calls are done in a context which allows drawing, such as in the WidgetBase::draw() method or in an Offscreen context:</p>
+<h2 id="drawing-in-widgets"><a class="header" href="#drawing-in-widgets">Drawing in widgets</a></h2>
+<p>Notice we use the draw calls inside our widget's draw method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{enums, prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    win.end();
+    win.show();
+
+    win.draw(|w| {
+        use draw::*;
+        // fill the window white
+        draw_rect_fill(0, 0, w.w(), w.h(), enums::Color::White);
+        // draw a blue pie
+        set_draw_color(enums::Color::Blue.inactive());
+        draw_pie(w.w() / 2 - 50, w.h() / 2 - 50, 100, 100, 0.0, 360.0);
+        // draw angled red text
+        set_draw_color(enums::Color::Red);
+        set_font(enums::Font::Courier, 16);
+        draw_text_angled(45, &quot;Hello World&quot;, w.w() / 2, w.h() / 2);
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145693473-defb2298-fc6b-4d2f-8a0c-3d4902b39dd3.jpg" alt="draw" /></p>
+<p>We've used the whole window as our canvas, but it can be any widget as well. Other available functions allow drawing lines, rects, arcs, pies, loops, polygons, even images.</p>
+<h2 id="offscreen-drawing"><a class="header" href="#offscreen-drawing">Offscreen drawing</a></h2>
+<p>Sometimes you would like to draw things in response to events, such as when the patients pushes and drags the cursor. In this case, you can use a draw::Offscreen to do that. In that case, we use the widget's draw method to just copy the Offscreen contents, while we do our drawing in the widget's handle method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{
+    app,
+    draw::{
+        draw_line, draw_point, draw_rect_fill, set_draw_color, set_line_style, LineStyle, Offscreen,
+    },
+    enums::{Color, Event, FrameType},
+    frame::Frame,
+    prelude::*,
+    window::Window,
+};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+const WIDTH: i32 = 800;
+const HEIGHT: i32 = 600;
+
+fn main() {
+    let app = app::App::default().with_scheme(app::Scheme::Gtk);
+
+    let mut wind = Window::default()
+        .with_size(WIDTH, HEIGHT)
+        .with_label(&quot;RustyPainter&quot;);
+    let mut frame = Frame::default()
+        .with_size(WIDTH - 10, HEIGHT - 10)
+        .center_of(&amp;wind);
+    frame.set_color(Color::White);
+    frame.set_frame(FrameType::DownBox);
+
+    wind.end();
+    wind.show();
+
+    // We fill our offscreen with white
+    let offs = Offscreen::new(frame.width(), frame.height()).unwrap();
+    #[cfg(not(target_os = &quot;macos&quot;))]
+    {
+        offs.begin();
+        draw_rect_fill(0, 0, WIDTH - 10, HEIGHT - 10, Color::White);
+        offs.end();
+    }
+
+    let offs = Rc::from(RefCell::from(offs));
+
+    frame.draw({
+        let offs = offs.clone();
+        move |_| {
+            let mut offs = offs.borrow_mut();
+            if offs.is_valid() {
+                offs.rescale();
+                offs.copy(5, 5, WIDTH - 10, HEIGHT - 10, 0, 0);
+            } else {
+                offs.begin();
+                draw_rect_fill(0, 0, WIDTH - 10, HEIGHT - 10, Color::White);
+                offs.copy(5, 5, WIDTH - 10, HEIGHT - 10, 0, 0);
+                offs.end();
+            }
+        }
+    });
+
+    frame.handle({
+        let mut x = 0;
+        let mut y = 0;
+        move |f, ev| {
+            // println!(&quot;{}&quot;, ev);
+            // println!(&quot;coords {:?}&quot;, app::event_coords());
+            // println!(&quot;get mouse {:?}&quot;, app::get_mouse());
+            let offs = offs.borrow_mut();
+            match ev {
+                Event::Push =&gt; {
+                    offs.begin();
+                    set_draw_color(Color::Red);
+                    set_line_style(LineStyle::Solid, 3);
+                    let coords = app::event_coords();
+                    x = coords.0;
+                    y = coords.1;
+                    draw_point(x, y);
+                    offs.end();
+                    f.redraw();
+                    set_line_style(LineStyle::Solid, 0);
+                    true
+                }
+                Event::Drag =&gt; {
+                    offs.begin();
+                    set_draw_color(Color::Red);
+                    set_line_style(LineStyle::Solid, 3);
+                    let coords = app::event_coords();
+                    draw_line(x, y, coords.0, coords.1);
+                    x = coords.0;
+                    y = coords.1;
+                    offs.end();
+                    f.redraw();
+                    set_line_style(LineStyle::Solid, 0);
+                    true
+                }
+                _ =&gt; false,
+            }
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>Notice how we open an Offscreen context using offs.begin() then close it with offs.end(). This allows us to call drawing functions inside the Offscreen.</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/146173813-67038a94-7739-480e-a181-29498aac842a.png" alt="image" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>FLTK has a lot to offer in terms of styling applications. We have already seen that we can use true color and different fonts, in addition to draw custom things. Styling is making use of all that. It can be done per widget leveraging the methods in WidgetExt, or globally using functions in the app module.</p>
+<h2 id="widgetext"><a class="header" href="#widgetext">WidgetExt</a></h2>
+<p>Most of the WidgetExt trait is related to modifying the frame type, label type, widget color, text color, text font and text size.
+These all have setters and getters which can be found <a href="https://docs.rs/fltk/*/fltk/prelude/trait.WidgetExt.html">here</a>.</p>
+<p>An example of this:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{
+    enums::{Align, Color, Font, FrameType},
+    prelude::*,
+    *,
+};
+
+const BLUE: Color = Color::from_hex(0x42A5F5);
+const SEL_BLUE: Color = Color::from_hex(0x2196F3);
+const GRAY: Color = Color::from_hex(0x757575);
+const WIDTH: i32 = 600;
+const HEIGHT: i32 = 400;
+
+fn main() {
+    let app = app::App::default();
+    let mut win = window::Window::default()
+        .with_size(WIDTH, HEIGHT)
+        .with_label(&quot;Flutter-like!&quot;);
+    let mut bar =
+        frame::Frame::new(0, 0, WIDTH, 60, &quot;  FLTK App!&quot;).with_align(Align::Left | Align::Inside);
+    let mut text = frame::Frame::default()
+        .with_size(100, 40)
+        .center_of(&amp;win)
+        .with_label(&quot;You have pushed the button this many times:&quot;);
+    let mut count = frame::Frame::default()
+        .size_of(&amp;text)
+        .below_of(&amp;text, 0)
+        .with_label(&quot;0&quot;);
+    let mut but = button::Button::new(WIDTH - 100, HEIGHT - 100, 60, 60, &quot;@+6plus&quot;);
+    win.end();
+    win.make_resizable(true);
+    win.show();
+
+    // Theming
+    app::background(255, 255, 255);
+    app::set_visible_focus(false);
+
+    bar.set_frame(FrameType::FlatBox);
+    bar.set_label_size(22);
+    bar.set_label_color(Color::White);
+    bar.set_color(BLUE);
+    bar.draw(|b| {
+        draw::set_draw_rgb_color(211, 211, 211);
+        draw::draw_rectf(0, b.height(), b.width(), 3);
+    });
+
+    text.set_label_size(18);
+    text.set_label_font(Font::Times);
+
+    count.set_label_size(36);
+    count.set_label_color(GRAY);
+
+    but.set_color(BLUE);
+    but.set_selection_color(SEL_BLUE);
+    but.set_label_color(Color::White);
+    but.set_frame(FrameType::OFlatFrame);
+    // End theming
+
+    but.set_callback(move |_| {
+        let label = (count.label().parse::&lt;i32&gt;().unwrap() + 1).to_string();
+        count.set_label(&amp;label);
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://github.com/MoAlyousef/fltk-rs/blob/master/screenshots/flutter_like.jpg" alt="counter" /></p>
+<p>Widgets also support showing images within them, which is discussed more in the Images section.</p>
+<h2 id="global-styling"><a class="header" href="#global-styling">Global styling</a></h2>
+<p>These can be found in the app module. Starting from changing the app's scheme:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use fltk::{prelude::*, enums::*, *};
+let app = app::App::default().with_scheme(app::Scheme::Plastic);
+<span class="boring">}
+</span></code></pre></pre>
+<p>There are four schemes:</p>
+<ul>
+<li>Base</li>
+<li>Gtk</li>
+<li>Gleam</li>
+<li>Plastic</li>
+</ul>
+<p>To setting the app's colors, default font, default frame type and whether to show focus on widgets.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::Button, enums, frame::Frame, prelude::*, window::Window};
+
+fn main() {
+    let app = app::App::default();
+    app::set_background_color(170, 189, 206);
+    app::set_background2_color(255, 255, 255);
+    app::set_foreground_color(0, 0, 0);
+    app::set_selection_color(255, 160,  63);
+    app::set_inactive_color(130, 149, 166);
+    app::set_font(enums::Font::Times);
+    
+    let mut wind = Window::default().with_size(400, 300);
+    let mut frame = Frame::default().with_size(200, 100).center_of(&amp;wind);
+    let mut but = Button::new(160, 210, 80, 40, &quot;Click me!&quot;);
+    wind.end();
+    wind.show();
+
+    but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727821-5923fcd4-3a57-4a15-b36f-574b3e5321ea.png" alt="image" /></p>
+<h3 id="custom-drawing"><a class="header" href="#custom-drawing">Custom Drawing</a></h3>
+<p>FLTK also offers drawing primitives which makes giving a widget a custom appearance quite easy. This is done using the draw() method which takes a closure. Obviously there is a draw2() method where the closure also refers to the widget itself. Lets draw our own button, even though FLTK offers a ShadowFrame FrameType, let's create our own:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, enums::*, *};
+
+fn main() {
+    let app = app::App::default();
+    app::set_color(255, 255, 255); // white
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+
+    let mut but = button::Button::default()
+        .with_pos(160, 210)
+        .with_size(80, 40)
+        .with_label(&quot;Button1&quot;);
+
+    but.draw2(|b| {
+        draw::set_draw_color(Color::Gray0);
+        draw::draw_rectf(b.x() + 2, b.y() + 2, b.width(), b.height());
+        draw::set_draw_color(Color::from_u32(0xF5F5DC));
+        draw::draw_rectf(b.x(), b.y(), b.width(), b.height());
+        draw::set_draw_color(Color::Black);
+        draw::draw_text2(
+            &amp;b.label(),
+            b.x(),
+            b.y(),
+            b.width(),
+            b.height(),
+            Align::Center,
+        );
+    });
+
+    my_window.end();
+    my_window.show();
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/100938232-62956a80-3505-11eb-888f-ffe655e7aadc.jpg" alt="draw" /></p>
+<p>The draw() method also supports drawing images inside of widgets as will be seen in the next section.</p>
+<h2 id="fltk-theme"><a class="header" href="#fltk-theme">fltk-theme</a></h2>
+<p>This is a <a href="https://github.com/fltk-rs/fltk-theme">crate</a> which provides several predefined themes which can be used by just loading the theme:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+use fltk_theme::{widget_themes, WidgetTheme, ThemeType};
+
+fn main() {
+    let a = app::App::default();
+    let widget_theme = WidgetTheme::new(ThemeType::Aero);
+    widget_theme.apply();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut btn = button::Button::new(160, 200, 80, 30, &quot;Hello&quot;);
+    btn.set_frame(widget_themes::OS_DEFAULT_BUTTON_UP_BOX);
+    win.end();
+    win.show();
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://github.com/fltk-rs/fltk-theme/raw/main/screenshots/aqua_classic.jpg" alt="aqua-classic" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>FLTK supports vector and raster graphics, and out of the box offers several image types, namely:</p>
+<ul>
+<li>BmpImage</li>
+<li>JpegImage</li>
+<li>GifImage</li>
+<li>PngImage</li>
+<li>SvgImage</li>
+<li>Pixmap</li>
+<li>RgbImage</li>
+<li>XpmImage</li>
+<li>XbmImage</li>
+<li>PnmImage</li>
+</ul>
+<p>It also defines 2 more helper types:</p>
+<ul>
+<li>SharedImage: which wraps all the previous types so you don't need to specify the image type.</li>
+<li>TiledImage: which offers a tiled image of any of the concrete types.</li>
+</ul>
+<p>Image types implement the ImageExt trait which offers methods to allow scaling, and retrieving image metadata. 
+Images can be constructed by passing a path to the image's load() constructor, or for some types, by using a from_data() constructor which accepts image data.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Takes a path
+let image = image::SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
+
+/// Takes data
+let image= image::SvgImage::from_data(&amp;data).unwrap();
+<span class="boring">}
+</span></code></pre></pre>
+<p>Images can be used with widgets either via the WidgetExt::set_image()/set_image_scaled() or set_deimage()/set_deimage_scaled() (for deactivated/grayed image):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let mut frame = frame::Frame::new(0, 0, 400, 300, &quot;&quot;);
+    let mut image = image::SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
+    image.scale(200, 200, true, true);
+    frame.set_image(Some(image));
+<span class="boring">}
+</span></code></pre></pre>
+<p>Or via WidgetExt::draw() method:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let mut frame = frame::Frame::new(0, 0, 400, 300, &quot;&quot;);
+    let mut image = image::SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
+    frame.draw2(move |f| {
+        image.scale(f.width(), f.height(), true, true);
+        image.draw(f.x(), f.y(), f.width(), f.height());
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<p><img src="https://github.com/MoAlyousef/fltk-rs/blob/master/screenshots/hello.jpg" alt="svg" /></p>
+<p>Using images in your app for icons and backgrounds also helps in giving your app its style.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>These widgets include Window types and others found in the group module: Group, Scroll, Pack, Tile, Flex ...etc.
+Widgets implementing the GroupExt trait, are characterized by having to call <code>::end()</code> method to basically close them.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{
+    app,
+    button::Button,
+    prelude::{GroupExt, WidgetBase, WidgetExt},
+    window::Window,
+};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = Window::default().with_size(400, 300);
+    let _btn = Button::new(160, 200, 80, 30, &quot;Click&quot;);
+    win.end();
+    win.show();
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>In the above example, the button <code>btn</code> will be parented by the window.
+After <code>end</code>ing such GroupExt widgets, any other widgets instantiated after the <code>end</code> call, will be instantiated outside.
+These can still be added using the <code>::add(&amp;other_widget)</code> method (or using <code>::insert</code>):</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{
+    app,
+    button::Button,
+    prelude::{GroupExt, WidgetBase, WidgetExt},
+    window::Window,
+};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = Window::default().with_size(400, 300);
+    win.end();
+    win.show();
+
+    let btn = Button::new(160, 200, 80, 30, &quot;Click&quot;);
+    win.add(&amp;btn);
+    
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>Another option is to reopen the widget:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{
+    app,
+    button::Button,
+    prelude::{GroupExt, WidgetBase, WidgetExt},
+    window::Window,
+};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = Window::default().with_size(400, 300);
+    win.end();
+    win.show();
+
+    win.begin();
+    let _btn = Button::new(160, 200, 80, 30, &quot;Click&quot;);
+    win.end();
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>While most GroupExt widgets require manual layouts, several have automatic layouting. The Flex widget was discussed in the <a href="https://github.com/fltk-rs/fltk-rs/wiki/Layouts">layouts page</a>. Packs require the widget or height of the child widget, depending on the Pack's orientation.</p>
+<p>A vertical Pack needs to know only the heights of its children:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(200, 300);
+    let mut pack = group::Pack::default_fill();
+    pack.set_spacing(5);
+    for i in 0..2 {
+        frame::Frame::default().with_size(0, 40).with_label(&amp;format!(&quot;field {}&quot;, i));
+        input::Input::default().with_size(0, 40);
+    }
+    frame::Frame::default().with_size(0, 40); // a filler
+    button::Button::default().with_size(0, 40).with_label(&quot;Submit&quot;);
+    pack.end();
+    wind.end();
+    wind.show();
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727469-a7181ebf-a3a3-4675-af23-ec40d847a593.png" alt="image" /></p>
+<p>For a horizontal pack, we set the Pack type, then we only need to pass the widths of the children:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(300, 100);
+    let mut pack = group::Pack::default_fill().with_type(group::PackType::Horizontal);
+    pack.set_spacing(5);
+    for i in 0..2 {
+        frame::Frame::default().with_size(40, 0).with_label(&amp;format!(&quot;field {}&quot;, i));
+        input::Input::default().with_size(40, 0);
+    }
+    frame::Frame::default().with_size(40, 0); // a filler
+    button::Button::default().with_size(40, 0).with_label(&quot;Submit&quot;);
+    pack.end();
+    wind.end();
+    wind.show();
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><p>Menus in FLTK are widgets which implement the MenuExt trait. To that end, there are several types:</p>
+<ul>
+<li>MenuBar</li>
+<li>MenuItem</li>
+<li>Choice (dropdown list)</li>
+<li>SysMenuBar (MacOS menu bar which appears at the top of the screen)</li>
+</ul>
+<p>Menu types function in 2 main ways:
+1- Add choices using the add_choice() method, then handling the user's selection in the callback:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
+    choice.add_choice(&quot;Choice 1&quot;);
+    choice.add_choice(&quot;Choice 2&quot;);
+    choice.add_choice(&quot;Choice 3&quot;);
+    // You can also simply type choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    wind.end();
+    wind.show();
+
+    choice.set_callback(|c| {
+        match c.value() {
+            0 =&gt; println!(&quot;choice 1 selected&quot;),
+            1 =&gt; println!(&quot;choice 2 selected&quot;),
+            2 =&gt; println!(&quot;choice 3 selected&quot;),
+            _ =&gt; unreachable!(),
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png" alt="image" /></p>
+<p>Alternatively you can query the textual value of the selected item:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
+    choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    wind.end();
+    wind.show();
+
+    choice.set_callback(|c| {
+        if let Some(choice) = c.choice() {
+            match choice.as_str() {
+                &quot;Choice 1&quot; =&gt; println!(&quot;choice 1 selected&quot;),
+                &quot;Choice 2&quot; =&gt; println!(&quot;choice 2 selected&quot;),
+                &quot;Choice 3&quot; =&gt; println!(&quot;choice 3 selected&quot;),
+                _ =&gt; unreachable!(),
+            }
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>2- Adding choices via the add() method, you pass each choice's callback distinctively.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+    let mut choice = menu::Choice::default()
+        .with_size(80, 30)
+        .center_of_parent()
+        .with_label(&quot;Select item&quot;);
+
+    choice.add(
+        &quot;Choice 1&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        |_| println!(&quot;choice 1 selected&quot;),
+    );
+    choice.add(
+        &quot;Choice 2&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        |_| println!(&quot;choice 2 selected&quot;),
+    );
+    choice.add(
+        &quot;Choice 3&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        |_| println!(&quot;choice 3 selected&quot;),
+    );
+
+    wind.end();
+    wind.show();
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>Alternatively, you can use the add_emit() to pass a Sender and a message instead of passing callbacks:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+#[derive(Clone)]
+enum Message {
+    Choice1,
+    Choice2,
+    Choice3,
+}
+
+fn main() {
+    let a = app::App::default();
+    let (s, r) = app::channel();
+    let mut wind = window::Window::default().with_size(400, 300);
+    let mut choice = menu::Choice::default()
+        .with_size(80, 30)
+        .center_of_parent()
+        .with_label(&quot;Select item&quot;);
+
+    choice.add_emit(
+        &quot;Choice 1&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        s.clone(),
+        Message::Choice1,
+    );
+    choice.add_emit(
+        &quot;Choice 2&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        s.clone(),
+        Message::Choice2,
+    );
+    choice.add_emit(
+        &quot;Choice 3&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        s,
+        Message::Choice3,
+    );
+
+    wind.end();
+    wind.show();
+
+    while a.wait() {
+        if let Some(msg) = r.recv() {
+            match msg {
+                Message::Choice1 =&gt; println!(&quot;choice 1 selected&quot;),
+                Message::Choice2 =&gt; println!(&quot;choice 2 selected&quot;),
+                Message::Choice3 =&gt; println!(&quot;choice 3 selected&quot;),
+            }
+        }
+    }
+}
+</code></pre></pre>
+<p>You might wonder, why go from a handful of lines in the first examples to a more complex manner of doing things. Each method has it's uses. 
+For simple drop down widgets, go with the first method. For an application's menu bar, go with the second. It allows you to specify Shortcuts and MenuFlags, and allows better decoupling of events, so you won't have to handle everything in the menu's callback. It's also easier to deal with submenus using the add() method, as in the <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">editor example</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>        let mut menu = menu::SysMenuBar::default().with_size(800, 35);
+        menu.set_frame(FrameType::FlatBox);
+        menu.add_emit(
+            &quot;&amp;File/New...\t&quot;,
+            Shortcut::Ctrl | 'n',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::New,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Open...\t&quot;,
+            Shortcut::Ctrl | 'o',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Open,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Save\t&quot;,
+            Shortcut::Ctrl | 's',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Save,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Save as...\t&quot;,
+            Shortcut::Ctrl | 'w',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::SaveAs,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Print...\t&quot;,
+            Shortcut::Ctrl | 'p',
+            menu::MenuFlag::MenuDivider,
+            *s,
+            Message::Print,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Quit\t&quot;,
+            Shortcut::Ctrl | 'q',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Quit,
+        );
+
+        menu.add_emit(
+            &quot;&amp;Edit/Cut\t&quot;,
+            Shortcut::Ctrl | 'x',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Cut,
+        );
+
+        menu.add_emit(
+            &quot;&amp;Edit/Copy\t&quot;,
+            Shortcut::Ctrl | 'c',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Copy,
+        );
+
+        menu.add_emit(
+            &quot;&amp;Edit/Paste\t&quot;,
+            Shortcut::Ctrl | 'v',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Paste,
+        );
+
+        menu.add_emit(
+            &quot;&amp;Help/About\t&quot;,
+            Shortcut::None,
+            menu::MenuFlag::Normal,
+            *s,
+            Message::About,
+        );
+
+        if let Some(mut item) = menu.find_item(&quot;&amp;File/Quit\t&quot;) {
+            item.set_label_color(Color::Red);
+        }
+<span class="boring">}
+</span></code></pre></pre>
+<p>Also notice the last call, which uses find_item() to find an item in the menu, and we hence set its label color to red.</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png" alt="image" /></p>
+<h2 id="system-menu-bar"><a class="header" href="#system-menu-bar">System Menu Bar</a></h2>
+<p>On MacOS, you might prefer to use a system menu bar, which typically appears on the top of the screen. For that, you can use a SysMenuBar widget. This has the same api as all widgets implementing MenuExt, and it translates into a normal MenuBar when the app is compiled for other targets than a MacOS.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>Input and Output widgets implement the InputExt trait. These are found between the input and output modules:</p>
+<ul>
+<li>Input</li>
+<li>IntInput</li>
+<li>FloatInput</li>
+<li>MultilineInput</li>
+<li>SecretInput</li>
+<li>FileInput</li>
+<li>Output</li>
+<li>MultilineOutput</li>
+</ul>
+<p>The hallmark of this trait is that these widgets have a textual value which can be queried using the value() method, and changed using the set_value() method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let flex = group::Flex::default().with_size(100, 100).column().center_of_parent();
+    let label = frame::Frame::default().with_label(&quot;Enter age&quot;);
+    let input = input::IntInput::default();
+    let mut btn = button::Button::default().with_label(&quot;Submit&quot;);
+    flex.end();
+    win.end();
+    win.show();
+
+    btn.set_callback(move |btn| {
+        println!(&quot;your age is {}&quot;, input.value());
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727249-2fa4d384-2bd3-41fd-bbae-61a3a33b12f6.png" alt="image" /></p>
+<p>Notice that we used an IntInput to limit ourselves to integral values. Even though for the user they can't enter strings, the return of value() is still a String as far as the developer is concerned.</p>
+<p>Output widgets don't allow the user to modify their values:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let flex = group::Flex::default().with_size(200, 50).column().center_of_parent();
+    let label = frame::Frame::default().with_label(&quot;Check this text:&quot;);
+    let mut output = output::Output::default();
+    output.set_value(&quot;You can't edit this!&quot;);
+    flex.end();
+    win.end();
+    win.show();
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727261-88ec533f-200b-4df7-a570-76ebd2ba520a.png" alt="image" /></p>
+<p>Input widgets also support being made read-only using the InputExt::set_readonly(bool) method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let flex = group::Flex::default().with_size(100, 100).column().center_of_parent();
+    let label = frame::Frame::default().with_label(&quot;Enter age&quot;);
+    let mut input = input::IntInput::default();
+    let mut btn = button::Button::default().with_label(&quot;Submit&quot;);
+    flex.end();
+    win.end();
+    win.show();
+
+    btn.set_callback(move |btn| {
+        println!(&quot;your age is {}&quot;, input.value());
+        input.set_readonly(true);
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>This makes our input read-only once the user hits the button.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>Valuator widgets implement the ValuatorExt trait. These keep track (graphically and internally) of numerical values along with steps, ranges and bounds.
+Such a valuator which you might be familiar with are scrollbars and sliders. The list offered by fltk is found in the valuator module:</p>
+<ul>
+<li>Slider</li>
+<li>NiceSlider</li>
+<li>ValueSlider</li>
+<li>Dial</li>
+<li>LineDial</li>
+<li>Counter</li>
+<li>Scrollbar</li>
+<li>Roller</li>
+<li>Adjuster</li>
+<li>ValueInput</li>
+<li>ValueOutput</li>
+<li>FillSlider</li>
+<li>FillDial</li>
+<li>HorSlider (Horizontal slider)</li>
+<li>HorFillSlider</li>
+<li>HorNiceSlider</li>
+<li>HorValueSlider</li>
+</ul>
+<p>Changing the valuators value in the gui triggers its callback. The current value of the valuator can be queried using the value() method. It can also be set using set_value(). The ranges and step can also be queried and changed to your use case:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut slider = valuator::HorNiceSlider::default().with_size(400, 20).center_of_parent();
+    slider.set_minimum(0.);
+    slider.set_maximum(100.);
+    slider.set_step(1., 1); // increment by 1.0 at each 1 step
+    slider.set_value(50.); // start in the middle
+    win.end();
+    win.show();
+
+    slider.set_callback(|s| {
+        println!(&quot;slider at {}&quot;, s.value());
+    });
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727188-4ac06d45-7fd1-44f7-9adc-366d9bb79d8f.png" alt="image" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>Text widgets are those that implement the DisplayExt. There are 3 and these can be found in the text module:</p>
+<ul>
+<li>TextDisplay</li>
+<li>TextEditor</li>
+<li>SimpleTerminal</li>
+</ul>
+<p>The main purpose of these widgets is displaying/editing text. The first 2 widgets require a TextBuffer, while the SimpleTerminal has an internal buffer:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut buf = text::TextBuffer::default();
+
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut txt = text::TextEditor::default().with_size(390, 290).center_of_parent();
+    txt.set_buffer(buf.clone());
+    win.end();
+    win.show();
+
+    buf.set_text(&quot;Hello world!&quot;);
+    buf.append(&quot;\n&quot;);
+    buf.append(&quot;This is a text editor!&quot;);
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727101-175fe355-1383-4789-ae40-2945ef0c63e2.png" alt="image" /></p>
+<p>Most operations are done through the TextBuffer. Text can be appended using append() or the whole content can be set using set_text().
+You can get back a clone (reference type) of the buffer using the DisplayExt::buffer() method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let buf = text::TextBuffer::default();
+
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut txt = text::TextEditor::default().with_size(390, 290).center_of_parent();
+    txt.set_buffer(buf);
+    win.end();
+    win.show();
+
+    let mut my_buf = txt.buffer().unwrap();
+
+    my_buf.set_text(&quot;Hello world!&quot;);
+    my_buf.append(&quot;\n&quot;);
+    my_buf.append(&quot;This is a text editor!&quot;);
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>The DisplayExt offers other methods to manage the text properties such as wrapping, cursor position, font, color, size...etc:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{enums::Color, prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut buf = text::TextBuffer::default();
+    buf.set_text(&quot;Hello world!&quot;);
+    buf.append(&quot;\n&quot;);
+    buf.append(&quot;This is a text editor!&quot;);
+
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut txt = text::TextDisplay::default().with_size(390, 290).center_of_parent();
+    txt.set_buffer(buf);
+    txt.wrap_mode(text::WrapMode::AtBounds, 0); // bounds don't require the second argument, unlike AtPixel and AtColumn
+    txt.set_text_color(Color::Red);
+    win.end();
+    win.show();
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727121-8396c77e-836d-4406-abd1-92af32ff7242.png" alt="image" /></p>
+<p>The TextBuffer has also a second purpose, and that's to provide a style buffer. A style buffer mirrors your text buffer and uses a style table (containing font, color and size) to add granular styling to your text, the style table itself is indexed, so to speak, using the corresponding letter:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{
+    enums::{Color, Font},
+    prelude::*,
+    *,
+};
+
+const STYLES: &amp;[text::StyleTableEntry] = &amp;[
+    text::StyleTableEntry {
+        color: Color::Green,
+        font: Font::Courier,
+        size: 16,
+    },
+    text::StyleTableEntry {
+        color: Color::Red,
+        font: Font::Courier,
+        size: 16,
+    },
+    text::StyleTableEntry {
+        color: Color::from_u32(0x8000ff),
+        font: Font::Courier,
+        size: 16,
+    },
+];
+
+fn main() {
+    let a = app::App::default();
+    let mut buf = text::TextBuffer::default();
+    let mut sbuf = text::TextBuffer::default();
+    buf.set_text(&quot;Hello world!&quot;);
+    sbuf.set_text(&amp;&quot;A&quot;.repeat(&quot;Hello world!&quot;.len())); // A represents the first entry in the table, repeated for every letter
+    buf.append(&quot;\n&quot;); 
+    sbuf.append(&quot;B&quot;); // Although a new line and the style might not apply, but it's needed to avoid messing out subsequent entries
+    buf.append(&quot;This is a text editor!&quot;);
+    sbuf.append(&amp;&quot;C&quot;.repeat(&quot;This is a text editor!&quot;.len()));
+
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut txt = text::TextDisplay::default()
+        .with_size(390, 290)
+        .center_of_parent();
+    txt.set_buffer(buf);
+    txt.set_highlight_data(sbuf, STYLES.to_vec());
+    win.end();
+    win.show();
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727157-be992344-763d-41f9-b3d8-2dfa13fbaab1.png" alt="image" /></p>
+<p>The terminal example uses the SimpleTerminal along with a style TextBuffer. It can be found here:
+https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs</p>
+<div style="break-before: page; page-break-before: always;"></div><p>Browser widgets implement the BrowserExt trait:</p>
+<ul>
+<li>Browser</li>
+<li>SelectBrowser</li>
+<li>HoldBrowser</li>
+<li>MultiBrowser</li>
+<li>FileBrowser</li>
+<li>CheckBrowser</li>
+</ul>
+<p>These can be found in the browser module.</p>
+<p>To instantiate a browser, it also needs the column widths, as well as the separator char that will be used in the add() method to separate items into columns:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut win = window::Window::default().with_size(900, 300);
+    let mut b = browser::Browser::new(10, 10, 900 - 20, 300 - 20, &quot;&quot;);
+    let widths = &amp;[50, 50, 50, 70, 70, 40, 40, 70, 70, 50];
+    b.set_column_widths(widths);
+    b.set_column_char('\t');
+    // we can now use the '\t' char in our add method.
+    b.add(&quot;USER\tPID\t%CPU\t%MEM\tVSZ\tRSS\tTTY\tSTAT\tSTART\tTIME\tCOMMAND&quot;);
+    b.add(&quot;root\t2888\t0.0\t0.0\t1352\t0\ttty3\tSW\tAug15\t0:00\t@b@f/sbin/mingetty tty3&quot;);
+    b.add(&quot;erco\t2889\t0.0\t13.0\t221352\t0\ttty3\tR\tAug15\t1:34\t@b@f/usr/local/bin/render a35 0004&quot;);
+    b.add(&quot;uucp\t2892\t0.0\t0.0\t1352\t0\tttyS0\tSW\tAug15\t0:00\t@b@f/sbin/agetty -h 19200 ttyS0 vt100&quot;);
+    b.add(&quot;root\t13115\t0.0\t0.0\t1352\t0\ttty2\tSW\tAug30\t0:00\t@b@f/sbin/mingetty tty2&quot;);
+    b.add(
+        &quot;root\t13464\t0.0\t0.0\t1352\t0\ttty1\tSW\tAug30\t0:00\t@b@f/sbin/mingetty tty1 --noclear&quot;,
+    );
+    win.end();
+    win.show();
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145733437-e3061015-12fa-4f2e-a1e3-01f59c4b189d.png" alt="image" /></p>
+<p>To gain additional formatting, we can use special character <code>@</code> followed by a formatting specifier:</p>
+<ul>
+<li>'@.' Print rest of line, don't look for more '@' signs</li>
+<li>'@@' Print rest of line starting with '@'</li>
+<li>'@l' Use a LARGE (24 point) font</li>
+<li>'@m' Use a medium large (18 point) font</li>
+<li>'@s' Use a small (11 point) font</li>
+<li>'@b' Use a bold font (adds FL_BOLD to font)</li>
+<li>'@i' Use an italic font (adds FL_ITALIC to font)</li>
+<li>'@f' or '@t' Use a fixed-pitch font (sets font to FL_COURIER)</li>
+<li>'@c' Center the line horizontally</li>
+<li>'@r' Right-justify the text</li>
+<li>'@B0', '@B1', ... '@B255' Fill the backgound with fl_color(n)</li>
+<li>'@C0', '@C1', ... '@C255' Use fl_color(n) to draw the text</li>
+<li>'@F0', '@F1', ... Use fl_font(n) to draw the text</li>
+<li>'@S1', '@S2', ... Use point size n to draw the text</li>
+<li>'@u' or '@_' Underline the text.</li>
+<li>'@-' draw an engraved line through the middle.</li>
+</ul>
+<p>In the following example, we color %CPU to red by preceding it with @C88:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut win = window::Window::default().with_size(900, 300);
+    let mut b = browser::Browser::new(10, 10, 900 - 20, 300 - 20, &quot;&quot;);
+    let widths = &amp;[50, 50, 50, 70, 70, 40, 40, 70, 70, 50];
+    b.set_column_widths(widths);
+    b.set_column_char('\t');
+    b.add(&quot;USER\tPID\t@C88%CPU\t%MEM\tVSZ\tRSS\tTTY\tSTAT\tSTART\tTIME\tCOMMAND&quot;);
+    win.end();
+    win.show();
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145733713-2fe3207d-25f7-4acd-ae91-754679c5696a.png" alt="image" /></p>
+<p>The colors follow FLTK's colormap, which can be indexed from 0 to 255:</p>
+<p><img src="https://www.fltk.org/doc-1.4/fltk-colormap.png" alt="colormap" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>Tree widgets allow showing items in a tree! There's no tree trait, all methods belong to the Tree type. Items are added using the add method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
+    tree.add(&quot;Item 1&quot;);
+    tree.add(&quot;Item 2&quot;);
+    tree.add(&quot;Item 3&quot;);
+    win.end();
+    win.show();
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145726958-f1f2a095-39c5-496f-b772-18d024dd609d.png" alt="image" /></p>
+<p>Sub-items are added by using the forward slash separator:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
+    tree.add(&quot;Item 1&quot;);
+    tree.add(&quot;Item 2&quot;);
+    tree.add(&quot;Item 3&quot;);
+    tree.add(&quot;Item 3/Subitem 1&quot;);
+    tree.add(&quot;Item 3/Subitem 2&quot;);
+    tree.add(&quot;Item 3/Subitem 3&quot;);
+    win.end();
+    win.show();
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727026-bfcff44f-2b01-4679-937b-3e7d441dfdf0.png" alt="image" /></p>
+<p>If you try the above code, you'll see that the root item is always indicated by the label &quot;ROOT&quot;. This can be changed using the set_root_label() method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
+    tree.set_root_label(&quot;My Tree&quot;);
+    tree.add(&quot;Item 1&quot;);
+    tree.add(&quot;Item 2&quot;);
+    tree.add(&quot;Item 3&quot;);
+    tree.add(&quot;Item 3/Subitem 1&quot;);
+    tree.add(&quot;Item 3/Subitem 2&quot;);
+    tree.add(&quot;Item 3/Subitem 3&quot;);
+    win.end();
+    win.show();
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727045-a25be6bc-a514-4b4a-b7b9-0a7ee2e359b4.png" alt="image" /></p>
+<p>Or even hidden using the set_show_root(false) method.</p>
+<p>Items can be queried using the first_selected_item() method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
+    tree.set_show_root(false);
+    tree.add(&quot;Item 1&quot;);
+    tree.add(&quot;Item 2&quot;);
+    tree.add(&quot;Item 3&quot;);
+    tree.add(&quot;Item 3/Subitem 1&quot;);
+    tree.add(&quot;Item 3/Subitem 2&quot;);
+    tree.add(&quot;Item 3/Subitem 3&quot;);
+    win.end();
+    win.show();
+
+    
+    tree.set_callback(|t| {
+        if let Some(item) = t.first_selected_item() {
+            println!(&quot;{} selected&quot;, item.label().unwrap());
+        }
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727072-8596cf09-100c-4cb6-a427-0d3c66702b39.png" alt="image" /></p>
+<p>Currently our tree only allow single selection, let's change it to multiple (we'll also change the connector style while we're at it):</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
+    tree.set_select_mode(tree::TreeSelect::Multi);
+    tree.set_connector_style(tree::TreeConnectorStyle::Solid);
+    tree.set_connector_color(enums::Color::Red.inactive());
+    tree.set_show_root(false);
+    tree.add(&quot;Item 1&quot;);
+    tree.add(&quot;Item 2&quot;);
+    tree.add(&quot;Item 3&quot;);
+    tree.add(&quot;Item 3/Subitem 1&quot;);
+    tree.add(&quot;Item 3/Subitem 2&quot;);
+    tree.add(&quot;Item 3/Subitem 3&quot;);
+    win.end();
+    win.show();
+
+    
+    tree.set_callback(|t| {
+        if let Some(item) = t.first_selected_item() {
+            println!(&quot;{} selected&quot;, item.label().unwrap());
+        }
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>The problem now is that we need to get the whole selection instead only of the first selected item, so we'll use the get_selected_items() method which returns an optional Vec, and instead of just getting the label, we'll get the whole path of the item:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
+    tree.set_select_mode(tree::TreeSelect::Multi);
+    tree.set_connector_style(tree::TreeConnectorStyle::Solid);
+    tree.set_connector_color(enums::Color::Red.inactive());
+    tree.set_show_root(false);
+    tree.add(&quot;Item 1&quot;);
+    tree.add(&quot;Item 2&quot;);
+    tree.add(&quot;Item 3&quot;);
+    tree.add(&quot;Item 3/Subitem 1&quot;);
+    tree.add(&quot;Item 3/Subitem 2&quot;);
+    tree.add(&quot;Item 3/Subitem 3&quot;);
+    win.end();
+    win.show();
+
+    
+    tree.set_callback(|t| {
+        if let Some(items) = t.get_selected_items() {
+            for i in items {
+                println!(&quot;{} selected&quot;, t.item_pathname(&amp;i).unwrap());
+            }
+        }
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727000-4b881896-309d-465d-8305-9a7e0a92eaea.png" alt="image" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>fltk offers a table widget, the use code for which can be found in the examples. However, using the <a href="https://crates.io/crates/fltk-table">fltk-table crate</a> would require much less boilerplate code and also offers an easier and more intuitive interface:</p>
+<pre><pre class="playground"><code class="language-rust">extern crate fltk_table;
+
+use fltk::{
+    app, enums,
+    prelude::{GroupExt, WidgetExt},
+    window,
+};
+use fltk_table::{SmartTable, TableOpts};
+
+fn main() {
+    let app = app::App::default().with_scheme(app::Scheme::Gtk);
+    let mut wind = window::Window::default().with_size(800, 600);
+
+    /// We pass the rows and columns thru the TableOpts field
+    let mut table = SmartTable::default()
+    .with_size(790, 590)
+    .center_of_parent()
+    .with_opts(TableOpts {
+        rows: 30,
+        cols: 15,
+        editable: true,
+        ..Default::default()
+    });
+    
+    wind.end();
+    wind.show();
+
+    // Just filling the vec with some values
+    for i in 0..30 {
+        for j in 0..15 {
+            table.set_cell_value(i, j, &amp;(i + j).to_string());
+        }
+    }
+
+    // set the value at the row,column 4,5 to &quot;another&quot;, notice that indices start at 0
+    table.set_cell_value(3, 4, &quot;another&quot;);
+
+    assert_eq!(table.cell_value(3, 4), &quot;another&quot;);
+
+    // To avoid closing the window on hitting the escape key
+    wind.set_callback(move |_| {
+        if app::event() == enums::Event::Close {
+            app.quit();
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://github.com/fltk-rs/fltk-table/raw/HEAD/screenshots/styled.jpg" alt="fltk-table" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>fltk offers several dialog types including file dialogs and others. </p>
+<h2 id="file-dialogs"><a class="header" href="#file-dialogs">File dialogs</a></h2>
+<p>There are 2 types, the native file dialog and FLTK's own file dialog. Native dialogs just show a the OS's own dialog. For windows, that's the win32 dialog, for MacOS, that's the Cocoa dialog, and for other posix systems, it depends on what you're running. On GNOME and other gtk-based desktops, it shows the gtk dialog and on KDE it shows kdialog.</p>
+<h3 id="native-dialogs"><a class="header" href="#native-dialogs">Native dialogs</a></h3>
+<p>To spawn a native dialog:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+
+    let mut btn = button::Button::default()
+        .with_size(80, 30)
+        .with_label(&quot;Select file&quot;)
+        .center_of_parent();
+
+    wind.end();
+    wind.show();
+
+    btn.set_callback(|_| {
+        let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseFile);
+        dialog.show();
+        println!(&quot;{:?}&quot;, dialog.filename());
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>This prints the Path of the chosen file. There are several types which can be passed as NativeFileChooserType, here we browse files, you can choose to BrowseDir instead, also enable mutli file/dir selection. If you select multiple files, you can get a Vec using the filenames() method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+
+    let mut btn = button::Button::default()
+        .with_size(100, 30)
+        .with_label(&quot;Select files&quot;)
+        .center_of_parent();
+
+    wind.end();
+    wind.show();
+
+    btn.set_callback(|_| {
+        let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseMultiFile);
+        dialog.show();
+        println!(&quot;{:?}&quot;, dialog.filenames());
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>You can also add filter the files to show:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    btn.set_callback(|_| {
+        let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseMultiFile);
+        dialog.set_filter(&quot;*.{txt,rs,toml}&quot;);
+        dialog.show();
+        println!(&quot;{:?}&quot;, dialog.filenames());
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<p>This will only show .txt, .rs and .toml files.</p>
+<h3 id="fltks-own-file-chooser"><a class="header" href="#fltks-own-file-chooser">FLTK's own file chooser</a></h3>
+<p>FLTK also offers its own file chooser:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+
+    let mut btn = button::Button::default()
+        .with_size(100, 30)
+        .with_label(&quot;Select file&quot;)
+        .center_of_parent();
+
+    wind.end();
+    wind.show();
+
+    btn.set_callback(|_| {
+        let mut dialog = dialog::FileChooser::new(
+            /*start dir*/ &quot;.&quot;,
+            /*pattern*/ &quot;*.{txt,rs,toml}&quot;,
+            /*type*/ dialog::FileChooserType::Multi,
+            /*title*/ &quot;Select file:&quot;,
+        );
+        dialog.show();
+        while dialog.shown() {
+            app::wait();
+        }
+        if dialog.count() &gt; 1 {
+            for i in 1..=dialog.count() { // values start at 1
+                println!(&quot; VALUE[{}]: '{}'&quot;, i, dialog.value(i).unwrap());
+            }
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145726912-600e4c58-32b7-4a1b-8e6a-44e640549722.png" alt="image" /></p>
+<p>A convenience function is also provided using file_chooser() and dir_chooser() functions:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+
+    let mut btn = button::Button::default()
+        .with_size(100, 30)
+        .with_label(&quot;Select file&quot;)
+        .center_of_parent();
+
+    wind.end();
+    wind.show();
+
+    btn.set_callback(|_| {
+        let file = dialog::file_chooser(
+            &quot;Choose File&quot;,
+            &quot;*.rs&quot;,
+            /*start dir*/ &quot;.&quot;,
+            /*relative*/ true,
+        );
+        if let Some(file) = file {
+            println!(&quot;{}&quot;, file);
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<h3 id="help-dialog"><a class="header" href="#help-dialog">Help dialog</a></h3>
+<p>FLTK offers a help dialog which can show html 2 documents:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+
+    let mut btn = button::Button::default()
+        .with_size(100, 30)
+        .with_label(&quot;Show dialog&quot;)
+        .center_of_parent();
+
+    wind.end();
+    wind.show();
+
+    btn.set_callback(|_| {
+        let mut help = dialog::HelpDialog::new(100, 100, 400, 300);
+        help.set_value(&quot;&lt;h2&gt;Hello world&lt;/h2&gt;&quot;); // this takes html
+        help.show();
+        while help.shown() {
+            app::wait();
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>The html can also be loaded using the HelpDialog::load(path_to_html_file) method. </p>
+<p><img src="https://user-images.githubusercontent.com/37966791/145726889-442d0453-e1d0-4b41-8717-f121fdf860fa.png" alt="image" /></p>
+<h3 id="alert-dialogs"><a class="header" href="#alert-dialogs">Alert dialogs</a></h3>
+<p>FLTK also offers several dialog types which can be conveniently shown using free functions:</p>
+<ul>
+<li>message</li>
+<li>alert</li>
+<li>choice</li>
+<li>input</li>
+<li>password (like input but doesn't show the inputted data)</li>
+</ul>
+<p>To show up a simple message dialog:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+
+    let mut btn = button::Button::default()
+        .with_size(100, 30)
+        .with_label(&quot;Show dialog&quot;)
+        .center_of_parent();
+
+    wind.end();
+    wind.show();
+
+    btn.set_callback(|_| {
+        dialog::message_default(&quot;Message&quot;);
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>This shows a message at a default location (basically near the pointer). If you would like to enter coordinates manually, you can use the message() function:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    btn.set_callback(|_| {
+        dialog::message(100, 100, &quot;Message&quot;);
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<p>All the previously mentioned functions have to variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
+Some dialogs return a value, like choice, input, and password. Input and password return the inputted text, while choice returns an index of the chosen value:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+
+    let mut btn = button::Button::default()
+        .with_size(100, 30)
+        .with_label(&quot;Show dialog&quot;)
+        .center_of_parent();
+
+    wind.end();
+    wind.show();
+
+    btn.set_callback(|_| {
+        // password and input also takes a second arg which is the default value
+        let pass = dialog::password_default(&quot;Enter password:&quot;, &quot;&quot;);
+        if let Some(pass) = pass {
+            println!(&quot;{}&quot;, pass);
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145726850-61fc17e4-cd6e-4821-a9b5-396203806066.png" alt="image" /></p>
+<p>An example with choice:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+
+    let mut btn = button::Button::default()
+        .with_size(100, 30)
+        .with_label(&quot;Show dialog&quot;)
+        .center_of_parent();
+
+    wind.end();
+    wind.show();
+
+    btn.set_callback(|_| {
+        let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
+        println!(&quot;{}&quot;, choice);
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>This will print the index, i.e. choosing No will print 0, Yes will print 1 and Cancel will print 2.</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/145726775-d000a807-8bf5-439b-a991-8bf25fcd5049.png" alt="image" /></p>
+<p>You have noticed that all of these dialogs didn't have a title. You can add a title also using a free function called before the dialog:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>        dialog::message_title(&quot;Exit!&quot;);
+        let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>You can also set the default title of all these dialog boxes using dialog::message_title_default(), you'll want to do this in the start of your app:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    dialog::message_title_default(&quot;My App!&quot;);
+    let mut wind = window::Window::default().with_size(400, 300);
+
+    let mut btn = button::Button::default()
+        .with_size(100, 30)
+        .with_label(&quot;Show dialog&quot;)
+        .center_of_parent();
+
+    wind.end();
+    wind.show();
+
+    btn.set_callback(|_| {
+        let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
+        println!(&quot;{}&quot;, choice);
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145726685-f086bde2-db63-4fa8-a579-954dbacbe44d.png" alt="image" /></p>
+<h2 id="custom-dialogs"><a class="header" href="#custom-dialogs">Custom dialogs</a></h2>
+<p>All these dialogs make assumptions about your app that might not be correct, especially regarding colors and fonts. If you have a heavily customized app you would probably also want custom dialogs. A dialog is basically a modal window which is spawned during the application. This can have the same styling as the rest of your app:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{
+    app, button,
+    enums::{Color, Font, FrameType},
+    frame, group, input,
+    prelude::*,
+    window,
+};
+
+fn style_button(btn: &amp;mut button::Button) {
+    btn.set_color(Color::Cyan);
+    btn.set_frame(FrameType::RFlatBox);
+    btn.clear_visible_focus();
+}
+
+pub fn show_dialog() -&gt; MyDialog {
+    MyDialog::default()
+}
+
+pub struct MyDialog {
+    inp: input::Input,
+}
+
+impl MyDialog {
+    pub fn default() -&gt; Self {
+        let mut win = window::Window::default()
+            .with_size(400, 100)
+            .with_label(&quot;My Dialog&quot;);
+        win.set_color(Color::from_rgb(240, 240, 240));
+        let mut pack = group::Pack::default()
+            .with_size(300, 30)
+            .center_of_parent()
+            .with_type(group::PackType::Horizontal);
+        pack.set_spacing(20);
+        frame::Frame::default()
+            .with_size(80, 0)
+            .with_label(&quot;Enter name:&quot;);
+        let mut inp = input::Input::default().with_size(100, 0);
+        inp.set_frame(FrameType::FlatBox);
+        let mut ok = button::Button::default().with_size(80, 0).with_label(&quot;Ok&quot;);
+        style_button(&amp;mut ok);
+        pack.end();
+        win.end();
+        win.make_modal(true);
+        win.show();
+        ok.set_callback({
+            let mut win = win.clone();
+            move |_| {
+                win.hide();
+            }
+        });
+        while win.shown() {
+            app::wait();
+        }
+        Self { inp }
+    }
+    pub fn value(&amp;self) -&gt; String {
+        self.inp.value()
+    }
+}
+
+fn main() {
+    let a = app::App::default();
+    app::set_font(Font::Times);
+    let mut win = window::Window::default().with_size(600, 400);
+    win.set_color(Color::from_rgb(240, 240, 240));
+    let mut btn = button::Button::default()
+        .with_size(80, 30)
+        .with_label(&quot;Click&quot;)
+        .center_of_parent();
+    style_button(&amp;mut btn);
+    let mut frame = frame::Frame::new(btn.x() - 40, btn.y() - 100, btn.w() + 80, 30, None);
+    frame.set_frame(FrameType::BorderBox);
+    frame.set_color(Color::Red.inactive());
+    win.end();
+    win.show();
+    btn.set_callback(move |_| {
+        let d = show_dialog();
+        frame.set_label(&amp;d.value());
+    });
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145726727-a0018457-1d87-4519-9d6e-08d8f8030d1a.png" alt="image" /></p>
+<h2 id="printer-dialog"><a class="header" href="#printer-dialog">Printer dialog</a></h2>
+<p>FLTK also offers a printer dialog which uses your platform's native printer dialog:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use fltk::{prelude::*, *};
+let mut but = button::Button::default();
+but.set_callback(|widget| {
+    let mut printer = printer::Printer::default();
+    if printer.begin_job(1).is_ok() {
+        printer.begin_page().ok();
+        let (width, height) = printer.printable_rect();
+        draw::set_draw_color(enums::Color::Black);
+        draw::set_line_style(draw::LineStyle::Solid, 2);
+        draw::draw_rect(0, 0, width, height);
+        draw::set_font(enums::Font::Courier, 12);
+        printer.set_origin(width / 2, height / 2);
+        printer.print_widget(widget, -widget.width() / 2, -widget.height() / 2);
+        printer.end_page().ok();
+        printer.end_job();
+    }
+});
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here it's just printing the button's image and specifying where it shows on the paper. You can pass any widget (mostly like a TextEditor widget) as the printed widget.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>fltk-rs allows you to create custom widgets. We need to define a struct which extends an already existing widget and widget type. The most basic widget type being widget::Widget. 
+1- Define your struct and whatever other internal data needs to be stored in it.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use fltk::{prelude::*, *};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+struct MyCustomButton {
+    inner: widget::Widget,
+    num_clicks: Rc&lt;RefCell&lt;i32&gt;&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>You'll notice 2 things, we're using an Rc RefCell for the data we're storing. This isn't necessary in the general case, however, since we need to move that data into a callback, while still having access to it after we mutate it, we'll wrap it in an Rc RefCell. We've imported the necessary modules.</p>
+<p>2- Define the implementation of your struct. The most important of these being the constructor since it's how we'll initialize the internal data as well:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl MyCustomButton {
+    // our constructor
+    pub fn new(radius: i32, label: &amp;str) -&gt; Self {
+        let mut inner = widget::Widget::default()
+            .with_size(radius * 2, radius * 2)
+            .with_label(label)
+            .center_of_parent();
+        inner.set_frame(enums::FrameType::OFlatBox);
+        let num_clicks = 0;
+        let num_clicks = Rc::from(RefCell::from(num_clicks));
+        let clicks = num_clicks.clone();
+        inner.draw(|i| { // we need a draw implementation
+            draw::draw_box(i.frame(), i.x(), i.y(), i.w(), i.h(), i.color());
+            draw::set_draw_color(enums::Color::Black); // for the text
+            draw::set_font(enums::Font::Helvetica, app::font_size());
+            draw::draw_text2(&amp;i.label(), i.x(), i.y(), i.w(), i.h(), i.align());
+        });
+        inner.handle(move |i, ev| match ev {
+            enums::Event::Push =&gt; {
+                *clicks.borrow_mut() += 1; // increment num_clicks
+                i.do_callback(); // do the callback which we'll set using set_callback().
+                true
+            }
+            _ =&gt; false,
+        });
+        Self {
+            inner,
+            num_clicks,
+        }
+    }
+
+    // get the times our button was clicked
+    pub fn num_clicks(&amp;self) -&gt; i32 {
+        *self.num_clicks.borrow()
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>3- Apply the widget_extends! macro to our struct, the macro requires the base type, and the member via which our custom type is extended. This is done via implementing the Deref and DerefMut traits. The macro also adds other convenience constructors and anchoring methods:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Extend widget::Widget via the member `inner` and add other initializers and constructors
+widget_extends!(MyCustomButton, widget::Widget, inner);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Now we're ready to try out our struct:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let app = app::App::default().with_scheme(app::Scheme::Gleam);
+    app::background(255, 255, 255); // make the background white
+    let mut wind = window::Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
+    
+    let mut btn = MyCustomButton::new(50, &quot;Click&quot;);
+    // notice that set_color and set_callback are automatically implemented for us!
+    btn.set_color(enums::Color::Cyan);
+    btn.set_callback(|_| println!(&quot;Clicked&quot;));
+    
+    wind.end();
+    wind.show();
+
+    app.run().unwrap();
+    
+    // print the number our button was clicked on exit
+    println!(&quot;Our button was clicked {} times&quot;, btn.num_clicks());
+}
+</code></pre></pre>
+<p>Full code:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+struct MyCustomButton {
+    inner: widget::Widget,
+    num_clicks: Rc&lt;RefCell&lt;i32&gt;&gt;,
+}
+
+impl MyCustomButton {
+    // our constructor
+    pub fn new(radius: i32, label: &amp;str) -&gt; Self {
+        let mut inner = widget::Widget::default()
+            .with_size(radius * 2, radius * 2)
+            .with_label(label)
+            .center_of_parent();
+        inner.set_frame(enums::FrameType::OFlatBox);
+        let num_clicks = 0;
+        let num_clicks = Rc::from(RefCell::from(num_clicks));
+        let clicks = num_clicks.clone();
+        inner.draw(|i| { // we need a draw implementation
+            draw::draw_box(i.frame(), i.x(), i.y(), i.w(), i.h(), i.color());
+            draw::set_draw_color(enums::Color::Black); // for the text
+            draw::set_font(enums::Font::Helvetica, app::font_size());
+            draw::draw_text2(&amp;i.label(), i.x(), i.y(), i.w(), i.h(), i.align());
+        });
+        inner.handle(move |i, ev| match ev {
+            enums::Event::Push =&gt; {
+                *clicks.borrow_mut() += 1; // increment num_clicks
+                i.do_callback(); // do the callback which we'll set using set_callback().
+                true
+            }
+            _ =&gt; false,
+        });
+        Self {
+            inner,
+            num_clicks,
+        }
+    }
+
+    // get the times our button was clicked
+    pub fn num_clicks(&amp;self) -&gt; i32 {
+        *self.num_clicks.borrow()
+    }
+}
+
+// Extend widget::Widget via the member `inner` and add other initializers and constructors
+widget_extends!(MyCustomButton, widget::Widget, inner);
+
+fn main() {
+    let app = app::App::default().with_scheme(app::Scheme::Gleam);
+    app::background(255, 255, 255); // make the background white
+    let mut wind = window::Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
+    let mut btn = MyCustomButton::new(50, &quot;Click&quot;);
+    btn.set_color(enums::Color::Cyan);
+    btn.set_callback(|_| println!(&quot;Clicked&quot;));
+    wind.end();
+    wind.show();
+
+    app.run().unwrap();
+    
+    // print the number our button was clicked on exit
+    println!(&quot;Our button was clicked {} times&quot;, btn.num_clicks());
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727718-fd0ee71f-f0c2-4438-a038-9b6950638a35.png" alt="image" /></p>
+<div style="break-before: page; page-break-before: always;"></div><p>Animations can be shown in fltk-rs using several mechanism:</p>
+<ul>
+<li>Leveraging the event loop</li>
+<li>Spawning threads</li>
+<li>Timeouts</li>
+</ul>
+<h2 id="leveraging-the-event-loop"><a class="header" href="#leveraging-the-event-loop">Leveraging the event loop</a></h2>
+<p>fltk offers app::wait() and app::check() which allow updating the ui during a blocking operation:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    // our button takes the whole left side of the window
+    let mut sliding_btn = button::Button::new(0, 0, 100, 300, None);
+    win.end();
+    win.show();
+
+    sliding_btn.set_callback(|btn| {
+        if btn.w() &gt; 0 &amp;&amp; btn.w() &lt; 100 {
+            return; // we're still animating
+        }
+        while btn.w() != 0 {
+            btn.set_size(btn.w() - 2, btn.h());
+            app::sleep(0.016);
+            btn.parent().unwrap().redraw();
+            app::wait(); // or app::check();
+        }
+    });
+    a.run().unwrap();
+}
+</code></pre></pre>
+<h2 id="spawning-threads"><a class="header" href="#spawning-threads">Spawning threads</a></h2>
+<p>This ensures we don't block the main/ui thread:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    // our button takes the whole left side of the window
+    let mut sliding_btn = button::Button::new(0, 0, 100, 300, None);
+    win.end();
+    win.show();
+
+    sliding_btn.set_callback(|btn| {
+        if btn.w() &gt; 0 &amp;&amp; btn.w() &lt; 100 {
+            return; // we're still animating
+        }
+        std::thread::spawn({
+            let mut btn = btn.clone();
+            move || {
+                while btn.w() != 0 {
+                    btn.set_size(btn.w() - 2, btn.h());
+                    app::sleep(0.016);
+                    app::awake(); // to awaken the ui thread
+                    btn.parent().unwrap().redraw();
+                }
+            }
+        });
+    });
+    a.run().unwrap();
+}
+</code></pre></pre>
+<h2 id="timeouts"><a class="header" href="#timeouts">Timeouts</a></h2>
+<p>fltk offers timeouts for recurring operations. We can add a timeout, repeat it and remove it:</p>
+<pre><pre class="playground"><code class="language-rust">extern crate once_cell;
+use fltk::{prelude::*, *};
+
+fn move_button(mut btn: button::Button) {
+    btn.set_size(btn.w() - 2, btn.h());
+    btn.parent().unwrap().redraw();
+    if btn.w() == 0 {
+        app::remove_timeout(move || {
+            let btn = btn.clone();
+            move_button(btn);
+        });
+    } else {
+        app::repeat_timeout(0.3, move || {
+            let btn = btn.clone();
+            move_button(btn);
+        });
+    }
+}
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut btn = button::Button::new(0, 0, 100, 300, None);
+    win.end();
+    win.show();
+
+    btn.set_callback(|b| {
+        let btn = b.clone();
+        app::add_timeout(0.016, move || {
+            let btn = btn.clone();
+            move_button(btn)
+        });
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
+<p>We basically add the timeout when the user clicks the button, and depending on the size of the button we either repeat it or remove it.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>

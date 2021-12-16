@@ -1,0 +1,529 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Events - fltk-book</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="Cross-Compiling.html"><strong aria-hidden="true">1.2.</strong> Cross Compiling</a></li><li class="chapter-item expanded "><a href="Fluid.html"><strong aria-hidden="true">1.3.</strong> Fluid</a></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">1.4.</strong> The App struct</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">1.5.</strong> Windows</a></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">1.6.</strong> Widgets</a></li><li class="chapter-item expanded "><a href="Buttons.html"><strong aria-hidden="true">1.7.</strong> Buttons</a></li><li class="chapter-item expanded "><a href="Labels.html"><strong aria-hidden="true">1.8.</strong> Labels</a></li><li class="chapter-item expanded "><a href="Events.html" class="active"><strong aria-hidden="true">1.9.</strong> Events</a></li><li class="chapter-item expanded "><a href="Drag-&-Drop.html"><strong aria-hidden="true">1.10.</strong> Drag &amp; Drop</a></li><li class="chapter-item expanded "><a href="State-Management.html"><strong aria-hidden="true">1.11.</strong> State Management</a></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">1.12.</strong> Layouts</a></li><li class="chapter-item expanded "><a href="Colors.html"><strong aria-hidden="true">1.13.</strong> Colors</a></li><li class="chapter-item expanded "><a href="Fonts.html"><strong aria-hidden="true">1.14.</strong> Fonts</a></li><li class="chapter-item expanded "><a href="Drawing.html"><strong aria-hidden="true">1.15.</strong> Drawing things</a></li><li class="chapter-item expanded "><a href="Styling.html"><strong aria-hidden="true">1.16.</strong> Styling</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">1.17.</strong> Images</a></li><li class="chapter-item expanded "><a href="Group-widgets.html"><strong aria-hidden="true">1.18.</strong> Group widgets</a></li><li class="chapter-item expanded "><a href="Menus.html"><strong aria-hidden="true">1.19.</strong> Menus</a></li><li class="chapter-item expanded "><a href="Input-&-Output.html"><strong aria-hidden="true">1.20.</strong> Input &amp; Output</a></li><li class="chapter-item expanded "><a href="Valuators.html"><strong aria-hidden="true">1.21.</strong> Valuators</a></li><li class="chapter-item expanded "><a href="Text.html"><strong aria-hidden="true">1.22.</strong> Text</a></li><li class="chapter-item expanded "><a href="Browsers.html"><strong aria-hidden="true">1.23.</strong> Browsers</a></li><li class="chapter-item expanded "><a href="Trees.html"><strong aria-hidden="true">1.24.</strong> Trees</a></li><li class="chapter-item expanded "><a href="Tables.html"><strong aria-hidden="true">1.25.</strong> Tables</a></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">1.26.</strong> Dialogs</a></li><li class="chapter-item expanded "><a href="Custom-Widgets.html"><strong aria-hidden="true">1.27.</strong> Custom widgets</a></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">1.28.</strong> Animations</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">fltk-book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>In the previously mentioned examples, you have seen callbacks mostly, and although that is one way of handling events, FLTK offers multiple ways to handle events:</p>
+<ul>
+<li>We can use the set_callback() method, which is automatically triggered with a click to our button.</li>
+<li>We can use the handle() method for fine-grained event handling.</li>
+<li>We can use the emit() method which takes a sender and a message, this allows us to handle events in the event loop.</li>
+<li>We can define our own event, which can be handled within another widget's handle method.</li>
+</ul>
+<h3 id="setting-the-callback"><a class="header" href="#setting-the-callback">Setting the callback</a></h3>
+<p>Part of the WidgetExt trait is the set_callback method:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+    but.set_callback(|_| println!(&quot;The button was clicked!&quot;));
+    app.run().unwrap();
+}
+</code></pre></pre>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+    but.set_callback(|b| b.set_label(&quot;Clicked!&quot;));
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>The set_callback() methods have default triggers varying by the type of the widget. For buttons it's clicking or pressing enter when the button has focus.
+This can be changed using the set_trigger() method. For buttons this might not make much sense, however for input widgets, the trigger can be set to &quot;CallbackTrigger::Changed&quot; and this will cause changes in the input widget to trigger the callback.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut inp = input::Input::new(/* params */);
+inp.set_trigger(CallbackTrigger::Changed);
+inp.set_callback(|i| println!(&quot;my current value is: {}&quot;, i.value());
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="using-the-handle-method"><a class="header" href="#using-the-handle-method">Using the handle method</a></h3>
+<p>The handle method takes a closure whose parameter is an Event, and returns a bool for handled events. The bool lets FLTK know whether the event was handled or not.
+The call looks like this:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+
+    but.handle(|_, event| {
+        println!(&quot;The event: {:?}&quot;, event);
+        false
+    });
+    
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>This prints the event, and doesn't handle it since we return false. Obviously we would like to do something useful, so change the handle call to:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    but.handle(|_, event| match event {
+        Event::Push =&gt; {
+            println!(&quot;I was pushed!&quot;);
+            true
+        },
+        _ =&gt; false,
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<p>Here we handle the Push event by doing something useful then  returning true, all other events are ignored and we return false.</p>
+<p>Another example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    but.handle(|b, event| match event {
+        Event::Push =&gt; {
+            b.set_label(&quot;Pushed&quot;);
+            true
+        },
+        _ =&gt; false,
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="using-messages"><a class="header" href="#using-messages">Using messages</a></h3>
+<p>This allows us to create channels and a Sender and Receiver structs, we can then emit messages (which have to be Send + Sync safe) to be handled in our event loop. The advantage is that we avoid having to wrap our types in smart pointers when we need to pass them into closures or into spawned threads.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+
+    let (s, r) = app::channel();
+    
+    but.emit(s, true);
+    // This is equivalent to calling but.set_callback(move |_| s.send(true)); 
+
+    while app.wait() {
+        if let Some(msg) = r.recv() {
+            match msg {
+                true =&gt; println!(&quot;Clicked&quot;),
+                false =&gt; (), // Here we basically do nothing
+            }
+        }
+    }
+}
+</code></pre></pre>
+<p>Messages can be received in the event loop like in the previous example, otherwise you can receive messages in a background thread or in app::add_idle()' s callback:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    app::add_idle(move || {
+        if let Some(msg) = r.recv() {
+            match msg {
+                true =&gt; println!(&quot;Clicked&quot;),
+                false =&gt; (), // Here we basically do nothing
+            }
+        }
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<p>You're also not limited to using fltk channels, you can use any channel. For example, this uses the std channel:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let (s, r) = std::sync::mpsc::channel::&lt;Message&gt;();
+btn.set_callback(move |_| {
+    s.send(Message::SomeMessage).unwrap();
+});
+<span class="boring">}
+</span></code></pre></pre>
+<p>You can also define a method which applies to all widgets, similar to the emit() method:</p>
+<pre><pre class="playground"><code class="language-rust">use std::sync::mpsc::Sender;
+
+pub trait SenderWidget&lt;W, T&gt;
+where
+    W: WidgetExt,
+    T: Send + Sync + Clone + 'static,
+{
+    fn send(&amp;mut self, sender: Sender&lt;T&gt;, msg: T);
+}
+
+impl&lt;W, T&gt; SenderWidget&lt;W, T&gt; for W
+where
+    W: WidgetExt,
+    T: Send + Sync + Clone + 'static,
+{
+    fn send(&amp;mut self, sender: Sender&lt;T&gt;, msg: T) {
+        self.set_callback(move |_| {
+            sender.send(msg.clone()).unwrap();
+        });
+    }
+}
+
+fn main() {
+    let btn = button::Button::default();
+    let (s, r) = std::sync::mpsc::channel::&lt;Message&gt;();
+    btn.send(s.clone(), Message::SomeMessage);
+}
+</code></pre></pre>
+<h3 id="creating-our-own-events"><a class="header" href="#creating-our-own-events">Creating our own events</a></h3>
+<p>FLTK recognizes 29 events which are listed in enums::Event. However it allows us to create our own events using the app::handle(impl Into<i32>, window) call. The handle function takes an arbitrary i32 (&gt; 30) value as a signal, ideally the values should be predefined, which can be handled within another widget's handle() method, the other widget needs to be within the window that was passed to app::handle.
+In the following example, we create a window with a frame and a button. The button's callback sends a CHANGED Event through the app::handle_main function. The CHANGED signal is queried in the frame's handle method.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::*, enums::*, frame::*, group::*, prelude::*, window::*};
+use std::cell::RefCell;
+use std::rc::Rc;
+
+pub struct MyEvent;
+
+impl MyEvent {
+    const CHANGED: i32 = 40;
+}
+
+#[derive(Clone)]
+pub struct Counter {
+    count: Rc&lt;RefCell&lt;i32&gt;&gt;,
+}
+
+impl Counter {
+    pub fn new(val: i32) -&gt; Self {
+        Counter {
+            count: Rc::from(RefCell::from(val)),
+        }
+    }
+
+    pub fn increment(&amp;mut self) {
+        *self.count.borrow_mut() += 1;
+        app::handle_main(MyEvent::CHANGED).unwrap();
+    }
+
+    pub fn decrement(&amp;mut self) {
+        *self.count.borrow_mut() -= 1;
+        app::handle_main(MyEvent::CHANGED).unwrap();
+    }
+
+    pub fn value(&amp;self) -&gt; i32 {
+        *self.count.borrow()
+    }
+}
+
+fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    let app = app::App::default();
+    let counter = Counter::new(0);
+    let mut wind = Window::default().with_size(160, 200).with_label(&quot;Counter&quot;);
+    let mut pack = Pack::default().with_size(120, 140).center_of(&amp;wind);
+    pack.set_spacing(10);
+    let mut but_inc = Button::default().with_size(0, 40).with_label(&quot;+&quot;);
+    let mut frame = Frame::default()
+        .with_size(0, 40)
+        .with_label(&amp;counter.clone().value().to_string());
+    let mut but_dec = Button::default().with_size(0, 40).with_label(&quot;-&quot;);
+    pack.end();
+    wind.end();
+    wind.show();
+
+    but_inc.set_callback({
+        let mut c = counter.clone();
+        move |_| c.increment()
+    });
+
+    but_dec.set_callback({
+        let mut c = counter.clone();
+        move |_| c.decrement()
+    });
+    
+    frame.handle(move |f, ev| {
+        if ev == MyEvent::CHANGED.into() {
+            f.set_label(&amp;counter.clone().value().to_string());
+            true
+        } else {
+            false
+        }
+    });
+
+    Ok(app.run()?)
+}
+</code></pre></pre>
+<p>The sent i32 signal can be created on the fly, or added to a const local or global, or within an enum. </p>
+<h4 id="advantages"><a class="header" href="#advantages">Advantages:</a></h4>
+<ul>
+<li>No overhead.</li>
+<li>The signal is dealt with like any fltk event.</li>
+<li>the app::handle function returns a bool which indicates whether the event was handled or not.</li>
+<li>Allows handling of custom signals/events outside the event loop.</li>
+<li>Allows an MVC or SVU architecture to your application.</li>
+</ul>
+<h4 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages:</a></h4>
+<ul>
+<li>The signal can only be handled in a widget's handle method.</li>
+<li>The signal is inaccessible within the event loop (for that, you might want to use WidgetExt::emit or channels described previously in this page). </li>
+</ul>
+<h3 id="fltk-evented-crate"><a class="header" href="#fltk-evented-crate">fltk-evented crate</a></h3>
+<p>For an alternative <code>on_&lt;event&gt;</code> method of handling events, check the <a href="https://crates.io/crates/fltk-evented">fltk-evented crate</a> whose Listener widget can handle events in the event loop, so you can avoid sending things into closures and worrying about lifetimes:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::Button, enums::Color, frame::Frame, group::Flex, prelude::*, window::Window};
+use fltk_evented::Listener;
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gtk);
+    app::set_font_size(20);
+
+    let mut wind = Window::default()
+        .with_size(160, 200)
+        .center_screen()
+        .with_label(&quot;Counter&quot;);
+    let flex = Flex::default()
+        .with_size(120, 160)
+        .center_of_parent()
+        .column();
+    let mut but_inc: Listener&lt;_&gt; = Button::default().with_label(&quot;+&quot;).into();
+    let mut frame = Frame::default();
+    let mut but_dec: Listener&lt;_&gt; = Button::default().with_label(&quot;-&quot;).into();
+    flex.end();
+    wind.end();
+    wind.show();
+
+    but_inc.on_hover(|b| {
+        b.set_color(Color::Red);
+    });
+
+    let mut val = 0;
+
+    while a.wait() {
+        if but_inc.triggered() {
+            val += 1;
+        }
+
+        if but_inc.hovered() {
+            but_inc.set_color(Color::White);
+        }
+
+        if but_inc.left() {
+            but_inc.set_color(Color::BackGround);
+        }
+
+        if but_dec.triggered() {
+            val -= 1;
+        }
+
+        if but_dec.hovered() {
+            but_dec.set_color(Color::White);
+        }
+
+        if but_dec.left() {
+            but_dec.set_color(Color::BackGround);
+        }
+
+        frame.set_label(&amp;val.to_string());
+    }
+}
+</code></pre></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Labels.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Drag-&amp;-Drop.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Labels.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Drag-&amp;-Drop.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

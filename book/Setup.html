@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Setup - fltk-book</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Setup.html" class="active"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="Cross-Compiling.html"><strong aria-hidden="true">1.2.</strong> Cross Compiling</a></li><li class="chapter-item expanded "><a href="Fluid.html"><strong aria-hidden="true">1.3.</strong> Fluid</a></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">1.4.</strong> The App struct</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">1.5.</strong> Windows</a></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">1.6.</strong> Widgets</a></li><li class="chapter-item expanded "><a href="Buttons.html"><strong aria-hidden="true">1.7.</strong> Buttons</a></li><li class="chapter-item expanded "><a href="Labels.html"><strong aria-hidden="true">1.8.</strong> Labels</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">1.9.</strong> Events</a></li><li class="chapter-item expanded "><a href="Drag-&-Drop.html"><strong aria-hidden="true">1.10.</strong> Drag &amp; Drop</a></li><li class="chapter-item expanded "><a href="State-Management.html"><strong aria-hidden="true">1.11.</strong> State Management</a></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">1.12.</strong> Layouts</a></li><li class="chapter-item expanded "><a href="Colors.html"><strong aria-hidden="true">1.13.</strong> Colors</a></li><li class="chapter-item expanded "><a href="Fonts.html"><strong aria-hidden="true">1.14.</strong> Fonts</a></li><li class="chapter-item expanded "><a href="Drawing.html"><strong aria-hidden="true">1.15.</strong> Drawing things</a></li><li class="chapter-item expanded "><a href="Styling.html"><strong aria-hidden="true">1.16.</strong> Styling</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">1.17.</strong> Images</a></li><li class="chapter-item expanded "><a href="Group-widgets.html"><strong aria-hidden="true">1.18.</strong> Group widgets</a></li><li class="chapter-item expanded "><a href="Menus.html"><strong aria-hidden="true">1.19.</strong> Menus</a></li><li class="chapter-item expanded "><a href="Input-&-Output.html"><strong aria-hidden="true">1.20.</strong> Input &amp; Output</a></li><li class="chapter-item expanded "><a href="Valuators.html"><strong aria-hidden="true">1.21.</strong> Valuators</a></li><li class="chapter-item expanded "><a href="Text.html"><strong aria-hidden="true">1.22.</strong> Text</a></li><li class="chapter-item expanded "><a href="Browsers.html"><strong aria-hidden="true">1.23.</strong> Browsers</a></li><li class="chapter-item expanded "><a href="Trees.html"><strong aria-hidden="true">1.24.</strong> Trees</a></li><li class="chapter-item expanded "><a href="Tables.html"><strong aria-hidden="true">1.25.</strong> Tables</a></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">1.26.</strong> Dialogs</a></li><li class="chapter-item expanded "><a href="Custom-Widgets.html"><strong aria-hidden="true">1.27.</strong> Custom widgets</a></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">1.28.</strong> Animations</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">fltk-book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Rust (version &gt; 1.45), CMake (version &gt; 3.11), Git and a C++11 compiler need to be installed and in your PATH for a crossplatform build from source. This crate also offers a bundled form of fltk on selected platforms, this can be enabled using the fltk-bundled feature flag (which requires curl and tar to download and unpack the bundled libraries). If you have ninja-build installed, you can enable it using the &quot;use-ninja&quot; feature. This should accelerate build times significantly.</p>
+<ul>
+<li>Windows: No dependencies.</li>
+<li>MacOS: No dependencies.</li>
+<li>Linux: X11 and OpenGL development headers need to be installed for development. The libraries themselves are available on linux distros with a graphical user interface.</li>
+</ul>
+<p>For Debian-based GUI distributions, that means running:</p>
+<pre><code>$ sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
+</code></pre>
+<p>For RHEL-based GUI distributions, that means running:</p>
+<pre><code>$ sudo yum groupinstall &quot;X Software Development&quot; &amp;&amp; yum install pango-devel libXinerama-devel
+</code></pre>
+<p>For Arch-based GUI distributions, that means running:</p>
+<pre><code>$ sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
+</code></pre>
+<p>For Alpine linux:</p>
+<pre><code>$ apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
+</code></pre>
+<ul>
+<li>Android: Android Studio, Android Sdk, Android Ndk.</li>
+</ul>
+<h2 id="detailed-setup"><a class="header" href="#detailed-setup">Detailed setup</a></h2>
+<p>This section assumes you don't even have Rust installed, and is separated into different environments:</p>
+<h3 id="windows-msvc-toolchain"><a class="header" href="#windows-msvc-toolchain">Windows (MSVC toolchain)</a></h3>
+<ul>
+<li>Go to https://www.rust-lang.org/learn/get-started</li>
+<li>Follow the link to <code>Visual Studio C++ Build tools</code> and download the MSVC compiler and Windows sdk.</li>
+<li>Using the installer, install:</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/37966791/116013495-2dff8800-a639-11eb-8e4c-8c6228e00abc.png" alt="image" /></p>
+<p>and make sure the following are checked:</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/116013520-48d1fc80-a639-11eb-934a-fac6609135b4.png" alt="image" /></p>
+<ul>
+<li>You can also check CMake in the previous list, or download CMake from:
+https://cmake.org/download/</li>
+<li>If you don't have <code>git</code>, make sure to get it from:
+https://git-scm.com/downloads</li>
+<li>From the rust-lang.org website, download the correct rustup installer for your architecture.</li>
+<li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
+</ul>
+<h3 id="windows-gnu-toolchain"><a class="header" href="#windows-gnu-toolchain">Windows (gnu toolchain)</a></h3>
+<p>If you don't already have msys2, you can get it from:
+https://www.msys2.org/</p>
+<ul>
+<li>You can get the Rust toolchain via the pacman package manager, or via rustup as described previously. The installation process however would require specifying the use of the gnu toolchain (not choosing the default which would install the MSVC toolchain). 
+The toolchain should also reflect the architecture of your machine. For example, a 64bit machine should install the x86_64-pc-windows-gnu toolchain.
+If you decide to get Rust via the package manager, make sure you're getting the mingw variant, and with the correct MINGW_PACKAGE_PREFIX (for 64bits, that env variable would equate to mingw-w64-x86_64).</li>
+<li>Assuming you're installing everything via pacman, open the mingw shell (not the msys2 shell, it can be found bundled in the msys2 install directory) and run the following:</li>
+</ul>
+<pre><code>$ pacman -S curl tar git $MINGW_PACKAGE_PREFIX-rust $MINGW_PACKAGE_PREFIX-gcc $MINGW_PACKAGE_PREFIX-cmake $MINGW_PACKAGE_PREFIX-make --needed
+</code></pre>
+<p>You can replace $MINGW_PACKAGE_PREFIX-make with $MINGW_PACKAGE_PREFIX-ninja.</p>
+<ul>
+<li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
+</ul>
+<h3 id="macos"><a class="header" href="#macos">MacOS</a></h3>
+<ul>
+<li>To get the Xcode Command Line Tools (which have the C++ compiler), run:</li>
+</ul>
+<pre><code>$ xcode-select --install
+</code></pre>
+<p>Follow the instructions. Alternatively you can install clang or gcc from homebrew.</p>
+<ul>
+<li>To get CMake, you can get it from:
+https://cmake.org/download/
+Or from homebrew as well.</li>
+<li>To get the Rust toolchain:</li>
+</ul>
+<pre><code>$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre>
+<p>And follow the default instructions.</p>
+<ul>
+<li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
+</ul>
+<h3 id="linux"><a class="header" href="#linux">Linux</a></h3>
+<ul>
+<li>Use your package manager to get a C++ compiler, CMake, make, git.
+Taking Debian/Ubuntu as an example:</li>
+</ul>
+<pre><code>$ sudo apt-get install g++ cmake git make
+</code></pre>
+<ul>
+<li>To get the dev dependencies for FLTK, you can also use your package manager:
+For Debian-based GUI distributions, that means running:</li>
+</ul>
+<pre><code>$ sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
+</code></pre>
+<p>For RHEL-based GUI distributions, that means running:</p>
+<pre><code>$ sudo yum groupinstall &quot;X Software Development&quot; &amp;&amp; yum install pango-devel libXinerama-devel
+</code></pre>
+<p>For Arch-based GUI distributions, that means running:</p>
+<pre><code>$ sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
+</code></pre>
+<p>For Alpine linux:</p>
+<pre><code>$ apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
+</code></pre>
+<ul>
+<li>To get the Rust toolchain:</li>
+</ul>
+<pre><code>$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre>
+<p>And follow the default instructions.</p>
+<ul>
+<li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Home.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Cross-Compiling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Home.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Cross-Compiling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Menus - fltk-book</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="Cross-Compiling.html"><strong aria-hidden="true">1.2.</strong> Cross Compiling</a></li><li class="chapter-item expanded "><a href="Fluid.html"><strong aria-hidden="true">1.3.</strong> Fluid</a></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">1.4.</strong> The App struct</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">1.5.</strong> Windows</a></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">1.6.</strong> Widgets</a></li><li class="chapter-item expanded "><a href="Buttons.html"><strong aria-hidden="true">1.7.</strong> Buttons</a></li><li class="chapter-item expanded "><a href="Labels.html"><strong aria-hidden="true">1.8.</strong> Labels</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">1.9.</strong> Events</a></li><li class="chapter-item expanded "><a href="Drag-&-Drop.html"><strong aria-hidden="true">1.10.</strong> Drag &amp; Drop</a></li><li class="chapter-item expanded "><a href="State-Management.html"><strong aria-hidden="true">1.11.</strong> State Management</a></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">1.12.</strong> Layouts</a></li><li class="chapter-item expanded "><a href="Colors.html"><strong aria-hidden="true">1.13.</strong> Colors</a></li><li class="chapter-item expanded "><a href="Fonts.html"><strong aria-hidden="true">1.14.</strong> Fonts</a></li><li class="chapter-item expanded "><a href="Drawing.html"><strong aria-hidden="true">1.15.</strong> Drawing things</a></li><li class="chapter-item expanded "><a href="Styling.html"><strong aria-hidden="true">1.16.</strong> Styling</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">1.17.</strong> Images</a></li><li class="chapter-item expanded "><a href="Group-widgets.html"><strong aria-hidden="true">1.18.</strong> Group widgets</a></li><li class="chapter-item expanded "><a href="Menus.html" class="active"><strong aria-hidden="true">1.19.</strong> Menus</a></li><li class="chapter-item expanded "><a href="Input-&-Output.html"><strong aria-hidden="true">1.20.</strong> Input &amp; Output</a></li><li class="chapter-item expanded "><a href="Valuators.html"><strong aria-hidden="true">1.21.</strong> Valuators</a></li><li class="chapter-item expanded "><a href="Text.html"><strong aria-hidden="true">1.22.</strong> Text</a></li><li class="chapter-item expanded "><a href="Browsers.html"><strong aria-hidden="true">1.23.</strong> Browsers</a></li><li class="chapter-item expanded "><a href="Trees.html"><strong aria-hidden="true">1.24.</strong> Trees</a></li><li class="chapter-item expanded "><a href="Tables.html"><strong aria-hidden="true">1.25.</strong> Tables</a></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">1.26.</strong> Dialogs</a></li><li class="chapter-item expanded "><a href="Custom-Widgets.html"><strong aria-hidden="true">1.27.</strong> Custom widgets</a></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">1.28.</strong> Animations</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">fltk-book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Menus in FLTK are widgets which implement the MenuExt trait. To that end, there are several types:</p>
+<ul>
+<li>MenuBar</li>
+<li>MenuItem</li>
+<li>Choice (dropdown list)</li>
+<li>SysMenuBar (MacOS menu bar which appears at the top of the screen)</li>
+</ul>
+<p>Menu types function in 2 main ways:
+1- Add choices using the add_choice() method, then handling the user's selection in the callback:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
+    choice.add_choice(&quot;Choice 1&quot;);
+    choice.add_choice(&quot;Choice 2&quot;);
+    choice.add_choice(&quot;Choice 3&quot;);
+    // You can also simply type choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    wind.end();
+    wind.show();
+
+    choice.set_callback(|c| {
+        match c.value() {
+            0 =&gt; println!(&quot;choice 1 selected&quot;),
+            1 =&gt; println!(&quot;choice 2 selected&quot;),
+            2 =&gt; println!(&quot;choice 3 selected&quot;),
+            _ =&gt; unreachable!(),
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png" alt="image" /></p>
+<p>Alternatively you can query the textual value of the selected item:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
+    choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    wind.end();
+    wind.show();
+
+    choice.set_callback(|c| {
+        if let Some(choice) = c.choice() {
+            match choice.as_str() {
+                &quot;Choice 1&quot; =&gt; println!(&quot;choice 1 selected&quot;),
+                &quot;Choice 2&quot; =&gt; println!(&quot;choice 2 selected&quot;),
+                &quot;Choice 3&quot; =&gt; println!(&quot;choice 3 selected&quot;),
+                _ =&gt; unreachable!(),
+            }
+        }
+    });
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>2- Adding choices via the add() method, you pass each choice's callback distinctively.</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut wind = window::Window::default().with_size(400, 300);
+    let mut choice = menu::Choice::default()
+        .with_size(80, 30)
+        .center_of_parent()
+        .with_label(&quot;Select item&quot;);
+
+    choice.add(
+        &quot;Choice 1&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        |_| println!(&quot;choice 1 selected&quot;),
+    );
+    choice.add(
+        &quot;Choice 2&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        |_| println!(&quot;choice 2 selected&quot;),
+    );
+    choice.add(
+        &quot;Choice 3&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        |_| println!(&quot;choice 3 selected&quot;),
+    );
+
+    wind.end();
+    wind.show();
+
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>Alternatively, you can use the add_emit() to pass a Sender and a message instead of passing callbacks:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+#[derive(Clone)]
+enum Message {
+    Choice1,
+    Choice2,
+    Choice3,
+}
+
+fn main() {
+    let a = app::App::default();
+    let (s, r) = app::channel();
+    let mut wind = window::Window::default().with_size(400, 300);
+    let mut choice = menu::Choice::default()
+        .with_size(80, 30)
+        .center_of_parent()
+        .with_label(&quot;Select item&quot;);
+
+    choice.add_emit(
+        &quot;Choice 1&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        s.clone(),
+        Message::Choice1,
+    );
+    choice.add_emit(
+        &quot;Choice 2&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        s.clone(),
+        Message::Choice2,
+    );
+    choice.add_emit(
+        &quot;Choice 3&quot;,
+        enums::Shortcut::None,
+        menu::MenuFlag::Normal,
+        s,
+        Message::Choice3,
+    );
+
+    wind.end();
+    wind.show();
+
+    while a.wait() {
+        if let Some(msg) = r.recv() {
+            match msg {
+                Message::Choice1 =&gt; println!(&quot;choice 1 selected&quot;),
+                Message::Choice2 =&gt; println!(&quot;choice 2 selected&quot;),
+                Message::Choice3 =&gt; println!(&quot;choice 3 selected&quot;),
+            }
+        }
+    }
+}
+</code></pre></pre>
+<p>You might wonder, why go from a handful of lines in the first examples to a more complex manner of doing things. Each method has it's uses. 
+For simple drop down widgets, go with the first method. For an application's menu bar, go with the second. It allows you to specify Shortcuts and MenuFlags, and allows better decoupling of events, so you won't have to handle everything in the menu's callback. It's also easier to deal with submenus using the add() method, as in the <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">editor example</a>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>        let mut menu = menu::SysMenuBar::default().with_size(800, 35);
+        menu.set_frame(FrameType::FlatBox);
+        menu.add_emit(
+            &quot;&amp;File/New...\t&quot;,
+            Shortcut::Ctrl | 'n',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::New,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Open...\t&quot;,
+            Shortcut::Ctrl | 'o',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Open,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Save\t&quot;,
+            Shortcut::Ctrl | 's',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Save,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Save as...\t&quot;,
+            Shortcut::Ctrl | 'w',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::SaveAs,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Print...\t&quot;,
+            Shortcut::Ctrl | 'p',
+            menu::MenuFlag::MenuDivider,
+            *s,
+            Message::Print,
+        );
+
+        menu.add_emit(
+            &quot;&amp;File/Quit\t&quot;,
+            Shortcut::Ctrl | 'q',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Quit,
+        );
+
+        menu.add_emit(
+            &quot;&amp;Edit/Cut\t&quot;,
+            Shortcut::Ctrl | 'x',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Cut,
+        );
+
+        menu.add_emit(
+            &quot;&amp;Edit/Copy\t&quot;,
+            Shortcut::Ctrl | 'c',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Copy,
+        );
+
+        menu.add_emit(
+            &quot;&amp;Edit/Paste\t&quot;,
+            Shortcut::Ctrl | 'v',
+            menu::MenuFlag::Normal,
+            *s,
+            Message::Paste,
+        );
+
+        menu.add_emit(
+            &quot;&amp;Help/About\t&quot;,
+            Shortcut::None,
+            menu::MenuFlag::Normal,
+            *s,
+            Message::About,
+        );
+
+        if let Some(mut item) = menu.find_item(&quot;&amp;File/Quit\t&quot;) {
+            item.set_label_color(Color::Red);
+        }
+<span class="boring">}
+</span></code></pre></pre>
+<p>Also notice the last call, which uses find_item() to find an item in the menu, and we hence set its label color to red.</p>
+<p><img src="https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png" alt="image" /></p>
+<h2 id="system-menu-bar"><a class="header" href="#system-menu-bar">System Menu Bar</a></h2>
+<p>On MacOS, you might prefer to use a system menu bar, which typically appears on the top of the screen. For that, you can use a SysMenuBar widget. This has the same api as all widgets implementing MenuExt, and it translates into a normal MenuBar when the app is compiled for other targets than a MacOS.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Group-widgets.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Input-&amp;-Output.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Group-widgets.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Input-&amp;-Output.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

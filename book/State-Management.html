@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>State Management - fltk-book</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="Cross-Compiling.html"><strong aria-hidden="true">1.2.</strong> Cross Compiling</a></li><li class="chapter-item expanded "><a href="Fluid.html"><strong aria-hidden="true">1.3.</strong> Fluid</a></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">1.4.</strong> The App struct</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">1.5.</strong> Windows</a></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">1.6.</strong> Widgets</a></li><li class="chapter-item expanded "><a href="Buttons.html"><strong aria-hidden="true">1.7.</strong> Buttons</a></li><li class="chapter-item expanded "><a href="Labels.html"><strong aria-hidden="true">1.8.</strong> Labels</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">1.9.</strong> Events</a></li><li class="chapter-item expanded "><a href="Drag-&-Drop.html"><strong aria-hidden="true">1.10.</strong> Drag &amp; Drop</a></li><li class="chapter-item expanded "><a href="State-Management.html" class="active"><strong aria-hidden="true">1.11.</strong> State Management</a></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">1.12.</strong> Layouts</a></li><li class="chapter-item expanded "><a href="Colors.html"><strong aria-hidden="true">1.13.</strong> Colors</a></li><li class="chapter-item expanded "><a href="Fonts.html"><strong aria-hidden="true">1.14.</strong> Fonts</a></li><li class="chapter-item expanded "><a href="Drawing.html"><strong aria-hidden="true">1.15.</strong> Drawing things</a></li><li class="chapter-item expanded "><a href="Styling.html"><strong aria-hidden="true">1.16.</strong> Styling</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">1.17.</strong> Images</a></li><li class="chapter-item expanded "><a href="Group-widgets.html"><strong aria-hidden="true">1.18.</strong> Group widgets</a></li><li class="chapter-item expanded "><a href="Menus.html"><strong aria-hidden="true">1.19.</strong> Menus</a></li><li class="chapter-item expanded "><a href="Input-&-Output.html"><strong aria-hidden="true">1.20.</strong> Input &amp; Output</a></li><li class="chapter-item expanded "><a href="Valuators.html"><strong aria-hidden="true">1.21.</strong> Valuators</a></li><li class="chapter-item expanded "><a href="Text.html"><strong aria-hidden="true">1.22.</strong> Text</a></li><li class="chapter-item expanded "><a href="Browsers.html"><strong aria-hidden="true">1.23.</strong> Browsers</a></li><li class="chapter-item expanded "><a href="Trees.html"><strong aria-hidden="true">1.24.</strong> Trees</a></li><li class="chapter-item expanded "><a href="Tables.html"><strong aria-hidden="true">1.25.</strong> Tables</a></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">1.26.</strong> Dialogs</a></li><li class="chapter-item expanded "><a href="Custom-Widgets.html"><strong aria-hidden="true">1.27.</strong> Custom widgets</a></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">1.28.</strong> Animations</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">fltk-book</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>FLTK doesn't impose a certain form of state management or app architecture. This is left to the user. All the examples in the fltk-rs repo and this wiki already use either callbacks or messages, you'll find many examples of both methods.
+Those were discussed in the <a href="https://github.com/fltk-rs/fltk-rs/wiki/events">events page</a>.</p>
+<p>Also all the examples might appear to handle everything in the main function, this is only for simplicity. You can create your own App struct, include the main window in it and the state of your app:</p>
+<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+
+#[derive(Copy, Clone)]
+enum Message {
+    Inc,
+    Dec,
+}
+
+struct MyApp {
+    app: app::App,
+    main_win: window::Window,
+    frame: frame::Frame,
+    count: i32,
+    receiver: app::Receiver&lt;Message&gt;,
+}
+
+impl MyApp {
+    pub fn new() -&gt; Self {
+        let count = 0;
+        let app = app::App::default();
+        let (s, receiver) = app::channel();
+        let mut main_win = window::Window::default().with_size(400, 300);
+        let col = group::Flex::default()
+            .with_size(100, 200)
+            .column()
+            .center_of_parent();
+        let mut inc = button::Button::default().with_label(&quot;+&quot;);
+        inc.emit(s, Message::Inc);
+        let frame = frame::Frame::default().with_label(&amp;count.to_string());
+        let mut dec = button::Button::default().with_label(&quot;-&quot;);
+        dec.emit(s, Message::Dec);
+        col.end();
+        main_win.end();
+        main_win.show();
+        Self {
+            app,
+            main_win,
+            frame,
+            count,
+            receiver,
+        }
+    }
+
+    pub fn run(mut self) {
+        while self.app.wait() {
+            if let Some(msg) = self.receiver.recv() {
+                match msg {
+                    Message::Inc =&gt; self.count += 1,
+                    Message::Dec =&gt; self.count -= 1,
+                }
+                self.frame.set_label(&amp;self.count.to_string());
+            }
+        }
+    }
+}
+
+fn main() {
+    let a = MyApp::new();
+    a.run();
+}
+</code></pre></pre>
+<h2 id="helper-crates"><a class="header" href="#helper-crates">Helper crates</a></h2>
+<p>The crates ecosystem offers many crates which provide state management. Also there are 2 crates under the fltk-rs org which offer means of architecting your app and managing its state:</p>
+<ul>
+<li><a href="https://github.com/fltk-rs/flemish">flemish</a>:</li>
+</ul>
+<p>Offers an Elm like SVU architecture. This is reactive, immutable in essence, and tears down the view which each Message.</p>
+<ul>
+<li><a href="https://github.com/fltk-rs/fltk-evented">fltk-evented</a>:</li>
+</ul>
+<p>This resembles immediate-mode guis in that all events are handled in the event loop. In reality it's also reactive but mutable and stateless. This doesn't cause a redraw with triggers.</p>
+<p>Both crates avoid the use of callbacks since these can be a pain in Rust in terms of lifetimes and borrowing. You need to use shared smart pointers with interior mutability to be able to borrow into a callback.</p>
+<p>You can take a look at both crates for inspiration.</p>
+<p>A sample counter in both:</p>
+<h2 id="flemish"><a class="header" href="#flemish">Flemish</a></h2>
+<pre><pre class="playground"><code class="language-rust">use flemish::{
+    button::Button, color_themes, frame::Frame, group::Flex, prelude::*, OnEvent, Sandbox, Settings,
+};
+
+pub fn main() {
+    Counter::new().run(Settings {
+        size: (300, 100),
+        resizable: true,
+        color_map: Some(color_themes::BLACK_THEME),
+        ..Default::default()
+    })
+}
+
+#[derive(Default)]
+struct Counter {
+    value: i32,
+}
+
+#[derive(Debug, Clone, Copy)]
+enum Message {
+    IncrementPressed,
+    DecrementPressed,
+}
+
+impl Sandbox for Counter {
+    type Message = Message;
+
+    fn new() -&gt; Self {
+        Self::default()
+    }
+
+    fn title(&amp;self) -&gt; String {
+        String::from(&quot;Counter - fltk-rs&quot;)
+    }
+
+    fn update(&amp;mut self, message: Message) {
+        match message {
+            Message::IncrementPressed =&gt; {
+                self.value += 1;
+            }
+            Message::DecrementPressed =&gt; {
+                self.value -= 1;
+            }
+        }
+    }
+
+    fn view(&amp;mut self) {
+        let col = Flex::default_fill().column();
+        Button::default()
+            .with_label(&quot;Increment&quot;)
+            .on_event(Message::IncrementPressed);
+        Frame::default().with_label(&amp;self.value.to_string());
+        Button::default()
+            .with_label(&quot;Decrement&quot;)
+            .on_event(Message::DecrementPressed);
+        col.end();
+    }
+}
+</code></pre></pre>
+<h2 id="fltk-evented"><a class="header" href="#fltk-evented">fltk-evented</a></h2>
+<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::Button, frame::Frame, group::Flex, prelude::*, window::Window};
+use fltk_evented::Listener;
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gtk);
+    app::set_font_size(20);
+
+    let mut wind = Window::default()
+        .with_size(160, 200)
+        .center_screen()
+        .with_label(&quot;Counter&quot;);
+    let flex = Flex::default()
+        .with_size(120, 160)
+        .center_of_parent()
+        .column();
+    let but_inc: Listener&lt;_&gt; = Button::default().with_label(&quot;+&quot;).into();
+    let mut frame = Frame::default();
+    let but_dec: Listener&lt;_&gt; = Button::default().with_label(&quot;-&quot;).into();
+    flex.end();
+    wind.end();
+    wind.show();
+
+    let mut val = 0;
+
+    while a.wait() {
+        if but_inc.triggered() {
+            val += 1;
+        }
+
+        if but_dec.triggered() {
+            val -= 1;
+        }
+
+        frame.set_label(&amp;val.to_string());
+    }
+}
+</code></pre></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Drag-&amp;-Drop.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Layouts.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Drag-&amp;-Drop.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Layouts.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

@@ -46,6 +46,6 @@ Or via WidgetExt::draw() method:
     });
 ```
 
-![svg](https://github.com/MoAlyousef/fltk-rs/blob/master/screenshots/hello.jpg)
+![svg](https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/hello.jpg)
 
 Using images in your app for icons and backgrounds also helps in giving your app its style.

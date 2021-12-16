@@ -1,7 +1,7 @@
 # Cross-compiling
 
 ## Using cargo-cross
-If you have Docker installed, you can try https://github.com/rust-embedded/cross
+If you have Docker installed, you can try [cargo-cross](https://github.com/rust-embedded/cross).
 ```
 $ cargo install cross
 $ cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docker daemon has to be running, no need to add via rustup

@@ -168,7 +168,7 @@
 <p>This section assumes you don't even have Rust installed, and is separated into different environments:</p>
 <h3 id="windows-msvc-toolchain"><a class="header" href="#windows-msvc-toolchain">Windows (MSVC toolchain)</a></h3>
 <ul>
-<li>Go to https://www.rust-lang.org/learn/get-started</li>
+<li>Go to the rust-lang get-started <a href="https://www.rust-lang.org/learn/get-started">section</a>.</li>
 <li>Follow the link to <code>Visual Studio C++ Build tools</code> and download the MSVC compiler and Windows sdk.</li>
 <li>Using the installer, install:</li>
 </ul>
@@ -176,16 +176,13 @@
 <p>and make sure the following are checked:</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/116013520-48d1fc80-a639-11eb-934a-fac6609135b4.png" alt="image" /></p>
 <ul>
-<li>You can also check CMake in the previous list, or download CMake from:
-https://cmake.org/download/</li>
-<li>If you don't have <code>git</code>, make sure to get it from:
-https://git-scm.com/downloads</li>
+<li>You can also check CMake in the previous list, or download CMake from <a href="https://cmake.org/download/">here</a>.</li>
+<li>If you don't have <code>git</code>, make sure to get it from <a href="https://git-scm.com/downloads">here</a>.</li>
 <li>From the rust-lang.org website, download the correct rustup installer for your architecture.</li>
 <li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
 </ul>
 <h3 id="windows-gnu-toolchain"><a class="header" href="#windows-gnu-toolchain">Windows (gnu toolchain)</a></h3>
-<p>If you don't already have msys2, you can get it from:
-https://www.msys2.org/</p>
+<p>If you don't already have msys2, you can get it from <a href="https://www.msys2.org/">here</a>.</p>
 <ul>
 <li>You can get the Rust toolchain via the pacman package manager, or via rustup as described previously. The installation process however would require specifying the use of the gnu toolchain (not choosing the default which would install the MSVC toolchain). 
 The toolchain should also reflect the architecture of your machine. For example, a 64bit machine should install the x86_64-pc-windows-gnu toolchain.
@@ -206,9 +203,12 @@ If you decide to get Rust via the package manager, make sure you're getting the 
 </code></pre>
 <p>Follow the instructions. Alternatively you can install clang or gcc from homebrew.</p>
 <ul>
-<li>To get CMake, you can get it from:
-https://cmake.org/download/
-Or from homebrew as well.</li>
+<li>To get CMake, you can get it from <a href="https://cmake.org/download/">here</a>.</li>
+</ul>
+<p>Or from homebrew as well.</p>
+<pre><code>$ brew install cmake
+</code></pre>
+<ul>
 <li>To get the Rust toolchain:</li>
 </ul>
 <pre><code>$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

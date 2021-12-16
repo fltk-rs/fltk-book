@@ -231,7 +231,7 @@ fn main() {
 <p>This section assumes you don't even have Rust installed, and is separated into different environments:</p>
 <h3 id="windows-msvc-toolchain"><a class="header" href="#windows-msvc-toolchain">Windows (MSVC toolchain)</a></h3>
 <ul>
-<li>Go to https://www.rust-lang.org/learn/get-started</li>
+<li>Go to the rust-lang get-started <a href="https://www.rust-lang.org/learn/get-started">section</a>.</li>
 <li>Follow the link to <code>Visual Studio C++ Build tools</code> and download the MSVC compiler and Windows sdk.</li>
 <li>Using the installer, install:</li>
 </ul>
@@ -239,16 +239,13 @@ fn main() {
 <p>and make sure the following are checked:</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/116013520-48d1fc80-a639-11eb-934a-fac6609135b4.png" alt="image" /></p>
 <ul>
-<li>You can also check CMake in the previous list, or download CMake from:
-https://cmake.org/download/</li>
-<li>If you don't have <code>git</code>, make sure to get it from:
-https://git-scm.com/downloads</li>
+<li>You can also check CMake in the previous list, or download CMake from <a href="https://cmake.org/download/">here</a>.</li>
+<li>If you don't have <code>git</code>, make sure to get it from <a href="https://git-scm.com/downloads">here</a>.</li>
 <li>From the rust-lang.org website, download the correct rustup installer for your architecture.</li>
 <li>Once you're all set up, you can create a Rust project using <code>cargo new</code>, add <code>fltk</code> as a dependency in your Cargo.toml and build your application.</li>
 </ul>
 <h3 id="windows-gnu-toolchain"><a class="header" href="#windows-gnu-toolchain">Windows (gnu toolchain)</a></h3>
-<p>If you don't already have msys2, you can get it from:
-https://www.msys2.org/</p>
+<p>If you don't already have msys2, you can get it from <a href="https://www.msys2.org/">here</a>.</p>
 <ul>
 <li>You can get the Rust toolchain via the pacman package manager, or via rustup as described previously. The installation process however would require specifying the use of the gnu toolchain (not choosing the default which would install the MSVC toolchain). 
 The toolchain should also reflect the architecture of your machine. For example, a 64bit machine should install the x86_64-pc-windows-gnu toolchain.
@@ -269,9 +266,12 @@ If you decide to get Rust via the package manager, make sure you're getting the 
 </code></pre>
 <p>Follow the instructions. Alternatively you can install clang or gcc from homebrew.</p>
 <ul>
-<li>To get CMake, you can get it from:
-https://cmake.org/download/
-Or from homebrew as well.</li>
+<li>To get CMake, you can get it from <a href="https://cmake.org/download/">here</a>.</li>
+</ul>
+<p>Or from homebrew as well.</p>
+<pre><code>$ brew install cmake
+</code></pre>
+<ul>
 <li>To get the Rust toolchain:</li>
 </ul>
 <pre><code>$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -313,7 +313,7 @@ For Debian-based GUI distributions, that means running:</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cross-compiling"><a class="header" href="#cross-compiling">Cross-compiling</a></h1>
 <h2 id="using-cargo-cross"><a class="header" href="#using-cargo-cross">Using cargo-cross</a></h2>
-<p>If you have Docker installed, you can try https://github.com/rust-embedded/cross</p>
+<p>If you have Docker installed, you can try <a href="https://github.com/rust-embedded/cross">cargo-cross</a>.</p>
 <pre><code>$ cargo install cross
 $ cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docker daemon has to be running, no need to add via rustup
 </code></pre>
@@ -1349,7 +1349,7 @@ fn main() {
 </code></pre></pre>
 <p>The set_size method takes another widget and fixes its size to the value passed, in the example it's 30. Since this is a column, the 30 represents the height of the widget to be set.
 The other widget will be expandable since no size is set for it. A full example can be found here:</p>
-<p>https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs</p>
+<p><a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs">Flex example</a></p>
 <p><img src="https://github.com/osen/FL_Flex/raw/main/doc/login.png" alt="image" /></p>
 <h3 id="packs-and-grids"><a class="header" href="#packs-and-grids">Packs and Grids</a></h3>
 <p>Packs &amp; Grids (HGrid and VGrid) are widgets in the group module which also implement the GroupExt trait. There are 2 forms of packs, Vertical and Horizontal packs, Vertical being the default. Vertical packs only require the height of its children widgets, while horizontal packs only require the width of its children widgets, like in the example below:</p>
@@ -1421,7 +1421,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p><img src="https://github.com/MoAlyousef/fltk-rs/blob/master/screenshots/counter.jpg" alt="counter" /></p>
+<p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/counter.jpg" alt="counter" /></p>
 <p>(With some skipped theming)</p>
 <p>These methods are namely:</p>
 <ul>
@@ -1764,7 +1764,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p><img src="https://github.com/MoAlyousef/fltk-rs/blob/master/screenshots/flutter_like.jpg" alt="counter" /></p>
+<p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/flutter_like.jpg" alt="counter" /></p>
 <p>Widgets also support showing images within them, which is discussed more in the Images section.</p>
 <h2 id="global-styling"><a class="header" href="#global-styling">Global styling</a></h2>
 <p>These can be found in the app module. Starting from changing the app's scheme:</p>
@@ -1915,7 +1915,7 @@ let image= image::SvgImage::from_data(&amp;data).unwrap();
     });
 <span class="boring">}
 </span></code></pre></pre>
-<p><img src="https://github.com/MoAlyousef/fltk-rs/blob/master/screenshots/hello.jpg" alt="svg" /></p>
+<p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/hello.jpg" alt="svg" /></p>
 <p>Using images in your app for icons and backgrounds also helps in giving your app its style.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="group-widgets"><a class="header" href="#group-widgets">Group widgets</a></h1>
 <p>These widgets include Window types and others found in the group module: Group, Scroll, Pack, Tile, Flex ...etc.
@@ -2511,8 +2511,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727157-be992344-763d-41f9-b3d8-2dfa13fbaab1.png" alt="image" /></p>
-<p>The terminal example uses the SimpleTerminal along with a style TextBuffer. It can be found here:
-https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs</p>
+<p>The terminal example uses the SimpleTerminal along with a style TextBuffer. It can be found <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs">here</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="browsers"><a class="header" href="#browsers">Browsers</a></h1>
 <p>Browser widgets implement the BrowserExt trait:</p>
 <ul>
@@ -3466,9 +3465,9 @@ fltk = &quot;^1.2&quot;
 <p>If you're building using the MSVC toolchain, make sure you run your build (at least your initial build) using the Native Tools Command Prompt, which should appear once you start typing &quot;native&quot; in the start menu, choose the version corresponding to your installed Rust toolchain (x86 or x64). The Native Tools Command Prompt has all the environment variables set correctly for native development.</p>
 <p>If you're building for the GNU toolchain, make sure that Make is also installed, which usually comes installed in MSYS2 and Cygwin.</p>
 <h3 id="build-fails-on-macos-11-with-an-apple-m1-chip-what-can-i-do"><a class="header" href="#build-fails-on-macos-11-with-an-apple-m1-chip-what-can-i-do">Build fails on MacOS 11 with an Apple M1 chip, what can I do?</a></h3>
-<p>If you're getting &quot;file too small to be an archive&quot; error, you might be hitting these issues: https://github.com/rust-lang/cargo/issues/8875, https://github.com/rust-lang/rust/issues/50220. MacOS's native C/C++ toolchain shouldn't have this issue, and can be installed by running <code>xcode-select --install</code> or by installing XCode. Make sure the corresponding Rust toolchain (aarch64-apple-darwin) is installed as well. You can uninstall other Rust apple-darwin toolchains or use cargo-lipo instead if you need universal/fat binaries.</p>
+<p>If you're getting &quot;file too small to be an archive&quot; error, you might be hitting this <a href="https://github.com/rust-lang/cargo/issues/8875">issues</a> or this <a href="https://github.com/rust-lang/rust/issues/50220">issue</a>. MacOS's native C/C++ toolchain shouldn't have this issue, and can be installed by running <code>xcode-select --install</code> or by installing XCode. Make sure the corresponding Rust toolchain (aarch64-apple-darwin) is installed as well. You can uninstall other Rust apple-darwin toolchains or use cargo-lipo instead if you need universal/fat binaries.</p>
 <h3 id="why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows"><a class="header" href="#why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows">Why do I get a Link error while using the mingw toolchain on windows?</a></h3>
-<p>If the linking fails because of this issue: https://github.com/rust-lang/rust/issues/47048 with older toolchains, it should work by using the fltk-shared feature (an issue with older compilers). Which would also generate a dynamic library which would need to be deployed with your application.</p>
+<p>If the linking fails because of this <a href="https://github.com/rust-lang/rust/issues/47048">issue</a> with older toolchains, it should work by using the fltk-shared feature (an issue with older compilers). Which would also generate a dynamic library which would need to be deployed with your application.</p>
 <pre><code class="language-toml">[dependencies]
 fltk = { version = &quot;^1.2&quot;, features = [&quot;fltk-shared&quot;] }
 </code></pre>
@@ -3528,8 +3527,8 @@ panic = &quot;abort&quot;
 <h3 id="can-i-use-this-crate-in-a-commercial-application"><a class="header" href="#can-i-use-this-crate-in-a-commercial-application">Can I use this crate in a commercial application?</a></h3>
 <p>Yes. This crate has an MIT license which requires acknowledgment. FLTK (the C++ library) is licensed under the LGPL license with an exception allowing static linking for commercial/closed-source use. You can find the full terms of both licenses here:</p>
 <ul>
-<li>https://github.com/fltk/fltk/blob/master/COPYING</li>
-<li>https://github.com/fltk-rs/fltk-rs/blob/master/LICENSE</li>
+<li><a href="https://github.com/fltk/fltk/blob/master/COPYING">COPYING</a></li>
+<li><a href="https://github.com/fltk-rs/fltk-rs/blob/master/LICENSE">LICENSE</a></li>
 </ul>
 <h2 id="alignment"><a class="header" href="#alignment">Alignment</a></h2>
 <h3 id="why-cant-i-align-input-or-output-text-to-the-right"><a class="header" href="#why-cant-i-align-input-or-output-text-to-the-right">Why can't I align input or output text to the right?</a></h3>

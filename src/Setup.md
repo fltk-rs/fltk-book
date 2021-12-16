@@ -28,7 +28,7 @@ $ apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 This section assumes you don't even have Rust installed, and is separated into different environments:
 
 ### Windows (MSVC toolchain)
-- Go to https://www.rust-lang.org/learn/get-started
+- Go to the rust-lang get-started [section](https://www.rust-lang.org/learn/get-started).
 - Follow the link to `Visual Studio C++ Build tools` and download the MSVC compiler and Windows sdk.
 - Using the installer, install:
 
@@ -38,16 +38,14 @@ and make sure the following are checked:
 
 ![image](https://user-images.githubusercontent.com/37966791/116013520-48d1fc80-a639-11eb-934a-fac6609135b4.png)
 
-- You can also check CMake in the previous list, or download CMake from:
-https://cmake.org/download/
-- If you don't have `git`, make sure to get it from:
-https://git-scm.com/downloads
+- You can also check CMake in the previous list, or download CMake from [here](https://cmake.org/download/).
+- If you don't have `git`, make sure to get it from [here](https://git-scm.com/downloads).
 - From the rust-lang.org website, download the correct rustup installer for your architecture.
 - Once you're all set up, you can create a Rust project using `cargo new`, add `fltk` as a dependency in your Cargo.toml and build your application.
 
 ### Windows (gnu toolchain)
-If you don't already have msys2, you can get it from:
-https://www.msys2.org/
+If you don't already have msys2, you can get it from [here](https://www.msys2.org/).
+
 - You can get the Rust toolchain via the pacman package manager, or via rustup as described previously. The installation process however would require specifying the use of the gnu toolchain (not choosing the default which would install the MSVC toolchain). 
 The toolchain should also reflect the architecture of your machine. For example, a 64bit machine should install the x86_64-pc-windows-gnu toolchain.
 If you decide to get Rust via the package manager, make sure you're getting the mingw variant, and with the correct MINGW_PACKAGE_PREFIX (for 64bits, that env variable would equate to mingw-w64-x86_64).
@@ -64,13 +62,18 @@ You can replace $MINGW_PACKAGE_PREFIX-make with $MINGW_PACKAGE_PREFIX-ninja.
 $ xcode-select --install
 ```
 Follow the instructions. Alternatively you can install clang or gcc from homebrew.
-- To get CMake, you can get it from:
-https://cmake.org/download/
+- To get CMake, you can get it from [here](https://cmake.org/download/).
+
 Or from homebrew as well.
+```
+$ brew install cmake
+```
+
 - To get the Rust toolchain:
 ```
 $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
+
 And follow the default instructions.
 - Once you're all set up, you can create a Rust project using `cargo new`, add `fltk` as a dependency in your Cargo.toml and build your application.
 

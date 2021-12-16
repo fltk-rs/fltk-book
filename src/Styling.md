@@ -74,7 +74,7 @@ fn main() {
 }
 ```
 
-![counter](https://github.com/MoAlyousef/fltk-rs/blob/master/screenshots/flutter_like.jpg)
+![counter](https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/flutter_like.jpg)
 
 Widgets also support showing images within them, which is discussed more in the Images section.
 

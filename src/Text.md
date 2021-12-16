@@ -131,5 +131,4 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727157-be992344-763d-41f9-b3d8-2dfa13fbaab1.png)
 
-The terminal example uses the SimpleTerminal along with a style TextBuffer. It can be found here:
-https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs
+The terminal example uses the SimpleTerminal along with a style TextBuffer. It can be found [here](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs)

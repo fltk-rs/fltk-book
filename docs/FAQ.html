@@ -160,9 +160,9 @@ fltk = &quot;^1.2&quot;
 <p>If you're building using the MSVC toolchain, make sure you run your build (at least your initial build) using the Native Tools Command Prompt, which should appear once you start typing &quot;native&quot; in the start menu, choose the version corresponding to your installed Rust toolchain (x86 or x64). The Native Tools Command Prompt has all the environment variables set correctly for native development.</p>
 <p>If you're building for the GNU toolchain, make sure that Make is also installed, which usually comes installed in MSYS2 and Cygwin.</p>
 <h3 id="build-fails-on-macos-11-with-an-apple-m1-chip-what-can-i-do"><a class="header" href="#build-fails-on-macos-11-with-an-apple-m1-chip-what-can-i-do">Build fails on MacOS 11 with an Apple M1 chip, what can I do?</a></h3>
-<p>If you're getting &quot;file too small to be an archive&quot; error, you might be hitting these issues: https://github.com/rust-lang/cargo/issues/8875, https://github.com/rust-lang/rust/issues/50220. MacOS's native C/C++ toolchain shouldn't have this issue, and can be installed by running <code>xcode-select --install</code> or by installing XCode. Make sure the corresponding Rust toolchain (aarch64-apple-darwin) is installed as well. You can uninstall other Rust apple-darwin toolchains or use cargo-lipo instead if you need universal/fat binaries.</p>
+<p>If you're getting &quot;file too small to be an archive&quot; error, you might be hitting this <a href="https://github.com/rust-lang/cargo/issues/8875">issues</a> or this <a href="https://github.com/rust-lang/rust/issues/50220">issue</a>. MacOS's native C/C++ toolchain shouldn't have this issue, and can be installed by running <code>xcode-select --install</code> or by installing XCode. Make sure the corresponding Rust toolchain (aarch64-apple-darwin) is installed as well. You can uninstall other Rust apple-darwin toolchains or use cargo-lipo instead if you need universal/fat binaries.</p>
 <h3 id="why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows"><a class="header" href="#why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows">Why do I get a Link error while using the mingw toolchain on windows?</a></h3>
-<p>If the linking fails because of this issue: https://github.com/rust-lang/rust/issues/47048 with older toolchains, it should work by using the fltk-shared feature (an issue with older compilers). Which would also generate a dynamic library which would need to be deployed with your application.</p>
+<p>If the linking fails because of this <a href="https://github.com/rust-lang/rust/issues/47048">issue</a> with older toolchains, it should work by using the fltk-shared feature (an issue with older compilers). Which would also generate a dynamic library which would need to be deployed with your application.</p>
 <pre><code class="language-toml">[dependencies]
 fltk = { version = &quot;^1.2&quot;, features = [&quot;fltk-shared&quot;] }
 </code></pre>
@@ -222,8 +222,8 @@ panic = &quot;abort&quot;
 <h3 id="can-i-use-this-crate-in-a-commercial-application"><a class="header" href="#can-i-use-this-crate-in-a-commercial-application">Can I use this crate in a commercial application?</a></h3>
 <p>Yes. This crate has an MIT license which requires acknowledgment. FLTK (the C++ library) is licensed under the LGPL license with an exception allowing static linking for commercial/closed-source use. You can find the full terms of both licenses here:</p>
 <ul>
-<li>https://github.com/fltk/fltk/blob/master/COPYING</li>
-<li>https://github.com/fltk-rs/fltk-rs/blob/master/LICENSE</li>
+<li><a href="https://github.com/fltk/fltk/blob/master/COPYING">COPYING</a></li>
+<li><a href="https://github.com/fltk-rs/fltk-rs/blob/master/LICENSE">LICENSE</a></li>
 </ul>
 <h2 id="alignment"><a class="header" href="#alignment">Alignment</a></h2>
 <h3 id="why-cant-i-align-input-or-output-text-to-the-right"><a class="header" href="#why-cant-i-align-input-or-output-text-to-the-right">Why can't I align input or output text to the right?</a></h3>

@@ -1,3 +1,5 @@
+# Trees
+
 Tree widgets allow showing items in a tree! There's no tree trait, all methods belong to the Tree type. Items are added using the add method:
 ```rust
 use fltk::{prelude::*, *};

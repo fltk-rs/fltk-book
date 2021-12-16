@@ -1,3 +1,5 @@
+# The App struct
+
 The crate offers an App struct in the app module. Initializing the App struct initializes all the internal styles, fonts and supported image types. It also initializes the multithreaded environment in which the app will run.
 ```rust
 use fltk::*;

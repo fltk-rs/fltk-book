@@ -142,8 +142,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>fltk offers a table widget, the use code for which can be found in the examples. However, using the <a href="https://crates.io/crates/fltk-table">fltk-table crate</a> would require much less boilerplate code and also offers an easier and more intuitive interface:</p>
-<pre><pre class="playground"><code class="language-rust">extern crate fltk_table;
+                        <h1 id="tables"><a class="header" href="#tables">Tables</a></h1>
+<p>fltk offers a table widget, the use code for which can be found in the examples. However, using the <a href="https://crates.io/crates/fltk-table">fltk-table crate</a> would require much less boilerplate code and also offers an easier and more intuitive interface:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">extern crate fltk_table;
 
 use fltk::{
     app, enums,
@@ -223,20 +224,6 @@ fn main() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

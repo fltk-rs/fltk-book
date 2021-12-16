@@ -1,3 +1,5 @@
+# Animations
+
 Animations can be shown in fltk-rs using several mechanism:
 - Leveraging the event loop
 - Spawning threads

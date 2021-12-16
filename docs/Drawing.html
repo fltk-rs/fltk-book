@@ -142,10 +142,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>fltk-rs provides free functions in the draw module which allow you to draw custom elements. The drawing works only if the calls are done in a context which allows drawing, such as in the WidgetBase::draw() method or in an Offscreen context:</p>
+                        <h1 id="drawing-things"><a class="header" href="#drawing-things">Drawing things</a></h1>
+<p>fltk-rs provides free functions in the draw module which allow you to draw custom elements. The drawing works only if the calls are done in a context which allows drawing, such as in the WidgetBase::draw() method or in an Offscreen context:</p>
 <h2 id="drawing-in-widgets"><a class="header" href="#drawing-in-widgets">Drawing in widgets</a></h2>
 <p>Notice we use the draw calls inside our widget's draw method:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{enums, prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums, prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -173,7 +174,7 @@ fn main() {
 <p>We've used the whole window as our canvas, but it can be any widget as well. Other available functions allow drawing lines, rects, arcs, pies, loops, polygons, even images.</p>
 <h2 id="offscreen-drawing"><a class="header" href="#offscreen-drawing">Offscreen drawing</a></h2>
 <p>Sometimes you would like to draw things in response to events, such as when the patients pushes and drags the cursor. In this case, you can use a draw::Offscreen to do that. In that case, we use the widget's draw method to just copy the Offscreen contents, while we do our drawing in the widget's handle method:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
     app,
     draw::{
         draw_line, draw_point, draw_rect_fill, set_draw_color, set_line_style, LineStyle, Offscreen,
@@ -306,20 +307,6 @@ fn main() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

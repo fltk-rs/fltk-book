@@ -1,3 +1,5 @@
+# Images
+
 FLTK supports vector and raster graphics, and out of the box offers several image types, namely:
 - BmpImage
 - JpegImage

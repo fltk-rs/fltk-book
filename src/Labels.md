@@ -1,3 +1,5 @@
+# Labels
+
 FLTK doesn't have a Label widget. So if you would just like to show text, you can use a Frame widget and give it a label. 
 
 All widgets takes a label in the ::new() constructor or using with_label() or set_label():

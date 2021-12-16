@@ -142,9 +142,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>fltk-rs allows you to create custom widgets. We need to define a struct which extends an already existing widget and widget type. The most basic widget type being widget::Widget. 
+                        <h1 id="custom-widgets"><a class="header" href="#custom-widgets">Custom widgets</a></h1>
+<p>fltk-rs allows you to create custom widgets. We need to define a struct which extends an already existing widget and widget type. The most basic widget type being widget::Widget. 
 1- Define your struct and whatever other internal data needs to be stored in it.</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use fltk::{prelude::*, *};
@@ -159,7 +160,7 @@ struct MyCustomButton {
 </span></code></pre></pre>
 <p>You'll notice 2 things, we're using an Rc RefCell for the data we're storing. This isn't necessary in the general case, however, since we need to move that data into a callback, while still having access to it after we mutate it, we'll wrap it in an Rc RefCell. We've imported the necessary modules.</p>
 <p>2- Define the implementation of your struct. The most important of these being the constructor since it's how we'll initialize the internal data as well:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl MyCustomButton {
@@ -201,7 +202,7 @@ struct MyCustomButton {
 <span class="boring">}
 </span></code></pre></pre>
 <p>3- Apply the widget_extends! macro to our struct, the macro requires the base type, and the member via which our custom type is extended. This is done via implementing the Deref and DerefMut traits. The macro also adds other convenience constructors and anchoring methods:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Extend widget::Widget via the member `inner` and add other initializers and constructors
@@ -209,7 +210,7 @@ widget_extends!(MyCustomButton, widget::Widget, inner);
 <span class="boring">}
 </span></code></pre></pre>
 <p>Now we're ready to try out our struct:</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2018">fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
     app::background(255, 255, 255); // make the background white
     let mut wind = window::Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
@@ -229,7 +230,7 @@ widget_extends!(MyCustomButton, widget::Widget, inner);
 }
 </code></pre></pre>
 <p>Full code:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -325,20 +326,6 @@ fn main() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

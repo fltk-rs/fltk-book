@@ -1,3 +1,5 @@
+# Menus
+
 Menus in FLTK are widgets which implement the MenuExt trait. To that end, there are several types:
 - MenuBar
 - MenuItem

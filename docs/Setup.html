@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>Rust (version &gt; 1.45), CMake (version &gt; 3.11), Git and a C++11 compiler need to be installed and in your PATH for a crossplatform build from source. This crate also offers a bundled form of fltk on selected platforms, this can be enabled using the fltk-bundled feature flag (which requires curl and tar to download and unpack the bundled libraries). If you have ninja-build installed, you can enable it using the &quot;use-ninja&quot; feature. This should accelerate build times significantly.</p>
+                        <h1 id="setup"><a class="header" href="#setup">Setup</a></h1>
+<p>Rust (version &gt; 1.45), CMake (version &gt; 3.11), Git and a C++11 compiler need to be installed and in your PATH for a crossplatform build from source. This crate also offers a bundled form of fltk on selected platforms, this can be enabled using the fltk-bundled feature flag (which requires curl and tar to download and unpack the bundled libraries). If you have ninja-build installed, you can enable it using the &quot;use-ninja&quot; feature. This should accelerate build times significantly.</p>
 <ul>
 <li>Windows: No dependencies.</li>
 <li>MacOS: No dependencies.</li>
@@ -277,20 +278,6 @@ For Debian-based GUI distributions, that means running:</li>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

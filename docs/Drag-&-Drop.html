@@ -142,10 +142,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>Drag and Drop are Event types supported by FLTK. You can drag widgets around if you implement these events, and you can drag outside files into an FLTK application. You might also want to implement drawing over widgets which would require handling Event::Drag at least.</p>
+                        <h1 id="drag--drop"><a class="header" href="#drag--drop">Drag &amp; Drop</a></h1>
+<p>Drag and Drop are Event types supported by FLTK. You can drag widgets around if you implement these events, and you can drag outside files into an FLTK application. You might also want to implement drawing over widgets which would require handling Event::Drag at least.</p>
 <h2 id="dragging-widgets"><a class="header" href="#dragging-widgets">Dragging widgets</a></h2>
 <p>Here we'll implement dragging for the window itself. We'll create a window without a border. Normally you can drag windows around using the border:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -178,7 +179,7 @@ fn main() {
 </code></pre></pre>
 <h2 id="dragging-files"><a class="header" href="#dragging-files">Dragging Files</a></h2>
 <p>Dragging a file into an application basically invokes the Paste event, and fills the app::event_text() with the path of the file. So when we handle dragging, we want to capture the path in Event::Paste, check if the file exists, read its content and fill our text widget:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, enums::Event, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, enums::Event, *};
 
 fn main() {
     let app = app::App::default();
@@ -228,7 +229,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>If you're not interested in the contents of the file, you can just take the path and show it to the user:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, enums::Event, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, enums::Event, *};
 
 fn main() {
     let app = app::App::default();
@@ -308,20 +309,6 @@ https://github.com/fltk-rs/fltk-rs/wiki/drawing#offscreen-drawing</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

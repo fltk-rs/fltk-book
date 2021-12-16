@@ -1,3 +1,5 @@
+# Home
+
 Welcome to the fltk-rs wiki!
 
 This is a work in progress for written tutorials targeting the fltk crate.

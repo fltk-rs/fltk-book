@@ -1,3 +1,5 @@
+# Drawing things
+
 fltk-rs provides free functions in the draw module which allow you to draw custom elements. The drawing works only if the calls are done in a context which allows drawing, such as in the WidgetBase::draw() method or in an Offscreen context:
 
 ## Drawing in widgets

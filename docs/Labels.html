@@ -142,9 +142,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>FLTK doesn't have a Label widget. So if you would just like to show text, you can use a Frame widget and give it a label. </p>
+                        <h1 id="labels"><a class="header" href="#labels">Labels</a></h1>
+<p>FLTK doesn't have a Label widget. So if you would just like to show text, you can use a Frame widget and give it a label. </p>
 <p>All widgets takes a label in the ::new() constructor or using with_label() or set_label():</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let btn = button::Button::new(160, 200, 80, 30, &quot;Click&quot;);
@@ -152,7 +153,7 @@
 </span></code></pre></pre>
 <p>This button has a label showing the text &quot;click&quot;.</p>
 <p>Similarly we can use set_label() or with_label():</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let btn = button::Button::default().with_label(&quot;Click&quot;);
@@ -162,7 +163,7 @@ btn.set_label(&quot;Click&quot;);
 <span class="boring">}
 </span></code></pre></pre>
 <p>However, the ::new() constructor takes in reality an optional to a static str, so the following would fail:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let label = String::from(&quot;Click&quot;); // label is not a static str
@@ -213,20 +214,6 @@ While using set_label() and with_label() calls FLTK's Fl_Widget::copy_label() me
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

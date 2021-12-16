@@ -1,3 +1,5 @@
+# Browsers
+
 Browser widgets implement the BrowserExt trait:
 - Browser
 - SelectBrowser

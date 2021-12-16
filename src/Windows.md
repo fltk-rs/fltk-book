@@ -1,3 +1,5 @@
+# Windows
+
 FLTK calls the native window on each platform it supports, then basically does its own drawing. This means it calls an HWND on windows, NSWindow on MacOS and an XWindow on X11 systems (linux, BSD).
 
 The windows themselves have the same interface as the other widgets provided by FLTK, the WidgetExt trait, which will be discussed in the next page. 

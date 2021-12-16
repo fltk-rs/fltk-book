@@ -1,3 +1,5 @@
+# Valuators
+
 Valuator widgets implement the ValuatorExt trait. These keep track (graphically and internally) of numerical values along with steps, ranges and bounds.
 Such a valuator which you might be familiar with are scrollbars and sliders. The list offered by fltk is found in the valuator module:
 - Slider

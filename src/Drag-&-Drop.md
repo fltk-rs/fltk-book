@@ -1,3 +1,5 @@
+# Drag & Drop
+
 Drag and Drop are Event types supported by FLTK. You can drag widgets around if you implement these events, and you can drag outside files into an FLTK application. You might also want to implement drawing over widgets which would require handling Event::Drag at least.
 
 ## Dragging widgets

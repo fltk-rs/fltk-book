@@ -1,3 +1,5 @@
+# Events
+
 In the previously mentioned examples, you have seen callbacks mostly, and although that is one way of handling events, FLTK offers multiple ways to handle events:
 - We can use the set_callback() method, which is automatically triggered with a click to our button.
 - We can use the handle() method for fine-grained event handling.

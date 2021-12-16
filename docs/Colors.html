@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>FLTK can handle <a href="https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)">true color</a>. Some convenience colors are made available in the enums::Color enum:</p>
+                        <h1 id="colors"><a class="header" href="#colors">Colors</a></h1>
+<p>FLTK can handle <a href="https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)">true color</a>. Some convenience colors are made available in the enums::Color enum:</p>
 <ul>
 <li>Black</li>
 <li>White</li>
@@ -155,7 +156,7 @@
 <ul>
 <li>by_index(). This uses fltk's colormap. Values range from 0 to 255:</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let red = Color::by_index(88);
@@ -165,7 +166,7 @@
 <ul>
 <li>from_hex(). This takes a 24-bit hex value in the form RGB:</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const RED: Color = Color::from_hex(0xff0000); // notice it's a const functions
@@ -174,21 +175,21 @@
 <ul>
 <li>from_rgb(). This takes 3 values r, g, b:</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const RED: Color = Color::from_rgb(255, 0, 0); // notice it's a const functions
 <span class="boring">}
 </span></code></pre></pre>
 <p>The Color enum also offers some convenience methods to generate different shades of the chosen color, using .darker(), .lighter(), .inactive() methods and others:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let col = Color::from_rgb(176, 100, 50).lighter();
 <span class="boring">}
 </span></code></pre></pre>
 <p>If you prefer html hex string colors, you can use the from_hex_str() method:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let col = Color::from_hex_str(&quot;#ff0000&quot;);
@@ -224,20 +225,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -1,3 +1,5 @@
+# Colors
+
 FLTK can handle [true color](https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)). Some convenience colors are made available in the enums::Color enum:
 - Black
 - White

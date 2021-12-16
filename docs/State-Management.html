@@ -142,10 +142,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>FLTK doesn't impose a certain form of state management or app architecture. This is left to the user. All the examples in the fltk-rs repo and this wiki already use either callbacks or messages, you'll find many examples of both methods.
+                        <h1 id="state-management"><a class="header" href="#state-management">State management</a></h1>
+<p>FLTK doesn't impose a certain form of state management or app architecture. This is left to the user. All the examples in the fltk-rs repo and this wiki already use either callbacks or messages, you'll find many examples of both methods.
 Those were discussed in the <a href="https://github.com/fltk-rs/fltk-rs/wiki/events">events page</a>.</p>
 <p>Also all the examples might appear to handle everything in the main function, this is only for simplicity. You can create your own App struct, include the main window in it and the state of your app:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 #[derive(Copy, Clone)]
 enum Message {
@@ -220,7 +221,7 @@ fn main() {
 <p>You can take a look at both crates for inspiration.</p>
 <p>A sample counter in both:</p>
 <h2 id="flemish"><a class="header" href="#flemish">Flemish</a></h2>
-<pre><pre class="playground"><code class="language-rust">use flemish::{
+<pre><pre class="playground"><code class="language-rust edition2018">use flemish::{
     button::Button, color_themes, frame::Frame, group::Flex, prelude::*, OnEvent, Sandbox, Settings,
 };
 
@@ -280,7 +281,7 @@ impl Sandbox for Counter {
 }
 </code></pre></pre>
 <h2 id="fltk-evented"><a class="header" href="#fltk-evented">fltk-evented</a></h2>
-<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::Button, frame::Frame, group::Flex, prelude::*, window::Window};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, button::Button, frame::Frame, group::Flex, prelude::*, window::Window};
 use fltk_evented::Listener;
 
 fn main() {
@@ -347,20 +348,6 @@ fn main() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

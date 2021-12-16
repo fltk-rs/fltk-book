@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>Welcome to the fltk-rs wiki!</p>
+                        <h1 id="home"><a class="header" href="#home">Home</a></h1>
+<p>Welcome to the fltk-rs wiki!</p>
 <p>This is a work in progress for written tutorials targeting the fltk crate.</p>
 <p>FLTK is a cross-platform lightweight gui library.
 The library itself is written in C++98, which is highly-portable. This crate is written in Rust, and uses FFI to call into the FLTK wrapper written in C89 and C++11.</p>
@@ -154,7 +155,7 @@ The library itself is written in C++98, which is highly-portable. This crate is 
 }
 </code></pre>
 <p>maps to:</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2018">fn main() {
     let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
@@ -184,20 +185,6 @@ The library itself is written in C++98, which is highly-portable. This crate is 
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

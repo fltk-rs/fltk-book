@@ -1,3 +1,5 @@
+# Tables
+
 fltk offers a table widget, the use code for which can be found in the examples. However, using the [fltk-table crate](https://crates.io/crates/fltk-table) would require much less boilerplate code and also offers an easier and more intuitive interface:
 ```rust
 extern crate fltk_table;

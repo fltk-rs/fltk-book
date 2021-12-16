@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>Valuator widgets implement the ValuatorExt trait. These keep track (graphically and internally) of numerical values along with steps, ranges and bounds.
+                        <h1 id="valuators"><a class="header" href="#valuators">Valuators</a></h1>
+<p>Valuator widgets implement the ValuatorExt trait. These keep track (graphically and internally) of numerical values along with steps, ranges and bounds.
 Such a valuator which you might be familiar with are scrollbars and sliders. The list offered by fltk is found in the valuator module:</p>
 <ul>
 <li>Slider</li>
@@ -164,7 +165,7 @@ Such a valuator which you might be familiar with are scrollbars and sliders. The
 <li>HorValueSlider</li>
 </ul>
 <p>Changing the valuators value in the gui triggers its callback. The current value of the valuator can be queried using the value() method. It can also be set using set_value(). The ranges and step can also be queried and changed to your use case:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -214,20 +215,6 @@ fn main() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

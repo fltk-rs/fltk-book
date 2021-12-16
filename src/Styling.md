@@ -1,3 +1,5 @@
+# Styling
+
 FLTK has a lot to offer in terms of styling applications. We have already seen that we can use true color and different fonts, in addition to draw custom things. Styling is making use of all that. It can be done per widget leveraging the methods in WidgetExt, or globally using functions in the app module.
 
 ## WidgetExt

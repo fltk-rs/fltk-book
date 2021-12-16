@@ -142,12 +142,13 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>fltk offers several dialog types including file dialogs and others. </p>
+                        <h1 id="dialogs"><a class="header" href="#dialogs">Dialogs</a></h1>
+<p>fltk offers several dialog types including file dialogs and others. </p>
 <h2 id="file-dialogs"><a class="header" href="#file-dialogs">File dialogs</a></h2>
 <p>There are 2 types, the native file dialog and FLTK's own file dialog. Native dialogs just show a the OS's own dialog. For windows, that's the win32 dialog, for MacOS, that's the Cocoa dialog, and for other posix systems, it depends on what you're running. On GNOME and other gtk-based desktops, it shows the gtk dialog and on KDE it shows kdialog.</p>
 <h3 id="native-dialogs"><a class="header" href="#native-dialogs">Native dialogs</a></h3>
 <p>To spawn a native dialog:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -171,7 +172,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>This prints the Path of the chosen file. There are several types which can be passed as NativeFileChooserType, here we browse files, you can choose to BrowseDir instead, also enable mutli file/dir selection. If you select multiple files, you can get a Vec using the filenames() method:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -195,7 +196,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>You can also add filter the files to show:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    btn.set_callback(|_| {
@@ -209,7 +210,7 @@ fn main() {
 <p>This will only show .txt, .rs and .toml files.</p>
 <h3 id="fltks-own-file-chooser"><a class="header" href="#fltks-own-file-chooser">FLTK's own file chooser</a></h3>
 <p>FLTK also offers its own file chooser:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -246,7 +247,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726912-600e4c58-32b7-4a1b-8e6a-44e640549722.png" alt="image" /></p>
 <p>A convenience function is also provided using file_chooser() and dir_chooser() functions:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -277,7 +278,7 @@ fn main() {
 </code></pre></pre>
 <h3 id="help-dialog"><a class="header" href="#help-dialog">Help dialog</a></h3>
 <p>FLTK offers a help dialog which can show html 2 documents:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -315,7 +316,7 @@ fn main() {
 <li>password (like input but doesn't show the inputted data)</li>
 </ul>
 <p>To show up a simple message dialog:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -337,7 +338,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>This shows a message at a default location (basically near the pointer). If you would like to enter coordinates manually, you can use the message() function:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    btn.set_callback(|_| {
@@ -347,7 +348,7 @@ fn main() {
 </span></code></pre></pre>
 <p>All the previously mentioned functions have to variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
 Some dialogs return a value, like choice, input, and password. Input and password return the inputted text, while choice returns an index of the chosen value:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -374,7 +375,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726850-61fc17e4-cd6e-4821-a9b5-396203806066.png" alt="image" /></p>
 <p>An example with choice:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -399,7 +400,7 @@ fn main() {
 <p>This will print the index, i.e. choosing No will print 0, Yes will print 1 and Cancel will print 2.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726775-d000a807-8bf5-439b-a991-8bf25fcd5049.png" alt="image" /></p>
 <p>You have noticed that all of these dialogs didn't have a title. You can add a title also using a free function called before the dialog:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>        dialog::message_title(&quot;Exit!&quot;);
@@ -407,7 +408,7 @@ fn main() {
 <span class="boring">}
 </span></code></pre></pre>
 <p>You can also set the default title of all these dialog boxes using dialog::message_title_default(), you'll want to do this in the start of your app:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -433,7 +434,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/37966791/145726685-f086bde2-db63-4fa8-a579-954dbacbe44d.png" alt="image" /></p>
 <h2 id="custom-dialogs"><a class="header" href="#custom-dialogs">Custom dialogs</a></h2>
 <p>All these dialogs make assumptions about your app that might not be correct, especially regarding colors and fonts. If you have a heavily customized app you would probably also want custom dialogs. A dialog is basically a modal window which is spawned during the application. This can have the same styling as the rest of your app:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
     app, button,
     enums::{Color, Font, FrameType},
     frame, group, input,
@@ -518,7 +519,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/37966791/145726727-a0018457-1d87-4519-9d6e-08d8f8030d1a.png" alt="image" /></p>
 <h2 id="printer-dialog"><a class="header" href="#printer-dialog">Printer dialog</a></h2>
 <p>FLTK also offers a printer dialog which uses your platform's native printer dialog:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use fltk::{prelude::*, *};
@@ -571,20 +572,6 @@ but.set_callback(|widget| {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

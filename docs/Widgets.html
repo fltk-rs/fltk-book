@@ -142,10 +142,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>FLTK offers around 80 widgets. These widgets all implement the basic set of traits WidgetBase and WidgetExt. We've already come across our first widget, the Window widget.
+                        <h1 id="widgets"><a class="header" href="#widgets">Widgets</a></h1>
+<p>FLTK offers around 80 widgets. These widgets all implement the basic set of traits WidgetBase and WidgetExt. We've already come across our first widget, the Window widget.
 As we've seen with the Window widget, widgets can also implement other traits depending on their functionality.
 Lets add a button to our previous example.</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -159,7 +160,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png" alt="image" /></p>
 <p>Notice that the button's parent is my_window since it's created between the implicit begin() and end() calls.
 Another way to add a widget is using the add(widget) method that's offered by widgets implementing the GroupExt trait:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -176,7 +177,7 @@ fn main() {
 <p>Another thing to notice is the initialization of the button which basically has the same constructor as the Window, that's because it's part of the WidgetBase trait. However, although the Window's x and y coordinates are relative to the screen, the button's x and y coordinates are relative to the window which contains the button. This also applies to our embedded window in the previous page if you hadn't noticed.</p>
 <p>The button also implements the ButtonExt trait, which offers some helpful methods like setting shortcuts to trigger our button among other methods.</p>
 <p>Constructing widgets can also be done using a builder pattern:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let but1 = Button::new(10, 10, 80, 40, &quot;Button 1&quot;);
@@ -220,20 +221,6 @@ So lets add some action in there in the next page! </p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -142,8 +142,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>Tree widgets allow showing items in a tree! There's no tree trait, all methods belong to the Tree type. Items are added using the add method:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+                        <h1 id="trees"><a class="header" href="#trees">Trees</a></h1>
+<p>Tree widgets allow showing items in a tree! There's no tree trait, all methods belong to the Tree type. Items are added using the add method:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -160,7 +161,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726958-f1f2a095-39c5-496f-b772-18d024dd609d.png" alt="image" /></p>
 <p>Sub-items are added by using the forward slash separator:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -180,7 +181,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727026-bfcff44f-2b01-4679-937b-3e7d441dfdf0.png" alt="image" /></p>
 <p>If you try the above code, you'll see that the root item is always indicated by the label &quot;ROOT&quot;. This can be changed using the set_root_label() method:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -202,7 +203,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/37966791/145727045-a25be6bc-a514-4b4a-b7b9-0a7ee2e359b4.png" alt="image" /></p>
 <p>Or even hidden using the set_show_root(false) method.</p>
 <p>Items can be queried using the first_selected_item() method:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -230,7 +231,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727072-8596cf09-100c-4cb6-a427-0d3c66702b39.png" alt="image" /></p>
 <p>Currently our tree only allow single selection, let's change it to multiple (we'll also change the connector style while we're at it):</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -260,7 +261,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>The problem now is that we need to get the whole selection instead only of the first selected item, so we'll use the get_selected_items() method which returns an optional Vec, and instead of just getting the label, we'll get the whole path of the item:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -322,20 +323,6 @@ fn main() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

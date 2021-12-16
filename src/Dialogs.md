@@ -1,3 +1,5 @@
+# Dialogs
+
 fltk offers several dialog types including file dialogs and others. 
 
 ## File dialogs

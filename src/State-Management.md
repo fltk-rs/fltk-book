@@ -1,3 +1,5 @@
+# State management
+
 FLTK doesn't impose a certain form of state management or app architecture. This is left to the user. All the examples in the fltk-rs repo and this wiki already use either callbacks or messages, you'll find many examples of both methods.
 Those were discussed in the [events page](https://github.com/fltk-rs/fltk-rs/wiki/events).
 

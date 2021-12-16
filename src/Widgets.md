@@ -1,3 +1,5 @@
+# Widgets
+
 FLTK offers around 80 widgets. These widgets all implement the basic set of traits WidgetBase and WidgetExt. We've already come across our first widget, the Window widget.
 As we've seen with the Window widget, widgets can also implement other traits depending on their functionality.
 Lets add a button to our previous example.

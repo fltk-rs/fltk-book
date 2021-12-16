@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>FLTK offers a GUI WYSIWYG rapid application development tool called FLUID which allows creating GUI applications.
+                        <h1 id="fluid"><a class="header" href="#fluid">Fluid</a></h1>
+<p>FLTK offers a GUI WYSIWYG rapid application development tool called FLUID which allows creating GUI applications.
 Currently there is a video tutorial on youtube on using it with Rust:
 <a href="https://www.youtube.com/watch?v=k_P0wG3-dNk">Use FLUID (RAD tool) with Rust</a></p>
 <p>The fl2rust crate translates the Fluid generated .fl files into Rust code to be compiled into your app.
@@ -164,7 +165,7 @@ fltk = &quot;1&quot;
 fl2rust = &quot;0.4&quot;
 </code></pre>
 <p>Then it can be used in the build.rs file (which is run pre-build) to generate Rust code:</p>
-<pre><pre class="playground"><code class="language-rust">// build.rs
+<pre><pre class="playground"><code class="language-rust edition2018">// build.rs
 fn main() {
     use std::path::PathBuf;
     use std::env;
@@ -204,20 +205,6 @@ fn main() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

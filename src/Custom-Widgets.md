@@ -1,3 +1,5 @@
+# Custom widgets
+
 fltk-rs allows you to create custom widgets. We need to define a struct which extends an already existing widget and widget type. The most basic widget type being widget::Widget. 
 1- Define your struct and whatever other internal data needs to be stored in it.
 ```rust

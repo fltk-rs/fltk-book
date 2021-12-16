@@ -1,3 +1,5 @@
+# Text
+
 Text widgets are those that implement the DisplayExt. There are 3 and these can be found in the text module:
 - TextDisplay
 - TextEditor

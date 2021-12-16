@@ -142,12 +142,13 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>FLTK has a lot to offer in terms of styling applications. We have already seen that we can use true color and different fonts, in addition to draw custom things. Styling is making use of all that. It can be done per widget leveraging the methods in WidgetExt, or globally using functions in the app module.</p>
+                        <h1 id="styling"><a class="header" href="#styling">Styling</a></h1>
+<p>FLTK has a lot to offer in terms of styling applications. We have already seen that we can use true color and different fonts, in addition to draw custom things. Styling is making use of all that. It can be done per widget leveraging the methods in WidgetExt, or globally using functions in the app module.</p>
 <h2 id="widgetext"><a class="header" href="#widgetext">WidgetExt</a></h2>
 <p>Most of the WidgetExt trait is related to modifying the frame type, label type, widget color, text color, text font and text size.
 These all have setters and getters which can be found <a href="https://docs.rs/fltk/*/fltk/prelude/trait.WidgetExt.html">here</a>.</p>
 <p>An example of this:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
     enums::{Align, Color, Font, FrameType},
     prelude::*,
     *,
@@ -216,7 +217,7 @@ fn main() {
 <p>Widgets also support showing images within them, which is discussed more in the Images section.</p>
 <h2 id="global-styling"><a class="header" href="#global-styling">Global styling</a></h2>
 <p>These can be found in the app module. Starting from changing the app's scheme:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use fltk::{prelude::*, enums::*, *};
@@ -231,7 +232,7 @@ let app = app::App::default().with_scheme(app::Scheme::Plastic);
 <li>Plastic</li>
 </ul>
 <p>To setting the app's colors, default font, default frame type and whether to show focus on widgets.</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{app, button::Button, enums, frame::Frame, prelude::*, window::Window};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, button::Button, enums, frame::Frame, prelude::*, window::Window};
 
 fn main() {
     let app = app::App::default();
@@ -256,7 +257,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/37966791/145727821-5923fcd4-3a57-4a15-b36f-574b3e5321ea.png" alt="image" /></p>
 <h3 id="custom-drawing"><a class="header" href="#custom-drawing">Custom Drawing</a></h3>
 <p>FLTK also offers drawing primitives which makes giving a widget a custom appearance quite easy. This is done using the draw() method which takes a closure. Obviously there is a draw2() method where the closure also refers to the widget itself. Lets draw our own button, even though FLTK offers a ShadowFrame FrameType, let's create our own:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, enums::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, enums::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -294,7 +295,7 @@ fn main() {
 <p>The draw() method also supports drawing images inside of widgets as will be seen in the next section.</p>
 <h2 id="fltk-theme"><a class="header" href="#fltk-theme">fltk-theme</a></h2>
 <p>This is a <a href="https://github.com/fltk-rs/fltk-theme">crate</a> which provides several predefined themes which can be used by just loading the theme:</p>
-<pre><pre class="playground"><code class="language-rust">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 use fltk_theme::{widget_themes, WidgetTheme, ThemeType};
 
 fn main() {
@@ -340,20 +341,6 @@ fn main() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>FLTK supports vector and raster graphics, and out of the box offers several image types, namely:</p>
+                        <h1 id="images"><a class="header" href="#images">Images</a></h1>
+<p>FLTK supports vector and raster graphics, and out of the box offers several image types, namely:</p>
 <ul>
 <li>BmpImage</li>
 <li>JpegImage</li>
@@ -162,7 +163,7 @@
 </ul>
 <p>Image types implement the ImageExt trait which offers methods to allow scaling, and retrieving image metadata. 
 Images can be constructed by passing a path to the image's load() constructor, or for some types, by using a from_data() constructor which accepts image data.</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Takes a path
@@ -173,7 +174,7 @@ let image= image::SvgImage::from_data(&amp;data).unwrap();
 <span class="boring">}
 </span></code></pre></pre>
 <p>Images can be used with widgets either via the WidgetExt::set_image()/set_image_scaled() or set_deimage()/set_deimage_scaled() (for deactivated/grayed image):</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let mut frame = frame::Frame::new(0, 0, 400, 300, &quot;&quot;);
@@ -183,7 +184,7 @@ let image= image::SvgImage::from_data(&amp;data).unwrap();
 <span class="boring">}
 </span></code></pre></pre>
 <p>Or via WidgetExt::draw() method:</p>
-<pre><pre class="playground"><code class="language-rust">
+<pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    let mut frame = frame::Frame::new(0, 0, 400, 300, &quot;&quot;);
@@ -226,20 +227,6 @@ let image= image::SvgImage::from_data(&amp;data).unwrap();
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

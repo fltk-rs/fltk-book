@@ -1,3 +1,5 @@
+# Group widgets
+
 These widgets include Window types and others found in the group module: Group, Scroll, Pack, Tile, Flex ...etc.
 Widgets implementing the GroupExt trait, are characterized by having to call `::end()` method to basically close them.
 ```rust

@@ -41,4 +41,4 @@ Any logic added after calling the run() method, will be executed after the event
 
 In addition to the App struct, the app module itself contains structs and free functions pertaining to the global state of your app. These include visuals like setting background and foreground colors and default fontface and size, screen functions, clipboard functions, global handlers, app events, channels (Sender and Receiver) and timeouts. 
 
-Some of these will be discussed elsewhere in the wiki. 
+Some of these will be discussed elsewhere in the book. 

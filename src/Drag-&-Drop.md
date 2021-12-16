@@ -143,5 +143,4 @@ fn main() {
 ```
 
 ## Dragging to draw
-You can draw inside events, but you'll want to use offscreen drawing. In the widgets draw method, you just copy the offscreen content into the widget. A more detailed example can be seen here:
-https://github.com/fltk-rs/fltk-rs/wiki/drawing#offscreen-drawing
+You can draw inside events, but you'll want to use offscreen drawing. In the widgets draw method, you just copy the offscreen content into the widget. A more detailed example can be seen here in the Offscreen drawing section in the [Drawing page](Drawing.md#offscreen-drawing).

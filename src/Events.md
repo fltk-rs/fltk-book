@@ -38,10 +38,22 @@ fn main() {
 The set_callback() methods have default triggers varying by the type of the widget. For buttons it's clicking or pressing enter when the button has focus.
 This can be changed using the set_trigger() method. For buttons this might not make much sense, however for input widgets, the trigger can be set to "CallbackTrigger::Changed" and this will cause changes in the input widget to trigger the callback.
 ```rust
-let mut inp = input::Input::new(/* params */);
-inp.set_trigger(CallbackTrigger::Changed);
-inp.set_callback(|i| println!("my current value is: {}", i.value());
+use fltk::{prelude::*, *};
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut inp = input::Input::default()
+        .with_size(160, 30)
+        .center_of_parent();
+    win.end();
+    win.show();
+    inp.set_trigger(enums::CallbackTrigger::Changed);
+    inp.set_callback(|i| println!("{}", i.value()));
+    a.run().unwrap();
+}
 ```
+This will print on every character input by the user.
 
 ### Using the handle method
 The handle method takes a closure whose parameter is an Event, and returns a bool for handled events. The bool lets FLTK know whether the event was handled or not.

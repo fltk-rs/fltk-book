@@ -31,6 +31,9 @@ fn main() {
     app.run().unwrap();
 }
 ```
+
+![image](https://user-images.githubusercontent.com/37966791/146625105-94b11a5d-0938-4962-96d1-aaff5424ffe8.png)
+
 This prints the Path of the chosen file. There are several types which can be passed as NativeFileChooserType, here we browse files, you can choose to BrowseDir instead, also enable mutli file/dir selection. If you select multiple files, you can get a Vec using the filenames() method:
 ```rust
 use fltk::{prelude::*, *};

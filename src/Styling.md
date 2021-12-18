@@ -119,7 +119,7 @@ fn main() {
 ![image](https://user-images.githubusercontent.com/37966791/145727821-5923fcd4-3a57-4a15-b36f-574b3e5321ea.png)
 
 ### Custom Drawing
-FLTK also offers drawing primitives which makes giving a widget a custom appearance quite easy. This is done using the draw() method which takes a closure. Obviously there is a draw2() method where the closure also refers to the widget itself. Lets draw our own button, even though FLTK offers a ShadowFrame FrameType, let's create our own:
+FLTK also offers drawing primitives which makes giving a widget a custom appearance quite easy. This is done using the draw() method which takes a closure. Lets draw our own button, even though FLTK offers a ShadowFrame FrameType, let's create our own:
 ```rust
 use fltk::{prelude::*, enums::*, *};
 

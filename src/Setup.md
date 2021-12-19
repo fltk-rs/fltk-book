@@ -55,7 +55,7 @@ If you decide to get Rust via the package manager, make sure you're getting the 
 ```
 $ pacman -S curl tar git $MINGW_PACKAGE_PREFIX-rust $MINGW_PACKAGE_PREFIX-gcc $MINGW_PACKAGE_PREFIX-cmake $MINGW_PACKAGE_PREFIX-make --needed
 ```
-You can replace $MINGW_PACKAGE_PREFIX-make with $MINGW_PACKAGE_PREFIX-ninja.
+You can replace $MINGW_PACKAGE_PREFIX-make with $MINGW_PACKAGE_PREFIX-ninja if you plan to use ninja via the use-ninja feature.
 - Once you're all set up, you can create a Rust project using `cargo new`, add `fltk` as a dependency in your Cargo.toml and build your application.
 
 ### MacOS

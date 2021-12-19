@@ -7,6 +7,53 @@ $ cargo install cross
 $ cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docker daemon has to be running, no need to add via rustup
 ```
 
+If your target requires external dependencies, like on Linux, you would have to create a custom docker image and use it for your cross-compilation via a Cross.toml file.
+
+For example, for a project of the following structure:
+```
+myapp
+     |_src
+     |    |_main.rs    
+     |
+     |_Cargo.toml
+     |
+     |_Cross.toml
+     |
+     |_archs
+            |_aarch64-linux
+                           |_Dockerfile
+```
+
+The Dockerfile contents:
+```
+FROM rustembedded/cross:aarch64-unknown-linux-gnu-0.2.1
+
+RUN dpkg --add-architecture arm64 && \
+    apt-get update && \
+    apt-get install --assume-yes --no-install-recommends \
+    libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 \
+    libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 \
+    libxfixes-dev:arm64  libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64
+```
+Notice the architecture appended to the library package's name like: libx11-dev:arm64.
+
+The Cross.toml contents:
+```toml
+[target.aarch64-unknown-linux-gnu]
+image = "my-arm64-image:0.1"
+```
+
+To build a new image, run:
+```
+$ docker build -t my-arm64-image:0.1 archs/aarch64-linux/
+```
+
+Then run cross:
+```
+$ cross build --features=no-pango --target=aarch64-unknown-linux-gnu
+```
+(This might take a while)
+
 ## Using a prebuilt bundle
 If the target you're compiling to, already has a prebuilt package:
 - x86_64-pc-windows-gnu

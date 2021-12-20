@@ -33,10 +33,7 @@ RUN dpkg --add-architecture arm64 && \
     apt-get install --assume-yes --no-install-recommends \
     libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 \
     libxinerama-dev:arm64 libxcursor-dev:arm64 \
-    libxrender-dev:arm64 libpango1.0-dev:arm64 \
-    libxfixes-dev:arm64  libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 pkg-config:arm64
-
-ENV PKG_CONFIG_LIBDIR=/usr/local/lib/aarch64-linux-gnu/pkgconfig:/usr/lib/aarch64-linux-gnu/pkgconfig
+    libxrender-dev:arm64  libxfixes-dev:arm64  libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 
 ```
 Notice the architecture appended to the library package's name like: libx11-dev:arm64.
 
@@ -53,9 +50,11 @@ $ docker build -t my-arm64-image:0.1 archs/aarch64-linux/
 
 Then run cross:
 ```
-$ PKG_CONFIG_LIBDIR=/usr/lib/aarch64-linux-gnu/pkgconfig cross build --target=aarch64-unknown-linux-gnu
+$ cross build --features=no-pango --target=aarch64-unknown-linux-gnu
 ```
 (This might take a while)
+
+P.S. If you need pango support, you would have to install pkg-config:arch and point PKG_CONFIG_LIBDIR to the pkgconfig directory relevant to that architecture.
 
 ## Using a prebuilt bundle
 If the target you're compiling to, already has a prebuilt package:

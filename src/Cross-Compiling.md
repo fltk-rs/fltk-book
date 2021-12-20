@@ -53,7 +53,7 @@ $ docker build -t my-arm64-image:0.1 archs/aarch64-linux/
 
 Then run cross:
 ```
-$ PKG_CONFIG_LIBDIR=/usr/local/lib/aarch64-linux-gnu/pkgconfig cross build --target=aarch64-unknown-linux-gnu
+$ PKG_CONFIG_LIBDIR=/usr/lib/aarch64-linux-gnu/pkgconfig cross build --target=aarch64-unknown-linux-gnu
 ```
 (This might take a while)
 

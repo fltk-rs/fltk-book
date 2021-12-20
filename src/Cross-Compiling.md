@@ -32,8 +32,9 @@ RUN dpkg --add-architecture arm64 && \
     apt-get update && \
     apt-get install --assume-yes --no-install-recommends \
     libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 \
-    libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libpango1.0-dev:arm64\
-    libxfixes-dev:arm64  libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64
+    libxinerama-dev:arm64 libxcursor-dev:arm64 \
+    libxrender-dev:arm64 libpango1.0-dev:arm64 \
+    libxfixes-dev:arm64  libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 pkg-config:arm64
 
 ENV PKG_CONFIG_LIBDIR=/usr/local/lib/aarch64-linux-gnu/pkgconfig:/usr/lib/aarch64-linux-gnu/pkgconfig
 ```
@@ -53,6 +54,10 @@ $ docker build -t my-arm64-image:0.1 archs/aarch64-linux/
 Then run cross:
 ```
 $ cross build --target=aarch64-unknown-linux-gnu
+```
+or
+```
+$ PKG_CONFIG_LIBDIR=/usr/local/lib/aarch64-linux-gnu/pkgconfig cross build --target=aarch64-unknown-linux-gnu
 ```
 (This might take a while)
 

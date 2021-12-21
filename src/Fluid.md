@@ -102,10 +102,10 @@ Double clicking the window pops up a dialog where we can change the window's gui
 ![image](https://user-images.githubusercontent.com/37966791/146927520-c2ee18b1-0d17-43cd-93eb-edbf725ddf6c.png)
 
 We'll give the window a label `My Window` in the Gui tab, we'll change the color to white in the Style tab:
-![image](https://user-images.githubusercontent.com/37966791/146927785-41f84904-663e-40e7-b3d0-531a9d2dcf7c.png)
+![image](https://user-images.githubusercontent.com/37966791/146932899-6a4419ae-9c91-4b48-a363-d87c85b01778.png)
 
 And under the C++ tab, we'll give it the variable name `my_win`:
-![image](https://user-images.githubusercontent.com/37966791/146927891-76a1a426-c3c7-415e-b786-80f4fb98b4d4.png)
+![image](https://user-images.githubusercontent.com/37966791/146932794-7e1a2819-842d-45c7-88c8-be9fb728e805.png)
 
 Our window will now be accessible via `myuifile::UserInterface::my_win`.
 

@@ -63,4 +63,4 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/146932070-ae63fd63-3f37-4d97-978e-4604d2bc0e4b.png)
 
-This changes the default DownBox with a custom down_box routine.
+This changes the default DownBox with a custom down_box routine. We can also ImageExt::draw() inside our draw routines to draw images (Like svg images to get scalable rounded borders).

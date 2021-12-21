@@ -1,5 +1,19 @@
 # Cross-compiling
 
+
+## Using a prebuilt bundle
+If the target you're compiling to, already has a prebuilt package:
+- x86_64-pc-windows-gnu
+- x86_64-pc-windows-msvc
+- x86_64-apple-darwin
+- x86_64-unknown-linux-gnu
+
+Add the target via rustup, then invoke the build:
+```
+$ rustup target add <your target> # replace with one of the targets above
+$ cargo build --target=<your target> --features=fltk-bundled
+```
+
 ## Using cargo-cross
 If you have Docker installed, you can try [cargo-cross](https://github.com/rust-embedded/cross).
 ```
@@ -7,7 +21,7 @@ $ cargo install cross
 $ cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docker daemon has to be running, no need to add via rustup
 ```
 
-If your target requires external dependencies, like on Linux, you would have to create a custom docker image and use it for your cross-compilation via a Cross.toml file.
+If your target requires external dependencies, like on Linux, you would have to create a custom docker image and use it for your cross-compilation via a Cross.toml file. Otherwise, it's recommended to use docker directly for direct compilation to the required target, see the next [section](Cross-Compiling#using-docker).
 
 For example, for a project of the following structure:
 ```
@@ -25,7 +39,7 @@ myapp
 ```
 
 The Dockerfile contents:
-```
+```dockerfile
 FROM rustembedded/cross:aarch64-unknown-linux-gnu-0.2.1
 
 RUN dpkg --add-architecture arm64 && \
@@ -56,18 +70,24 @@ $ cross build --features=no-pango --target=aarch64-unknown-linux-gnu
 
 P.S. If you need pango support, you would have to install pkg-config:arch and point PKG_CONFIG_LIBDIR to the pkgconfig directory relevant to that architecture.
 
-## Using a prebuilt bundle
-If the target you're compiling to, already has a prebuilt package:
-- x86_64-pc-windows-gnu
-- x86_64-pc-windows-msvc
-- x86_64-apple-darwin
-- x86_64-unknown-linux-gnu
+## Using docker
+Using a docker image of the target platform directly can save you from the hassle of cross-compiling to a different linux target using cross.
+You'll need a Dockerfile which pulls the target you want and install the Rust and C++ toolchains and the required dependencies.
+For example, building for alpine linux:
+```dockerfile
+FROM alpine:latest AS alpine_build
+RUN apk add rust cargo git cmake make g++ pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
+COPY . .
+RUN cargo build --release
 
-Add the target via rustup, then invoke the build:
+FROM scratch AS export-stage
+COPY --from=alpine_build target/release/<your binary name> .
 ```
-$ rustup target add <your target> # replace with one of the targets above
-$ cargo build --target=<your target> --features=fltk-bundled
+And run using:
 ```
+$ DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
+```
+Your binary will be in the `./out` directory.
 
 ## Using a cross-compiling C/C++ toolchain
 

@@ -1,11 +1,19 @@
 # Home
 
-Welcome to the fltk-rs book!
+Welcome to the [fltk-rs](https://github.com/fltk-rs/fltk-rs) book!
 
-This is a work in progress for written tutorials targeting the fltk crate.
+This is an introductory book targeting the [fltk crate](https://crates.io/crates/fltk). Other resources include:
+- [Official Documentation](https://docs.rs/fltk)
+- [Videos](https://github.com/fltk-rs/fltk-rs#tutorials)
+- [Discussions](https://github.com/fltk-rs/fltk-rs/discussions)
+- [Examples](https://github.com/fltk-rs/fltk-rs/tree/master/fltk/examples)
+- [Demos](https://github.com/fltk-rs/demos)
+- [7guis-fltk-rs](https://github.com/tdryer/7guis-fltk-rs)
+- [FLTK-RS-Examples](https://github.com/wyhinton/FLTK-RS-Examples)
+- Erco's FLTK cheat [page](http://seriss.com/people/erco/fltk/), which is an excellent FLTK C++ reference. 
 
-FLTK is a cross-platform lightweight gui library.
-The library itself is written in C++98, which is highly-portable. This crate is written in Rust, and uses FFI to call into the FLTK wrapper written in C89 and C++11.
+[FLTK](https://github.com/fltk/fltk) is a cross-platform lightweight gui library.
+The library itself is written in C++98, which is highly-portable. The fltk crate is written in Rust, and uses FFI to call into the FLTK wrapper, [cfltk](https://github.com/MoAlyousef/cfltk), which is written in C89 and C++11.
 
 The library has a minimalist architecture, and would be familiar to developers used to Object-Oriented gui libraries. The wrapper itself follows the same model which simplifies the documentation, since method names are identical or similar to their C++ equivalents. This makes referring the FLTK C++ documentation quite simpler since the methods basically map to each other.
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Home - fltk-book</title>
+        <title>Home - fltk book</title>
 
 
         <!-- Custom HTML head -->
@@ -110,7 +110,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">fltk-book</h1>
+                    <h1 class="menu-title">fltk book</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -143,10 +143,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="home"><a class="header" href="#home">Home</a></h1>
-<p>Welcome to the fltk-rs book!</p>
-<p>This is a work in progress for written tutorials targeting the fltk crate.</p>
-<p>FLTK is a cross-platform lightweight gui library.
-The library itself is written in C++98, which is highly-portable. This crate is written in Rust, and uses FFI to call into the FLTK wrapper written in C89 and C++11.</p>
+<p>Welcome to the <a href="https://github.com/fltk-rs/fltk-rs">fltk-rs</a> book!</p>
+<p>This is an introductory book targeting the <a href="https://crates.io/crates/fltk">fltk crate</a>. Other resources include:</p>
+<ul>
+<li><a href="https://docs.rs/fltk">Official Documentation</a></li>
+<li><a href="https://github.com/fltk-rs/fltk-rs#tutorials">Videos</a></li>
+<li><a href="https://github.com/fltk-rs/fltk-rs/discussions">Discussions</a></li>
+<li><a href="https://github.com/fltk-rs/fltk-rs/tree/master/fltk/examples">Examples</a></li>
+<li><a href="https://github.com/fltk-rs/demos">Demos</a></li>
+<li><a href="https://github.com/tdryer/7guis-fltk-rs">7guis-fltk-rs</a></li>
+<li><a href="https://github.com/wyhinton/FLTK-RS-Examples">FLTK-RS-Examples</a></li>
+<li>Erco's FLTK cheat <a href="http://seriss.com/people/erco/fltk/">page</a>, which is an excellent FLTK C++ reference. </li>
+</ul>
+<p><a href="https://github.com/fltk/fltk">FLTK</a> is a cross-platform lightweight gui library.
+The library itself is written in C++98, which is highly-portable. The fltk crate is written in Rust, and uses FFI to call into the FLTK wrapper, <a href="https://github.com/MoAlyousef/cfltk">cfltk</a>, which is written in C89 and C++11.</p>
 <p>The library has a minimalist architecture, and would be familiar to developers used to Object-Oriented gui libraries. The wrapper itself follows the same model which simplifies the documentation, since method names are identical or similar to their C++ equivalents. This makes referring the FLTK C++ documentation quite simpler since the methods basically map to each other.</p>
 <pre><code class="language-c++">int main() {
     auto wind = new Fl_Window(100, 100, 400, 300, &quot;My Window&quot;);

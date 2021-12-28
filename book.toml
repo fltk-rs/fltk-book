@@ -3,7 +3,7 @@ authors = ["Mohammed Alyousef"]
 language = "en"
 multilingual = false
 src = "src"
-title = "fltk-book"
+title = "fltk book"
 
 [rust]
 edition = "2018"

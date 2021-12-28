@@ -217,7 +217,7 @@ panic = &quot;abort&quot;
 </code></pre>
 <p>Furthermore, you can build Rust's stdlib optimized for size (it comes optimized for speed by default). More info on that <a href="https://github.com/johnthagen/min-sized-rust">here</a></p>
 <h3 id="can-i-cross-compile-my-application-to-a-mobile-platform-or-wasm"><a class="header" href="#can-i-cross-compile-my-application-to-a-mobile-platform-or-wasm">Can I cross-compile my application to a mobile platform or WASM?</a></h3>
-<p>FLTK currently doesn't support WASM nor mobile platforms. It is focused on desktop applications.</p>
+<p>FLTK currently doesn't support WASM nor iOS. It has experimental support for Android (YMMV). It is focused on desktop applications.</p>
 <h2 id="licensing"><a class="header" href="#licensing">Licensing</a></h2>
 <h3 id="can-i-use-this-crate-in-a-commercial-application"><a class="header" href="#can-i-use-this-crate-in-a-commercial-application">Can I use this crate in a commercial application?</a></h3>
 <p>Yes. This crate has an MIT license which requires acknowledgment. FLTK (the C++ library) is licensed under the LGPL license with an exception allowing static linking for commercial/closed-source use. You can find the full terms of both licenses here:</p>
@@ -230,7 +230,7 @@ panic = &quot;abort&quot;
 <p>FLTK has some known issues with text alignment.</p>
 <h2 id="concurrency"><a class="header" href="#concurrency">Concurrency</a></h2>
 <h3 id="do-you-plan-on-supporting-multithreading-or-asyncawait"><a class="header" href="#do-you-plan-on-supporting-multithreading-or-asyncawait">Do you plan on supporting multithreading or async/await?</a></h3>
-<p>FLTK supports multithreaded and concurrent applications. See the examples directory for examples on usage with threads, messages, async_std and tokio.</p>
+<p>FLTK supports multithreaded and concurrent applications. See the examples dir and the <a href="https://github.com/fltk-rs/demos">fltk-rs demos repo</a> for examples on usage with threads, messages, async_std and tokio (web-todo examples).</p>
 <h3 id="should-i-explicitly-call-applock-and-appunlock"><a class="header" href="#should-i-explicitly-call-applock-and-appunlock">Should I explicitly call app::lock() and app::unlock()?</a></h3>
 <p>fltk-rs surrounds all mutating calls to widgets with a lock on the C++ wrapper side. Normally you wouldn't have to call app::lock() and app::unlock(). 
 This depends however on the support of recursive mutexes in your system. 

@@ -16,9 +16,10 @@ fltk = "^1.2"
 Furthermore, the fltk-bundled flag assumes you have curl and tar installed (for Windows, they're available in the Native Tools Command Prompt).
 
 ### Build fails on windows, why can't CMake find my toolchain?
-If you're building using the MSVC toolchain, make sure you run your build (at least your initial build) using the Native Tools Command Prompt, which should appear once you start typing "native" in the start menu, choose the version corresponding to your installed Rust toolchain (x86 or x64). The Native Tools Command Prompt has all the environment variables set correctly for native development.
+If you're building using the MSVC toolchain, make sure you run your build (at least your initial build) using the Native Tools Command Prompt, which should appear once you start typing "native" in the start menu, choose the version corresponding to your installed Rust toolchain (x86 or x64). The Native Tools Command Prompt has all the environment variables set correctly for native development. [cmake-rs](https://github.com/alexcrichton/cmake-rs) which the bindings use might not be able to find the Visual Studio 2022 generator, in which case, you can try to use the fltk-bundled feature, or use ninja via the use-ninja feature. This requires installing [Ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages) which can be installed with Chocolatey, Scoop or manually.
 
-If you're building for the GNU toolchain, make sure that Make is also installed, which usually comes installed in MSYS2 and Cygwin.
+If you're building for the GNU toolchain, make sure that Make is also installed, which usually comes installed in mingw64 toolchain.
+
 
 ### Build fails on MacOS 11 with an Apple M1 chip, what can I do?
 If you're getting "file too small to be an archive" error, you might be hitting this [issues](https://github.com/rust-lang/cargo/issues/8875) or this [issue](https://github.com/rust-lang/rust/issues/50220). MacOS's native C/C++ toolchain shouldn't have this issue, and can be installed by running `xcode-select --install` or by installing XCode. Make sure the corresponding Rust toolchain (aarch64-apple-darwin) is installed as well. You can uninstall other Rust apple-darwin toolchains or use cargo-lipo instead if you need universal/fat binaries.
@@ -51,7 +52,7 @@ $ cargo run
 CMake caches the C++ compiler variable after it's first run, so if the above failed because of a previous run, you would have to run ```cargo clean``` or you can manually delete the CMakeCache.txt file in the build directory.
 
 ### Can I accelerate the build speed?
-You can use the "use-ninja" feature flag if you have ninja installed. Or you can set the NUM_JOBS environment variable, which the cmake crate picks up and tries to parallelize the build.
+You can use the "use-ninja" feature flag if you have ninja installed. 
 
 ### Can I cache a previous build of the FLTK library?
 You can use the fltk-bundled feature and use either the CFLTK_BUNDLE_DIR or CFLTK_BUNDLE_URL to point to the location of your cached cfltk and fltk libraries.

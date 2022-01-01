@@ -208,8 +208,7 @@ fn main() {
 </code></pre></pre>
 <h2 id="timeouts"><a class="header" href="#timeouts">Timeouts</a></h2>
 <p>fltk offers timeouts for recurring operations. We can add a timeout, repeat it and remove it:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">extern crate once_cell;
-use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn move_button(mut btn: button::Button) {
     btn.set_size(btn.w() - 2, btn.h());

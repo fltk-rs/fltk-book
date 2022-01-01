@@ -73,7 +73,6 @@ fn main() {
 
 fltk offers timeouts for recurring operations. We can add a timeout, repeat it and remove it:
 ```rust
-extern crate once_cell;
 use fltk::{prelude::*, *};
 
 fn move_button(mut btn: button::Button) {

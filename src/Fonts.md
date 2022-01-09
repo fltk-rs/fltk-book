@@ -28,7 +28,7 @@ use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default().load_system_fonts();
-    // To load a font by path, check the app::load_font() function
+    // To load a font by path, check the App::load_font() method
     let fonts = app::fonts();
     // println!("{:?}", fonts);
     let mut wind = window::Window::default().with_size(400, 300);
@@ -51,7 +51,7 @@ fn main() {
 }
 ```
 
-If you would like to load a bundled font without it being in the system, you can alternatively use Font::load_font() and Font::set_font():
+If you would like to load a bundled font without it being in the system, you can alternatively use Font::load_font() and Font::set_font(), this allows you to replace one of FLTK's predefined fonts with a custom font:
 ```rust
 use fltk::{app, enums::Font, button::Button, frame::Frame, prelude::*, window::Window};
 

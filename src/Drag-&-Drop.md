@@ -56,7 +56,7 @@ fn main() {
     disp.handle({
         let mut dnd = false;
         let mut released = false;
-        let mut buf = buf.clone();
+        let buf = buf.clone();
         move |_, ev| match ev {
             Event::DndEnter => {
                 dnd = true;
@@ -70,9 +70,18 @@ fn main() {
             Event::Paste => {
                 if dnd && released {
                     let path = app::event_text();
-                    let path = std::path::Path::new(&path);
-                    assert!(path.exists());
-                    buf.load_file(&path).unwrap();
+                    let path = path.trim();
+                    let path = path.replace("file://", "");
+                    let path = std::path::PathBuf::from(&path);
+                    if path.exists() {
+                        // we use a timeout to avoid pasting the path into the buffer
+                        app::add_timeout3(0.0, {
+                            let mut buf = buf.clone();
+                            move |_| {
+                                buf.load_file(&path).unwrap();
+                            }
+                        });
+                    }
                     dnd = false;
                     released = false;
                     true

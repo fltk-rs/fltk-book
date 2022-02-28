@@ -152,6 +152,7 @@
 </ul>
 <h3 id="setting-the-callback"><a class="header" href="#setting-the-callback">Setting the callback</a></h3>
 <p>Part of the WidgetExt trait is the set_callback method:</p>
+<h4 id="using-closures"><a class="header" href="#using-closures">Using closures</a></h4>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -164,6 +165,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
+<p>The capture argument is the <code>&amp;mut Self</code> of the widget for which the callback is set:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -194,6 +196,82 @@ fn main() {
 }
 </code></pre></pre>
 <p>This will print on every character input by the user.</p>
+<p>The advanatage of using closures is the ability to &quot;close&quot; on scope arguments, i.e. you can also pass variables from the surrounding scope into the closure:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+    but.set_callback(move |_| {
+        my_window.set_label(&quot;button was pressed&quot;);
+    });
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>You will notice in the <a href="Menus">Menus section</a> that the handling is done on a per MenuItem basis.</p>
+<h4 id="using-function-objects"><a class="header" href="#using-function-objects">Using function objects</a></h4>
+<p>You can also use function objects directly if you prefer:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+
+fn button_cb(w: &amp;mut impl WidgetExt) {
+    w.set_label(&quot;Clicked&quot;);
+}
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    my_window.end();
+    my_window.show();
+    but.set_callback(button_cb);
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>We use <code>&amp;mut impl WidgetExt</code> to be able to reuse the function object with multiple different widget types, otherwise, you can use <code>&amp;mut button::Button</code> for the button.
+A disadvantage to this approach, is that to handle state, you would have to manage global state.</p>
+<pre><pre class="playground"><code class="language-rust edition2018">extern crate lazy_static;
+
+use fltk::{prelude::*, *};
+use std::sync::Mutex;
+
+#[derive(Default)]
+struct State {
+    count: i32,
+}
+
+impl State {
+    fn increment(&amp;mut self) {
+        self.count += 1;
+    }
+}
+
+lazy_static::lazy_static! {
+    static ref STATE: Mutex&lt;State&gt; = Mutex::new(State::default());
+}
+
+
+fn button_cb(_w: &amp;mut button::Button) {
+    let mut state = STATE.lock().unwrap();
+    state.increment();
+}
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, &quot;Increment!&quot;);
+    my_window.end();
+    my_window.show();
+    
+    but.set_callback(button_cb);
+    
+    app.run().unwrap();
+}
+</code></pre></pre>
+<p>Here we use lazy_static, there are also other crates to facilitate state management.</p>
+<p>Similary for menus, we can use <code>&amp;mut impl MenuExt</code> to be able to set the callback for menu widgets and menu items, in the <code>MenuExt::add()/insert()</code> or <code>MenuItem::add()/insert()</code> methods.</p>
 <h3 id="using-the-handle-method"><a class="header" href="#using-the-handle-method">Using the handle method</a></h3>
 <p>The handle method takes a closure whose parameter is an Event, and returns a bool for handled events. The bool lets FLTK know whether the event was handled or not.
 The call looks like this:</p>

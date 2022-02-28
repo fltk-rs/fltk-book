@@ -239,6 +239,110 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
+<p>Also as mentioned in the <a href="Events">Events section</a>, you can use a function object instead of passing closures:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::*, prelude::*, *};
+
+fn menu_cb(m: &amp;mut impl MenuExt) {
+    if let Some(choice) = m.choice() {
+        match choice.as_str() {
+            &quot;New\t&quot; =&gt; println!(&quot;New&quot;),
+            &quot;Open\t&quot; =&gt; println!(&quot;Open&quot;),
+            &quot;Third&quot; =&gt; println!(&quot;Third&quot;),
+            &quot;Quit\t&quot; =&gt; {
+                println!(&quot;Quitting&quot;);
+                app::quit();
+            },
+            _ =&gt; println!(&quot;{}&quot;, choice),
+        }
+    }
+}
+
+fn main() {
+    let a = app::App::default();
+    let mut win = window::Window::default().with_size(400, 300);
+    let mut menubar = menu::MenuBar::new(0, 0, 400, 40, &quot;rew&quot;);
+    menubar.add(&quot;File/New\t&quot;, Shortcut::None, menu::MenuFlag::Normal, menu_cb);
+    menubar.add(
+        &quot;File/Open\t&quot;,
+        Shortcut::None,
+        menu::MenuFlag::Normal,
+        menu_cb,
+    );
+    let idx = menubar.add(
+        &quot;File/Recent&quot;,
+        Shortcut::None,
+        menu::MenuFlag::Submenu,
+        menu_cb,
+    );
+    menubar.add(
+        &quot;File/Recent/First\t&quot;,
+        Shortcut::None,
+        menu::MenuFlag::Normal,
+        menu_cb,
+    );
+    menubar.add(
+        &quot;File/Recent/Second\t&quot;,
+        Shortcut::None,
+        menu::MenuFlag::Normal,
+        menu_cb,
+    );
+    menubar.add(
+        &quot;File/Quit\t&quot;,
+        Shortcut::None,
+        menu::MenuFlag::Normal,
+        menu_cb,
+    );
+    let mut btn1 = button::Button::new(160, 150, 80, 30, &quot;Modify 1&quot;);
+    let mut btn2 = button::Button::new(160, 200, 80, 30, &quot;Modify 2&quot;);
+    let mut clear = button::Button::new(160, 250, 80, 30, &quot;Clear&quot;);
+    win.end();
+    win.show();
+
+    btn1.set_callback({
+        let menubar = menubar.clone();
+        move |_| {
+            if let Some(mut item) = menubar.find_item(&quot;File/Recent&quot;) {
+                item.add(
+                    &quot;Recent/Third&quot;,
+                    Shortcut::None,
+                    menu::MenuFlag::Normal,
+                    menu_cb,
+                );
+                item.add(
+                    &quot;Recent/Fourth&quot;,
+                    Shortcut::None,
+                    menu::MenuFlag::Normal,
+                    menu_cb,
+                );
+            }
+        }
+    });
+
+    btn2.set_callback({
+        let mut menubar = menubar.clone();
+        move |_| {
+            menubar.add(
+                &quot;File/Recent/Fifth\t&quot;,
+                Shortcut::None,
+                menu::MenuFlag::Normal,
+                menu_cb,
+            );
+            menubar.add(
+                &quot;File/Recent/Sixth\t&quot;,
+                Shortcut::None,
+                menu::MenuFlag::Normal,
+                menu_cb,
+            );
+        }
+    });
+
+    clear.set_callback(move |_| {
+        menubar.clear_submenu(idx).unwrap();
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
 <p>Alternatively, you can use the add_emit() to pass a Sender and a message instead of passing callbacks:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 

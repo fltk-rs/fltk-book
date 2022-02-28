@@ -8,6 +8,9 @@ In the previously mentioned examples, you have seen callbacks mostly, and althou
 
 ### Setting the callback
 Part of the WidgetExt trait is the set_callback method:
+
+#### Using closures
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -22,6 +25,7 @@ fn main() {
 }
 ```
 
+The capture argument is the `&mut Self` of the widget for which the callback is set:
 ```rust
 use fltk::{prelude::*, *};
 
@@ -54,6 +58,89 @@ fn main() {
 }
 ```
 This will print on every character input by the user.
+
+The advanatage of using closures is the ability to "close" on scope arguments, i.e. you can also pass variables from the surrounding scope into the closure:
+```rust
+use fltk::{prelude::*, *};
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
+    my_window.end();
+    my_window.show();
+    but.set_callback(move |_| {
+        my_window.set_label("button was pressed");
+    });
+    app.run().unwrap();
+}
+```
+
+You will notice in the [Menus section](Menus) that the handling is done on a per MenuItem basis.
+
+#### Using function objects
+You can also use function objects directly if you prefer:
+```rust
+use fltk::{prelude::*, *};
+
+fn button_cb(w: &mut impl WidgetExt) {
+    w.set_label("Clicked");
+}
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
+    my_window.end();
+    my_window.show();
+    but.set_callback(button_cb);
+    app.run().unwrap();
+}
+```
+We use `&mut impl WidgetExt` to be able to reuse the function object with multiple different widget types, otherwise, you can use `&mut button::Button` for the button.
+A disadvantage to this approach, is that to handle state, you would have to manage global state.
+```rust
+extern crate lazy_static;
+
+use fltk::{prelude::*, *};
+use std::sync::Mutex;
+
+#[derive(Default)]
+struct State {
+    count: i32,
+}
+
+impl State {
+    fn increment(&mut self) {
+        self.count += 1;
+    }
+}
+
+lazy_static::lazy_static! {
+    static ref STATE: Mutex<State> = Mutex::new(State::default());
+}
+
+
+fn button_cb(_w: &mut button::Button) {
+    let mut state = STATE.lock().unwrap();
+    state.increment();
+}
+
+fn main() {
+    let app = app::App::default();
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Increment!");
+    my_window.end();
+    my_window.show();
+    
+    but.set_callback(button_cb);
+    
+    app.run().unwrap();
+}
+```
+Here we use lazy_static, there are also other crates to facilitate state management.
+
+Similary for menus, we can use `&mut impl MenuExt` to be able to set the callback for menu widgets and menu items, in the `MenuExt::add()/insert()` or `MenuItem::add()/insert()` methods.
 
 ### Using the handle method
 The handle method takes a closure whose parameter is an Event, and returns a bool for handled events. The bool lets FLTK know whether the event was handled or not.

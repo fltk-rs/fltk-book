@@ -2,7 +2,8 @@
 
 Out of the box, fltk-rs offers:
 - A Flex widget
-- Packs and Grids
+- Pack
+- Grid
 - Widget relative positioning.
 
 ### Flex
@@ -31,8 +32,8 @@ The other widget will be expandable since no size is set for it. A full example 
 
 ![image](https://github.com/osen/FL_Flex/raw/main/doc/login.png)
 
-### Packs and Grids
-Packs & Grids (HGrid and VGrid) are widgets in the group module which also implement the GroupExt trait. There are 2 forms of packs, Vertical and Horizontal packs, Vertical being the default. Vertical packs only require the height of its children widgets, while horizontal packs only require the width of its children widgets, like in the example below:
+### Packs
+The Pack widget (in the group module) also implement the GroupExt trait. There are 2 forms of packs, Vertical and Horizontal packs, Vertical being the default. Vertical packs only require the height of its children widgets, while horizontal packs only require the width of its children widgets, like in the example below:
 ```rust
 use fltk::{prelude::*, *};
 
@@ -77,6 +78,29 @@ fn main() {
 In which case we don't even need the size of the buttons.
 
 ![image](https://user-images.githubusercontent.com/37966791/100937983-ef8bf400-3504-11eb-9da1-09c5ac1aade4.png)
+
+### Grid
+[Grid](https://github.com/fltk-rs/fltk-grid)) is implemented currently in an external crate. It requires a layout which is set using `Grid::set_layout(&mut self, rows, columns)`. Then widgets are inserted via the `Grid::insert(&mut self, row, column)` or `Grid::insert_ext(&mut self, row, column, row_span, column_span)` methods:
+```rust
+use fltk::{prelude::*, *};
+use fltk_grid::Grid;
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gtk);
+    let mut win = window::Window::default().with_size(500, 300);
+    let mut grid = Grid::default_fill();
+    grid.debug(false); // set to true to show cell outlines and numbers
+    grid.set_layout(5, 5); // 5 rows, 5 columns
+    grid.insert(&mut button::Button::default(), 0, 1); // widget, row, col
+    grid.insert_ext(&mut button::Button::default(), 2, 1, 3, 1); // widget, row, col, row_span, col_span
+    win.end();
+    win.show();
+    a.run().unwrap();
+}
+```
+A form example from the fltk-grid repo:
+
+![image](https://user-images.githubusercontent.com/37966791/160347418-b8b54408-3dc9-4fc4-93e8-fb6c1c0282e9.png)
 
 ### Relative positioning
 The WidgetExt trait offers several constructor methods which allow us to construct widgets relative to other widgets size and position. This is similar to Qml's anchoring.

@@ -80,7 +80,7 @@ In which case we don't even need the size of the buttons.
 ![image](https://user-images.githubusercontent.com/37966791/100937983-ef8bf400-3504-11eb-9da1-09c5ac1aade4.png)
 
 ### Grid
-[Grid](https://github.com/fltk-rs/fltk-grid)) is implemented currently in an external crate. It requires a layout which is set using `Grid::set_layout(&mut self, rows, columns)`. Then widgets are inserted via the `Grid::insert(&mut self, row, column)` or `Grid::insert_ext(&mut self, row, column, row_span, column_span)` methods:
+[Grid](https://github.com/fltk-rs/fltk-grid) is implemented currently in an external crate. It requires a layout which is set using `Grid::set_layout(&mut self, rows, columns)`. Then widgets are inserted via the `Grid::insert(&mut self, row, column)` or `Grid::insert_ext(&mut self, row, column, row_span, column_span)` methods:
 ```rust
 use fltk::{prelude::*, *};
 use fltk_grid::Grid;
@@ -89,16 +89,21 @@ fn main() {
     let a = app::App::default().with_scheme(app::Scheme::Gtk);
     let mut win = window::Window::default().with_size(500, 300);
     let mut grid = Grid::default_fill();
-    grid.debug(false); // set to true to show cell outlines and numbers
-    grid.set_layout(5, 5); // 5 rows, 5 columns
-    grid.insert(&mut button::Button::default(), 0, 1); // widget, row, col
-    grid.insert_ext(&mut button::Button::default(), 2, 1, 3, 1); // widget, row, col, row_span, col_span
+    // set to true to show cell outlines and numbers
+    grid.debug(false); 
+    // 5 rows, 5 columns
+    grid.set_layout(5, 5); 
+    // widget, row, col
+    grid.insert(&mut button::Button::default().with_label("Click"), 0, 1); 
+    // widget, row, col, row_span, col_span
+    grid.insert_ext(&mut button::Button::default().with_label("Button 2"), 2, 1, 3, 1); 
     win.end();
     win.show();
     a.run().unwrap();
 }
 ```
-A form example from the fltk-grid repo:
+
+[Grid example](https://github.com/fltk-rs/fltk-grid/blob/main/examples/form.rs)
 
 ![image](https://user-images.githubusercontent.com/37966791/160347418-b8b54408-3dc9-4fc4-93e8-fb6c1c0282e9.png)
 
@@ -136,9 +141,13 @@ fn main() {
 (With some skipped theming)
 
 These methods are namely:
-- above_of()
-- below_of()
-- right_of()
-- left_of()
-- center_of()
-- size_of()
+- `above_of(&widget, padding)`: places the widget above the passed widget
+- `below_of(&widget, padding)`: places the widget below the passed widget
+- `right_of(&widget, padding)`: places the widget right of the passed widget
+- `left_of(&widget, padding)`: places the widget left of the passed widget
+- `center_of(&widget)`: places the widget at the center (both x and y axes) of the passed widget.
+- `center_of_parent()`: places the widget at the center (both x and y axes) of the parent.
+- `center_x(&widget)`: places the widget at the center (x-axis) of the passed widget.
+- `center_y(&widget)`: places the widget at the center (y-axis) of the passed widget.
+- `size_of(&widget)`: constructs the widget with the same size of the passed widget.
+- `size_of_parent()`: constructs the widget with the same size of its parent.

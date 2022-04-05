@@ -8,7 +8,7 @@
 
 
         <!-- Custom HTML head -->
-
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +90,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -2793,65 +2793,6 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 <li>The signal can only be handled in a widget's handle method.</li>
 <li>The signal is inaccessible within the event loop (for that, you might want to use WidgetExt::emit or channels described previously in this page). </li>
 </ul>
-<h3 id="fltk-evented-crate"><a class="header" href="#fltk-evented-crate">fltk-evented crate</a></h3>
-<p>For an alternative <code>on_&lt;event&gt;</code> method of handling events, check the <a href="https://crates.io/crates/fltk-evented">fltk-evented crate</a> whose Listener widget can handle events in the event loop, so you can avoid sending things into closures and worrying about lifetimes:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, button::Button, enums::Color, frame::Frame, group::Flex, prelude::*, window::Window};
-use fltk_evented::Listener;
-
-fn main() {
-    let a = app::App::default().with_scheme(app::Scheme::Gtk);
-    app::set_font_size(20);
-
-    let mut wind = Window::default()
-        .with_size(160, 200)
-        .center_screen()
-        .with_label(&quot;Counter&quot;);
-    let flex = Flex::default()
-        .with_size(120, 160)
-        .center_of_parent()
-        .column();
-    let mut but_inc: Listener&lt;_&gt; = Button::default().with_label(&quot;+&quot;).into();
-    let mut frame = Frame::default();
-    let mut but_dec: Listener&lt;_&gt; = Button::default().with_label(&quot;-&quot;).into();
-    flex.end();
-    wind.end();
-    wind.show();
-
-    but_inc.on_hover(|b| {
-        b.set_color(Color::Red);
-    });
-
-    let mut val = 0;
-
-    while a.wait() {
-        if but_inc.triggered() {
-            val += 1;
-        }
-
-        if but_inc.hovered() {
-            but_inc.set_color(Color::White);
-        }
-
-        if but_inc.left() {
-            but_inc.set_color(Color::BackGround);
-        }
-
-        if but_dec.triggered() {
-            val -= 1;
-        }
-
-        if but_dec.hovered() {
-            but_dec.set_color(Color::White);
-        }
-
-        if but_dec.left() {
-            but_dec.set_color(Color::BackGround);
-        }
-
-        frame.set_label(&amp;val.to_string());
-    }
-}
-</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="drag--drop"><a class="header" href="#drag--drop">Drag &amp; Drop</a></h1>
 <p>Drag and Drop are Event types supported by FLTK. You can drag widgets around if you implement these events, and you can drag outside files into an FLTK application. You might also want to implement drawing over widgets which would require handling Event::Drag at least.</p>
 <h2 id="dragging-widgets"><a class="header" href="#dragging-widgets">Dragging widgets</a></h2>
@@ -3159,17 +3100,18 @@ fn main() {
     wind.show();
 
     let mut val = 0;
+    frame.set_label(&amp;val.to_string());
 
     while a.wait() {
         if but_inc.triggered() {
             val += 1;
+            frame.set_label(&amp;val.to_string());
         }
 
         if but_dec.triggered() {
             val -= 1;
+            frame.set_label(&amp;val.to_string());
         }
-
-        frame.set_label(&amp;val.to_string());
     }
 }
 </code></pre></pre>

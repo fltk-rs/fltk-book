@@ -172,17 +172,18 @@ fn main() {
     wind.show();
 
     let mut val = 0;
+    frame.set_label(&val.to_string());
 
     while a.wait() {
         if but_inc.triggered() {
             val += 1;
+            frame.set_label(&val.to_string());
         }
 
         if but_dec.triggered() {
             val -= 1;
+            frame.set_label(&val.to_string());
         }
-
-        frame.set_label(&val.to_string());
     }
 }
 ```

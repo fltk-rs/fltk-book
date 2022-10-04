@@ -52,6 +52,7 @@ fn main() {
 ```
 
 (The focus box can be removed using the clear_visible_focus() method `btn1.clear_visible_focus()`).
+
 ![image](https://user-images.githubusercontent.com/37966791/145727291-8be40de6-8ec6-4e57-bb29-fa0f0ac3b251.png)
 
 Other toggle-able buttons don't have this property.

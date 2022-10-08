@@ -148,12 +148,12 @@
 <p>The first tutorial uses the fltk-bundled feature flag, which is only supported for certain platforms since these are built using the Github Actions CI, namely:</p>
 <ul>
 <li>Windows 10 x64 (msvc and gnu).</li>
-<li>MacOS 10.15 x64.</li>
-<li>Ubuntu 18.04 or later, x64.</li>
+<li>MacOS 12 x64 and aarch64.</li>
+<li>Ubuntu 20.04 or later, x64 and aarch64.</li>
 </ul>
 <p>If you're not running one of the aforementioned platforms, you'll have to remove the fltk-bundled feature flag in your Cargo.toml file:</p>
 <pre><code class="language-toml">[dependencies]
-fltk = &quot;^1.2&quot;
+fltk = &quot;^1.3&quot;
 </code></pre>
 <p>Furthermore, the fltk-bundled flag assumes you have curl and tar installed (for Windows, they're available in the Native Tools Command Prompt).</p>
 <h3 id="build-fails-on-windows-why-cant-cmake-find-my-toolchain"><a class="header" href="#build-fails-on-windows-why-cant-cmake-find-my-toolchain">Build fails on windows, why can't CMake find my toolchain?</a></h3>
@@ -164,8 +164,10 @@ fltk = &quot;^1.2&quot;
 <h3 id="why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows"><a class="header" href="#why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows">Why do I get a Link error while using the mingw toolchain on windows?</a></h3>
 <p>If the linking fails because of this <a href="https://github.com/rust-lang/rust/issues/47048">issue</a> with older toolchains, it should work by using the fltk-shared feature (an issue with older compilers). Which would also generate a dynamic library which would need to be deployed with your application.</p>
 <pre><code class="language-toml">[dependencies]
-fltk = { version = &quot;^1.2&quot;, features = [&quot;fltk-shared&quot;] }
+fltk = { version = &quot;^1.3&quot;, features = [&quot;fltk-shared&quot;] }
 </code></pre>
+<h3 id="why-does-my-msys2-mingw-built-fltk-app-using-fltk-bundled-isnt-self-contained-and-requires-several-dlls"><a class="header" href="#why-does-my-msys2-mingw-built-fltk-app-using-fltk-bundled-isnt-self-contained-and-requires-several-dlls">Why does my msys2 mingw built fltk app using, fltk-bundled, isn't self-contained and requires several dlls?</a></h3>
+<p>If you have installed libgdiplus via pacman, it would require those dependencies on other systems. If you're using the windows sdk-provided libgdiplus, it shouldn't require extra dlls. You can either uninstall libgdiplus that was installed via pacman, or or you can build using the feature flag: <code>no-gdiplus</code>.</p>
 <h3 id="why-do-i-get-link-errors-when-i-use-the-system-fltk-feature"><a class="header" href="#why-do-i-get-link-errors-when-i-use-the-system-fltk-feature">Why do I get link errors when I use the system-fltk feature?</a></h3>
 <p>This crate targets FLTK 1.4, while currently most distros distribute an older version of FLTK (1.3.5). You can try to install FLTK (C++) by building from source.</p>
 <h3 id="build-fails-on-arch-linux-because-of-pango-or-cairo"><a class="header" href="#build-fails-on-arch-linux-because-of-pango-or-cairo">Build fails on Arch linux because of pango or cairo?</a></h3>
@@ -295,6 +297,14 @@ An example of a leaking widget:</p>
 <h3 id="is-fltk-rs-panicexception-safe"><a class="header" href="#is-fltk-rs-panicexception-safe">Is fltk-rs panic/exception-safe?</a></h3>
 <p>FLTK (C++) doesn't throw exceptions, neither do the C wrapper (cfltk) nor the fltk-sys crate. The higher level fltk crate, which wraps fltk-sys, is not exception-safe since it uses asserts internally after various operations to ensure memory-safety. An example is a widget constructor which checks that the returned pointer (from the C++ side) is not null from allocation failure. It also asserts all widget reads/writes are happening on valid (not deleted) widgets.
 Also any function sending a string across FFI is checked for interal null bytes. For such functions, the developer can perform a sanity check on passed strings to make sure they're valid UTF-8 strings, or check that a widget was not deleted prior to accessing a widget. That said, all functions passed as callbacks to be handled by the C++ side are exception-safe.</p>
+<h3 id="are-there-any-environment-variables-which-can-affect-the-build-or-behavior"><a class="header" href="#are-there-any-environment-variables-which-can-affect-the-build-or-behavior">Are there any environment variables which can affect the build or behavior?</a></h3>
+<ul>
+<li><code>CFLTK_TOOLCHAIN=&lt;path&gt;</code> allows passing the path to a CMake file acting as a CMAKE_TOOLCHAIN_FILE, this allows passing extra info to cmake if needed.</li>
+<li><code>CFLTK_WAYLAND_ONLY=&lt;1 or 0&gt;</code> allows building for wayland only without directly linking X11 libs nor relying on their headers for the build process. This only works with the <code>use-wayland</code> feature flag.</li>
+<li><code>CFLTK_BUNDLE_DIR=&lt;path&gt;</code> allows passing a path of prebuilt cfltk and fltk static libs, useful for when a customized build of fltk is needed, or for targetting other arches when building with the <code>fltk-bundled</code> flag.</li>
+<li><code>CFLTK_BUNDLE_URL=&lt;url&gt;</code> similar to above but allows passing a url which will directs the build script to download from the passed url.</li>
+<li><code>FLTK_BACKEND=&lt;x11 or wayland&gt;</code> allows choosing the backend of your hybrid X11/wayland FLTK app. This only works for apps built with <code>use-wayland</code> feature flag. </li>
+</ul>
 <h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
 <p>Please refer to the <a href="https://github.com/fltk-rs/fltk-rs/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> page for further information.</p>
 

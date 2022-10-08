@@ -5,13 +5,13 @@
 ### Why does the build fails when I follow one of the tutorials?
 The first tutorial uses the fltk-bundled feature flag, which is only supported for certain platforms since these are built using the Github Actions CI, namely:
 - Windows 10 x64 (msvc and gnu).
-- MacOS 10.15 x64.
-- Ubuntu 18.04 or later, x64.
+- MacOS 12 x64 and aarch64.
+- Ubuntu 20.04 or later, x64 and aarch64.
 
 If you're not running one of the aforementioned platforms, you'll have to remove the fltk-bundled feature flag in your Cargo.toml file:
 ```toml
 [dependencies]
-fltk = "^1.2"
+fltk = "^1.3"
 ```
 Furthermore, the fltk-bundled flag assumes you have curl and tar installed (for Windows, they're available in the Native Tools Command Prompt).
 
@@ -28,8 +28,11 @@ If you're getting "file too small to be an archive" error, you might be hitting 
 If the linking fails because of this [issue](https://github.com/rust-lang/rust/issues/47048) with older toolchains, it should work by using the fltk-shared feature (an issue with older compilers). Which would also generate a dynamic library which would need to be deployed with your application.
 ```toml
 [dependencies]
-fltk = { version = "^1.2", features = ["fltk-shared"] }
+fltk = { version = "^1.3", features = ["fltk-shared"] }
 ```
+
+### Why does my msys2 mingw built fltk app using, fltk-bundled, isn't self-contained and requires several dlls?
+If you have installed libgdiplus via pacman, it would require those dependencies on other systems. If you're using the windows sdk-provided libgdiplus, it shouldn't require extra dlls. You can either uninstall libgdiplus that was installed via pacman, or or you can build using the feature flag: `no-gdiplus`.
 
 ### Why do I get link errors when I use the system-fltk feature?
 This crate targets FLTK 1.4, while currently most distros distribute an older version of FLTK (1.3.5). You can try to install FLTK (C++) by building from source.
@@ -194,6 +197,13 @@ Interfacing with C++ or C code can't be reasoned about by the Rust compiler, so 
 ### Is fltk-rs panic/exception-safe?
 FLTK (C++) doesn't throw exceptions, neither do the C wrapper (cfltk) nor the fltk-sys crate. The higher level fltk crate, which wraps fltk-sys, is not exception-safe since it uses asserts internally after various operations to ensure memory-safety. An example is a widget constructor which checks that the returned pointer (from the C++ side) is not null from allocation failure. It also asserts all widget reads/writes are happening on valid (not deleted) widgets.
 Also any function sending a string across FFI is checked for interal null bytes. For such functions, the developer can perform a sanity check on passed strings to make sure they're valid UTF-8 strings, or check that a widget was not deleted prior to accessing a widget. That said, all functions passed as callbacks to be handled by the C++ side are exception-safe.
+
+### Are there any environment variables which can affect the build or behavior?
+- `CFLTK_TOOLCHAIN=<path>` allows passing the path to a CMake file acting as a CMAKE_TOOLCHAIN_FILE, this allows passing extra info to cmake if needed.
+- `CFLTK_WAYLAND_ONLY=<1 or 0>` allows building for wayland only without directly linking X11 libs nor relying on their headers for the build process. This only works with the `use-wayland` feature flag.
+- `CFLTK_BUNDLE_DIR=<path>` allows passing a path of prebuilt cfltk and fltk static libs, useful for when a customized build of fltk is needed, or for targetting other arches when building with the `fltk-bundled` flag.
+- `CFLTK_BUNDLE_URL=<url>` similar to above but allows passing a url which will directs the build script to download from the passed url.
+- `FLTK_BACKEND=<x11 or wayland>` allows choosing the backend of your hybrid X11/wayland FLTK app. This only works for apps built with `use-wayland` feature flag. 
 
 ## Contributing
 Please refer to the [CONTRIBUTING](https://github.com/fltk-rs/fltk-rs/blob/master/CONTRIBUTING.md) page for further information.

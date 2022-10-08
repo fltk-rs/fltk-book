@@ -6,12 +6,18 @@ If the target you're compiling to, already has a prebuilt package:
 - x86_64-pc-windows-gnu
 - x86_64-pc-windows-msvc
 - x86_64-apple-darwin
+- aarch64-apple-darwin
 - x86_64-unknown-linux-gnu
+- aarch64-unknown-linux-gnu
 
 Add the target via rustup, then invoke the build:
 ```
 $ rustup target add <your target> # replace with one of the targets above
 $ cargo build --target=<your target> --features=fltk-bundled
+```
+For aarch64-unknonw-linux-gnu, you might have to specify the linker:
+```
+$ CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=<your target> --features=fltk-bundled
 ```
 
 ## Using cargo-cross
@@ -42,12 +48,17 @@ The Dockerfile contents:
 ```dockerfile
 FROM rustembedded/cross:aarch64-unknown-linux-gnu-0.2.1
 
+ENV CC=aarch64-linux-gnu-gcc \
+    CXX=aarch64-linux-gnu-g++ \
+    CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc
+
 RUN dpkg --add-architecture arm64 && \
     apt-get update && \
     apt-get install --assume-yes --no-install-recommends \
     libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 \
     libxinerama-dev:arm64 libxcursor-dev:arm64 \
-    libxrender-dev:arm64  libxfixes-dev:arm64  libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 
+    libxrender-dev:arm64  libxfixes-dev:arm64  libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 \
+    libasound2-dev:arm64 libpango1.0-dev:arm64
 ```
 Notice the architecture appended to the library package's name like: libx11-dev:arm64.
 
@@ -64,11 +75,9 @@ $ docker build -t my-arm64-image:0.1 archs/aarch64-linux/
 
 Then run cross:
 ```
-$ cross build --features=no-pango --target=aarch64-unknown-linux-gnu
+$ cross build --target=aarch64-unknown-linux-gnu
 ```
 (This might take a while)
-
-P.S. If you need pango support, you would have to install pkg-config:arch and point PKG_CONFIG_LIBDIR to the pkgconfig directory relevant to that architecture.
 
 ## Using docker
 Using a docker image of the target platform directly can save you from the hassle of cross-compiling to a different linux target using cross.
@@ -126,3 +135,36 @@ ar = "x86_64-w64-mingw32-gcc-ar"
 $ cargo build --target=x86_64-pc-windows-gnu
 ```
 
+Another example is building from x86_64 debian-based distro to arm64 debian-based distro:
+- You'll need to add the Rust target using:
+```
+$ rustup target add aarch64-unknown-linux-gnu
+```
+- Install a C/C++ cross-compiler like the Mingw toolchain. On Debian-based distros, you can run:
+```
+$ apt-get install g++-aarch64-linux-gnu
+```
+- Add the required architecture to your system:
+```
+$ sudo dpkg --add-architecture arm64
+```
+- You might need to add the following mirrors to /etc/apt/sources.list:
+```
+deb [arch=arm64] http://ports.ubuntu.com/ focal main multiverse universe
+
+deb [arch=arm64] http://ports.ubuntu.com/ focal-security main multiverse universe
+
+deb [arch=arm64] http://ports.ubuntu.com/ focal-backports main multiverse universe
+
+deb [arch=arm64] http://ports.ubuntu.com/ focal-updates main multiverse universe
+```
+- Install the required dependencies for your target architecture:
+```
+$ sudo apt-get update
+$ sudo apt-get install libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64
+```
+Notice the `:arm64` suffix in the packages' name.
+- Run the build:
+```
+$ CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=aarch64-unknown-linux-gnu
+```

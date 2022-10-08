@@ -75,7 +75,7 @@ $ rustup target add aarch64-unknown-linux-gnu
 ```
 - Install a C/C++ cross-compiler like the Mingw toolchain. On Debian-based distros, you can run:
 ```
-$ apt-get install g++-aarch64-linux-gnu
+$ apt-get install cmake make g++-aarch64-linux-gnu pkg-config-aarch64-linux-gnu
 ```
 - Add the required architecture to your system:
 ```

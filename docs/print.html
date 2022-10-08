@@ -344,6 +344,86 @@ $ cargo build --target=&lt;your target&gt; --features=fltk-bundled
 <p>For aarch64-unknonw-linux-gnu, you might have to specify the linker:</p>
 <pre><code>$ CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=&lt;your target&gt; --features=fltk-bundled
 </code></pre>
+<h2 id="using-a-cross-compiling-cc-toolchain"><a class="header" href="#using-a-cross-compiling-cc-toolchain">Using a cross-compiling C/C++ toolchain</a></h2>
+<p>The idea is that you need a C/C++ cross-compiler and a Rust target installed via <code>rustup target add</code> as mentioned in the previous scenario.</p>
+<p>For Windows and MacOS, the system compiler would already support targetting the supported architectures. For example, on MacOS, if you can already build fltk apps using your system compiler, you can target a different architecture using (assuming you have an intel x86_64 mac):</p>
+<pre><code>$ rustup target add aarch64-apple-darwin
+$ cargo build --target=arch64-apple-darwin
+</code></pre>
+<h3 id="linux-to-64-bit-windows"><a class="header" href="#linux-to-64-bit-windows">Linux to 64-bit Windows</a></h3>
+<p>Assuming you would like to cross-compile from Linux to 64-bit Windows, and are already able to build on your host machine:</p>
+<ul>
+<li>You'll need to add the Rust target using:</li>
+</ul>
+<pre><code>$ rustup target add x86_64-pc-windows-gnu # depending on the arch
+</code></pre>
+<ul>
+<li>Install a C/C++ cross-compiler like the Mingw toolchain. On Debian-based distros, you can run:</li>
+</ul>
+<pre><code>$ apt-get install mingw-w64 # or gcc-mingw-w64-x86-64
+</code></pre>
+<p>On RHEL-based distros:</p>
+<pre><code>$ dnf install mingw64-gcc
+</code></pre>
+<p>On Arch:</p>
+<pre><code>$ pacman -S mingw-w64-gcc
+</code></pre>
+<p>On Alpine:</p>
+<pre><code>$ apk add mingw-w64-gcc
+</code></pre>
+<ul>
+<li>Add a <code>.cargo/config.toml</code> in your project root (or HOME dir if you want the setting to be global), and specify the cross-linker and the archiver:</li>
+</ul>
+<pre><code class="language-toml"># .cargo/config.toml
+[target.x86_64-pc-windows-gnu]
+linker = &quot;x86_64-w64-mingw32-gcc&quot;
+ar = &quot;x86_64-w64-mingw32-gcc-ar&quot;
+</code></pre>
+<ul>
+<li>Run the build:</li>
+</ul>
+<pre><code>$ cargo build --target=x86_64-pc-windows-gnu
+</code></pre>
+<h3 id="x64-linux-gnu-to-aarch64-linux-gnu"><a class="header" href="#x64-linux-gnu-to-aarch64-linux-gnu">x64 linux-gnu to aarch64 linux-gnu</a></h3>
+<p>Another example is building from x86_64 debian-based distro to arm64 debian-based distro:</p>
+<ul>
+<li>You'll need to add the Rust target using:</li>
+</ul>
+<pre><code>$ rustup target add aarch64-unknown-linux-gnu
+</code></pre>
+<ul>
+<li>Install a C/C++ cross-compiler like the Mingw toolchain. On Debian-based distros, you can run:</li>
+</ul>
+<pre><code>$ apt-get install g++-aarch64-linux-gnu
+</code></pre>
+<ul>
+<li>Add the required architecture to your system:</li>
+</ul>
+<pre><code>$ sudo dpkg --add-architecture arm64
+</code></pre>
+<ul>
+<li>You might need to add the following mirrors to /etc/apt/sources.list:</li>
+</ul>
+<pre><code>deb [arch=arm64] http://ports.ubuntu.com/ focal main multiverse universe
+
+deb [arch=arm64] http://ports.ubuntu.com/ focal-security main multiverse universe
+
+deb [arch=arm64] http://ports.ubuntu.com/ focal-backports main multiverse universe
+
+deb [arch=arm64] http://ports.ubuntu.com/ focal-updates main multiverse universe
+</code></pre>
+<ul>
+<li>Install the required dependencies for your target architecture:</li>
+</ul>
+<pre><code>$ sudo apt-get update
+$ sudo apt-get install libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64
+</code></pre>
+<p>Notice the <code>:arm64</code> suffix in the packages' name.</p>
+<ul>
+<li>Run the build:</li>
+</ul>
+<pre><code>$ CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=aarch64-unknown-linux-gnu
+</code></pre>
 <h2 id="using-cargo-cross"><a class="header" href="#using-cargo-cross">Using cargo-cross</a></h2>
 <p>If you have Docker installed, you can try <a href="https://github.com/rust-embedded/cross">cargo-cross</a>.</p>
 <pre><code>$ cargo install cross
@@ -406,80 +486,6 @@ COPY --from=alpine_build target/release/&lt;your binary name&gt; .
 <pre><code>$ DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
 </code></pre>
 <p>Your binary will be in the <code>./out</code> directory.</p>
-<h2 id="using-a-cross-compiling-cc-toolchain"><a class="header" href="#using-a-cross-compiling-cc-toolchain">Using a cross-compiling C/C++ toolchain</a></h2>
-<p>The idea is that you need a C/C++ cross-compiler and a Rust target installed via <code>rustup target add</code> as mentioned in the previous scenario.</p>
-<p>Assuming you would like to cross-compile from Linux to 64-bit Windows, and are already able to build on your host machine:</p>
-<ul>
-<li>You'll need to add the Rust target using:</li>
-</ul>
-<pre><code>$ rustup target add x86_64-pc-windows-gnu # depending on the arch
-</code></pre>
-<ul>
-<li>Install a C/C++ cross-compiler like the Mingw toolchain. On Debian-based distros, you can run:</li>
-</ul>
-<pre><code>$ apt-get install mingw-w64 # or gcc-mingw-w64-x86-64
-</code></pre>
-<p>On RHEL-based distros:</p>
-<pre><code>$ dnf install mingw64-gcc
-</code></pre>
-<p>On Arch:</p>
-<pre><code>$ pacman -S mingw-w64-gcc
-</code></pre>
-<p>On Alpine:</p>
-<pre><code>$ apk add mingw-w64-gcc
-</code></pre>
-<ul>
-<li>Add a <code>.cargo/config.toml</code> in your project root (or HOME dir if you want the setting to be global), and specify the cross-linker and the archiver:</li>
-</ul>
-<pre><code class="language-toml"># .cargo/config.toml
-[target.x86_64-pc-windows-gnu]
-linker = &quot;x86_64-w64-mingw32-gcc&quot;
-ar = &quot;x86_64-w64-mingw32-gcc-ar&quot;
-</code></pre>
-<ul>
-<li>Run the build:</li>
-</ul>
-<pre><code>$ cargo build --target=x86_64-pc-windows-gnu
-</code></pre>
-<p>Another example is building from x86_64 debian-based distro to arm64 debian-based distro:</p>
-<ul>
-<li>You'll need to add the Rust target using:</li>
-</ul>
-<pre><code>$ rustup target add aarch64-unknown-linux-gnu
-</code></pre>
-<ul>
-<li>Install a C/C++ cross-compiler like the Mingw toolchain. On Debian-based distros, you can run:</li>
-</ul>
-<pre><code>$ apt-get install g++-aarch64-linux-gnu
-</code></pre>
-<ul>
-<li>Add the required architecture to your system:</li>
-</ul>
-<pre><code>$ sudo dpkg --add-architecture arm64
-</code></pre>
-<ul>
-<li>You might need to add the following mirrors to /etc/apt/sources.list:</li>
-</ul>
-<pre><code>deb [arch=arm64] http://ports.ubuntu.com/ focal main multiverse universe
-
-deb [arch=arm64] http://ports.ubuntu.com/ focal-security main multiverse universe
-
-deb [arch=arm64] http://ports.ubuntu.com/ focal-backports main multiverse universe
-
-deb [arch=arm64] http://ports.ubuntu.com/ focal-updates main multiverse universe
-</code></pre>
-<ul>
-<li>Install the required dependencies for your target architecture:</li>
-</ul>
-<pre><code>$ sudo apt-get update
-$ sudo apt-get install libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64
-</code></pre>
-<p>Notice the <code>:arm64</code> suffix in the packages' name.</p>
-<ul>
-<li>Run the build:</li>
-</ul>
-<pre><code>$ CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=aarch64-unknown-linux-gnu
-</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fluid"><a class="header" href="#fluid">Fluid</a></h1>
 <p>FLTK offers a GUI WYSIWYG rapid application development tool called FLUID which allows creating GUI applications.
 Currently there is a video tutorial on youtube on using it with Rust:

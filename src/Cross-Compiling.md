@@ -171,6 +171,11 @@ And run using:
 DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
 ```
 Your binary will be in the `./out` directory.
+Note on alpine, if you install Rust via rustup, you might have to point the musl-gcc and musl-g++ to the appropriate toolchain in your dockerfile (before running `cargo build`):
+```dockerfile
+RUN ln -s /usr/bin/x86_64-alpine-linux-musl-gcc /usr/bin/musl-gcc
+RUN ln -s /usr/bin/x86_64-alpine-linux-musl-g++ /usr/bin/musl-g++
+```
 
 Another example to compile from amd64 linux-gnu to arm64 linux-gnu:
 ```dockerfile

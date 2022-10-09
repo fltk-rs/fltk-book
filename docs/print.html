@@ -480,7 +480,11 @@ COPY --from=alpine_build target/release/&lt;your binary name&gt; .
 <p>And run using:</p>
 <pre><code>DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
 </code></pre>
-<p>Your binary will be in the <code>./out</code> directory.</p>
+<p>Your binary will be in the <code>./out</code> directory.
+Note on alpine, if you install Rust via rustup, you might have to point the musl-gcc and musl-g++ to the appropriate toolchain in your dockerfile (before running <code>cargo build</code>):</p>
+<pre><code class="language-dockerfile">RUN ln -s /usr/bin/x86_64-alpine-linux-musl-gcc /usr/bin/musl-gcc
+RUN ln -s /usr/bin/x86_64-alpine-linux-musl-g++ /usr/bin/musl-g++
+</code></pre>
 <p>Another example to compile from amd64 linux-gnu to arm64 linux-gnu:</p>
 <pre><code class="language-dockerfile">FROM ubuntu:latest AS ubuntu_build
 

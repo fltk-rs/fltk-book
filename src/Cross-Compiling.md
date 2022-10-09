@@ -191,7 +191,7 @@ ENV PATH=/root/.cargo/bin:$PATH
 
 RUN rustup target add aarch64-unknown-linux-gnu
 # works around an include path issue in some debian versions
-RUN apt-get install -y libharfbuzz-dev && cp /usr/include/harfbuzz/*.h /usr/include/aarch64-linux-gnu
+RUN apt-get install -y libharfbuzz-dev libpango1.0-dev --no-install-recommends && cp /usr/include/harfbuzz/*.h /usr/include/aarch64-linux-gnu
 
 COPY . .
 

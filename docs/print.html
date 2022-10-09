@@ -361,7 +361,7 @@ cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docke
      |
      |_arm64-dockerfile
 </code></pre>
-<p>The Dockerfile contents:</p>
+<p>The arm64-dockerfile (the name doesn't matter, just make sure Cross.toml points to the file) contents:</p>
 <pre><code class="language-dockerfile">FROM ghcr.io/cross-rs/aarch64-unknown-linux-gnu:latest
 
 RUN dpkg --add-architecture arm64 &amp;&amp; \
@@ -380,7 +380,7 @@ dockerfile = &quot;./arm64-dockerfile&quot;
 <p>Then run cross:</p>
 <pre><code>cross build --target=aarch64-unknown-linux-gnu
 </code></pre>
-<p>(This might take a while)</p>
+<p>(This might take a while for the first time)</p>
 <h2 id="using-docker"><a class="header" href="#using-docker">Using docker</a></h2>
 <p>Using a docker image of the target platform directly can save you from the hassle of cross-compiling to a different linux target using cross.
 You'll need a Dockerfile which pulls the target you want and install the Rust and C++ toolchains and the required dependencies.

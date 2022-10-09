@@ -42,7 +42,7 @@ myapp
      |_arm64-dockerfile
 ```
 
-The Dockerfile contents:
+The arm64-dockerfile (the name doesn't matter, just make sure Cross.toml points to the file) contents:
 ```dockerfile
 FROM ghcr.io/cross-rs/aarch64-unknown-linux-gnu:latest
 
@@ -66,7 +66,7 @@ Then run cross:
 ```
 cross build --target=aarch64-unknown-linux-gnu
 ```
-(This might take a while)
+(This might take a while for the first time)
 
 ## Using docker
 Using a docker image of the target platform directly can save you from the hassle of cross-compiling to a different linux target using cross.

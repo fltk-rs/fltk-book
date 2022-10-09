@@ -9,12 +9,12 @@ For more information, you can check the project's [repo](https://github.com/MoAl
 
 You can get FLUID via fltk-fluid and fl2rust crates using cargo install:
 ```
-$ cargo install fltk-fluid
-$ cargo install fl2rust
+cargo install fltk-fluid
+cargo install fl2rust
 ```
 And run using:
 ```
-$ fltk-fluid &
+fluid &
 ```
 Another option to get Fluid is to download it via your system's package manager, it comes as a separate package or part of the fltk package.
 
@@ -48,7 +48,7 @@ fn main() {
 We'll be naming our fluid file myuifile.fl. We tell cargo to rerun if that file is changed. We'll create the file in our source directory, but you can put it in its own directory if you wish. We tell the generator to take the fluid file and generate a myuifile.rs. This file is generated in the OUT_DIR, so you won't be seeing it in your src directory.
 However to include it, you need to create a Rust source file, it can be the same name as our outputted file, and put it in the src directory:
 ```
-$ touch src/myuifile.rs
+touch src/myuifile.rs
 ```
 
 We'll have to import the contents from the auto-generated file using the include! macro:
@@ -75,7 +75,7 @@ fn main() {
 
 Now comes the gui part. Open fluid:
 ```rust
-$ fltk-fluid & #or just fluid if installed from a package manager
+fltk-fluid & #or just fluid if installed from a package manager
 ```
 The ampersand tells our shell to open it as a detached process, so we can still use our shell to compile our code.
 

@@ -42,15 +42,15 @@ Pango changed its include paths which caused build failures across many projects
 - Use the no-pango feature. Downsides: loss of rtl and cjk language support.
 - Set the CFLAGS and CXXFLAGS to correct the global include paths.
 ```
-$ export CFLAGS="-isystem /usr/include/harfbuzz -isystem /usr/include/cairo"
-$ export CXXFLAGS="-isystem /usr/include/harfbuzz -isystem /usr/include/cairo"
+export CFLAGS="-isystem /usr/include/harfbuzz -isystem /usr/include/cairo"
+export CXXFLAGS="-isystem /usr/include/harfbuzz -isystem /usr/include/cairo"
 ```
 
 ### How do I force CMake to use a certain C++ compiler?
 FLTK works with all 3 major compilers. If you would like to change the C++ compiler that's chosen by default by CMake, you can change the CXX environment variable before running the build:
 ```
-$ export CXX=/usr/bin/clang++
-$ cargo run
+export CXX=/usr/bin/clang++
+cargo run
 ```
 CMake caches the C++ compiler variable after it's first run, so if the above failed because of a previous run, you would have to run ```cargo clean``` or you can manually delete the CMakeCache.txt file in the build directory.
 

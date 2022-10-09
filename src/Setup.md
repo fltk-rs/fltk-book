@@ -10,19 +10,19 @@ Rust (version > 1.45), CMake (version > 3.11), Git and a C++11 compiler need to 
 
 For Debian-based GUI distributions, that means running:
 ```
-$ sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
+sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
 ```
 For RHEL-based GUI distributions, that means running:
 ```
-$ sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel
+sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel
 ```
 For Arch-based GUI distributions, that means running:
 ```
-$ sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
+sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
 ```
 For Alpine linux:
 ```
-$ apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
+apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 ```
 - Android: Android Studio, Android Sdk, Android Ndk.
 
@@ -53,7 +53,7 @@ The toolchain should also reflect the architecture of your machine. For example,
 If you decide to get Rust via the package manager, make sure you're getting the mingw variant, and with the correct MINGW_PACKAGE_PREFIX (for 64bits, that env variable would equate to mingw-w64-x86_64).
 - Assuming you're installing everything via pacman, open the mingw shell (not the msys2 shell, it can be found bundled in the msys2 install directory, or via `source shell mingw64`) and run the following:
 ```
-$ pacman -S curl tar git $MINGW_PACKAGE_PREFIX-rust $MINGW_PACKAGE_PREFIX-gcc $MINGW_PACKAGE_PREFIX-cmake $MINGW_PACKAGE_PREFIX-make --needed
+pacman -S curl tar git $MINGW_PACKAGE_PREFIX-rust $MINGW_PACKAGE_PREFIX-gcc $MINGW_PACKAGE_PREFIX-cmake $MINGW_PACKAGE_PREFIX-make --needed
 ```
 You can replace $MINGW_PACKAGE_PREFIX-make with $MINGW_PACKAGE_PREFIX-ninja if you plan to use ninja via the use-ninja feature.
 - Once you're all set up, you can create a Rust project using `cargo new`, add `fltk` as a dependency in your Cargo.toml and build your application.
@@ -61,19 +61,19 @@ You can replace $MINGW_PACKAGE_PREFIX-make with $MINGW_PACKAGE_PREFIX-ninja if y
 ### MacOS
 - To get the Xcode Command Line Tools (which have the C++ compiler), run:
 ```
-$ xcode-select --install
+xcode-select --install
 ```
 Follow the instructions. Alternatively you can install clang or gcc from homebrew.
 - To get CMake, you can get it from [here](https://cmake.org/download/).
 
 Or from homebrew as well.
 ```
-$ brew install cmake
+brew install cmake
 ```
 
 - To get the Rust toolchain:
 ```
-$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 And follow the default instructions.
@@ -83,28 +83,28 @@ And follow the default instructions.
 - Use your package manager to get a C++ compiler, CMake, make, git.
 Taking Debian/Ubuntu as an example:
 ```
-$ sudo apt-get install g++ cmake git make
+sudo apt-get install g++ cmake git make
 ```
 - To get the dev dependencies for FLTK, you can also use your package manager:
 For Debian-based GUI distributions, that means running:
 ```
-$ sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
+sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
 ```
 For RHEL-based GUI distributions, that means running:
 ```
-$ sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel
+sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel
 ```
 For Arch-based GUI distributions, that means running:
 ```
-$ sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
+sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
 ```
 For Alpine linux:
 ```
-$ apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
+apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 ```
 - To get the Rust toolchain:
 ```
-$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 And follow the default instructions.
 - Once you're all set up, you can create a Rust project using `cargo new`, add `fltk` as a dependency in your Cargo.toml and build your application.

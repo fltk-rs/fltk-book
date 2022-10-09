@@ -160,6 +160,59 @@ cargo build --target=&lt;your target&gt; --features=fltk-bundled
 <p>For aarch64-unknonw-linux-gnu, you might have to specify the linker:</p>
 <pre><code>CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=&lt;your target&gt; --features=fltk-bundled
 </code></pre>
+<h2 id="using-cross"><a class="header" href="#using-cross">Using cross</a></h2>
+<p>If you have Docker installed, you can try <a href="https://github.com/cross-rs/cross">cross</a>.</p>
+<pre><code>cargo install cross
+cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docker daemon has to be running, no need to add via rustup
+</code></pre>
+<p>If your target requires external dependencies, like on Linux, you would have to create a custom docker image and use it for your cross-compilation via a Cross.toml file.</p>
+<p>For example, for a project of the following structure:</p>
+<pre><code>myapp
+     |_src
+     |    |_main.rs    
+     |
+     |_Cargo.toml
+     |
+     |_Cross.toml
+     |
+     |_arm64-dockerfile
+</code></pre>
+<p>The Dockerfile contents:</p>
+<pre><code class="language-dockerfile">FROM ghcr.io/cross-rs/aarch64-unknown-linux-gnu:latest
+
+RUN dpkg --add-architecture arm64 &amp;&amp; \
+    apt-get update &amp;&amp; \
+    apt-get install --assume-yes --no-install-recommends \
+    libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 \
+    libxinerama-dev:arm64 libxcursor-dev:arm64 \
+    libxrender-dev:arm64  libxfixes-dev:arm64  libgl1-mesa-dev:arm64 \
+    libglu1-mesa-dev:arm64 libasound2-dev:arm64 libpango1.0-dev:arm64
+</code></pre>
+<p>Notice the architecture appended to the library package's name like: libx11-dev:arm64.</p>
+<p>The Cross.toml contents:</p>
+<pre><code class="language-toml">[target.aarch64-unknown-linux-gnu]
+dockerfile = &quot;./arm64-dockerfile&quot;
+</code></pre>
+<p>Then run cross:</p>
+<pre><code>cross build --target=aarch64-unknown-linux-gnu
+</code></pre>
+<p>(This might take a while)</p>
+<h2 id="using-docker"><a class="header" href="#using-docker">Using docker</a></h2>
+<p>Using a docker image of the target platform directly can save you from the hassle of cross-compiling to a different linux target using cross.
+You'll need a Dockerfile which pulls the target you want and install the Rust and C++ toolchains and the required dependencies.
+For example, building for alpine linux:</p>
+<pre><code class="language-dockerfile">FROM alpine:latest AS alpine_build
+RUN apk add rust cargo git cmake make g++ pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
+COPY . .
+RUN cargo build --release
+
+FROM scratch AS export-stage
+COPY --from=alpine_build target/release/&lt;your binary name&gt; .
+</code></pre>
+<p>And run using:</p>
+<pre><code>DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
+</code></pre>
+<p>Your binary will be in the <code>./out</code> directory.</p>
 <h2 id="using-a-cross-compiling-cc-toolchain"><a class="header" href="#using-a-cross-compiling-cc-toolchain">Using a cross-compiling C/C++ toolchain</a></h2>
 <p>The idea is that you need a C/C++ cross-compiler and a Rust target installed via <code>rustup target add</code> as mentioned in the previous scenario.</p>
 <p>For Windows and MacOS, the system compiler would already support targetting the supported architectures. For example, on MacOS, if you can already build fltk apps using your system compiler, you can target a different architecture using (assuming you have an intel x86_64 mac):</p>
@@ -244,68 +297,6 @@ echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-update
 </ul>
 <pre><code>CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=aarch64-unknown-linux-gnu
 </code></pre>
-<h2 id="using-cargo-cross"><a class="header" href="#using-cargo-cross">Using cargo-cross</a></h2>
-<p>If you have Docker installed, you can try <a href="https://github.com/rust-embedded/cross">cargo-cross</a>.</p>
-<pre><code>cargo install cross
-cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docker daemon has to be running, no need to add via rustup
-</code></pre>
-<p>If your target requires external dependencies, like on Linux, you would have to create a custom docker image and use it for your cross-compilation via a Cross.toml file. Otherwise, it's recommended to use docker directly for direct compilation to the required target, see the next <a href="Cross-Compiling#using-docker">section</a>.</p>
-<p>For example, for a project of the following structure:</p>
-<pre><code>myapp
-     |_src
-     |    |_main.rs    
-     |
-     |_Cargo.toml
-     |
-     |_Cross.toml
-     |
-     |_archs
-            |_aarch64-linux
-                           |_Dockerfile
-</code></pre>
-<p>The Dockerfile contents:</p>
-<pre><code class="language-dockerfile">FROM rustembedded/cross:aarch64-unknown-linux-gnu-0.2.1
-
-ENV CC=aarch64-linux-gnu-gcc \
-    CXX=aarch64-linux-gnu-g++ \
-    CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc
-
-RUN dpkg --add-architecture arm64 &amp;&amp; \
-    apt-get update &amp;&amp; \
-    apt-get install --assume-yes --no-install-recommends \
-    libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 \
-    libxinerama-dev:arm64 libxcursor-dev:arm64 \
-    libxrender-dev:arm64  libxfixes-dev:arm64  libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 \
-    libasound2-dev:arm64 libpango1.0-dev:arm64
-</code></pre>
-<p>Notice the architecture appended to the library package's name like: libx11-dev:arm64.</p>
-<p>The Cross.toml contents:</p>
-<pre><code class="language-toml">[target.aarch64-unknown-linux-gnu]
-image = &quot;my-arm64-image:0.1&quot;
-</code></pre>
-<p>To build a new image, run:</p>
-<pre><code>docker build -t my-arm64-image:0.1 archs/aarch64-linux/
-</code></pre>
-<p>Then run cross:</p>
-<pre><code>cross build --target=aarch64-unknown-linux-gnu
-</code></pre>
-<p>(This might take a while)</p>
-<h2 id="using-docker"><a class="header" href="#using-docker">Using docker</a></h2>
-<p>Using a docker image of the target platform directly can save you from the hassle of cross-compiling to a different linux target using cross.
-You'll need a Dockerfile which pulls the target you want and install the Rust and C++ toolchains and the required dependencies.
-For example, building for alpine linux:</p>
-<pre><code class="language-dockerfile">FROM alpine:latest AS alpine_build
-RUN apk add rust cargo git cmake make g++ pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
-COPY . .
-RUN cargo build --release
-
-FROM scratch AS export-stage
-COPY --from=alpine_build target/release/&lt;your binary name&gt; .
-</code></pre>
-<p>And run using:</p>
-<pre><code>DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
-</code></pre>
-<p>Your binary will be in the <code>./out</code> directory.</p>
 
                     </main>
 

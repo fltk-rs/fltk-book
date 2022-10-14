@@ -1,7 +1,6 @@
 [book]
-authors = ["Mohammed Alyousef"]
-language = "en"
-multilingual = false
+authors = ["Mohammed Alyousef", "Flatig L"]
+language = "zh-CN"
 src = "src"
 title = "fltk book"
 

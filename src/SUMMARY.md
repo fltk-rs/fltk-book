@@ -1,7 +1,7 @@
 # Summary
 
 - [开始](Home.md)
-- [安装](Setup.md)
+- [配置](Setup.md)
     - [跨平台编译](Cross-Compiling.md)
     - [使用 Fluid](Fluid.md)
 - [App 结构](The-App-struct.md)

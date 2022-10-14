@@ -85,7 +85,7 @@ fn main() {
 ```
 我们实例化了 App 结构，它初始化了 runtime 和 styles，在main的最后，我们调用了 run() 函数。
 
-## 为这本书做贡献
+## 为本书做贡献
 这本书是使用 [mdbook](https://github.com/rust-lang/mdBook)，根据 [fltk-book](https://github.com/fltk-rs/fltk-book) 仓库的内容生成的。本书的作者为 **Mohammed Alyousef**，由 **Flatig L** 翻译为中文
 
 因此，你可能需要运行 `cargo install mdbook`. 更多说明可以在fltk-book的README文件和mdbook的 [用户指南](https://rust-lang.github.io/mdBook/) 中找到。

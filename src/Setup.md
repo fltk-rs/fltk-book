@@ -1,33 +1,33 @@
-# Setup
+# 配置
 
-Rust (version > 1.45), CMake (version > 3.11), Git and a C++11 compiler need to be installed and in your PATH for a crossplatform build from source. This crate also offers a bundled form of fltk on selected platforms, this can be enabled using the fltk-bundled feature flag (which requires curl and tar to download and unpack the bundled libraries). If you have ninja-build installed, you can enable it using the "use-ninja" feature. This should accelerate build times significantly.
+请确保 Rust (version > 1.45)，CMake (version > 3.11)，Git 和一个 C++11 编译器已安装并在 PATH 中配置，以此通过源代码构建跨平台程序。这个 crate 还在选定的平台上提供了fltk的捆绑形式，这可以使用fltk-bundle feature flag 来启用（这需要curl和tar来下载并解包捆绑的库）。如果你安装了 ninja-build ，你可以使用 "use-ninja" feature来启用它。这应该会大大加快构建时间。
 
 - Windows: 
     - MSVC: Windows SDK
-    - Gnu: No dependencies
-- MacOS: No dependencies.
-- Linux: X11 and OpenGL development headers need to be installed for development. The libraries themselves are available on linux distros with a graphical user interface.
+    - Gnu: 无依赖
+- MacOS: 无依赖
+- Linux: 开发时需要安装 X11 and OpenGL 头文件。这些库本身可以在具有图形用户界面的Linux发行版上使用。
 
-For Debian-based GUI distributions, that means running:
+基于 Debian 的Linux发行版，运行:
 ```
 sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
 ```
-For RHEL-based GUI distributions, that means running:
+基于 RHEL的Linux发行版，运行:
 ```
 sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel
 ```
-For Arch-based GUI distributions, that means running:
+基于 Arch 的Linux发行版，运行:
 ```
 sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
 ```
-For Alpine linux:
+Alpine Linux:
 ```
 apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 ```
 - Android: Android Studio, Android Sdk, Android Ndk.
 
-## Detailed setup
-This section assumes you don't even have Rust installed, and is separated into different environments:
+## 具体配置细节
+本节假设你甚至没有安装Rust，我们分几个不同的环境讨论：
 
 ### Windows (MSVC toolchain)
 - Go to the rust-lang get-started [section](https://www.rust-lang.org/learn/get-started).

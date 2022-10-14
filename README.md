@@ -8,7 +8,7 @@
 
 你可以通过以下链接在线访问它：
 
-https://flatig.github.io/fltk-book_zh
+https://flatig.vip/fltk-book-zh
 
 你可以通过以下链接在线访问它的英文原版：
 

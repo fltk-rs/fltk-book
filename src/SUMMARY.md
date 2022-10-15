@@ -2,7 +2,7 @@
 
 - [开始](Home.md)
 - [配置](Setup.md)
-    - [跨平台编译](Cross-Compiling.md)
+    - [交叉编译](Cross-Compiling.md)
     - [使用 Fluid](Fluid.md)
 - [App 结构](The-App-struct.md)
 - [窗口 Windows](Windows.md)

@@ -8,23 +8,23 @@
 - MacOS: 无依赖
 - Linux: 开发时需要安装 X11 and OpenGL 头文件。这些库本身可以在具有图形用户界面的Linux发行版上使用。
 
-基于 Debian 的Linux发行版，运行:
+基于 Debian 的Linux发行版，运行：
 ```
 sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
 ```
-基于 RHEL的Linux发行版，运行:
+基于 RHEL的Linux发行版，运行：
 ```
 sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel
 ```
-基于 Arch 的Linux发行版，运行:
+基于 Arch 的Linux发行版，运行：
 ```
 sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
 ```
-Alpine Linux:
+Alpine Linux：
 ```
 apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 ```
-- Android: Android Studio, Android Sdk, Android Ndk.
+- Android： Android Studio，Android Sdk， Android Ndk。
 
 ## 具体配置细节
 本节假设你甚至没有安装Rust，我们分几个不同的环境讨论：

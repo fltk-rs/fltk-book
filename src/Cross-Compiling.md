@@ -1,8 +1,8 @@
-# Cross-compiling
+# 交叉编译
 
 
-## Using a prebuilt bundle
-If the target you're compiling to, already has a prebuilt package:
+## 使用预置Bundle
+如果你要为下列平台编译的话，很幸运，它们已经有一个预置包了：
 - x86_64-pc-windows-gnu
 - x86_64-pc-windows-msvc
 - x86_64-apple-darwin
@@ -10,12 +10,14 @@ If the target you're compiling to, already has a prebuilt package:
 - x86_64-unknown-linux-gnu
 - aarch64-unknown-linux-gnu
 
-Add the target via rustup, then invoke the build:
+通过rustup添加target，然后调用build：
+
 ```
-rustup target add <your target> # replace with one of the targets above
+rustup target add <your target> # 使用上列目标平台替换target
 cargo build --target=<your target> --features=fltk-bundled
 ```
-For aarch64-unknonw-linux-gnu, you might have to specify the linker:
+对于arch64-unknonw-linux-gnu，你可能需要验证链接器：
+
 ```
 CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=<your target> --features=fltk-bundled
 ```
@@ -94,7 +96,7 @@ The first command changes the current mirrors to reflect your current amd64 syst
 - Update your package manager's database:
 ```
 sudo apt-get update
-``` 
+```
 - Install the required dependencies for your target architecture:
 ```
 sudo apt-get install libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64

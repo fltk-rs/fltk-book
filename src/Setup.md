@@ -30,13 +30,13 @@ apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 本节假设你甚至没有安装Rust，我们分几个不同的环境讨论：
 
 ### Windows (MSVC toolchain)
-- Go to the rust-lang get-started [section](https://www.rust-lang.org/learn/get-started).
-- Follow the link to `Visual Studio C++ Build tools` and download the MSVC compiler and Windows sdk.
-- Using the installer, install:
+- 访问rust语言官网的 [开始](https://www.rust-lang.org/learn/get-started)。
+- 按照 "Visual Studio C++ build tools "的链接，下载MSVC编译器和Windows sdk。
+- 使用安装器安装：
 
 ![image](https://user-images.githubusercontent.com/37966791/116013495-2dff8800-a639-11eb-8e4c-8c6228e00abc.png)
 
-and make sure the following are checked:
+确保选中这些：
 
 ![image](https://user-images.githubusercontent.com/37966791/116013520-48d1fc80-a639-11eb-934a-fac6609135b4.png)
 

@@ -1,13 +1,13 @@
-# Layouts
+# 布局 Layouts
 
-Out of the box, fltk-rs offers:
+Rust提供了开箱即用的：
 - A Flex widget
 - Pack
 - Grid
 - Widget relative positioning.
 
 ### Flex
-The Flex widget allows flexbox layouts. It's in group module and implements the GroupExt trait. There are 2 forms of Flex widgets, which can be specified using the set_type or with_type methods. These are the column and row:
+Flex widget允许进行灵活的布局。它在group module中，实现了GroupExt trait。有2种形式的Flexwidget，可以使用set_type或with_type方法指定。比如列（Column） 和 行（Row）：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -25,15 +25,15 @@ fn main() {
     a.run().unwrap();
 }
 ```
-The set_size method takes another widget and fixes its size to the value passed, in the example it's 30. Since this is a column, the 30 represents the height of the widget to be set.
-The other widget will be expandable since no size is set for it. A full example can be found here:
+set_size方法接收另一个widget并将其大小固定为所传递的值，在这个例子中是30。因为这是一个column，所以30代表要设置的widget的高度。
+另一个widget是可扩展的，因为没有为它设置尺寸。一个完整的例子可以在这里找到。
 
-[Flex example](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs)
+[第一个例子](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs)
 
 ![image](https://github.com/osen/FL_Flex/raw/main/doc/login.png)
 
 ### Packs
-The Pack widget (in the group module) also implement the GroupExt trait. There are 2 forms of packs, Vertical and Horizontal packs, Vertical being the default. Vertical packs only require the height of its children widgets, while horizontal packs only require the width of its children widgets, like in the example below:
+pack widget（在group module中）也实现了GroupExt trait。有两种形式的Pack，Vertical Pack 和 Horizontal Pack，Vertical Pack是默认的。它只需要子widget的高度，而Horizontal Pack只需要它的子widget的宽度，像下面的例子：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -53,8 +53,9 @@ fn main() {
     app.run().unwrap();
 }
 ```
-This creates a pack widget inside the window, and fills it with 2 buttons. Notice that the x and y coordinates are no longer needed for the buttons. You can also embed packs inside packs like in the calculator example in the repo. 
-You can also use the Pack::auto_layout() method:
+这就在窗口内创建了一个Pack Widget，并在其中填入2个按钮。注意，按钮的x和y坐标不再需要了。你也可以像 repo 中的Calculator示例一样，在Pack中嵌入Pack。
+你也可以使用Pack::auto_layout()方法：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -75,12 +76,13 @@ fn main() {
     app.run().unwrap();
 }
 ```
-In which case we don't even need the size of the buttons.
+在这种情况下，我们甚至不需要按钮的大小。
 
 ![image](https://user-images.githubusercontent.com/37966791/100937983-ef8bf400-3504-11eb-9da1-09c5ac1aade4.png)
 
 ### Grid
-[Grid](https://github.com/fltk-rs/fltk-grid) is implemented currently in an external crate. It requires a layout which is set using `Grid::set_layout(&mut self, rows, columns)`. Then widgets are inserted via the `Grid::insert(&mut self, row, column)` or `Grid::insert_ext(&mut self, row, column, row_span, column_span)` methods:
+[Grid](https://github.com/fltk-rs/fltk-grid)目前是在一个external crate中实现的。它需要一个layout，使用`Grid::set_layout(&mut self, rows, columns)`来设置。然后通过`Grid::insert(&mut self, row, column)`或`Grid::insert_ext(&mut self, row, column, row_span, column_span)`方法插入widget。
+
 ```rust
 use fltk::{prelude::*, *};
 use fltk_grid::Grid;
@@ -89,11 +91,11 @@ fn main() {
     let a = app::App::default().with_scheme(app::Scheme::Gtk);
     let mut win = window::Window::default().with_size(500, 300);
     let mut grid = Grid::default_fill();
-    // set to true to show cell outlines and numbers
+    // 设置为 "true "以显示单元格的框线和数字
     grid.debug(false); 
-    // 5 rows, 5 columns
+    // 5 行，5 列
     grid.set_layout(5, 5); 
-    // widget, row, col
+    // 组件，行，列
     grid.insert(&mut button::Button::default().with_label("Click"), 0, 1); 
     // widget, row, col, row_span, col_span
     grid.insert_ext(&mut button::Button::default().with_label("Button 2"), 2, 1, 3, 1); 
@@ -108,7 +110,7 @@ fn main() {
 ![image](https://user-images.githubusercontent.com/37966791/160347418-b8b54408-3dc9-4fc4-93e8-fb6c1c0282e9.png)
 
 ### Relative positioning
-The WidgetExt trait offers several constructor methods which allow us to construct widgets relative to other widgets size and position. This is similar to Qml's anchoring.
+WidgetExt trait提供了几个构造方法，允许我们相对于其他widget的大小和位置来构造widget。这类似于Qml的锚定（anchoring）：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -138,16 +140,16 @@ fn main() {
 
 ![counter](https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/counter.jpg)
 
-(With some skipped theming)
+(有一些跳过的主题设计)
 
-These methods are namely:
-- `above_of(&widget, padding)`: places the widget above the passed widget
-- `below_of(&widget, padding)`: places the widget below the passed widget
-- `right_of(&widget, padding)`: places the widget right of the passed widget
-- `left_of(&widget, padding)`: places the widget left of the passed widget
-- `center_of(&widget)`: places the widget at the center (both x and y axes) of the passed widget.
-- `center_of_parent()`: places the widget at the center (both x and y axes) of the parent.
-- `center_x(&widget)`: places the widget at the center (x-axis) of the passed widget.
-- `center_y(&widget)`: places the widget at the center (y-axis) of the passed widget.
-- `size_of(&widget)`: constructs the widget with the same size of the passed widget.
-- `size_of_parent()`: constructs the widget with the same size of its parent.
+这些方法是：
+- `above_of(&widget, padding)`: 将该widget置于所传递的widget之上
+- `below_of(&widget, padding)`: 将该widget置于所传递的widget之下
+- `right_of(&widget, padding)`: 将该widget置于所传递的widget右边
+- `left_of(&widget, padding)`:将该widget置于所传递的widget左边
+- `center_of(&widget)`: 将widget放置在所传递的widget的中心（包括x和y轴）
+- `center_of_parent()`: 将widget放在父widget的中心位置（包括x轴和y轴）
+- `center_x(&widget)`: 将widget放置在所传递的widget的中心（X轴）
+- `center_y(&widget)`: 将widget放置在所传递的widget的中心（Y轴）
+- `size_of(&widget)`: 构建与所传widget相同大小的widget
+- `size_of_parent()`: 构建与其父widget相同大小的widget

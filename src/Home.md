@@ -1,21 +1,23 @@
-# Home
+# 开始
 
-Welcome to the [fltk-rs](https://github.com/fltk-rs/fltk-rs) book!
+欢迎来到 [fltk-rs](https://github.com/fltk-rs/fltk-rs) !
 
-This is an introductory book targeting the [fltk crate](https://crates.io/crates/fltk). Other resources include:
-- [Official Documentation](https://docs.rs/fltk)
-- [Videos](https://github.com/fltk-rs/fltk-rs#tutorials)
-- [Discussions](https://github.com/fltk-rs/fltk-rs/discussions)
-- [Examples](https://github.com/fltk-rs/fltk-rs/tree/master/fltk/examples)
-- [Demos](https://github.com/fltk-rs/demos)
+这是为 [fltk crate](https://crates.io/crates/fltk) 而写的一本说明书。 其他资源有:
+- [官方文档](https://docs.rs/fltk)
+- [视频](https://github.com/fltk-rs/fltk-rs#tutorials)
+- [讨论、社区](https://github.com/fltk-rs/fltk-rs/discussions)
+- [示例](https://github.com/fltk-rs/fltk-rs/tree/master/fltk/examples)
+- [示范](https://github.com/fltk-rs/demos)
 - [7guis-fltk-rs](https://github.com/tdryer/7guis-fltk-rs)
 - [FLTK-RS-Examples](https://github.com/wyhinton/FLTK-RS-Examples)
 - Erco's FLTK cheat [page](http://seriss.com/people/erco/fltk/), which is an excellent FLTK C++ reference. 
 
-[FLTK](https://github.com/fltk/fltk) is a cross-platform lightweight gui library.
-The library itself is written in C++98, which is highly-portable. The fltk crate is written in Rust, and uses FFI to call into the FLTK wrapper, [cfltk](https://github.com/MoAlyousef/cfltk), which is written in C89 and C++11.
+[FLTK](https://github.com/fltk/fltk) 是一个跨平台的轻量级 gui库。
+该库自身是使用 C++98编写的，具有高度可移植性。 fltk crate 则使用 rust实现，并使用FFI来调用 使用C89和C++11编写的FLTK封装器 [cfltk](https://github.com/MoAlyousef/cfltk)。
 
-The library has a minimalist architecture, and would be familiar to developers used to Object-Oriented gui libraries. The wrapper itself follows the same model which simplifies the documentation, since method names are identical or similar to their C++ equivalents. This makes referring the FLTK C++ documentation quite simpler since the methods basically map to each other.
+该库的构造及其简洁，习惯使用面向对象gui库的开发者会感觉到很熟悉。封装器本身也遵循同样的模式，因为方法的名称与C++的名称相同或相似，这使得文档大大简化。同时也让参考FLTK的C++文档变得非常简单，因为这些方法基本上是相互对应的。
+
+C++：
 
 ```c++
 int main() {
@@ -24,7 +26,7 @@ int main() {
     wind->show();
 }
 ```
-maps to:
+Rust：
 ```rust
 fn main() {
     let wind = window::Window::new(100, 100, 400, 300, "My Window");
@@ -33,33 +35,34 @@ fn main() {
 }
 ```
 
-Why choose FLTK?
-- Lightweight. Small binary, around 1mb after stripping. [Small memory footprint](https://szibele.com/memory-footprint-of-gui-toolkits/).
-- Speed. Fast to install, fast to build, fast at startup and fast at runtime.
-- Single executable. No DLLs to deploy.
-- Supports old architectures.
-- FLTK's permissive license which allows static linking for closed-source applications.
-- Themeability (4 supported schemes: Base, GTK, Plastic and Gleam), and additional theming using [fltk-theme](https://crates.io/crates/fltk-theme).
-- Provides around 80 customizable widgets.
-- Has inbuilt image support.
+为什么选择 FLTK ？
+- 轻量。二进制文件简小，strip 后仅有大约1MB。 [低内存占用](https://szibele.com/memory-footprint-of-gui-toolkits/)。
+- 快速。安装快、构建快、启动快、运行快。
+- 仅有一个运行文件。不需要配置DDL库。
+- 向前兼容，支持旧架构。
+- FLTK的允许性许可证，允许闭源应用静态链接。
+- 多主题 (4款默认支持的主题: Base, GTK, Plastic and Gleam)，以及 [fltk-theme](https://crates.io/crates/fltk-theme) 中的其他主题。
+- 提供了约80个可供自定义的 widget。
+- 内置图像支持。
 
-## Usage
+## 用法
 
-Just add the following to your project's Cargo.toml file:
+将以下代码添加到你的 Cargo.toml 文件:
 ```toml
 [dependencies]
 fltk = "^1.2"
 ```
 
-To use the bundled libs (available for x64 windows (msvc & gnu (msys2)), x64 linux & macos):
+使用捆绑的库（适用于 x64 windows (msvc & gnu (msys2)), x64 linux & macos）:
 ```toml
 [dependencies]
 fltk = { version = "^1.2", features = ["fltk-bundled"] }
 ```
 
-The library is automatically built and statically linked to your binary.
+该库会自动构建并静态链接到你的二进制文件中。
 
-To make our first Rust code sample work, we need to import the necessary fltk modules:
+我们需要导入必要的 fltk 模块，以使我们的第一个rust代码示例工作：
+
 ```rust
 use fltk::{prelude::*, window::Window};
 fn main() {
@@ -69,7 +72,7 @@ fn main() {
 }
 ```
 
-If you run the code sample, you might notice it does nothing. We actually need to run the event loop, this is equivalent to using `Fl::run()` in C++:
+如果你运行代码样本，你可能会发现什么都没有发生。实际上，我们还需要运行事件循环（event loop），这相当于在C++中使用`Fl::run()`：
 ```rust
 use fltk::{app, prelude::*, window::Window};
 fn main() {
@@ -80,9 +83,9 @@ fn main() {
     a.run().unwrap();
 }
 ```
-We instantiate the App struct, which initializes the runtime and styles, then at the end of main, we call the run() method.
+我们实例化了 App 结构，它初始化了 runtime 和 styles，在main的最后，我们调用了 run() 函数。
 
-## Contributing to the book
-The book is generated using [mdbook](https://github.com/rust-lang/mdBook) on the [fltk-book](https://github.com/fltk-rs/fltk-book) repo.
+## 为本书做贡献
+这本书是使用 [mdbook](https://github.com/rust-lang/mdBook)，根据 [fltk-book](https://github.com/fltk-rs/fltk-book) 仓库的内容生成的。本书的作者为 **Mohammed Alyousef**，由 **Flatig L** 翻译为中文
 
-As such, you would need to `cargo install mdbook`. More instructions can be found in fltk-book's README and in mdbook's [user guide](https://rust-lang.github.io/mdBook/).
+因此，你可能需要运行 `cargo install mdbook`. 更多说明可以在fltk-book的README文件和mdbook的 [用户指南](https://rust-lang.github.io/mdBook/) 中找到。

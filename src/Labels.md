@@ -1,14 +1,16 @@
-# Labels
+# 标签 Labels
 
-FLTK doesn't have a Label widget. So if you would just like to show text, you can use a Frame widget and give it a label. 
+FLTK没有标签widget。因此，如果你要想显示文本，你可以使用一个Frame widget并给它一个label。
 
-All widgets takes a label in the ::new() constructor or using with_label() or set_label():
+所有widge件都可以使用::new()构造函数，或者用with_label()或set_label()来获取一个标签。
+
 ```rust
 let btn = button::Button::new(160, 200, 80, 30, "Click");
 ```
-This button has a label showing the text "click".
+这个按钮有一个显示 "点击 "文字的标签。
 
-Similarly we can use set_label() or with_label():
+同样地，我们可以使用set_label()或with_label()：
+
 ```rust
 let btn = button::Button::default().with_label("Click");
 // or
@@ -16,27 +18,26 @@ let mut btn = button::Button::default();
 btn.set_label("Click");
 ```
 
-However, the ::new() constructor takes in reality an optional to a static str, so the following would fail:
+然而，::new()构造函数实际上是把一个可选的 static str 带到了这里，所以下面的代码会失败：
 ```rust
 let label = String::from("Click"); // label is not a static str
 let mut btn = button::Button::new(160, 200, 80, 30, &label);
 ```
-You would want to use `btn.set_label(&label);` in this case. The reason is that FLTK expects a `const char *` label, which is the equivalent of Rust's `&'static str`. These strings live in the program's code segment. If you disassemble an application, it would show all these static strings. And since these have a static lifetime, FLTK by default doesn't store them. 
-While using set_label() and with_label() calls FLTK's Fl_Widget::copy_label() method which actually stores the string.
+在这种情况下，你应该使用`btn.set_label(&label);`。原因是FLTK期望的label是`const char *` 的，这相当于Rust的`&'static str`。这些字符串存在于程序的二进制代码段中。如果你反汇编一个程序，会显示所有这些静态字符串。由于这些字符串有一个静态的生命周期，FLTK默认不会存储它们。而当使用set_label()和with_label()调用FLTK的Fl_Widget::copy_label()方法时，实际上是存储字符串。
 
-You are also not limited to text labels, FLTK has predefined symbols which translate into images:
+你也不限于文字标签，FLTK有预定义的符号，可以转换成图像。
 
 ![symbols](https://www.fltk.org/doc-1.4/symbols.png)
 
-The @ sign may also be followed by the following optional "formatting" characters, in this order:
+@符号后面还可以加上以下可选的 "格式化 "字符，其顺序和规则如下：
 
-- '#' forces square scaling, rather than distortion to the widget's shape.
-- +[1-9] or -[1-9] tweaks the scaling a little bigger or smaller.
-- '$' flips the symbol horizontally, '%' flips it vertically.
-- [0-9] - rotates by a multiple of 45 degrees. '5' and '6' do no rotation while the others point in the direction of that key on a numeric keypad. '0', followed by four more digits rotates the symbol by that amount in degrees.
+- '#'强制进行方形缩放，而不是对小部件的形状进行扭曲。
+- +[1-9]或-[1-9]将缩放比例调大或调小一点。
+- $'水平翻转符号，'%'垂直翻转符号。
+- [0-9] - 旋转45度的倍数。5'和'6'不做旋转，而其他数字则指向数字键盘上的那个键的方向。'0'，后面还有四个数字，使符号按该度数旋转。
 
-Thus, to show a very large arrow pointing downward you would use the label string "@+92->".
+因此，如果要显示一个非常大的指向下方的箭头，你可以使用标签字符串"@+92->"。
 
-Symbols and text can be combined in a label, however the symbol must be at the beginning and/or at the end of the text. If the text spans multiple lines, the symbol or symbols will scale up to match the height of all the lines:
+符号和文本可以结合在一个标签中，但是符号必须在文本的开头和/或结尾处。如果文本跨越了多行，那么符号将被放大以匹配所有行的高度：
 
 ![ex](https://www.fltk.org/doc-1.4/symbol-examples.png)

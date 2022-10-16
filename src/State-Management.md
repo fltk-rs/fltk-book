@@ -1,9 +1,9 @@
-# State management
+# 状态管理器 State management
 
-FLTK doesn't impose a certain form of state management or app architecture. This is left to the user. All the examples in the fltk-rs repo and this book already use either callbacks or messages, you'll find many examples of both methods.
-Those were discussed in the [events page](Events.md).
+FLTK并不强加某种形式的状态管理或应用程序架构。这是留给用户自己选择的。fltk-rs repo和本书中的所有例子都已经使用了回调（Callback）或消息（message），你会发现很多这两种方法的例子。
+这些都在[事件 Event](Events.md)中讨论过。
 
-Also all the examples might appear to handle everything in the main function, this is only for simplicity. You can create your own App struct, include the main window in it and the state of your app:
+此外，所有的例子可能看起来都是在主函数中处理一切，这只是为了简化。您可以创建自己的应用程序结构，将主窗口和您的应用程序的状态包含在其中：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -69,21 +69,21 @@ fn main() {
 
 ## Helper crates
 
-The crates ecosystem offers many crates which provide state management. Also there are 2 crates under the fltk-rs org which offer means of architecting your app and managing its state:
+crates生态系统给出了许多提供状态管理的crates。此外，在fltk-rs组织下有2个crate，它们提供了架构你的应用程序和管理其状态的方法：
 
 - [flemish](https://github.com/fltk-rs/flemish):
 
-Offers an Elm like SVU architecture. This is reactive, immutable in essence, and tears down the view which each Message.
+提供了一个类似Elm的SVU架构。这是反应式（reactive）的，本质上是不可变的，而且拆解了每个Message的view。
 
 - [fltk-evented](https://github.com/fltk-rs/fltk-evented):
 
-This resembles immediate-mode guis in that all events are handled in the event loop. In reality it's also reactive but mutable and stateless. This doesn't cause a redraw with triggers.
+这类似于即时模式的guis，所有事件都在事件循环中处理。在现实中，它也是反应式的，但却是可变的和无状态的。这不会引起触发器的重绘。
 
-Both crates avoid the use of callbacks since these can be a pain in Rust in terms of lifetimes and borrowing. You need to use shared smart pointers with interior mutability to be able to borrow into a callback.
+这两个crate都避免使用回调，因为在Rust中，由于生命周期和借用机制，处理这些回调极其麻烦。你需要使用具有内部可变性的共享智能指针，才能够借用回调。
 
-You can take a look at both crates for inspiration.
+你可以看一下这两个crate以获得灵感。
 
-A sample counter in both:
+在这两个crate中都展示了一个示例计数器：
 
 ## Flemish
 ```rust

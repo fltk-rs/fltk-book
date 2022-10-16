@@ -1,12 +1,13 @@
-# Styling
+# 样式设计 Styling
 
-FLTK has a lot to offer in terms of styling applications. We have already seen that we can use true color and different fonts, in addition to draw custom things. Styling is making use of all that. It can be done per widget leveraging the methods in WidgetExt, or globally using functions in the app module.
+FLTK在风格化应用方面提供了许多东西。我们已经看到，我们可以使用true color和不同的字体，此外还可以进行自定义绘制。Styling就是利用所有这些。它可以利用WidgetExt中的方法在每个widget上进行，也可以使用app模块中的函数在全局上完成。
 
 ## WidgetExt
-Most of the WidgetExt trait is related to modifying the frame type, label type, widget color, text color, text font and text size.
-These all have setters and getters which can be found [here](https://docs.rs/fltk/*/fltk/prelude/trait.WidgetExt.html).
+大多数WidgetExt trait与修改框架类型、标签类型、widget颜色、文本颜色、文本字体和文本大小有关。
+这些都有setter和 getter，可以在[这里]（https://docs.rs/fltk/*/fltk/prelude/trait.WidgetExt.html）找到。
 
-An example of this:
+一个例子：
+
 ```rust
 use fltk::{
     enums::{Align, Color, Font, FrameType},
@@ -76,22 +77,22 @@ fn main() {
 
 ![counter](https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/flutter_like.jpg)
 
-Widgets also support showing images within them, which is discussed more in the Images section.
+widget也支持在其中显示图像，这在image章节有更多讨论。
 
 ## Global styling
 
-These can be found in the app module. Starting from changing the app's scheme:
+这些可以在程序module中找到。从改变程序的主题开始：
 ```rust
 use fltk::{prelude::*, enums::*, *};
 let app = app::App::default().with_scheme(app::Scheme::Plastic);
 ```
-There are four schemes:
+提供有四个主题：
 - Base
 - Gtk
 - Gleam
 - Plastic
 
-To setting the app's colors, default font, default frame type and whether to show focus on widgets.
+设置应用程序的颜色、默认字体、默认框架类型和是否在widget上显示焦点：
 ```rust
 use fltk::{app, button::Button, enums, frame::Frame, prelude::*, window::Window};
 
@@ -119,7 +120,7 @@ fn main() {
 ![image](https://user-images.githubusercontent.com/37966791/145727821-5923fcd4-3a57-4a15-b36f-574b3e5321ea.png)
 
 ### Custom Drawing
-FLTK also offers drawing primitives which makes giving a widget a custom appearance quite easy. This is done using the draw() method which takes a closure. Lets draw our own button, even though FLTK offers a ShadowFrame FrameType, let's create our own:
+FLTK还提供了原始绘图drawing primitives，这使得给widget自定义外观非常容易。这是用draw()方法完成的，它需要一个闭包。让我们来绘制一个自己的按钮（虽然FLTK提供了一个ShadowFrame FrameType），在这里创建一个我们自己的：
 ```rust
 use fltk::{prelude::*, enums::*, *};
 
@@ -158,10 +159,10 @@ fn main() {
 
 ![draw](https://user-images.githubusercontent.com/37966791/100938232-62956a80-3505-11eb-888f-ffe655e7aadc.jpg)
 
-The draw() method also supports drawing images inside of widgets as will be seen in the next section.
+draw()方法也支持在widget内部绘制图像，这将在下一节看到。
 
 ## fltk-theme
-This is a [crate](https://github.com/fltk-rs/fltk-theme) which provides several predefined themes which can be used by just loading the theme:
+这是一个[crate](https://github.com/fltk-rs/fltk-theme)，它提供了几个预定义的主题，只要加载主题就可以使用
 ```rust
 use fltk::{prelude::*, *};
 use fltk_theme::{widget_themes, WidgetTheme, ThemeType};

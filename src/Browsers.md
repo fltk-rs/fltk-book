@@ -1,6 +1,6 @@
-# Browsers
+# 阅览器 Browsers
 
-Browser widgets implement the BrowserExt trait:
+Browser widgets 实现了 BrowserExt trait：
 - Browser
 - SelectBrowser
 - HoldBrowser
@@ -8,9 +8,10 @@ Browser widgets implement the BrowserExt trait:
 - FileBrowser
 - CheckBrowser
 
-These can be found in the browser module.
+这些可以在 browser module中找到。
 
-To instantiate a browser, it also needs the column widths, as well as the separator char that will be used in the add() method to separate items into columns:
+为了实例化一个browser，需要提供每一项的列宽column widths，以及在add()方法中用于将item分成几列的分隔符column char：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -38,25 +39,25 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145733437-e3061015-12fa-4f2e-a1e3-01f59c4b189d.png)
 
-To gain additional formatting, we can use special character `@` followed by a formatting specifier:
-- '@.' Print rest of line, don't look for more '@' signs
-- '@@' Print rest of line starting with '@'
-- '@l' Use a LARGE (24 point) font
-- '@m' Use a medium large (18 point) font
-- '@s' Use a small (11 point) font
-- '@b' Use a bold font (adds FL_BOLD to font)
-- '@i' Use an italic font (adds FL_ITALIC to font)
-- '@f' or '@t' Use a fixed-pitch font (sets font to FL_COURIER)
-- '@c' Center the line horizontally
-- '@r' Right-justify the text
-- '@B0', '@B1', ... '@B255' Fill the backgound with fl_color(n)
-- '@C0', '@C1', ... '@C255' Use fl_color(n) to draw the text
-- '@F0', '@F1', ... Use fl_font(n) to draw the text
-- '@S1', '@S2', ... Use point size n to draw the text
-- '@u' or '@_' Underline the text.
-- '@-' draw an engraved line through the middle.
+可以使用特殊字符`@`来实现其他丰富的格式化效果，我们需要后面跟一个格式化指定符：
+- '@.' 打印其余行，且不会再寻找其他的'@'符号
+- '@@' 打印其余以'@'开头的行
+- '@l'  使用大号字体(24 point) 
+- '@m' 使用中号字体(18 point)
+- '@s' 使用小号字体(11 point)
+- '@b' 使用宽字体(adds FL_BOLD to font)
+- '@i' 使用斜体(adds FL_ITALIC to font)
+- '@f' 或 '@t' 使用等距字体 (sets font to FL_COURIER)
+- '@c' 水平居中
+- '@r' 向右对齐文本
+- '@B0', '@B1', ... '@B255' 使用fl_color(n)填充背景
+- '@C0', '@C1', ... '@C255' 使用fl_color(n) 渲染文本
+- '@F0', '@F1', ... 使用 fl_font(n) 渲染文本
+- '@S1', '@S2', ... 使用相应的尺寸来渲染文本
+- '@u' or '@_' 字体添加下划线
+- '@-' 字体中间添加修改线
 
-In the following example, we color %CPU to red by preceding it with @C88:
+在下面的例子中，我们在%CPU前面加上@C88，将其渲染成红色：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -76,6 +77,6 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145733713-2fe3207d-25f7-4acd-ae91-754679c5696a.png)
 
-The colors follow FLTK's colormap, which can be indexed from 0 to 255:
+这些颜色遵循FLTK的颜色映射，可以从0到255进行索引。
 
 ![colormap](https://www.fltk.org/doc-1.4/fltk-colormap.png)

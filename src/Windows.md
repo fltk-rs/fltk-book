@@ -1,10 +1,10 @@
-# Windows
+# 窗口 Windows
 
-FLTK calls the native window on each platform it supports, then basically does its own drawing. This means it calls an HWND on windows, NSWindow on MacOS and an XWindow on X11 systems (linux, BSD).
+FLTK会在它支持的系统平台上调用原生窗口，然后基本上通过自己的方法来绘制。它会在windows上调用HWND，在MacOS上调用NSWindow，在X11系统（linux, BSD）上调用XWindow。
 
-The windows themselves have the same interface as the other widgets provided by FLTK, the WidgetExt trait, which will be discussed in the next page. 
+Window 本身具有与FLTK提供的其他部件相同的接口，即WidgetExt trait，这将在下一页讨论。
 
-Lets use what we've seen so far to create a window.
+让我们用到目前为止学到的东西来创建一个Window。
 
 ```rust
 use fltk::{prelude::*, *};
@@ -20,17 +20,18 @@ fn main() {
 
 ![img1](https://user-images.githubusercontent.com/37966791/100937363-f82ffa80-3503-11eb-8f3a-9afe34bdad59.jpg)
 
-The new() call takes 5 parameters:
-- `x` which is the horizontal distance from the left of the screen.
-- `y` which is the vertical distance from the top of the screen.
-- `width` which is the window's width.
-- `height` which is the window's height.
-- `title` which is the window's title.
+调用new()函数需要五个参数：
+- `x` 以电脑屏幕最左侧为原点的水平距离。
+- `y` 以电脑屏幕最左侧为原点的垂直距离。
+- `width` window的宽度。
+- `height` window的高度。
+- `title` window标题。
 
-Next notice the call to end(). Windows, among other types of widgets, implement the GroupExt trait. These widgets will own/parent any widget created between the call begin() (which is implicit here with the creation of the window) and the call end().
-The next call show() basically raises the window so it appears on the display.
+接下来注意对end()的调用。window，以及其他类型的widget，实现了GroupExt trait。实现该trait的这些部件将 持有 任何在call()和end()间创建的widget（通过new()创建串口时，隐式调用了begin()），或者作为其父widget。
+下一个调用show()唤起了window，使其出现在显示屏上。
 
-Windows can be embedded inside other windows:
+window可以被嵌入到其他window内：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -47,7 +48,7 @@ fn main() {
 ```
 ![embed](https://user-images.githubusercontent.com/37966791/100937446-139b0580-3504-11eb-8738-1e4161175d0b.jpg)
 
-Here the 2nd window, my_window2, is embedded inside the 1st window, my_window. We've given it the color black so it appears to us. Notice that its parent is the first window. Creating the 2nd window outside of the parent will basically create 2 separate windows, and will require a call to show():
+在这里，第二个窗口，my_window2，被嵌入到第一个窗口，my_window里面。我们把它的颜色设为黑色，这样它才会被我们看到。注意，它的父窗口是第一个窗口。在父窗口之外创建第2个窗口才会创建两个独立的窗口，不要忘记还要调用show()：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -63,11 +64,11 @@ fn main() {
 }
 ```
 
-Windows can also be borderless using the my_window.set_border(false) method.
+可以使用my_window.set_border(false)方法实现无边框窗口：
 
 ![image](https://user-images.githubusercontent.com/37966791/100937639-565cdd80-3504-11eb-8cf6-e135243c38b0.png)
 
-The set_border(bool) method is part of the WindowExt trait, implemented by all window types in FLTK, in addition to the WidgetExt and GroupExt traits.
-The list of traits can be found in the prelude module of the crate:
+set_border(bool)方法是WindowExt trait的一部分，除了WidgetExt和GroupExt trait外，FLTK中的所有窗口类型都实现了它。
+所有trait的列表可以在crates的prelude module中找到：
 
-[docs](https://docs.rs/fltk/*/fltk/prelude/index.html)
+[文档](https://docs.rs/fltk/*/fltk/prelude/index.html)

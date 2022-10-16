@@ -1,13 +1,14 @@
-# Menus
+# 菜单 Menus
 
-Menus in FLTK are widgets which implement the MenuExt trait. To that end, there are several types:
+FLTK中的菜单是实现MenuExt trait的widget。Menu有下面这几种类型：
 - MenuBar
 - MenuItem
 - Choice (dropdown list)
-- SysMenuBar (MacOS menu bar which appears at the top of the screen)
+- SysMenuBar (MacOS上则是出现在屏幕顶部的menu bar)
 
-Menu types function in 2 main ways:
-1- Add choices using the add_choice() method, then handling the user's selection in the callback:
+Menu类型主要有两个方面的功能：
+1- 使用add_choice()方法添加选项，然后在callback中处理用户的选择：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -37,7 +38,7 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png)
 
-Alternatively you can query the textual value of the selected item:
+另外，你也可以获取所选项目的文本内容来操作：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -64,7 +65,8 @@ fn main() {
 }
 ```
 
-2- Adding choices via the add() method, you pass each choice's callback distinctively.
+2- 通过add()方法添加选项，你要明确地传递每个选项的回调：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -101,7 +103,7 @@ fn main() {
     app.run().unwrap();
 }
 ```
-Also as mentioned in the [Events section](Events), you can use a function object instead of passing closures:
+另外，正如在 [事件 Events](Events)中提到的，你可以使用一个函数对象，而不必传递闭包：
 ```rust
 use fltk::{enums::*, prelude::*, *};
 
@@ -207,7 +209,7 @@ fn main() {
 }
 ```
 
-Alternatively, you can use the add_emit() to pass a Sender and a message instead of passing callbacks:
+另外，你可以使用add_emit()来传递一个sender和一个message，而不必要传递回调：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -264,8 +266,9 @@ fn main() {
 }
 ```
 
-You might wonder, why go from a handful of lines in the first examples to a more complex manner of doing things. Each method has it's uses. 
-For simple drop down widgets, go with the first method. For an application's menu bar, go with the second. It allows you to specify Shortcuts and MenuFlags, and allows better decoupling of events, so you won't have to handle everything in the menu's callback. It's also easier to deal with submenus using the add() method, as in the [editor example](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs):
+你可能会问，为什么我们要从第一个例子中的几行代码，转到更复杂的方式。其实每种方法都有它的用途。
+对于简单的下拉widget，建议用第一种方法。对于一个程序的菜单栏，用第二种方法。它允许你指定Shortcuts和MenuFlags，并且可以更好地解耦事件，所以你不必在菜单的回调中处理一切。使用add()方法处理子菜单也更容易，就像在[编辑器例子](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs)中那样：
+
 ```rust
         let mut menu = menu::SysMenuBar::default().with_size(800, 35);
         menu.set_frame(FrameType::FlatBox);
@@ -353,9 +356,10 @@ For simple drop down widgets, go with the first method. For an application's men
             item.set_label_color(Color::Red);
         }
 ```
-Also notice the last call, which uses find_item() to find an item in the menu, and we hence set its label color to red.
+注意到最后一个调用，它使用find_item()在menu中找到一个item，然后我们将其标签颜色设置为红色：
 
 ![image](https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png)
 
-## System Menu Bar
-On MacOS, you might prefer to use a system menu bar, which typically appears on the top of the screen. For that, you can use a SysMenuBar widget. This has the same api as all widgets implementing MenuExt, and it translates into a normal MenuBar when the app is compiled for other targets than a MacOS.
+## 系统菜单栏
+在MacOS上，你可能更喜欢使用系统菜单栏，它通常出现在屏幕的顶部。为此，你可以使用一个SysMenuBar widget。它与所有实现MenuExt trait的widget具有相同的api，当程序为MacOS以外的其他目标平台编译时，它将转化为一个普通的MenuBar。
+

@@ -1,6 +1,6 @@
-# Fonts
+# 字体 Fonts
 
-FLTK has already 16 fonts which can be found in enums::Font:
+FLTK已经有16种字体，可以在enums::Font中找到：
 - Helvetica
 - HelveticaBold
 - HelveticaItalic
@@ -18,17 +18,18 @@ FLTK has already 16 fonts which can be found in enums::Font:
 - ScreenBold 
 - Zapfdingbats
 
-It also allows loading system and bundled fonts.
+它还允许加载系统字体和捆绑字体。
 
-System fonts depend on the system, and are not loaded by default. These can be loaded using the App::load_system_fonts() method.
-The fonts can then be acquired using the app::fonts() function or be queried using the app::font_count(), app::font_name() and app::font_index() functions.
-And then can be used using the Font::by_index() or Font::by_name() methods.
+系统字体依赖于系统，默认情况下不被加载。这些字体可以用App::load_system_fonts()方法加载。
+然后可以使用app::fonts()函数获取字体，还可以使用app::font_count()、app::font_name()和app::font_index()函数进行查询。
+然后可以使用Font::by_index()或Font::by_name()方法来使用。
+
 ```rust
 use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default().load_system_fonts();
-    // To load a font by path, check the App::load_font() method
+    // 要按路径加载字体，请检查App::load_font()方法
     let fonts = app::fonts();
     // println!("{:?}", fonts);
     let mut wind = window::Window::default().with_size(400, 300);
@@ -51,7 +52,7 @@ fn main() {
 }
 ```
 
-If you would like to load a bundled font without it being in the system, you can alternatively use Font::load_font() and Font::set_font(), this allows you to replace one of FLTK's predefined fonts with a custom font:
+如果你想加载一个不在系统中的捆绑字体，你可以选择使用Font::load_font()和Font::set_font()，这允许你用自定义字体替换FLTK的预定义字体：
 ```rust
 use fltk::{app, enums::Font, button::Button, frame::Frame, prelude::*, window::Window};
 
@@ -74,6 +75,6 @@ fn main() {
 }
 ```
 
-load_font() loads the font from the .ttf file, set_font() replaces Font::Helvetica (FLTK's default font) with our loaded font.
+load_font()从.ttf文件中加载字体，set_font()用我们加载的字体替换Font::Helvetica（FLTK的默认字体）：
 
 ![image](https://user-images.githubusercontent.com/37966791/145735197-130f7dd6-a31f-4bc6-a362-90a13493a556.png)

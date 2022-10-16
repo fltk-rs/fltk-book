@@ -1,28 +1,29 @@
 # Fluid
 
-FLTK offers a GUI WYSIWYG rapid application development tool called FLUID which allows creating GUI applications.
-Currently there is a video tutorial on youtube on using it with Rust:
+FLTK提供了一个名为FLUID的，所见即所得的快速GUI应用开发工具，用它可以创建GUI应用。
+目前在youtube上有一个使用基于Rust使用它的视频教程。
 [Use FLUID (RAD tool) with Rust](https://www.youtube.com/watch?v=k_P0wG3-dNk)
 
-The fl2rust crate translates the Fluid generated .fl files into Rust code to be compiled into your app.
-For more information, you can check the project's [repo](https://github.com/MoAlyousef/fl2rust).
+fl2rust crate将Fluid生成的.fl文件翻译成Rust代码，并编译进你的程序中。
+要获取更多详细信息，请查看它的官方[仓库](https://github.com/MoAlyousef/fl2rust)。
 
-You can get FLUID via fltk-fluid and fl2rust crates using cargo install:
+你可以使用cargo install 安装 fltk-fluid和fl2rust crates来获得FLUID。
 ```
 cargo install fltk-fluid
 cargo install fl2rust
 ```
-And run using:
+然后运行：
 ```
 fluid &
 ```
-Another option to get Fluid is to download it via your system's package manager, it comes as a separate package or part of the fltk package.
+你也可以通过你系统的包管理器获取Fluid，这样的话它将作为一个单独的包或fltk包的一部分。
 
-Currently, fl2rust, doesn't check the generated Rust code for correctness. It's also limited to constructor methods.
+目前，fl2rust并不能检查生成的Rust代码的正确性。它也只限于构造方法。
 
-## Usage
-To start, you can create a new Rust project using `cargo new app`.
-fl2rust is added as a build-dependency to your project:
+## 用法
+首先，你可以使用`cargo new app`创建一个新的Rust项目。
+fl2rust将作为一个构建依赖项，被添加到你的项目中：
+
 ```toml
 # Cargo.toml
 [dependencies]
@@ -32,7 +33,7 @@ fltk = "1"
 fl2rust = "0.4"
 ```
 
-Then it can be used in the build.rs file (which is run pre-build) to generate Rust code:
+然后就可以在build.rs文件中使用它（该文件在预编译时运行）来生成Rust代码。
 ```rust
 // build.rs
 fn main() {
@@ -45,13 +46,14 @@ fn main() {
 }
 ```
 
-We'll be naming our fluid file myuifile.fl. We tell cargo to rerun if that file is changed. We'll create the file in our source directory, but you can put it in its own directory if you wish. We tell the generator to take the fluid file and generate a myuifile.rs. This file is generated in the OUT_DIR, so you won't be seeing it in your src directory.
-However to include it, you need to create a Rust source file, it can be the same name as our outputted file, and put it in the src directory:
+我们将把fluid文件命名为myuifile.fl。我们告诉cargo，如果该文件被修改，就重新运行。我们将在我们的源代码目录创建文件，但如果你愿意，也可以为它创建自己的文件夹放进去。我们告诉生成器，让它接受fluid文件并生成一个myuifile.rs。这个文件是在OUT_DIR中生成的，所以你不会在你的src目录中看到它。
+但是为了包含（include）它，你需要创建一个Rust源文件，它可以和我们输出的文件同名，并把它放在src目录中：
+
 ```
 touch src/myuifile.rs
 ```
 
-We'll have to import the contents from the auto-generated file using the include! macro:
+我们将使用include！宏，从自动生成的文件中导入这些内容。
 ```rust
 // src/myuifile.rs
 #![allow(unused_variables)]
@@ -61,7 +63,7 @@ We'll have to import the contents from the auto-generated file using the include
 
 include!(concat!(env!("OUT_DIR"), "/myuifile.rs"));
 ```
-Then we'll be able to use the contents in main.rs:
+然后我们就可以使用main.rs中的内容了：
 ```rust
 // src/main.rs
 use fltk::{prelude::*, *};
@@ -73,55 +75,113 @@ fn main() {
 }
 ```
 
-Now comes the gui part. Open fluid:
+现在到了gui部分。打开fluid：
 ```rust
 fltk-fluid & #or just fluid if installed from a package manager
 ```
-The ampersand tells our shell to open it as a detached process, so we can still use our shell to compile our code.
+“&”符号让shell把它作为一个分离进程打开，所以我们仍然可以用我们的shell来编译我们的代码。
+
+
 
 ![image](https://user-images.githubusercontent.com/37966791/146925955-ac778726-1398-4ea2-8e46-a2f8fff89804.png)
 
-We're greeted with an empty window along with a menu bar. Our first step here is to create a Class:
+
+
+我们第一眼看到的是一个空窗口和一个菜单栏。我们在这里的第一步是创建一个类：
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146926284-cd9f21ce-b4b1-4009-9766-32876a08de98.png)
 
-This will popup a dialog, we can leave the name as it is (UserInterface) by clicking Ok. Now you'll see our class listed:
+
+
+这将弹出一个对话框，我们直接点击 "OK "让它使用默认的名称（UserInterface）。现在你会看到我们的类出现在列表中：
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146926505-545f26c1-ac7d-4f10-94a9-2d0c16875d4e.png)
-(We've expanded the window)
 
-Next, press new again and we'll add a constructor function for our class:
+(我们已经扩展了这个窗口)
+
+接下来，再次按下new键，我们将为我们的类添加一个构造函数：
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146926749-9199bd23-0346-4286-993f-bfb7588ae420.png)
-We'll also accept the default name which is `make_window()`.
 
-Next we'll add a window:
+同样使用它的默认名称，即`make_window()`。
+
+接下来我们将添加一个窗口：
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146926970-769ad7a1-9d03-457a-91f7-d6a18e2ba3b0.png)
 
-A new window pops up, we can enlarge it a bit by dragging the border:
+
+
+现在弹出了一个新的窗口，我们可以拖动边框将其放大一些：
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146927099-ff014e0d-8ea0-4f90-a500-882eb7b49bb2.png)
 
-Double clicking the window pops up a dialog where we can change the window's gui properties (under the GUI tab), style (under the Style tab) and class properties (under the C++ tab).
+
+
+双击窗口会弹出一个对话框，我们可以改变窗口的gui属性（在GUI标签下）、风格（在Style标签下）和类属性（在C++标签下）。
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146927520-c2ee18b1-0d17-43cd-93eb-edbf725ddf6c.png)
 
-We'll give the window a label `My Window` in the Gui tab, we'll change the color to white in the Style tab:
+
+
+我们在GUI标签中给这个窗口一个`My Window`标签 ，然后在Style标签中把颜色改为白色：
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146932899-6a4419ae-9c91-4b48-a363-d87c85b01778.png)
 
-And under the C++ tab, we'll give it the variable name `my_win`:
+
+
+在C++标签下，我们给它一个变量名`my_win`。
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146932794-7e1a2819-842d-45c7-88c8-be9fb728e805.png)
 
-Our window will now be accessible via `myuifile::UserInterface::my_win`.
 
-We'll add a button by left clicking the window and adding a Button:
+
+现在，我们的窗口可以通过`myuifile::UserInterface::my_win`访问。
+
+现在左击窗口并添加一个Button（按钮）：
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146928089-ad0454de-252e-4e81-9079-db0ef5c67c8f.png)
 
-This will open the same dialog as before but for the button. Under C++, we'll give it the variable name `btn`. Under style we'll change the color and label color. Then under Gui we'll give it the label "click me":
+
+
+这将打开与之前相同的对话框，但这次我们选择按钮。在C++下，我们将给它一个变量名`btn`。在style下，我们将改变颜色和标签的颜色。然后在Gui下，我们将给它一个标签 "click me"。
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146928419-a1a96e03-5b90-4aaa-8f70-9b17f76f9b9f.png)
 
-We'll drag the border to resize and drag the button to any position we want. Fluid has a layout menu where we can modify a number of widgets (if we had multiple buttons for example) to have the same layout/size ...etc:
+
+
+可以拖动边框来调整大小，把按钮拖到任何想要的位置。Fluid有一个布局菜单，可以用它修改一些小部件（如果我们有很多按钮），使其具有相同的布局/大小...等。
+
+
+
 ![image](https://user-images.githubusercontent.com/37966791/146928654-43838e2a-aba8-4a24-8d70-1e25e1717c58.png)
 
-We'll now save the file using `File/Save As...` as myuifile.fl in the src directory.
 
-We can now run `cargo run` to check our build succeeds, but we still haven't call the `make_window()` method, so we won't see anything yet.
-Now you can modify src/main.rs to show the window and add a callback to our button:
+
+我们现在点击`File/Save As...`将文件保存在src目录下，命名为srcmyuifile.fl。
+
+现在可以运行`cargo run`来看看是否能编译通过，但我们还没有调用`make_window()`方法，所以暂时还不会看到任何东西。
+现在你可以修改 src/main.rs 来显示窗口，并为我们的按钮添加一个回调。
+
 ```rust
 use fltk::{prelude::*, *};
 mod myuifile;
@@ -138,5 +198,4 @@ fn main() {
     app.run().unwrap();
 }
 ```
-
 

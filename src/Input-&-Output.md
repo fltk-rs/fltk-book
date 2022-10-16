@@ -1,6 +1,6 @@
-# Input & Output
+# 输入输出 Input & Output
 
-Input and Output widgets implement the InputExt trait. These are found between the input and output modules:
+输入和输出 widget 实现了InputExt trait。在input&output modules中还可以找到这些：
 - Input
 - IntInput
 - FloatInput
@@ -10,7 +10,7 @@ Input and Output widgets implement the InputExt trait. These are found between t
 - Output
 - MultilineOutput
 
-The hallmark of this trait is that these widgets have a textual value which can be queried using the value() method, and changed using the set_value() method:
+这种trait的特点是，这些widget会带有一个文本值，可以用value()方法查询，用set_value()方法改变：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -35,9 +35,9 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727249-2fa4d384-2bd3-41fd-bbae-61a3a33b12f6.png)
 
-Notice that we used an IntInput to limit ourselves to integral values. Even though for the user they can't enter strings, the return of value() is still a String as far as the developer is concerned.
+请注意，我们使用了一个IntInput来限制输入整数值。虽然用户不能输入字符串，但就开发者而言，value()的返回值仍然是一个String。
 
-Output widgets don't allow the user to modify their values:
+输出部件不允许用户修改其数值：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -57,7 +57,7 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727261-88ec533f-200b-4df7-a570-76ebd2ba520a.png)
 
-Input widgets also support being made read-only using the InputExt::set_readonly(bool) method:
+输入部件也可以使用 InputExt::set_readonly(bool) 方法变成只读：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -80,4 +80,4 @@ fn main() {
     a.run().unwrap();
 }
 ```
-This makes our input read-only once the user hits the button.
+这使我们的输入在用户点击按钮后成为只读。

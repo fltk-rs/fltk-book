@@ -1,8 +1,8 @@
-# Widgets
+# 组件 Widgets
 
-FLTK offers around 80 widgets. These widgets all implement the basic set of traits WidgetBase and WidgetExt. We've already come across our first widget, the Window widget.
-As we've seen with the Window widget, widgets can also implement other traits depending on their functionality.
-Lets add a button to our previous example.
+FLTK提供了大约80个窗口组件。这些组件都实现了WidgetBase和WidgetExt的基本trait集。 我们已经遇到了我们的第一个组件，Window。
+正如我们在Window小组件中所看到的，小组件也可以根据其功能实现其他trait。
+在我们之前写的例子中添加一个按钮：
 
 ```rust
 use fltk::{prelude::*, *};
@@ -18,8 +18,9 @@ fn main() {
 ```
 ![image](https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png)
 
-Notice that the button's parent is my_window since it's created between the implicit begin() and end() calls.
-Another way to add a widget is using the add(widget) method that's offered by widgets implementing the GroupExt trait:
+注意，这个按钮的父组件是my_window，因为它是在begin()和end()之间创建的。
+另一种添加组件的方法是，使用实现了GroupExt trait的widget所提供的add(widget)方法。
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -36,11 +37,12 @@ fn main() {
 }
 ```
 
-Another thing to notice is the initialization of the button which basically has the same constructor as the Window, that's because it's part of the WidgetBase trait. However, although the Window's x and y coordinates are relative to the screen, the button's x and y coordinates are relative to the window which contains the button. This also applies to our embedded window in the previous page if you hadn't noticed.
+另一件要注意的事情是按钮的初始化，它的构造函数基本上与Window相同，这是因为它实现了WidgetBase trait。注意，虽然Window的x和y坐标是相对于屏幕的，但按钮的x和y坐标却是相对于包含按钮的窗口的。你可能已经注意到，这也适用于我们在前一页的嵌入式窗口。
 
-The button also implements the ButtonExt trait, which offers some helpful methods like setting shortcuts to trigger our button among other methods.
+这个按钮也实现了ButtonExt trait，它提供了一些有用的方法，比如设置快捷键来触发我们的按钮以及其他方法。
 
-Constructing widgets can also be done using a builder pattern:
+构建组件也可以用构建器模式来完成：
+
 ```rust
 let but1 = Button::new(10, 10, 80, 40, "Button 1");
 // OR
@@ -49,7 +51,6 @@ let but1 = Button::default()
     .with_size(80, 40)
     .with_label("Button 1");
 ```
-Which basically have the same effect.
+这基本上有相同的效果。
 
-As it stands, our application shows a window with a button, the button is clickable but does nothing!
-So lets add some action in there in the next page! 
+目前，我们的程序显示了一个带有按钮的窗口，这个按钮是可以点击的，但什么也做不了！因此，在下一页中，我们将学习为它添加一些动作。

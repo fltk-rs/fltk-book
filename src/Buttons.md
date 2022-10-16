@@ -1,6 +1,6 @@
-# Buttons
+# 按钮 Buttons
 
-Button widgets serve multiple purposes and come in several forms:
+Button widgets 有多种用途和多种形式：
 - Button
 - RadioButton
 - ToggleButton
@@ -11,8 +11,9 @@ Button widgets serve multiple purposes and come in several forms:
 - RadioLightButton
 - RadioRoundButton
 
-These can be found in the button module.
-The simplest of which is the Button widget, which basically runs some action when clicked. This applies to all buttons as well:
+这些可以在可以在 button module 中找到。
+其中最简单的就是Button，它在用户点击时产生一些行为。当然所有的按钮都会这样：
+
 ```rust
 use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
 
@@ -30,10 +31,12 @@ fn main() {
 }
 ```
 
-However other buttons can have other value.
-CheckButton, ToggleButton, LightButton for example hold their current value, i.e. whether they were toggled or not:
+然而其他按钮可以带有表示自己某些属性的其他值（value）：
+例如CheckButton, ToggleButton, LightButton 拥有它们当前状态（比如，是否被选中）的信息。
 
-Radio buttons (RadioRoundButton, RadioLightButton and RadioButton) also hold their value, but only one can be toggled in the parent group (any widget implementing GroupExt). So they are aware of the values of other radio buttons:
+
+
+单选按钮（RadioRoundButton、RadioLightButton和RadioButton）也带有它们的一些值，但在parent group（任何实现GroupExt的widget）中只有一个可以被切换。所以这些组件是知道其他按钮的值的：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -51,13 +54,14 @@ fn main() {
 }
 ```
 
-(The focus box can be removed using the clear_visible_focus() method `btn1.clear_visible_focus()`).
+(可以用clear_visible_focus()方法`btn1.clear_visible_focus()`来删除焦点框）
 
 ![image](https://user-images.githubusercontent.com/37966791/145727291-8be40de6-8ec6-4e57-bb29-fa0f0ac3b251.png)
 
-Other toggle-able buttons don't have this property.
+其他可切换的按钮没有这个属性。
 
-You can query whether a button is toggled or not using the ButtonExt::value() method:
+你可以使用ButtonExt::value()方法查询一个按钮是否被切换：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -84,11 +88,11 @@ fn main() {
     a.run().unwrap();
 }
 ```
-CheckButton also provides a convenience method is_checked(), while radio buttons provide an is_toggled().
+CheckButton还提供了一个方便的方法is_checked()，而radio buttons提供了一个is_toggled()：
 
 ![image](https://user-images.githubusercontent.com/37966791/145727325-7e5bb45f-674e-4bb2-81c8-27d0ee391d34.png)
 
-By default, toggle-able buttons are created untoggled, however this can be overridden using set_value(), or the convenience methods set_checked() (for CheckButton) and set_toggled() (for radio buttons):
+默认情况下，可切换的按钮在创建时是不可切换的，然而这可以用set_value()，或者方便的方法set_checked()（对CheckButton使用）和set_toggled()（对radio buttons使用）来重写：
 ```rust
 use fltk::{prelude::*, *};
 

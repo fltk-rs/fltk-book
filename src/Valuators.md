@@ -1,7 +1,8 @@
-# Valuators
+# 估值器 Valuators
 
-Valuator widgets implement the ValuatorExt trait. These keep track (graphically and internally) of numerical values along with steps, ranges and bounds.
-Such a valuator which you might be familiar with are scrollbars and sliders. The list offered by fltk is found in the valuator module:
+估值器widget实现了ValuatorExt trait。这些widget跟踪（以图形和内部方式）跟踪steps，ranges和bounds。
+你可能熟悉滚动条和滑块（scrollbars and sliders）这种估值器。可以在valuator模块中找到fltk提供的这些估值器：
+
 - Slider
 - NiceSlider
 - ValueSlider
@@ -20,7 +21,7 @@ Such a valuator which you might be familiar with are scrollbars and sliders. The
 - HorNiceSlider
 - HorValueSlider
 
-Changing the valuators value in the gui triggers its callback. The current value of the valuator can be queried using the value() method. It can also be set using set_value(). The ranges and step can also be queried and changed to your use case:
+在gui中改变valuator的值会触发其回调。Valuator的当前值可以通过value()方法来查询。它也可以用set_value()来为它设置一个值。range和step也可以根据你的使用情况进行查询和改变：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -30,8 +31,8 @@ fn main() {
     let mut slider = valuator::HorNiceSlider::default().with_size(400, 20).center_of_parent();
     slider.set_minimum(0.);
     slider.set_maximum(100.);
-    slider.set_step(1., 1); // increment by 1.0 at each 1 step
-    slider.set_value(50.); // start in the middle
+    slider.set_step(1., 1); // 每一step增长10
+    slider.set_value(50.); // 从中间开始
     win.end();
     win.show();
 

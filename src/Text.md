@@ -1,11 +1,11 @@
-# Text
+# 文字 Text
 
-Text widgets are those that implement the DisplayExt. There are 3 and these can be found in the text module:
+Text widget实现了DisplayExt trait，共有3个，可以在text module中找到：
 - TextDisplay
 - TextEditor
 - SimpleTerminal
 
-The main purpose of these widgets is displaying/editing text. The first 2 widgets require a TextBuffer, while the SimpleTerminal has an internal buffer:
+这些部件的主要目的是显示/编辑文本。前两个部件需要一个TextBuffer，而SimpleTerminal有一个内部缓冲器：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -29,8 +29,9 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727101-175fe355-1383-4789-ae40-2945ef0c63e2.png)
 
-Most operations are done through the TextBuffer. Text can be appended using append() or the whole content can be set using set_text().
-You can get back a clone (reference type) of the buffer using the DisplayExt::buffer() method:
+大多数操作是通过TextBuffer完成的。可以用append()来追加文本，也可以用set_text()来设置其全部内容。
+你可以使用DisplayExt::buffer()方法取回缓冲区的clone（reference type）：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -54,7 +55,7 @@ fn main() {
 }
 ```
 
-The DisplayExt offers other methods to manage the text properties such as wrapping, cursor position, font, color, size...etc:
+DisplayExt提供了其他方法来管理文本属性，wrapping，cursor position，font，color，size...等。
 ```rust
 use fltk::{enums::Color, prelude::*, *};
 
@@ -79,7 +80,7 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727121-8396c77e-836d-4406-abd1-92af32ff7242.png)
 
-The TextBuffer has also a second purpose, and that's to provide a style buffer. A style buffer mirrors your text buffer and uses a style table (containing font, color and size) to add granular styling to your text, the style table itself is indexed, so to speak, using the corresponding letter:
+TextBuffer还有第二个用途，那就是提供一个样式缓冲区（style buffer）。样式缓冲区反映了你的文本缓冲区，并使用一个样式表（包含字体、颜色和大小）来为你的文本添加细粒度的样式，样式表本身是有索引的，具体说是使用相应的字母：
 ```rust
 use fltk::{
     enums::{Color, Font},
@@ -131,4 +132,4 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727157-be992344-763d-41f9-b3d8-2dfa13fbaab1.png)
 
-The terminal example uses the SimpleTerminal along with a style TextBuffer. It can be found [here](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs)
+Terminal的例子使用了SimpleTerminal和一个有样式的TextBuffer，你可以在 [这儿](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs) 找到

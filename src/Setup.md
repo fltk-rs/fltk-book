@@ -40,71 +40,71 @@ apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 
 ![image](https://user-images.githubusercontent.com/37966791/116013520-48d1fc80-a639-11eb-934a-fac6609135b4.png)
 
-- You can also check CMake in the previous list, or download CMake from [here](https://cmake.org/download/).
-- If you don't have `git`, make sure to get it from [here](https://git-scm.com/downloads).
-- From the rust-lang.org website, download the correct rustup installer for your architecture.
-- Once you're all set up, you can create a Rust project using `cargo new`, add `fltk` as a dependency in your Cargo.toml and build your application.
+- 你也需要在前面的列表中检查是否有CMake，或者点击这里直接下载 [Cmake](https://cmake.org/download/)。
+- 如果你还没有GIt，请点击下载 [Git](https://git-scm.com/downloads)。
+- 从 rust-lang.org 网站上，下载适合你的架构的正确的rustup安装程序。
+- 一旦你都准备好了，你就可以用`cargo new`创建一个Rust项目，在Cargo.toml中添加`fltk`作为依赖，然后开始构建你的应用程序。
 
 ### Windows (gnu toolchain)
-If you don't already have msys2, you can get it from [here](https://www.msys2.org/).
+如果你还没有msys2，点击这里安装 [msys2](https://www.msys2.org/)。
 
-- You can get the Rust toolchain via the pacman package manager, or via rustup as described previously. The installation process however would require specifying the use of the gnu toolchain (not choosing the default which would install the MSVC toolchain). 
-The toolchain should also reflect the architecture of your machine. For example, a 64bit machine should install the x86_64-pc-windows-gnu toolchain.
-If you decide to get Rust via the package manager, make sure you're getting the mingw variant, and with the correct MINGW_PACKAGE_PREFIX (for 64bits, that env variable would equate to mingw-w64-x86_64).
-- Assuming you're installing everything via pacman, open the mingw shell (not the msys2 shell, it can be found bundled in the msys2 install directory, or via `source shell mingw64`) and run the following:
+- 你可以通过pacman软件包管理器获得Rust工具链，或者通过前面所说的rustup。然而，在安装过程中需要指定使用gnu工具链（而不是默认安装MSVC工具链）。
+工具链也应该反映你的机器的结构。例如，一台64位机器应该安装x86_64-pc-windows-gnu工具链。
+如果你决定通过软件包管理器来获得Rust，请确保你得到的是mingw的变体，并且有正确的MINGW_PACKAGE_PREFIX（对于64位机器，这个环境变量相当于mingw-w64-x86_64）。
+- 假设你通过pacman安装了所有东西，打开mingw shell（不是msys2 shell，它可以在msys2安装目录下找到，或者通过`source shell mingw64`）并运行以下内容：
 ```
 pacman -S curl tar git $MINGW_PACKAGE_PREFIX-rust $MINGW_PACKAGE_PREFIX-gcc $MINGW_PACKAGE_PREFIX-cmake $MINGW_PACKAGE_PREFIX-make --needed
 ```
-You can replace $MINGW_PACKAGE_PREFIX-make with $MINGW_PACKAGE_PREFIX-ninja if you plan to use ninja via the use-ninja feature.
-- Once you're all set up, you can create a Rust project using `cargo new`, add `fltk` as a dependency in your Cargo.toml and build your application.
+如果你打算通过use-ninja使用ninja，你可以用$MINGW_PACKAGE_PREFIX-ninja替换$MINGW_PACKAGE_PREFIX-make。
+- 一旦你都准备好了，你就可以用`cargo new`创建一个Rust项目，在Cargo.toml中添加`fltk`作为依赖，然后开始构建你的应用程序。
 
 ### MacOS
-- To get the Xcode Command Line Tools (which have the C++ compiler), run:
+- 要获得Xcode命令行工具（它带有C++编译器），运行下列代码：
 ```
 xcode-select --install
 ```
-Follow the instructions. Alternatively you can install clang or gcc from homebrew.
-- To get CMake, you can get it from [here](https://cmake.org/download/).
+​	之后按照说明进行。或者，你也可以通过Homebrew安装clang或gcc：
+- 为了下载CMake，你可以点击这里下载[CMake](https://cmake.org/download/)。
 
-Or from homebrew as well.
+或者，也可以跟上面一样使用Homebrew：
 ```
 brew install cmake
 ```
 
-- To get the Rust toolchain:
+- 安装Rust Toolchain：
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-And follow the default instructions.
-- Once you're all set up, you can create a Rust project using `cargo new`, add `fltk` as a dependency in your Cargo.toml and build your application.
+按照默认设置进行即可。
+- 一旦你都准备好了，你就可以用`cargo new`创建一个Rust项目，在Cargo.toml中添加`fltk`作为依赖，然后开始构建你的应用程序。
 
 ### Linux
-- Use your package manager to get a C++ compiler, CMake, make, git.
-Taking Debian/Ubuntu as an example:
+- 使用你的软件包管理器安装一个C++编译器，还有CMake，make，git。
+以Debian/Ubuntu 为例：
 ```
 sudo apt-get install g++ cmake git make
 ```
-- To get the dev dependencies for FLTK, you can also use your package manager:
-For Debian-based GUI distributions, that means running:
+- 要获得FLTK的开发依赖项，你也可以使用你的软件包管理器。
+对基于Debian的GUI发行版，运行下列代码：
 ```
 sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
 ```
-For RHEL-based GUI distributions, that means running:
+对于基于RHEL的GUI发行版，运行下列代码：
 ```
 sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel
 ```
-For Arch-based GUI distributions, that means running:
+对于基于Arch Linux的GUI发行版，运行下列代码：
 ```
 sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
 ```
-For Alpine linux:
+对于Alpine linux：
 ```
 apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 ```
-- To get the Rust toolchain:
+- 安装Rust Toolchain：
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
-And follow the default instructions.
-- Once you're all set up, you can create a Rust project using `cargo new`, add `fltk` as a dependency in your Cargo.toml and build your application.
+按照默认设置进行即可。
+- 一旦你都准备好了，你就可以用`cargo new`创建一个Rust项目，在Cargo.toml中添加`fltk`作为依赖，然后开始构建你的应用程序。

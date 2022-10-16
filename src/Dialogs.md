@@ -1,12 +1,12 @@
-# Dialogs
+# 对话框 Dialogs
 
-fltk offers several dialog types including file dialogs and others. 
+fltk提供了几种对话框类型，有文件对话框和其他一些。
 
-## File dialogs
-There are 2 types, the native file dialog and FLTK's own file dialog. Native dialogs just show a the OS's own dialog. For windows, that's the win32 dialog, for MacOS, that's the Cocoa dialog, and for other posix systems, it depends on what you're running. On GNOME and other gtk-based desktops, it shows the gtk dialog and on KDE it shows kdialog.
+## 文件对话框 File dialogs
+有2种类型，原生文件对话框和FLTK自己的文件对话框。原生对话框只是显示操作系统自己的对话框。对于windows来说，那是win32对话框，对于MacOS来说，那是Cocoa对话框，而对于其他posix系统来说，取决于你正在运行什么。在GNOME和其他基于gtk的桌面上，它显示gtk对话框，在KDE上它显示kdialog。
 
-### Native dialogs
-To spawn a native dialog:
+### 原生对话框 Native dialogs
+唤起一个原生对话框：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -34,7 +34,7 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/146625105-94b11a5d-0938-4962-96d1-aaff5424ffe8.png)
 
-This prints the Path of the chosen file. There are several types which can be passed as NativeFileChooserType, here we browse files, you can choose to BrowseDir instead, also enable mutli file/dir selection. If you select multiple files, you can get a Vec using the filenames() method:
+这将打印出所选文件的路径。有几种类型可以作为NativeFileChooserType被传递，这里我们浏览文件，你可以选择BrowseDir来代替，也可以启用多文件/目录选择。如果你选择了多个文件，你可以使用filenames()方法得到一个Vec：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -60,7 +60,7 @@ fn main() {
 }
 ```
 
-You can also add filter the files to show:
+你也可以选择添加过滤器来有选择地选取文件：
 ```rust
     btn.set_callback(|_| {
         let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseMultiFile);
@@ -69,10 +69,10 @@ You can also add filter the files to show:
         println!("{:?}", dialog.filenames());
     });
 ```
-This will only show .txt, .rs and .toml files.
+这将只显示.txt、.rs和.toml文件。
 
-### FLTK's own file chooser
-FLTK also offers its own file chooser:
+### FLTL提供的文件选择器 FLTK's own file chooser
+FLTK也提供了自己的文件选择器：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -112,7 +112,7 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145726912-600e4c58-32b7-4a1b-8e6a-44e640549722.png)
 
-A convenience function is also provided using file_chooser() and dir_chooser() functions:
+用file_chooser()和dir_chooser()函数提供了一个方便的函数：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -144,8 +144,8 @@ fn main() {
 }
 ```
 
-### Help dialog
-FLTK offers a help dialog which can show html 2 documents:
+### 帮助对话框 Help dialog
+FLTK提供了一个帮助对话框，可以显示html 2文档：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -173,19 +173,19 @@ fn main() {
     app.run().unwrap();
 }
 ```
-The html can also be loaded using the HelpDialog::load(path_to_html_file) method. 
+html文件也可以用HelpDialog::load(path_to_html_file)方法加载：
 
 ![image](https://user-images.githubusercontent.com/37966791/145726889-442d0453-e1d0-4b41-8717-f121fdf860fa.png)
 
-### Alert dialogs
-FLTK also offers several dialog types which can be conveniently shown using free functions:
+### 提示对话框 Alert dialogs
+FLTK还提供了几种对话框类型，可以使用自由函数方便地显示：
 - message
 - alert
 - choice
 - input
-- password (like input but doesn't show the inputted data)
+- password (类似于input，但不显示输入内容)
 
-To show up a simple message dialog:
+显示一个简单的message对话框：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -208,15 +208,16 @@ fn main() {
     app.run().unwrap();
 }
 ```
-This shows a message at a default location (basically near the pointer). If you would like to enter coordinates manually, you can use the message() function:
+这将在默认的位置（基本上在指针附近）显示一个message。如果你想手动输入坐标，你可以使用 message() 函数：
 ```rust
     btn.set_callback(|_| {
         dialog::message(100, 100, "Message");
     });
 ```
 
-All the previously mentioned functions have to variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
-Some dialogs return a value, like choice, input, and password. Input and password return the inputted text, while choice returns an index of the chosen value:
+前面提到的所有函数都有变体，一个有_default()后缀，不需要坐标，另一个没有，需要坐标。
+有些对话框会返回一个值，比如choice，input，and password。input和password返回输入的文本，而choice则返回选择值的索引：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -233,7 +234,7 @@ fn main() {
     wind.show();
 
     btn.set_callback(|_| {
-        // password and input also takes a second arg which is the default value
+        // 密码和输入也需要第二个参数，这是默认值
         let pass = dialog::password_default("Enter password:", "");
         if let Some(pass) = pass {
             println!("{}", pass);
@@ -246,7 +247,7 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145726850-61fc17e4-cd6e-4821-a9b5-396203806066.png)
 
-An example with choice:
+使用choice的一个例子：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -270,17 +271,17 @@ fn main() {
     app.run().unwrap();
 }
 ```
-This will print the index, i.e. choosing No will print 0, Yes will print 1 and Cancel will print 2.
+这将打印索引，即选择No将打印0，Yes将打印1，Cancel将打印2。
 
 ![image](https://user-images.githubusercontent.com/37966791/145726775-d000a807-8bf5-439b-a991-8bf25fcd5049.png)
 
-You have noticed that all of these dialogs didn't have a title. You can add a title also using a free function called before the dialog:
+你已经注意到，所有这些对话框都没有一个。你也可以在对话框前调用函数来添加一个title：
 ```rust
         dialog::message_title("Exit!");
         let choice = dialog::choice_default("Would you like to save", "No", "Yes", "Cancel");
 ```
 
-You can also set the default title of all these dialog boxes using dialog::message_title_default(), you'll want to do this in the start of your app:
+你也可以使用 dialog::message_title_default() 来设置所有这些对话框的默认标题，你要在你的程序的开始部分这样做：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -307,8 +308,8 @@ fn main() {
 ```
 ![image](https://user-images.githubusercontent.com/37966791/145726685-f086bde2-db63-4fa8-a579-954dbacbe44d.png)
 
-## Custom dialogs
-All these dialogs make assumptions about your app that might not be correct, especially regarding colors and fonts. If you have a heavily customized app you would probably also want custom dialogs. A dialog is basically a modal window which is spawned during the application. This can have the same styling as the rest of your app:
+## 自定义对话框 Custom dialogs
+所有这些对话框与你的程序设想的样子可能不相符合，特别是关于颜色和字体。如果你有一个深度定制的程序，你可能也会想要定制对话框。对话框基本上是一个在应用程序中生成的模式窗口。它可以与你的应用程序的其他部分具有相同的风格：
 ```rust
 use fltk::{
     app, button,
@@ -395,8 +396,8 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145726727-a0018457-1d87-4519-9d6e-08d8f8030d1a.png)
 
-## Printer dialog
-FLTK also offers a printer dialog which uses your platform's native printer dialog:
+## 打印机话框 Printer dialog
+FLTK还提供了一个打印机对话框，它使用你的系统平台的本地打印机对话框：
 ```rust
 use fltk::{prelude::*, *};
 let mut but = button::Button::default();
@@ -416,4 +417,4 @@ but.set_callback(|widget| {
     }
 });
 ```
-Here it's just printing the button's image and specifying where it shows on the paper. You can pass any widget (mostly like a TextEditor widget) as the printed widget.
+这里只是打印按钮的图像并指定它在纸上显示的位置。你可以传递任何widget（主要是像TextEditor widget）作为打印widget。

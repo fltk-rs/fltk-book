@@ -1,7 +1,8 @@
-# Custom widgets
+# 自定义组件 Custom widgets
 
-fltk-rs allows you to create custom widgets. We need to define a struct which extends an already existing widget and widget type. The most basic widget type being widget::Widget. 
-1- Define your struct and whatever other internal data needs to be stored in it.
+fltk-rs允许你创建自定义widget。我们需要定义一个struct，它需要扩展一个已经存在的widget和widget type。最基本的widget type是widget::Widget。
+1- 定义你的struct和任何其他需要存储在其中的内部数据：
+
 ```rust
 use fltk::{prelude::*, *};
 use std::cell::RefCell;
@@ -12,12 +13,13 @@ struct MyCustomButton {
     num_clicks: Rc<RefCell<i32>>,
 }
 ```
-You'll notice 2 things, we're using an Rc RefCell for the data we're storing. This isn't necessary in the general case, however, since we need to move that data into a callback, while still having access to it after we mutate it, we'll wrap it in an Rc RefCell. We've imported the necessary modules.
+你会注意到两件事，我们正在使用一个Rc RefCell来存储数据。这在一般情况下是没有必要的，但是，由于我们需要将这些数据所有权move到一个回调中，同时在我们修改它之后仍然可以访问它，我们将把它包装在一个Rc RefCell中。我们已经导入了必要的模块。
 
-2- Define the implementation of your struct. The most important of these being the constructor since it's how we'll initialize the internal data as well:
+2- 定义结构的impl。其中最重要的是构造函数，因为我们要通过它来初始化内部数据：
+
 ```rust
 impl MyCustomButton {
-    // our constructor
+    // 我们定义的结构体
     pub fn new(radius: i32, label: &str) -> Self {
         let mut inner = widget::Widget::default()
             .with_size(radius * 2, radius * 2)
@@ -27,16 +29,16 @@ impl MyCustomButton {
         let num_clicks = 0;
         let num_clicks = Rc::from(RefCell::from(num_clicks));
         let clicks = num_clicks.clone();
-        inner.draw(|i| { // we need a draw implementation
+        inner.draw(|i| { // 我们需要一个绘图的实现 draw implementation
             draw::draw_box(i.frame(), i.x(), i.y(), i.w(), i.h(), i.color());
-            draw::set_draw_color(enums::Color::Black); // for the text
+            draw::set_draw_color(enums::Color::Black); // 设置文字颜色
             draw::set_font(enums::Font::Helvetica, app::font_size());
             draw::draw_text2(&i.label(), i.x(), i.y(), i.w(), i.h(), i.align());
         });
         inner.handle(move |i, ev| match ev {
             enums::Event::Push => {
-                *clicks.borrow_mut() += 1; // increment num_clicks
-                i.do_callback(); // do the callback which we'll set using set_callback().
+                *clicks.borrow_mut() += 1; // 递增 num_clicks
+                i.do_callback(); // 使用 set_callback() 时设置的回调
                 true
             }
             _ => false,
@@ -47,28 +49,29 @@ impl MyCustomButton {
         }
     }
 
-    // get the times our button was clicked
+    // 获得我们的按钮被点击的次数
     pub fn num_clicks(&self) -> i32 {
         *self.num_clicks.borrow()
     }
 }
 ```
 
-3- Apply the widget_extends! macro to our struct, the macro requires the base type, and the member via which our custom type is extended. This is done via implementing the Deref and DerefMut traits. The macro also adds other convenience constructors and anchoring methods:
+3- 对我们的struct应用widget_extends！宏，该宏需要基本类型，已经我们通过该成员扩展的自定义类型。这是通过实现Deref和DerefMut trait实现的。该宏还添加了其他方便的构造函数和锚定方法（anchoring methods）：
+
 ```rust
-// Extend widget::Widget via the member `inner` and add other initializers and constructors
+// 通过成员`inner`扩展widget::Widget，并添加其他初始化器和构造函数
 widget_extends!(MyCustomButton, widget::Widget, inner);
 ```
 
-Now we're ready to try out our struct:
+现在来试一试我们的struct：
 ```rust
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
-    app::background(255, 255, 255); // make the background white
+    app::background(255, 255, 255); // 设置白色背景
     let mut wind = window::Window::new(100, 100, 400, 300, "Hello from rust");
     
     let mut btn = MyCustomButton::new(50, "Click");
-    // notice that set_color and set_callback are automatically implemented for us!
+    // 注意，set_color和set_callback已经自动为我们实现了
     btn.set_color(enums::Color::Cyan);
     btn.set_callback(|_| println!("Clicked"));
     
@@ -77,12 +80,12 @@ fn main() {
 
     app.run().unwrap();
     
-    // print the number our button was clicked on exit
+    // 打印我们的按钮被点击的数字，退出
     println!("Our button was clicked {} times", btn.num_clicks());
 }
 ```
 
-Full code:
+全部代码：
 ```rust
 use fltk::{prelude::*, *};
 use std::cell::RefCell;
@@ -94,7 +97,7 @@ struct MyCustomButton {
 }
 
 impl MyCustomButton {
-    // our constructor
+    // 我们定义的结构体
     pub fn new(radius: i32, label: &str) -> Self {
         let mut inner = widget::Widget::default()
             .with_size(radius * 2, radius * 2)
@@ -104,16 +107,16 @@ impl MyCustomButton {
         let num_clicks = 0;
         let num_clicks = Rc::from(RefCell::from(num_clicks));
         let clicks = num_clicks.clone();
-        inner.draw(|i| { // we need a draw implementation
+        inner.draw(|i| { // 我们需要一个绘图的实现 draw implementation
             draw::draw_box(i.frame(), i.x(), i.y(), i.w(), i.h(), i.color());
-            draw::set_draw_color(enums::Color::Black); // for the text
+            draw::set_draw_color(enums::Color::Black); // 设置文字颜色
             draw::set_font(enums::Font::Helvetica, app::font_size());
             draw::draw_text2(&i.label(), i.x(), i.y(), i.w(), i.h(), i.align());
         });
         inner.handle(move |i, ev| match ev {
             enums::Event::Push => {
-                *clicks.borrow_mut() += 1; // increment num_clicks
-                i.do_callback(); // do the callback which we'll set using set_callback().
+                *clicks.borrow_mut() += 1; // 递增 num_clicks
+                i.do_callback(); // 使用 set_callback() 时设置的回调
                 true
             }
             _ => false,
@@ -124,18 +127,18 @@ impl MyCustomButton {
         }
     }
 
-    // get the times our button was clicked
+    // 获得我们的按钮被点击的次数
     pub fn num_clicks(&self) -> i32 {
         *self.num_clicks.borrow()
     }
 }
 
-// Extend widget::Widget via the member `inner` and add other initializers and constructors
+// 通过成员`inner`扩展widget::Widget，并添加其他初始化器和构造函数
 widget_extends!(MyCustomButton, widget::Widget, inner);
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
-    app::background(255, 255, 255); // make the background white
+    app::background(255, 255, 255); // 设置白色背景
     let mut wind = window::Window::new(100, 100, 400, 300, "Hello from rust");
     let mut btn = MyCustomButton::new(50, "Click");
     btn.set_color(enums::Color::Cyan);
@@ -145,7 +148,7 @@ fn main() {
 
     app.run().unwrap();
     
-    // print the number our button was clicked on exit
+    // 打印我们的按钮被点击的数字，退出
     println!("Our button was clicked {} times", btn.num_clicks());
 }
 ```

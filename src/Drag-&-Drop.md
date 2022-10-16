@@ -1,10 +1,10 @@
-# Drag & Drop
+# 拖放 Drag & Drop
 
-Drag and Drop are Event types supported by FLTK. You can drag widgets around if you implement these events, and you can drag outside files into an FLTK application. You might also want to implement drawing over widgets which would require handling Event::Drag at least.
+拖放是FLTK支持的事件类型。如果你实现了这些事件，你就可以拖动组件，也可以将外部文件拖入FLTK应用程序。你可能还想实现在widget上绘图，这就要求处理Event::Drag。
 
-## Dragging widgets
+## 拖动组件
 
-Here we'll implement dragging for the window itself. We'll create a window without a border. Normally you can drag windows around using the border:
+这里我们将为窗口本身实现拖动。我们将创建一个没有边框的窗口。通常情况下，你可以使用边框来拖动窗口。
 ```rust
 use fltk::{prelude::*, *};
 
@@ -38,9 +38,9 @@ fn main() {
 }
 ```
 
-## Dragging Files
+## 拖动文件
 
-Dragging a file into an application basically invokes the Paste event, and fills the app::event_text() with the path of the file. So when we handle dragging, we want to capture the path in Event::Paste, check if the file exists, read its content and fill our text widget:
+将一个文件拖入程序中会调用Paste事件，并将文件的路径填入app::event_text()。因此，当我们处理拖动时，我们想在Event::Paste中捕获路径，检查文件是否存在，读取其内容并填充我们的text widget：
 ```rust
 use fltk::{prelude::*, enums::Event, *};
 
@@ -101,7 +101,7 @@ fn main() {
 }
 ```
 
-If you're not interested in the contents of the file, you can just take the path and show it to the user:
+如果你对文件的内容不感兴趣，你可以只取路径并显示给用户：
 ```rust
 use fltk::{prelude::*, enums::Event, *};
 
@@ -151,5 +151,5 @@ fn main() {
 }
 ```
 
-## Dragging to draw
-You can draw inside events, but you'll want to use offscreen drawing. In the widgets draw method, you just copy the offscreen content into the widget. A more detailed example can be seen here in the Offscreen drawing section in the [Drawing page](Drawing.md#offscreen-drawing).
+## 拖动绘图
+你可以在事件里面绘图，但你会可能想使用屏幕外的画法。在widget绘图方法中，你只是把屏幕外的内容复制到widget中。一个更详细的例子可以在[绘图](Drawing.md#offscreen-drawing)中的屏幕外绘图部分看到。

@@ -1,10 +1,10 @@
-# Drawing things
+# 绘制事物 Drawing things
 
-fltk-rs provides free functions in the draw module which allow you to draw custom elements. The drawing works only if the calls are done in a context which allows drawing, such as in the WidgetBase::draw() method or in an Offscreen context:
+fltk-rs在draw module中提供了让你绘制自定义元素的自由函数。只有当调用是在允许绘制的上下文中进行时，例如在WidgetBase::draw()方法中或在Offscreen上下文中，绘制才有效：
 
-## Drawing in widgets
+## 在组件上绘制
 
-Notice we use the draw calls inside our widget's draw method:
+注意，我们在widget的draw方法中使用了draw调用：
 ```rust
 use fltk::{enums, prelude::*, *};
 
@@ -16,12 +16,12 @@ fn main() {
 
     win.draw(|w| {
         use draw::*;
-        // fill the window white
+        // 白色窗口
         draw_rect_fill(0, 0, w.w(), w.h(), enums::Color::White);
-        // draw a blue pie
+        // 画一个蓝色的圆
         set_draw_color(enums::Color::Blue.inactive());
         draw_pie(w.w() / 2 - 50, w.h() / 2 - 50, 100, 100, 0.0, 360.0);
-        // draw angled red text
+        // 绘制具有角度的字体
         set_draw_color(enums::Color::Red);
         set_font(enums::Font::Courier, 16);
         draw_text_angled(45, "Hello World", w.w() / 2, w.h() / 2);
@@ -33,10 +33,10 @@ fn main() {
 
 ![draw](https://user-images.githubusercontent.com/37966791/145693473-defb2298-fc6b-4d2f-8a0c-3d4902b39dd3.jpg)
 
-We've used the whole window as our canvas, but it can be any widget as well. Other available functions allow drawing lines, rects, arcs, pies, loops, polygons, even images.
+我们用整个窗口作为我们的画布，也可以是在任何widget上。其他可用的功能允许绘制直线、矩形、弧线、饼、循环、多边形，甚至图像。
 
-## Offscreen drawing
-Sometimes you would like to draw things in response to events, such as when the patients pushes and drags the cursor. In this case, you can use a draw::Offscreen to do that. In that case, we use the widget's draw method to just copy the Offscreen contents, while we do our drawing in the widget's handle method:
+## 在屏幕外绘制
+有时你想根据事件来画东西，比如推拖光标的时候。在这种情况下，你可以使用draw::Offscreen来做到这一点。在这种情况下，我们使用widget的draw方法只是复制屏幕外的内容，而绘制是在widget的handle方法中进行的。
 ```rust
 use fltk::{
     app,
@@ -140,6 +140,6 @@ fn main() {
 }
 ```
 
-Notice how we open an Offscreen context using offs.begin() then close it with offs.end(). This allows us to call drawing functions inside the Offscreen.
+注意我们是如何用offs.begin()打开一个Offscreen上下文，然后用offs.end()关闭它。这使得我们可以在Offscreen内调用绘图函数：
 
 ![image](https://user-images.githubusercontent.com/37966791/146173813-67038a94-7739-480e-a181-29498aac842a.png)

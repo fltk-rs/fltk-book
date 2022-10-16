@@ -1,14 +1,14 @@
-# Animations
+# 动画 Animations
 
-Animations can be shown in fltk-rs using several mechanism:
-- Leveraging the event loop
-- Spawning threads
-- Timeouts
+动画可以通过几种机制在fltk-rs中显示：
+- 利用事件循环 Leveraging the event loop
+- 使用线程 Spawning threads
+- 超时 Timeouts
 
 
-## Leveraging the event loop
+## 利用事件循环
 
-fltk offers app::wait() and app::check() which allow updating the ui during a blocking operation:
+fltk提供了app::wait()和app::check()，允许在一个阻塞操作中更新ui：
 ```rust
 use fltk::{enums::*, prelude::*, *};
 
@@ -16,7 +16,7 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     win.set_color(Color::White);
-    // our button takes the whole left side of the window
+    // 我们的按钮占据了窗口的左侧
     let mut sliding_btn = button::Button::new(0, 0, 100, 300, None);
     style_btn(&mut sliding_btn);
     win.end();
@@ -43,9 +43,9 @@ fn style_btn(btn: &mut button::Button) {
 }
 ```
 
-## Spawning threads
+## 使用线程
 
-This ensures we don't block the main/ui thread:
+这确保我们不会阻塞主/ui线程：
 ```rust
 use fltk::{enums::*, prelude::*, *};
 
@@ -85,9 +85,9 @@ fn style_btn(btn: &mut button::Button) {
 }
 ```
 
-## Timeouts
+## 超时
 
-fltk offers timeouts for recurring operations. We can add a timeout, repeat it and remove it:
+fltk为重复性操作提供了timeout功能。我们可以添加一个timeout，重复操作或让它消失。
 ```rust
 use fltk::{enums::*, prelude::*, *};
 
@@ -129,4 +129,4 @@ fn style_btn(btn: &mut button::Button) {
 }
 ```
 
-We basically add the timeout when the user clicks the button, and depending on the size of the button we either repeat it or remove it.
+我们是在用户点击按钮时加入timeout，根据按钮的大小，我可以重复使用或者删除它。

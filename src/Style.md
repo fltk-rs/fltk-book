@@ -1,3 +1,3 @@
-# Style
+# 样式 Style
 
-FLTK offers extensive custom styling options for your application, from changing the app's general scheme, to customizing colors, fonts, frame types, custom drawing...etc.
+FLTK为你的应用程序提供了广泛的自定义style选项，从改变应用程序的总体方案，到自定义颜色、字体、框架类型、自定义绘图...等等。

@@ -1,6 +1,6 @@
-# Images
+# 图像 Images
 
-FLTK supports vector and raster graphics, and out of the box offers several image types, namely:
+FLTK支持矢量图和位图，开箱即提供下列几种图像类型：
 - BmpImage
 - JpegImage
 - GifImage
@@ -12,22 +12,22 @@ FLTK supports vector and raster graphics, and out of the box offers several imag
 - XbmImage
 - PnmImage
 
-It also defines 2 more helper types:
-- SharedImage: which wraps all the previous types so you don't need to specify the image type.
-- TiledImage: which offers a tiled image of any of the concrete types.
+它还提供了两个helper types：
+- SharedImage：它包装了之前所有的类型，所以你不需要指定图像类型。
+- TiledImage：它提供了一个任何具体类型的平铺图像（图形学术语）。
 
-Image types implement the ImageExt trait which offers methods to allow scaling, and retrieving image metadata. 
-Images can be constructed by passing a path to the image's load() constructor, or for some types, by using a from_data() constructor which accepts image data.
+图像类型实现了ImageExt trait，提供了允许缩放和检索图像元数据的方法。
+Image可以通过向它的load()构造函数传递路径来构建，或者对某些类型可以使用接受图像数据的from_data()构造函数：
 
 ```rust
-/// Takes a path
+/// 需要一个路径
 let image = image::SvgImage::load("screenshots/RustLogo.svg").unwrap();
 
-/// Takes data
+/// 需要图像数据
 let image= image::SvgImage::from_data(&data).unwrap();
 ```
 
-Images can be used with widgets either via the WidgetExt::set_image()/set_image_scaled() or set_deimage()/set_deimage_scaled() (for deactivated/grayed image):
+Image可以通过WidgetExt::set_image()/set_image_scaled()或set_deimage()/set_deimage_scaled()（用于deactivated/grayed image）与widget一起使用。
 
 ```rust
 use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
@@ -50,7 +50,7 @@ fn main() {
 }
 ```
 
-Or via WidgetExt::draw() method:
+或者通过WidgetExt::draw()方法：
 ```rust
 use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
@@ -76,4 +76,4 @@ fn main() {
 
 ![svg](https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/hello.jpg)
 
-Using images in your app for icons and backgrounds also helps in giving your app its style.
+在你的应用程序中使用图像作为图标和背景也有助于赋予你的应用程序以风格。

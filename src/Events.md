@@ -1,15 +1,15 @@
-# Events
+# 事件 Events
 
-In the previously mentioned examples, you have seen callbacks mostly, and although that is one way of handling events, FLTK offers multiple ways to handle events:
-- We can use the set_callback() method, which is automatically triggered with a click to our button.
-- We can use the handle() method for fine-grained event handling.
-- We can use the emit() method which takes a sender and a message, this allows us to handle events in the event loop.
-- We can define our own event, which can be handled within another widget's handle method.
+在前面提到的例子中，你主要看到了回调（Callback），除此之外，FLTK还提供了多种处理事件的方式：
+- 我们可以使用set_callback()方法，在点击我们的按钮时自动触发该方法。
+- 我们可以使用handle()方法进行细粒度的事件处理。
+- 我们可以使用emit()方法，该方法接收一个sender和一个message，这使我们可以在event loop中处理事件。
+- 我们可以定义我们自己的事件，它可以在另一个部件的处理方法中被处理。
 
-### Setting the callback
-Part of the WidgetExt trait is the set_callback method:
+### 设置回调 Callback
+WidgetExt trait 提供了set_callback方法。
 
-#### Using closures
+#### 使用闭包
 
 ```rust
 use fltk::{prelude::*, *};
@@ -25,7 +25,7 @@ fn main() {
 }
 ```
 
-The capture argument is the `&mut Self` of the widget for which the callback is set:
+捕获的参数是你所设置了回调的widget的可变借用`&mut Self`： 
 ```rust
 use fltk::{prelude::*, *};
 
@@ -39,8 +39,9 @@ fn main() {
     app.run().unwrap();
 }
 ```
-The set_callback() methods have default triggers varying by the type of the widget. For buttons it's clicking or pressing enter when the button has focus.
-This can be changed using the set_trigger() method. For buttons this might not make much sense, however for input widgets, the trigger can be set to "CallbackTrigger::Changed" and this will cause changes in the input widget to trigger the callback.
+set_callback()方法有默认的触发器，不同widget可能有不同的触发器。对按钮来说，当它有焦点时，触发器是点击或按下回车。
+可以通过set_trigger()方法为widget改变触发器。对于按钮可能没什么意义，但是对于Input widget来说，触发器可以被设置为 "CallbackTrigger::Changed"，这可以使Input widget的状态改变时触发回调：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -57,9 +58,9 @@ fn main() {
     a.run().unwrap();
 }
 ```
-This will print on every character input by the user.
+用户每输入一个字符就会打印一次。
 
-The advanatage of using closures is the ability to "close" on scope arguments, i.e. you can also pass variables from the surrounding scope into the closure:
+使用闭包的好处是能够“关闭”作用域参数，即你也可以将周围作用域中的变量传递到闭包中：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -76,10 +77,10 @@ fn main() {
 }
 ```
 
-You will notice in the [Menus section](Menus) that the handling is done on a per MenuItem basis.
+你会注意到在[菜单](Menus)中，处理是在每个MenuI tem基础上进行的。
 
-#### Using function objects
-You can also use function objects directly if you prefer:
+#### 使用方法对象
+如果你喜欢的话你也可以直接设置方法对象：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -97,8 +98,9 @@ fn main() {
     app.run().unwrap();
 }
 ```
-We use `&mut impl WidgetExt` to be able to reuse the function object with multiple different widget types, otherwise, you can use `&mut button::Button` for the button.
-A disadvantage to this approach, is that to handle state, you would have to manage global state.
+我们使用`&mut impl WidgetExt`，以便能够在多种不同的widget类型中重复使用这个函数对象。或者，你可以直接使用`&mut button::Button`来表示只有Button可以使用。
+这种方法的一个缺点是，为了处理状态，你必须管理全局状态：
+
 ```rust
 extern crate lazy_static;
 
@@ -138,13 +140,14 @@ fn main() {
     app.run().unwrap();
 }
 ```
-Here we use lazy_static, there are also other crates to facilitate state management.
+这里我们使用lazy_static，也有其他的crate来优化状态管理。
 
-Similary for menus, we can use `&mut impl MenuExt` to be able to set the callback for menu widgets and menu items, in the `MenuExt::add()/insert()` or `MenuItem::add()/insert()` methods.
+同样，对菜单来说，在`MenuExt::add()/insert()`或`MenuItem::add()/insert()`方法中，我们可以使用`&mut impl MenuExt`来设置menu widget和menu item的回调。
 
-### Using the handle method
-The handle method takes a closure whose parameter is an Event, and returns a bool for handled events. The bool lets FLTK know whether the event was handled or not.
-The call looks like this:
+### 使用处理方法 handle method
+handle方法接收一个参数为事件的闭包，并为已处理的事件返回一个bool。这个bool值让FLTK知道该事件是否被处理。
+它的调用是这样的：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -163,7 +166,7 @@ fn main() {
     app.run().unwrap();
 }
 ```
-This prints the event, and doesn't handle it since we return false. Obviously we would like to do something useful, so change the handle call to:
+这将打印出event，但并不处理它，因为我们返回false。很明显，我们想做一些有用的事情，所以把处理调用改为：
 ```rust
     but.handle(|_, event| match event {
         Event::Push => {
@@ -173,9 +176,9 @@ This prints the event, and doesn't handle it since we return false. Obviously we
         _ => false,
     });
 ```
-Here we handle the Push event by doing something useful then  returning true, all other events are ignored and we return false.
+在这里，我们做一些有用的事情来处理推送事件并返回真，将其他事件都忽略并返回假。
 
-Another example:
+另一个例子：
 ```rust
     but.handle(|b, event| match event {
         Event::Push => {
@@ -186,8 +189,8 @@ Another example:
     });
 ```
 
-### Using messages
-This allows us to create channels and a Sender and Receiver structs, we can then emit messages (which have to be Send + Sync safe) to be handled in our event loop. The advantage is that we avoid having to wrap our types in smart pointers when we need to pass them into closures or into spawned threads.
+### 使用messages
+这允许我们创建Channel和一个Sender Receiver结构，然后我们可以发射Message（必须是Send + Sync安全的），并在我们的事件循环中处理。这样做的好处是，当我们需要将我们的类型传递到闭包或生成的线程中时，我们不必用智能指针来包装它们。
 ```rust
 use fltk::{prelude::*, *};
 
@@ -202,31 +205,31 @@ fn main() {
     let (s, r) = app::channel();
     
     but.emit(s, true);
-    // This is equivalent to calling but.set_callback(move |_| s.send(true)); 
+    // 这等同于调用but.set_callback(move |_| s.send(true))
 
     while app.wait() {
         if let Some(msg) = r.recv() {
             match msg {
                 true => println!("Clicked"),
-                false => (), // Here we basically do nothing
+                false => (), // 这里不作任何事
             }
         }
     }
 }
 ```
-Messages can be received in the event loop like in the previous example, otherwise you can receive messages in a background thread or in app::add_idle()' s callback:
+跟之前的例子一样，Messages 可以在事件循环中被接受， 另外你也可以在后台线程或app::add_idle()的回调中接收Message：
 ```rust
     app::add_idle(move || {
         if let Some(msg) = r.recv() {
             match msg {
                 true => println!("Clicked"),
-                false => (), // Here we basically do nothing
+                false => (), // 这里不做任何事
             }
         }
     });
 ```
 
-You're also not limited to using fltk channels, you can use any channel. For example, this uses the std channel:
+你也不限于使用fltk channel，你可以使用任何channel。例如，这个使例子用std channel：
 ```rust
 let (s, r) = std::sync::mpsc::channel::<Message>();
 btn.set_callback(move |_| {
@@ -234,7 +237,7 @@ btn.set_callback(move |_| {
 });
 ```
 
-You can also define a method which applies to all widgets, similar to the emit() method:
+你也可以定义一个适用于所有widget的方法，类似于emit()方法：
 ```rust
 use std::sync::mpsc::Sender;
 
@@ -265,9 +268,10 @@ fn main() {
 }
 ```
 
-### Creating our own events
-FLTK recognizes 29 events which are listed in enums::Event. However it allows us to create our own events using the app::handle(impl Into<i32>, window) call. The handle function takes an arbitrary i32 (> 30) value as a signal, ideally the values should be predefined, which can be handled within another widget's handle() method, the other widget needs to be within the window that was passed to app::handle.
-In the following example, we create a window with a frame and a button. The button's callback sends a CHANGED Event through the app::handle_main function. The CHANGED signal is queried in the frame's handle method.
+### 创建自己的events
+FLTK识别了29个事件，这些事件在enums::Event中可以看到。然而，它允许我们使用app::handle(impl Into<i32>, window)调用创建我们自己的事件。handle函数接受一个任意的i32（>30）值作为信号，理想情况下，这些值应该是预定义的，可以在另一个widget的handle()方法中处理，另一个widget需要在传递给app::handle的窗口中。
+在下面的例子中，我们创建了一个带有Frame和button的窗口。button的回调通过app::handle_main函数发送一个CHANGED事件。该CHANGED信号在框架的handle方法中被查询到：
+
 ```rust
 use fltk::{app, button::*, enums::*, frame::*, group::*, prelude::*, window::*};
 use std::cell::RefCell;
@@ -342,16 +346,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(app.run()?)
 }
-``` 
-The sent i32 signal can be created on the fly, or added to a const local or global, or within an enum. 
+```
+发送的i32信号可以即时创建，或者也可以添加到局部/全局常量中，或者添加到一个枚举中。
 
-#### Advantages:
-- No overhead.
-- The signal is dealt with like any fltk event.
-- the app::handle function returns a bool which indicates whether the event was handled or not.
-- Allows handling of custom signals/events outside the event loop.
-- Allows an MVC or SVU architecture to your application.
+#### 优点
+- 无开销。
+- 该信号的处理与任何fltk事件一样。
+- app::handle函数可以返回一个bool，表示该事件是否被处理。
+- 允许在事件循环之外处理自定义信号/事件。
+- 允许在你的应用程序中采用MVC或SVU架构。
 
-#### Disadvantages:
-- The signal can only be handled in a widget's handle method.
-- The signal is inaccessible within the event loop (for that, you might want to use WidgetExt::emit or channels described previously in this page). 
+#### 缺点
+- 该信号只能在一个widget的处理方法中处理。
+- 该信号在事件循环中是不可访问的（为此，你可能想使用WidgetExt::emit或本页之前描述的channel）。

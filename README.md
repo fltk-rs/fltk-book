@@ -4,6 +4,10 @@ This is an mdbook for fltk-rs. It can be accessed online using the following lin
 
 https://fltk-rs.github.io/fltk-book
 
+您可以通過以下鏈接在線訪問中文翻譯：
+
+https://flatig.vip/fltk-book-zh
+
 You can print and save as pdf to read at your convenience.
 
 To contribute:
@@ -19,3 +23,7 @@ To contribute:
 5- check things are correct by running `mdbook serve` and checking the output in your browser.
 
 6- Push your changes and open a pull request.
+
+You can also contribute to the Chinese translation here:
+
+https://github.com/Flatigers/fltk-book-zh

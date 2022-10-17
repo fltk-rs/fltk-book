@@ -2,6 +2,10 @@
 
 Welcome to the [fltk-rs](https://github.com/fltk-rs/fltk-rs) book!
 
+A Chinese translation of the fltk-book can be found here (中文翻譯):
+
+https://flatig.vip/fltk-book-zh
+
 This is an introductory book targeting the [fltk crate](https://crates.io/crates/fltk). Other resources include:
 - [Official Documentation](https://docs.rs/fltk)
 - [Videos](https://github.com/fltk-rs/fltk-rs#tutorials)

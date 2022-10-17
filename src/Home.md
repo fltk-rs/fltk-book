@@ -2,9 +2,7 @@
 
 Welcome to the [fltk-rs](https://github.com/fltk-rs/fltk-rs) book!
 
-A Chinese translation of the fltk-book can be found here (中文翻譯):
-
-https://flatig.vip/fltk-book-zh
+[本書的中文翻譯](https://flatig.vip/fltk-book-zh)
 
 This is an introductory book targeting the [fltk crate](https://crates.io/crates/fltk). Other resources include:
 - [Official Documentation](https://docs.rs/fltk)
@@ -90,3 +88,5 @@ We instantiate the App struct, which initializes the runtime and styles, then at
 The book is generated using [mdbook](https://github.com/rust-lang/mdBook) on the [fltk-book](https://github.com/fltk-rs/fltk-book) repo.
 
 As such, you would need to `cargo install mdbook`. More instructions can be found in fltk-book's README and in mdbook's [user guide](https://rust-lang.github.io/mdBook/).
+
+You can also contribute to the Chinese translation [here](https://github.com/Flatigers/fltk-book-zh)

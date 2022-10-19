@@ -17,7 +17,17 @@ cargo build --target=<your target> --features=fltk-bundled
 ```
 For aarch64-unknonw-linux-gnu, you might have to specify the linker:
 ```
-CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=<your target> --features=fltk-bundled
+CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=aarch64-unknown-linux-gnu --features=fltk-bundled
+```
+You can specify the linker in a .cargo/config.toml file so you won't have to pass it to the build command:
+```toml
+# .cargo/config.toml
+[target.aarch64-unknown-linux-gnu]
+linker = "aarch64-linux-gnu-gcc"
+```
+Then:
+```
+cargo build --target=aarch64-unknown-linux-gnu --features=fltk-bundled
 ```
 
 
@@ -103,6 +113,16 @@ Notice the `:arm64` suffix in the packages' name.
 - Run the build:
 ```
 CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --target=aarch64-unknown-linux-gnu
+```
+You can specify the linker in a .cargo/config.toml file so you won't have to pass it to the build command:
+```toml
+# .cargo/config.toml
+[target.aarch64-unknown-linux-gnu]
+linker = "aarch64-linux-gnu-gcc"
+```
+Then:
+```
+cargo build --target=aarch64-unknown-linux-gnu
 ```
 
 ## Using cross
@@ -205,3 +225,30 @@ RUN CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ CARGO_TARGET_AARCH64_UNKN
 FROM scratch AS export-stage
 COPY --from=ubuntu_build target/aarch64-unknown-linux-gnu/release/<your binary 
 ```
+
+## Using a CMake toolchain file
+The path to the file can be passed to CFLTK_TOOLCHAIN env variable:
+```
+CFLTK_TOOLCHAIN=$(pwd)/toolchain.cmake cargo build --target=<target architecture>
+```
+In newer versions of CMake (above 3.20), you can directly set the CMAKE_TOOLCHAIN_FILE environment variable.
+
+The contents of the CMake toolchain file usually set the CMAKE_SYSTEM_NAME as well as the cross-compilers. Another thing which needs to be set on Linux/BSD is the PKG_CONFIG_EXECUTABLE and PKG_CONFIG_PATH.
+A sample toolchain file:
+```cmake
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_PROCESSOR arm64)
+
+set(triplet aarch64-linux-gnu)
+set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)
+set(CMAKE_CXX_COMPILER /usr/bin/${triplet}-g++)
+set(ENV{PKG_CONFIG_EXECUTABLE} /usr/bin/${triplet}-pkg-config)
+set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/usr/lib/${triplet}/pkgconfig")
+
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+```
+Note the CMAKE_SYSTEM_PROCESSOR is usually the value of `uname -m` on the target platform, other possible values can be found [here](https://stackoverflow.com/a/70498851/9698906). We set the triplet variable in this example to aarch64-linux-gnu, which is the prefix used for the gcc/g++ compilers, as well as the cross-compiling aware pkg-config. This triplet is also equivalent to the Rust triplet aarch64-unknown-linux-gnu. The PKG_CONFIG_PATH is set to the directories containing the .pc files for our target, since these are required for the cairo and pango dependencies on Linux/BSD.
+The last 4 options just tell CMake to not mix the include/library paths of both host/target.

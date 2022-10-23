@@ -202,10 +202,13 @@ RUN ln -s /usr/bin/x86_64-alpine-linux-musl-g++ /usr/bin/musl-g++
 
 Another example to compile from amd64 linux-gnu to arm64 linux-gnu:
 ```dockerfile
-FROM ubuntu:latest AS ubuntu_build
+FROM ubuntu:20.04 AS ubuntu_build
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -qq
-RUN	apt-get install -y --no-install-recommends lsb-release g++-aarch64-linux-gnu g++ cmake curl tar git 
+RUN	apt-get install -y --no-install-recommends lsb-release g++-aarch64-linux-gnu g++ cmake curl tar git make
+RUN apt-get install -y ca-certificates && update-ca-certificates --fresh && export SSL_CERT_DIR=/etc/ssl/certs
 RUN	dpkg --add-architecture arm64 
 RUN sed -i "s/deb http/deb [arch=amd64] http/" /etc/apt/sources.list
 RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe" | tee -a /etc/apt/sources.list 
@@ -215,18 +218,21 @@ RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates
 RUN	apt-get update -qq && apt-get install -y --no-install-recommends libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64
 RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable --profile minimal -y
 
-ENV PATH=/root/.cargo/bin:$PATH
+ENV PATH="/root/.cargo/bin:$PATH" \
+	CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ \
+	CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc \
+    CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc \
+    CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++ \
+    PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig/:${PKG_CONFIG_PATH}"
 
 RUN rustup target add aarch64-unknown-linux-gnu
-# works around an include path issue in some debian versions
-RUN apt-get install -y libharfbuzz-dev libpango1.0-dev --no-install-recommends && cp /usr/include/harfbuzz/*.h /usr/include/aarch64-linux-gnu
 
 COPY . .
 
-RUN CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --release --target=aarch64-unknown-linux-gnu
+RUN  cargo build --release --target=aarch64-unknown-linux-gnu
 
 FROM scratch AS export-stage
-COPY --from=ubuntu_build target/aarch64-unknown-linux-gnu/release/<your binary 
+COPY --from=ubuntu_build target/aarch64-unknown-linux-gnu/release/<your binary name> .
 ```
 
 ## Using a CMake toolchain file

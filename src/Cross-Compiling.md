@@ -215,7 +215,7 @@ RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main mu
 RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe" | tee -a /etc/apt/sources.list 
 RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe" | tee -a /etc/apt/sources.list 
 RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe" | tee -a /etc/apt/sources.list 
-RUN	apt-get update -qq && apt-get install -y --no-install-recommends libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64
+RUN	apt-get update -qq && apt-get install -y --no-install-recommends -o APT::Immediate-Configure=0 libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64
 RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable --profile minimal -y
 
 ENV PATH="/root/.cargo/bin:$PATH" \

@@ -77,7 +77,7 @@ fn main() {
             println!("btn1 is checked");
         }
         if btn2.value() {
-            println!("btn1 is checked");
+            println!("btn2 is checked");
         }
     });
 

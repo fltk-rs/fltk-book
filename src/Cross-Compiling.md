@@ -194,10 +194,31 @@ And run using:
 DOCKER_BUILDKIT=1 docker build --file Dockerfile --output out .
 ```
 Your binary will be in the `./out` directory.
+
 Note on alpine, if you install Rust via rustup, you might have to point the musl-gcc and musl-g++ to the appropriate toolchain in your dockerfile (before running `cargo build`):
 ```dockerfile
 RUN ln -s /usr/bin/x86_64-alpine-linux-musl-gcc /usr/bin/musl-gcc
 RUN ln -s /usr/bin/x86_64-alpine-linux-musl-g++ /usr/bin/musl-g++
+```
+You would also need to add "-C target-feature=-crt-static" to RUSTFLAGS due to this rust toolchain issue:
+https://github.com/rust-lang/rust/issues/61328
+
+i.e.
+```dockerfile
+FROM alpine:latest AS alpine_build
+ENV RUSTUP_HOME="/usr/local/rustup" CARGO_HOME="/usr/local/cargo" PATH="/usr/local/cargo/bin:$PATH" RUSTFLAGS="-C target-feature=-crt-static"
+RUN apk add git curl cmake make g++ pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
+
+RUN ln -s /usr/bin/x86_64-alpine-linux-musl-gcc /usr/bin/musl-gcc
+RUN ln -s /usr/bin/x86_64-alpine-linux-musl-g++ /usr/bin/musl-g++
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain stable-x86_64-unknown-linux-musl
+
+COPY . .
+RUN cargo build --release
+
+FROM scratch AS export-stage
+COPY --from=alpine_build target/release/<your binary name> .
 ```
 
 Another example to compile from amd64 linux-gnu to arm64 linux-gnu:

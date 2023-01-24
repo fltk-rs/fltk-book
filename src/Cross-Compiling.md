@@ -38,7 +38,8 @@ cargo install cross
 cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docker daemon has to be running, no need to add via rustup
 ```
 
-If your target requires external dependencies, like on Linux, you would have to create a custom docker image and use it for your cross-compilation via a Cross.toml file.
+If your target requires external dependencies, like on Linux, you would have to create a custom docker image and use it for your cross-compilation via:
+1- a Cross.toml file.
 
 For example, for a project of the following structure:
 ```
@@ -75,6 +76,19 @@ The Cross.toml contents:
 dockerfile = "./arm64-dockerfile"
 ```
 
+2- Configuring Cargo.toml:
+```toml
+[target.aarch64-unknown-linux-gnu]
+pre-build = [""" \
+    dpkg --add-architecture arm64 && \
+    apt-get update && \
+    apt-get install --assume-yes --no-install-recommends \
+    libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 \
+    libxinerama-dev:arm64 libxcursor-dev:arm64 \
+    libxrender-dev:arm64  libxfixes-dev:arm64  libgl1-mesa-dev:arm64 \
+    libglu1-mesa-dev:arm64 libasound2-dev:arm64 libpango1.0-dev:arm64 \
+    """]
+```
 Then run cross:
 ```
 cross build --target=aarch64-unknown-linux-gnu

@@ -9,3 +9,12 @@ edition = "2018"
 
 [build]
 build-dir = "docs"
+
+[output.html]
+git-repository-url = "https://github.com/Flatigers/fltk-book-zh"
+edit-url-template = "https://github.com/Flatigers/fltk-book-zh/edit/main/{path}"
+
+
+[output.html.fold]
+enable = true
+level = 1

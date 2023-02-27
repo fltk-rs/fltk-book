@@ -578,23 +578,23 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 </code></pre>
 <p>注意 CMAKE_SYSTEM_PROCESSOR 通常是目标平台上 uname -m 的值，其他可能的值参见<a href="https://stackoverflow.com/questions/70475665/what-are-the-possible-values-of-cmake-system-processor/70498851#70498851">Possible Values</a>。 我们将此示例中的<code>triplet</code>变量设置为 aarch64-linux-gnu，这是用于 gcc/g++ 编译器以及 pkg-config 的前缀。 这个<code>triplet</code>也等同于 Rust <code>triplet</code> aarch64-unknown-linux-gnu。 PKG_CONFIG_PATH 设置为包含我们target的 <code>.pc</code> 文件的目录，这些是 Linux/BSD 上的 cairo 和 pango 依赖项所必需的。 最后 4 个选项可以防止CMake混淆host/taregt（当前机器和交叉编译的目标机器）的include/library的路径。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fluid"><a class="header" href="#fluid">Fluid</a></h1>
-<p>FLTK提供了一个名为FLUID的，所见即所得的快速GUI应用开发工具，用它可以创建GUI应用。
-目前在youtube上有一个使用基于Rust使用它的视频教程。
+<p>FLTK提供了一个名为FLUID的，所见即所得的快速GUI程序开发工具，它可以方便地编写GUI程序。
+目前在Youtube上有一个教你基于Rust使用它的视频教程：
 <a href="https://www.youtube.com/watch?v=k_P0wG3-dNk">Use FLUID (RAD tool) with Rust</a></p>
-<p>fl2rust crate将Fluid生成的.fl文件翻译成Rust代码，并编译进你的程序中。
+<p>fl2rust crate将Fluid生成的.fl文件转换成Rust代码，并编译进你的程序中。
 要获取更多详细信息，请查看它的官方<a href="https://github.com/MoAlyousef/fl2rust">仓库</a>。</p>
-<p>你可以使用cargo install 安装 fltk-fluid和fl2rust crates来获得FLUID。</p>
+<p>你可以使用cargo install 安装 fltk-fluid 和 fl2rust crate 来使用FLUID。</p>
 <pre><code>cargo install fltk-fluid
 cargo install fl2rust
 </code></pre>
 <p>然后运行：</p>
 <pre><code>fluid &amp;
 </code></pre>
-<p>你也可以通过你系统的包管理器获取Fluid，这样的话它将作为一个单独的包或fltk包的一部分。</p>
-<p>目前，fl2rust并不能检查生成的Rust代码的正确性。它也只限于构造方法。</p>
+<p>你也可以通过使用包管理器获取Fluid，这样的话它将作为一个单独的程序或者是fltk程序的一部分安装到你的系统中。</p>
+<p>目前，fl2rust并不能确保生成的Rust代码的正确性。它的使用也只限于构造方法。</p>
 <h2 id="用法-1"><a class="header" href="#用法-1">用法</a></h2>
-<p>首先，你可以使用<code>cargo new app</code>创建一个新的Rust项目。
-fl2rust将作为一个构建依赖项，被添加到你的项目中：</p>
+<p>为了演示用法，我们使用<code>cargo new app</code>创建一个新的Rust项目。
+fl2rust将作为 <code>build-dependdencies</code> 添加到你的项目中：</p>
 <pre><code class="language-toml"># Cargo.toml
 [dependencies]
 fltk = &quot;1&quot;
@@ -602,7 +602,7 @@ fltk = &quot;1&quot;
 [build-dependencies]
 fl2rust = &quot;0.4&quot;
 </code></pre>
-<p>然后就可以在build.rs文件中使用它（该文件在预编译时运行）来生成Rust代码。</p>
+<p>然后在编译文件build.rs（该文件会在编译Rust程序时运行）中调用它提供的方法来将<code>.fl</code>文件转换成Rust代码。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">// build.rs
 fn main() {
     use std::path::PathBuf;
@@ -613,11 +613,11 @@ fn main() {
     g.in_out(&quot;src/myuifile.fl&quot;, out_path.join(&quot;myuifile.rs&quot;).to_str().unwrap()).expect(&quot;Failed to generate rust from fl file!&quot;);
 }
 </code></pre></pre>
-<p>我们将把fluid文件命名为myuifile.fl。我们告诉cargo，如果该文件被修改，就重新运行。我们将在我们的源代码目录创建文件，但如果你愿意，也可以为它创建自己的文件夹放进去。我们告诉生成器，让它接受fluid文件并生成一个myuifile.rs。这个文件是在OUT_DIR中生成的，所以你不会在你的src目录中看到它。
-但是为了包含（include）它，你需要创建一个Rust源文件，它可以和我们输出的文件同名，并把它放在src目录中：</p>
+<p>我们在src目录下创建一个fluid文件 <code>myuifile.fl</code>。我们通过<code>println!</code>中的指令告诉Cargo，如果文件发生改变就重新运行脚本。这里的文件名和目录是为了演示而设置的，你可以自己选择目录，以及输入和输出的文件名。这里我们将<code>myuifile.fl</code>文件转换成<code>myuifile.rs</code>，它生成在<code>OUT_DIR</code>中，因此我们不会在<code>src</code>目录下看到它。
+为了可以使用转换后的文件，你需要在<code>src</code>目录创建一个与上述的输出文件同名的文件：</p>
 <pre><code>touch src/myuifile.rs
 </code></pre>
-<p>我们将使用include！宏，从自动生成的文件中导入这些内容。</p>
+<p>然后使用 <code>include</code> 宏，载入生成的文件中的内容。</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// src/myuifile.rs
@@ -629,7 +629,7 @@ fn main() {
 include!(concat!(env!(&quot;OUT_DIR&quot;), &quot;/myuifile.rs&quot;));
 <span class="boring">}
 </span></code></pre></pre>
-<p>然后我们就可以使用main.rs中的内容了：</p>
+<p>最后我们就可以在<code>main.rs</code>中使用这些内容了：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">// src/main.rs
 use fltk::{prelude::*, *};
 mod myuifile;
@@ -639,42 +639,38 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>现在到了gui部分。打开fluid：</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fltk-fluid &amp; #or just fluid if installed from a package manager
-<span class="boring">}
-</span></code></pre></pre>
-<p>“&amp;”符号让shell把它作为一个分离进程打开，所以我们仍然可以用我们的shell来编译我们的代码。</p>
+<p>现在到了gui的编写部分，打开fluid：</p>
+<pre><code class="language-bash">fltk-fluid &amp; # 如果从包管理器安装，只需要运行 fluid
+</code></pre>
+<p><code>&amp;</code>使终端将它作为一个独立的进程打开，所以我们仍然可以使用终端来使用cargo编译我们的代码，或者你可以打开另一个终端。</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146925955-ac778726-1398-4ea2-8e46-a2f8fff89804.png" alt="image" /></p>
-<p>我们第一眼看到的是一个空窗口和一个菜单栏。我们在这里的第一步是创建一个类：</p>
+<p>我们看到的是一个空窗口和一个菜单栏。编写程序的第一步是创建一个类：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146926284-cd9f21ce-b4b1-4009-9766-32876a08de98.png" alt="image" /></p>
-<p>这将弹出一个对话框，我们直接点击 &quot;OK &quot;让它使用默认的名称（UserInterface）。现在你会看到我们的类出现在列表中：</p>
+<p>现在会弹出一个对话框，我们直接点击 &quot;OK &quot;让它使用默认的名称（UserInterface）。现在你会看到我们刚才创建的类出现在下面的列表中：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146926505-545f26c1-ac7d-4f10-94a9-2d0c16875d4e.png" alt="image" /></p>
-<p>(我们已经扩展了这个窗口)</p>
-<p>接下来，再次按下new键，我们将为我们的类添加一个构造函数：</p>
+<p>接下来，再次点击new，为这个类添加一个构造函数：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146926749-9199bd23-0346-4286-993f-bfb7588ae420.png" alt="image" /></p>
 <p>同样使用它的默认名称，即<code>make_window()</code>。</p>
-<p>接下来我们将添加一个窗口：</p>
+<p>接下来我们添加一个窗口：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146926970-769ad7a1-9d03-457a-91f7-d6a18e2ba3b0.png" alt="image" /></p>
-<p>现在弹出了一个新的窗口，我们可以拖动边框将其放大一些：</p>
+<p>现在出现了一个新的窗口，我们可以拖动边框放大它：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146927099-ff014e0d-8ea0-4f90-a500-882eb7b49bb2.png" alt="image" /></p>
-<p>双击窗口会弹出一个对话框，我们可以改变窗口的gui属性（在GUI标签下）、风格（在Style标签下）和类属性（在C++标签下）。</p>
+<p>双击窗口，这会弹出一个对话框，可以用来设置窗口的gui属性（在GUI标签下）、风格（在Style标签下）和类属性（在C++标签下）。</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146927520-c2ee18b1-0d17-43cd-93eb-edbf725ddf6c.png" alt="image" /></p>
-<p>我们在GUI标签中给这个窗口一个<code>My Window</code>标签 ，然后在Style标签中把颜色改为白色：</p>
+<p>我们在GUI标签中给这个窗口设置<code>My Window</code>标签 ，然后在Style标签中把颜色改为白色：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146932899-6a4419ae-9c91-4b48-a363-d87c85b01778.png" alt="image" /></p>
-<p>在C++标签下，我们给它一个变量名<code>my_win</code>。</p>
+<p>在C++标签下，我们为这个窗口变量起个名字，<code>my_win</code>。</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146932794-7e1a2819-842d-45c7-88c8-be9fb728e805.png" alt="image" /></p>
-<p>现在，我们的窗口可以通过<code>myuifile::UserInterface::my_win</code>访问。</p>
-<p>现在左击窗口并添加一个Button（按钮）：</p>
+<p>现在，可以通过<code>myuifile::UserInterface::my_win</code>访问窗口了。</p>
+<p>之后，用鼠标左键点击窗口，然后添加一个Button（按钮）：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146928089-ad0454de-252e-4e81-9079-db0ef5c67c8f.png" alt="image" /></p>
-<p>这将打开与之前相同的对话框，但这次我们选择按钮。在C++下，我们将给它一个变量名<code>btn</code>。在style下，我们将改变颜色和标签的颜色。然后在Gui下，我们将给它一个标签 &quot;click me&quot;。</p>
+<p>这次我们选择Button。在C++标签下，我们为这个按钮变量起一个名字，<code>btn</code>。在style下，改变按钮的颜色和标签的颜色。然后在GUI下，把它的标签（按钮显示的文字） &quot;click me&quot;。</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146928419-a1a96e03-5b90-4aaa-8f70-9b17f76f9b9f.png" alt="image" /></p>
-<p>可以拖动边框来调整大小，把按钮拖到任何想要的位置。Fluid有一个布局菜单，可以用它修改一些小部件（如果我们有很多按钮），使其具有相同的布局/大小...等。</p>
+<p>可以拖动边框来调整大小，拖动按钮来改变它的位置。Fluid有一个Layout菜单，可以用它修改一组小部件（例如有很多按钮的情况），使其具有相同的布局/大小...等。</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146928654-43838e2a-aba8-4a24-8d70-1e25e1717c58.png" alt="image" /></p>
-<p>我们现在点击<code>File/Save As...</code>将文件保存在src目录下，命名为srcmyuifile.fl。</p>
-<p>现在可以运行<code>cargo run</code>来看看是否能编译通过，但我们还没有调用<code>make_window()</code>方法，所以暂时还不会看到任何东西。
-现在你可以修改 src/main.rs 来显示窗口，并为我们的按钮添加一个回调。</p>
+<p>现在点击<code>File/Save As...</code>将文件保存在src目录下，命名为<code>myuifile.fl</code>。</p>
+<p>可以运行<code>cargo run</code>来看看能不能编译通过，但我们还没有调用<code>make_window()</code>方法，所以暂时还不会看到任何东西。
+现在修改 src/main.rs 来让窗口可以显示出来，并为我们的按钮添加一个点击回调事件（callback）。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 mod myuifile;
 
@@ -691,7 +687,7 @@ fn main() {
 }
 </code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="app-结构"><a class="header" href="#app-结构">App 结构</a></h1>
-<p>crate在app模块中提供了一个App结构。初始化App结构可以初始化所有内部样式、字体和支持的图像类型。它还初始化了程序将要运行的多线程环境。</p>
+<p>Fltk crate的app模块中有一个App结构体。初始化App结构体，将会初始化所有内部样式、字体和支持的图像类型。它还会初始化程序将要在其中运行的多线程环境。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::*;
 
 fn main() {
@@ -699,18 +695,18 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>run方法运行gui应用程序的事件循环（event loop）。
-要对事件进行精细的控制，可以使用wait()方法：</p>
+<p>run方法将会启动gui程序的事件循环（event loop）。
+如果要对事件进行细粒度控制，可以使用wait()方法：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::*;
 
 fn main() {
     let app = app::App::default();
     while app.wait() {
-        // handle events
+        // 处理事件
     }
 }
 </code></pre></pre>
-<p>此外，App结构允许你使用with_scheme()初始器来设置程序的全局主题：</p>
+<p>此外，可以在App的实例上使用<code>with_scheme()</code>来设置程序的全局主题：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::*;
 
 fn main() {
@@ -718,15 +714,22 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>这将使你的程序具有Gtk程序的样子。还有其他的内置方案，Basic、Plastic和Gleam。</p>
-<p>App结构还负责在应用程序开始时使用load_system_fonts()方法加载系统字体。</p>
-<p>一个典型的fltk-rs应用程序，将在创建任何部件和显示主窗口之前构建App结构。</p>
-<p>任何在run()方法调用后添加的逻辑，将在事件循环结束后执行（通常是关闭应用程序的所有窗口时，或者调用quit()方法时）。该逻辑可能包括在必要时重启程序的逻辑。</p>
-<p>除了App结构外，App模块本身还包含与你的程序的全局状态有关的结构和自由函数。其中包括设置背景和前景颜色、默认字体和大小等视觉效果、屏幕功能、剪贴板功能、全局处理器、应用事件、通道（channels）（发送器和接收器）和超时。</p>
+<p>这将你的程序的主题设置为GTK。还有其他的内置主题方案，Basic、Plastic和Gleam（有一个<code>fltk-theme crate</code>提供了更多主题，你也可以自定义主题让它看起来更好看(^ο^)）。</p>
+<p>还可以在App的实例上调用<code>load_system_fonts()</code>方法，让程序在启动时加载系统字体。</p>
+<p>一个典型的fltk-rs程序将在创建任何组件并显示窗口之前创建App结构体。</p>
+<p>任何写在调用<code>run()</code>方法后的代码，将在事件循环结束后执行（通常是关闭程序的所有窗口时，或者调用<code>quit()</code>方法时）。这包括必要时重启程序的指令等。</p>
+<p>除了App结构体外，<code>app</code>模块本身还包含与你的程序的全局状态有关的结构体和自由函数。其中包括设置背景色和前景色，以及默认字体和大小等视觉效果，还有屏幕功能、剪贴板功能、全局事件处理器、程序事件、通道（发送器和接收器）和超时等。</p>
 <p>其中一些将在本书的其他部分讨论。</p>
+<pre><code>原文名词对照：
+自由函数 - free functions
+屏幕，剪切板功能 - screen functions, clipboard functions
+全局事件处理器 - global handler
+程序事件 - app events
+通道，发送器和接收器 - channels, sender and receiver
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="窗口-windows"><a class="header" href="#窗口-windows">窗口 Windows</a></h1>
-<p>FLTK会在它支持的系统平台上调用原生窗口，然后基本上通过自己的方法来绘制。它会在windows上调用HWND，在MacOS上调用NSWindow，在X11系统（linux, BSD）上调用XWindow。</p>
-<p>Window 本身具有与FLTK提供的其他部件相同的接口，即WidgetExt trait，这将在下一页讨论。</p>
+<p>FLTK在它支持的系统平台上调用原生窗口，然后基本上是自己绘制图形界面的。它会在windows上调用<code>HWND</code>，在MacOS上调用<code>NSWindow</code>，在X11系统（linux, BSD）上调用<code>XWindow</code>。</p>
+<p>Window 与FLTK的其他组件具有相同的接口，<code>WidgetExt trait</code>。这将在下一节讨论。</p>
 <p>让我们用到目前为止学到的东西来创建一个Window。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
@@ -739,17 +742,17 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937363-f82ffa80-3503-11eb-8f3a-9afe34bdad59.jpg" alt="img1" /></p>
-<p>调用new()函数需要五个参数：</p>
+<p>调用<code>new()</code>方法需要五个参数：</p>
 <ul>
-<li><code>x</code> 以电脑屏幕最左侧为原点的水平距离。</li>
-<li><code>y</code> 以电脑屏幕最左侧为原点的垂直距离。</li>
-<li><code>width</code> window的宽度。</li>
-<li><code>height</code> window的高度。</li>
-<li><code>title</code> window标题。</li>
+<li><code>x</code> 从电脑屏幕最左侧开始计算的水平距离。</li>
+<li><code>y</code> 从电脑屏幕最上侧开始计算的垂直距离。</li>
+<li><code>width</code> Window的宽度。</li>
+<li><code>height</code> Window的高度。</li>
+<li><code>title</code> Window的标题。</li>
 </ul>
-<p>接下来注意对end()的调用。window，以及其他类型的widget，实现了GroupExt trait。实现该trait的这些部件将 持有 任何在call()和end()间创建的widget（通过new()创建串口时，隐式调用了begin()），或者作为其父widget。
-下一个调用show()唤起了window，使其出现在显示屏上。</p>
-<p>window可以被嵌入到其他window内：</p>
+<p>这里还调用了<code>end()</code>方法。<code>GroupExt Trait</code>定义了<code>begin()</code>方法和<code>end()</code>方法，Window以及其他实现了该Trait的组件，将<strong>持有</strong>任何在<code>begin()</code>和<code>end()</code>方法间创建的组件（通过<code>new()</code>创建Window时，隐式调用了<code>begin()</code>），或者成为这些组件的父组件。
+调用<code>show()</code>会让Window出现在屏幕上。</p>
+<p>Window可以被嵌入到其他Window内：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -764,7 +767,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937446-139b0580-3504-11eb-8738-1e4161175d0b.jpg" alt="embed" /></p>
-<p>在这里，第二个窗口，my_window2，被嵌入到第一个窗口，my_window里面。我们把它的颜色设为黑色，这样它才会被我们看到。注意，它的父窗口是第一个窗口。在父窗口之外创建第2个窗口才会创建两个独立的窗口，不要忘记还要调用show()：</p>
+<p>在这里创建了第二个窗口<code>my_window2</code>，它会被嵌入到第一个窗口<code>my_window</code>里面。我们把它的颜色设为黑色，这样我们才能注意到它。注意，它的父组件是第一个Window。在父窗口外创建第2个窗口才会创建出两个独立的窗口，需要注意每个窗口都需要调用<code>show()</code>方法才会显示：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -778,16 +781,16 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>可以使用my_window.set_border(false)方法实现无边框窗口：</p>
+<p>可以使用<code>my_window.set_border(false)</code>方法取消<code>my_window</code>的边框，实现无边框窗口：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937639-565cdd80-3504-11eb-8cf6-e135243c38b0.png" alt="image" /></p>
-<p>set_border(bool)方法是WindowExt trait的一部分，除了WidgetExt和GroupExt trait外，FLTK中的所有窗口类型都实现了它。
-所有trait的列表可以在crates的prelude module中找到：</p>
-<p><a href="https://docs.rs/fltk/*/fltk/prelude/index.html">文档</a></p>
+<p><code>set_border(bool)</code>方法也定义在<code>WindowExt trait</code>中，除了直线了<code>WidgetExt Trait</code>和<code>GroupExt Trait</code>的组件外（实现WindowExt需要实现GroupExt，实现GroupExt需要实现WidgetExt），FLTK中的所有窗口类型都实现了该Trait。
+所有的Trait可以在fltk crate的<code>fltk::prelude</code>模块中找到：</p>
+<p><a href="https://docs.rs/fltk/*/fltk/prelude/index.html">FLTK Trait文档</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="组件-widgets"><a class="header" href="#组件-widgets">组件 Widgets</a></h1>
-<p>FLTK提供了大约80个窗口组件。这些组件都实现了WidgetBase和WidgetExt的基本trait集。 我们已经遇到了我们的第一个组件，Window。
-正如我们在Window小组件中所看到的，小组件也可以根据其功能实现其他trait。
+<p>FLTK提供了80多个组件。这些组件都实现了<code>WidgetBase</code>和<code>WidgetExt</code>组成的基本集合。 我们已经见过了我们的第一个组件，Window组件。
+正如我们在Window组件中了解的，基于功能的不同，不同的组件还会各自实现其他Trait。
 在我们之前写的例子中添加一个按钮：</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2018">uuse fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -799,8 +802,8 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png" alt="image" /></p>
-<p>注意，这个按钮的父组件是my_window，因为它是在begin()和end()之间创建的。
-另一种添加组件的方法是，使用实现了GroupExt trait的widget所提供的add(widget)方法。</p>
+<p>注意，这个按钮的父组件是my_window，因为它是在隐式调用的<code>begin()</code>和<code>end()</code>之间创建的。
+在程序中添加组件的另一种方法是，在实现了<code>GroupExt Trait</code>的Widget上调用该Trait提供的<code>add(widget)</code>方法。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -815,21 +818,21 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>另一件要注意的事情是按钮的初始化，它的构造函数基本上与Window相同，这是因为它实现了WidgetBase trait。注意，虽然Window的x和y坐标是相对于屏幕的，但按钮的x和y坐标却是相对于包含按钮的窗口的。你可能已经注意到，这也适用于我们在前一页的嵌入式窗口。</p>
-<p>这个按钮也实现了ButtonExt trait，它提供了一些有用的方法，比如设置快捷键来触发我们的按钮以及其他方法。</p>
-<p>构建组件也可以用构建器模式来完成：</p>
+<p>需要注意一下按钮的初始化方式，它的构造方法基本上与Window相同，因为<code>new()</code>方法是定义在<code>WidgetBase trait</code>中的，而大部分组件都实现了这个Trait。注意，虽然Window的x和y坐标是相对于屏幕而言的，但按钮的x和y坐标却是相对于作为按钮父组件的的Window而言的。你可能已经注意到了这一点，这也适用于我们在上一节中提到的嵌入在另一个窗口中的窗口。</p>
+<p>Button组件也实现了<code>ButtonExt trait</code>，它定义了一些有用的方法，比如设置快捷键<code>Shortcut</code>来通过其他方法触发我们的按钮。</p>
+<p>也可以使用构建器模式来创建一个组件：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let but1 = Button::new(10, 10, 80, 40, &quot;Button 1&quot;);
-// OR
+// 下面为构建器模式
 let but1 = Button::default()
     .with_pos(10, 10)
     .with_size(80, 40)
     .with_label(&quot;Button 1&quot;);
 <span class="boring">}
 </span></code></pre></pre>
-<p>这基本上有相同的效果。</p>
-<p>目前，我们的程序显示了一个带有按钮的窗口，这个按钮是可以点击的，但什么也做不了！因此，在下一页中，我们将学习为它添加一些动作。</p>
+<p>它们的效果基本是相同的。</p>
+<p>目前位置，我们的程序会显示一个窗口和其中的按钮。这个按钮可以点击，但什么用都没有！但别担心，在下一节中，我们将学习为它添加一些行为（Actions）。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="按钮-buttons"><a class="header" href="#按钮-buttons">按钮 Buttons</a></h1>
 <p>Button widgets 有多种用途和多种形式：</p>
 <ul>

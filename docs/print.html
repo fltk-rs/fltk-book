@@ -1127,10 +1127,11 @@ fn main() {
 </li>
 </ol>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png" alt="image" /></p>
-<p>另外，你也可以结构出菜单选项的字符串来进行匹配：
-```rust
-use fltk::{prelude::*, *};</p>
-<pre><code>fn main() {
+<p>另外，你也可以结构出菜单选项的字符串来进行匹配：</p>
+<pre><code>```rust
+use fltk::{prelude::*, *};
+
+fn main() {
     let app = app::App::default();
     let mut wind = window::Window::default().with_size(400, 300);
     let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
@@ -1192,10 +1193,11 @@ fn main() {
 </code></pre></pre>
 </li>
 </ol>
-<p>另外在 <a href="Events">事件 Events</a> 还会提到，你可以不适用闭包而传递一个函数：
-```rust
-use fltk::{enums::<em>, prelude::</em>, *};</p>
-<pre><code>fn menu_cb(m: &amp;mut impl MenuExt) {
+<p>另外在 <a href="Events">事件 Events</a> 还会提到，你可以不适用闭包而传递一个函数：</p>
+<pre><code>```rust
+use fltk::{enums::*, prelude::*, *};
+
+fn menu_cb(m: &amp;mut impl MenuExt) {
     if let Some(choice) = m.choice() {
         match choice.as_str() {
             &quot;New\t&quot; =&gt; println!(&quot;New&quot;),
@@ -1354,96 +1356,95 @@ fn main() {
 </code></pre></pre>
 <p>你可能会问，为什么不直接用第一个例子那样简单的代码，还要使用其他更复杂的方式完成回调。其实每种方法都有它的用途。
 对于简单的<strong>下拉菜单</strong>，用第一种方法会更加方便。对于程序的<strong>菜单栏</strong>，用第二种方法会更好，它可以让你为菜单选项设置快捷键<code>Shortcuts</code>和选项的类型<code>MenuFlags</code>（例如下拉菜单，选择选项，用于分隔的占位菜单等），另外你不用再像第一个例子一样，在菜单的回调中处理所有事件。使用<code>add_emit()</code>方法处理子菜单一样很容易，就像在<a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">编辑器示例</a>中那样：</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>        let mut menu = menu::SysMenuBar::default().with_size(800, 35);
-        menu.set_frame(FrameType::FlatBox);
-        menu.add_emit(
-            &quot;&amp;File/New...\t&quot;,
-            Shortcut::Ctrl | 'n',
-            menu::MenuFlag::Normal,
-            *s,
-            Message::New,
-        );
+<pre><code>```rust
+    let mut menu = menu::SysMenuBar::default().with_size(800, 35);
+    menu.set_frame(FrameType::FlatBox);
+    menu.add_emit(
+        &quot;&amp;File/New...\t&quot;,
+        Shortcut::Ctrl | 'n',
+        menu::MenuFlag::Normal,
+        *s,
+        Message::New,
+    );
 
-        menu.add_emit(
-            &quot;&amp;File/Open...\t&quot;,
-            Shortcut::Ctrl | 'o',
-            menu::MenuFlag::Normal,
-            *s,
-            Message::Open,
-        );
+    menu.add_emit(
+        &quot;&amp;File/Open...\t&quot;,
+        Shortcut::Ctrl | 'o',
+        menu::MenuFlag::Normal,
+        *s,
+        Message::Open,
+    );
 
-        menu.add_emit(
-            &quot;&amp;File/Save\t&quot;,
-            Shortcut::Ctrl | 's',
-            menu::MenuFlag::Normal,
-            *s,
-            Message::Save,
-        );
+    menu.add_emit(
+        &quot;&amp;File/Save\t&quot;,
+        Shortcut::Ctrl | 's',
+        menu::MenuFlag::Normal,
+        *s,
+        Message::Save,
+    );
 
-        menu.add_emit(
-            &quot;&amp;File/Save as...\t&quot;,
-            Shortcut::Ctrl | 'w',
-            menu::MenuFlag::Normal,
-            *s,
-            Message::SaveAs,
-        );
+    menu.add_emit(
+        &quot;&amp;File/Save as...\t&quot;,
+        Shortcut::Ctrl | 'w',
+        menu::MenuFlag::Normal,
+        *s,
+        Message::SaveAs,
+    );
 
-        menu.add_emit(
-            &quot;&amp;File/Print...\t&quot;,
-            Shortcut::Ctrl | 'p',
-            menu::MenuFlag::MenuDivider,
-            *s,
-            Message::Print,
-        );
+    menu.add_emit(
+        &quot;&amp;File/Print...\t&quot;,
+        Shortcut::Ctrl | 'p',
+        menu::MenuFlag::MenuDivider,
+        *s,
+        Message::Print,
+    );
 
-        menu.add_emit(
-            &quot;&amp;File/Quit\t&quot;,
-            Shortcut::Ctrl | 'q',
-            menu::MenuFlag::Normal,
-            *s,
-            Message::Quit,
-        );
+    menu.add_emit(
+        &quot;&amp;File/Quit\t&quot;,
+        Shortcut::Ctrl | 'q',
+        menu::MenuFlag::Normal,
+        *s,
+        Message::Quit,
+    );
 
-        menu.add_emit(
-            &quot;&amp;Edit/Cut\t&quot;,
-            Shortcut::Ctrl | 'x',
-            menu::MenuFlag::Normal,
-            *s,
-            Message::Cut,
-        );
+    menu.add_emit(
+        &quot;&amp;Edit/Cut\t&quot;,
+        Shortcut::Ctrl | 'x',
+        menu::MenuFlag::Normal,
+        *s,
+        Message::Cut,
+    );
 
-        menu.add_emit(
-            &quot;&amp;Edit/Copy\t&quot;,
-            Shortcut::Ctrl | 'c',
-            menu::MenuFlag::Normal,
-            *s,
-            Message::Copy,
-        );
+    menu.add_emit(
+        &quot;&amp;Edit/Copy\t&quot;,
+        Shortcut::Ctrl | 'c',
+        menu::MenuFlag::Normal,
+        *s,
+        Message::Copy,
+    );
 
-        menu.add_emit(
-            &quot;&amp;Edit/Paste\t&quot;,
-            Shortcut::Ctrl | 'v',
-            menu::MenuFlag::Normal,
-            *s,
-            Message::Paste,
-        );
+    menu.add_emit(
+        &quot;&amp;Edit/Paste\t&quot;,
+        Shortcut::Ctrl | 'v',
+        menu::MenuFlag::Normal,
+        *s,
+        Message::Paste,
+    );
 
-        menu.add_emit(
-            &quot;&amp;Help/About\t&quot;,
-            Shortcut::None,
-            menu::MenuFlag::Normal,
-            *s,
-            Message::About,
-        );
+    menu.add_emit(
+        &quot;&amp;Help/About\t&quot;,
+        Shortcut::None,
+        menu::MenuFlag::Normal,
+        *s,
+        Message::About,
+    );
 
-        if let Some(mut item) = menu.find_item(&quot;&amp;File/Quit\t&quot;) {
-            item.set_label_color(Color::Red);
-        }
-<span class="boring">}
-</span></code></pre></pre>
-<p>注意到最后一个调用，它使用<code>find_item()</code>方法，在菜单中匹配到符合的选项，然后把它的Label颜色设为红色：</p>
+    if let Some(mut item) = menu.find_item(&quot;&amp;File/Quit\t&quot;) {
+        item.set_label_color(Color::Red);
+    }
+```
+</code></pre>
+<p>注意最后一个调用，它使用<code>find_item()</code>方法，在菜单中匹配到符合的选项，然后把它的Label颜色设为红色：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png" alt="image" /></p>
 <h2 id="系统菜单栏"><a class="header" href="#系统菜单栏">系统菜单栏</a></h2>
 <p>在MacOS上，你可能更喜欢使用系统提供的菜单栏，它通常出现在屏幕的顶部。为此，你可以使用<code>SysMenuBar</code>组件。它与所有实现<code>MenuExt Trait</code>的组件具有相同的API，当程序为MacOS以外的其他目标平台编译时，该组件将变为一个普通的<code>MenuBar</code>。</p>

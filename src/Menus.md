@@ -39,6 +39,7 @@ Menu主要有两方面的作用：
 ![image](https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png)
 
 另外，你也可以结构出菜单选项的字符串来进行匹配：
+
     ```rust
     use fltk::{prelude::*, *};
 
@@ -103,6 +104,7 @@ Menu主要有两方面的作用：
     }
     ```
 另外在 [事件 Events](Events) 还会提到，你可以不适用闭包而传递一个函数：
+
     ```rust
     use fltk::{enums::*, prelude::*, *};
 
@@ -209,6 +211,7 @@ Menu主要有两方面的作用：
     ```
 
 此外，你还可以使用`add_emit()`方法来传递一个`sender`和一个`message`，不必直接设置回调，而是通过`App::wait()`中处理：
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -268,7 +271,7 @@ fn main() {
 你可能会问，为什么不直接用第一个例子那样简单的代码，还要使用其他更复杂的方式完成回调。其实每种方法都有它的用途。
 对于简单的**下拉菜单**，用第一种方法会更加方便。对于程序的**菜单栏**，用第二种方法会更好，它可以让你为菜单选项设置快捷键`Shortcuts`和选项的类型`MenuFlags`（例如下拉菜单，选择选项，用于分隔的占位菜单等），另外你不用再像第一个例子一样，在菜单的回调中处理所有事件。使用`add_emit()`方法处理子菜单一样很容易，就像在[编辑器示例](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs)中那样：
 
-```rust
+    ```rust
         let mut menu = menu::SysMenuBar::default().with_size(800, 35);
         menu.set_frame(FrameType::FlatBox);
         menu.add_emit(
@@ -354,8 +357,9 @@ fn main() {
         if let Some(mut item) = menu.find_item("&File/Quit\t") {
             item.set_label_color(Color::Red);
         }
-```
-注意到最后一个调用，它使用`find_item()`方法，在菜单中匹配到符合的选项，然后把它的Label颜色设为红色：
+    ```
+
+注意最后一个调用，它使用`find_item()`方法，在菜单中匹配到符合的选项，然后把它的Label颜色设为红色：
 
 ![image](https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png)
 

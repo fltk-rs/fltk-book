@@ -149,15 +149,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="菜单-menus"><a class="header" href="#菜单-menus">菜单 Menus</a></h1>
-<p>FLTK中的菜单是实现MenuExt trait的widget。Menu有下面这几种类型：</p>
+<p>FLTK提供了菜单组件，它们均实现了<code>MenuExt trait</code>。Menu组件有下面这几种：</p>
 <ul>
 <li>MenuBar</li>
 <li>MenuItem</li>
-<li>Choice (dropdown list)</li>
-<li>SysMenuBar (MacOS上则是出现在屏幕顶部的menu bar)</li>
+<li>Choice (下拉列表)</li>
+<li>SysMenuBar (在MacOS出现在屏幕顶部的menu bar)</li>
 </ul>
-<p>Menu类型主要有两个方面的功能：
-1- 使用add_choice()方法添加选项，然后在callback中处理用户的选择：</p>
+<p>Menu主要有两方面的作用：</p>
+<ol>
+<li>
+<p>使用<code>add_choice()</code>方法添加菜单选项，然后在设置回调处理不同选项执行的操作：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -167,7 +169,7 @@ fn main() {
     choice.add_choice(&quot;Choice 1&quot;);
     choice.add_choice(&quot;Choice 2&quot;);
     choice.add_choice(&quot;Choice 3&quot;);
-    // You can also simply type choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    // 也可以直接输入 choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
     wind.end();
     wind.show();
 
@@ -183,11 +185,13 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
+</li>
+</ol>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png" alt="image" /></p>
-<p>另外，你也可以获取所选项目的文本内容来操作：</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
-
-fn main() {
+<p>另外，你也可以结构出菜单选项的字符串来进行匹配：
+```rust
+use fltk::{prelude::*, *};</p>
+<pre><code>fn main() {
     let app = app::App::default();
     let mut wind = window::Window::default().with_size(400, 300);
     let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
@@ -208,8 +212,11 @@ fn main() {
 
     app.run().unwrap();
 }
-</code></pre></pre>
-<p>2- 通过add()方法添加选项，你要明确地传递每个选项的回调：</p>
+```
+</code></pre>
+<ol start="2">
+<li>
+<p>通过<code>add()</code>方法添加菜单选项，你需要在其中设置好每个选项的回调：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -218,26 +225,25 @@ fn main() {
     let mut choice = menu::Choice::default()
         .with_size(80, 30)
         .center_of_parent()
-        .with_label(&quot;Select item&quot;);
 
     choice.add(
         &quot;Choice 1&quot;,
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         |_| println!(&quot;choice 1 selected&quot;),
-    );
+        );
     choice.add(
         &quot;Choice 2&quot;,
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         |_| println!(&quot;choice 2 selected&quot;),
-    );
+        );
     choice.add(
         &quot;Choice 3&quot;,
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         |_| println!(&quot;choice 3 selected&quot;),
-    );
+        );
 
     wind.end();
     wind.show();
@@ -245,10 +251,12 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>另外，正如在 <a href="Events">事件 Events</a>中提到的，你可以使用一个函数对象，而不必传递闭包：</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::*, prelude::*, *};
-
-fn menu_cb(m: &amp;mut impl MenuExt) {
+</li>
+</ol>
+<p>另外在 <a href="Events">事件 Events</a> 还会提到，你可以不适用闭包而传递一个函数：
+```rust
+use fltk::{enums::<em>, prelude::</em>, *};</p>
+<pre><code>fn menu_cb(m: &amp;mut impl MenuExt) {
     if let Some(choice) = m.choice() {
         match choice.as_str() {
             &quot;New\t&quot; =&gt; println!(&quot;New&quot;),
@@ -348,8 +356,9 @@ fn main() {
 
     a.run().unwrap();
 }
-</code></pre></pre>
-<p>另外，你可以使用add_emit()来传递一个sender和一个message，而不必要传递回调：</p>
+```
+</code></pre>
+<p>此外，你还可以使用<code>add_emit()</code>方法来传递一个<code>sender</code>和一个<code>message</code>，不必直接设置回调，而是通过<code>App::wait()</code>中处理：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 #[derive(Clone)]
@@ -404,8 +413,8 @@ fn main() {
     }
 }
 </code></pre></pre>
-<p>你可能会问，为什么我们要从第一个例子中的几行代码，转到更复杂的方式。其实每种方法都有它的用途。
-对于简单的下拉widget，建议用第一种方法。对于一个程序的菜单栏，用第二种方法。它允许你指定Shortcuts和MenuFlags，并且可以更好地解耦事件，所以你不必在菜单的回调中处理一切。使用add()方法处理子菜单也更容易，就像在<a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">编辑器例子</a>中那样：</p>
+<p>你可能会问，为什么不直接用第一个例子那样简单的代码，还要使用其他更复杂的方式完成回调。其实每种方法都有它的用途。
+对于简单的<strong>下拉菜单</strong>，用第一种方法会更加方便。对于程序的<strong>菜单栏</strong>，用第二种方法会更好，它可以让你为菜单选项设置快捷键<code>Shortcuts</code>和选项的类型<code>MenuFlags</code>（例如下拉菜单，选择选项，用于分隔的占位菜单等），另外你不用再像第一个例子一样，在菜单的回调中处理所有事件。使用<code>add_emit()</code>方法处理子菜单一样很容易，就像在<a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">编辑器示例</a>中那样：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>        let mut menu = menu::SysMenuBar::default().with_size(800, 35);
@@ -495,10 +504,10 @@ fn main() {
         }
 <span class="boring">}
 </span></code></pre></pre>
-<p>注意到最后一个调用，它使用find_item()在menu中找到一个item，然后我们将其标签颜色设置为红色：</p>
+<p>注意到最后一个调用，它使用<code>find_item()</code>方法，在菜单中匹配到符合的选项，然后把它的Label颜色设为红色：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png" alt="image" /></p>
 <h2 id="系统菜单栏"><a class="header" href="#系统菜单栏">系统菜单栏</a></h2>
-<p>在MacOS上，你可能更喜欢使用系统菜单栏，它通常出现在屏幕的顶部。为此，你可以使用一个SysMenuBar widget。它与所有实现MenuExt trait的widget具有相同的api，当程序为MacOS以外的其他目标平台编译时，它将转化为一个普通的MenuBar。</p>
+<p>在MacOS上，你可能更喜欢使用系统提供的菜单栏，它通常出现在屏幕的顶部。为此，你可以使用<code>SysMenuBar</code>组件。它与所有实现<code>MenuExt Trait</code>的组件具有相同的API，当程序为MacOS以外的其他目标平台编译时，该组件将变为一个普通的<code>MenuBar</code>。</p>
 
                     </main>
 

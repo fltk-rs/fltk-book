@@ -1,6 +1,6 @@
 # 按钮 Buttons
 
-Button widgets 有多种用途和多种形式：
+Button组件的用处很多，它有多种形式：
 - Button
 - RadioButton
 - ToggleButton
@@ -11,8 +11,8 @@ Button widgets 有多种用途和多种形式：
 - RadioLightButton
 - RadioRoundButton
 
-这些可以在可以在 button module 中找到。
-其中最简单的就是Button，它在用户点击时产生一些行为。当然所有的按钮都会这样：
+这些组件可以在 `Button mod` 中找到。
+其中最简单的就是`Button`组件，它能在发生点击事件时执行一些行为。当然所有的按钮都可以这样：
 
 ```rust
 use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
@@ -28,15 +28,14 @@ fn main() {
     but.set_callback(move |_| frame.set_label("Hello world"));
 
     app.run().unwrap();
+
 }
 ```
 
-然而其他按钮可以带有表示自己某些属性的其他值（value）：
-例如CheckButton, ToggleButton, LightButton 拥有它们当前状态（比如，是否被选中）的信息。
+其他一些按钮可以带有表示自己某些属性的其他值：
+例如`CheckButton`, `ToggleButton`, `LightButton` 带有表示它们当前状态（比如，是否被选中）的信息。
 
-
-
-单选按钮（RadioRoundButton、RadioLightButton和RadioButton）也带有它们的一些值，但在parent group（任何实现GroupExt的widget）中只有一个可以被切换。所以这些组件是知道其他按钮的值的：
+单选按钮（RadioRoundButton、RadioLightButton和RadioButton）也带有它们的一些值，但在父组件（任何实现GroupExt的组件都可以作为父组件）中只有一个可以被选中。因此说，这些组件是可以访问到同一个组合中其他相应组件的值的：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -44,7 +43,7 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
-    // only one can be toggled by the user at a time, the other will be automatically untoggled
+    // 用户同一时间只能选中一个按钮，选中后，另一个会被取消选中
     let btn1 = button::RadioRoundButton::default().with_label("Option 1");
     let btn2 = button::RadioRoundButton::default().with_label("Option 2"); 
     flex.end();
@@ -54,13 +53,13 @@ fn main() {
 }
 ```
 
-(可以用clear_visible_focus()方法`btn1.clear_visible_focus()`来删除焦点框）
+可以用`clear_visible_focus()`方法来取消焦点（`btn1.clear_visible_focus()`）
 
 ![image](https://user-images.githubusercontent.com/37966791/145727291-8be40de6-8ec6-4e57-bb29-fa0f0ac3b251.png)
 
-其他可切换的按钮没有这个属性。
+其他可选择的按钮没有这个属性。
 
-你可以使用ButtonExt::value()方法查询一个按钮是否被切换：
+`ButtonExt::value()`方法会返回一个布尔值，表示一个按钮是否被选中：
 
 ```rust
 use fltk::{prelude::*, *};
@@ -81,18 +80,18 @@ fn main() {
             println!("btn1 is checked");
         }
         if btn2.value() {
-            println!("btn1 is checked");
+            println!("btn2 is checked");
         }
     });
 
     a.run().unwrap();
 }
 ```
-CheckButton还提供了一个方便的方法is_checked()，而radio buttons提供了一个is_toggled()：
+`CheckButton`还提供了一个方便的方法`is_checked()`，一系列`RadioButton`提供了`is_toggled()`用来判断：
 
 ![image](https://user-images.githubusercontent.com/37966791/145727325-7e5bb45f-674e-4bb2-81c8-27d0ee391d34.png)
 
-默认情况下，可切换的按钮在创建时是不可切换的，然而这可以用set_value()，或者方便的方法set_checked()（对CheckButton使用）和set_toggled()（对radio buttons使用）来重写：
+默认情况下，可选择的按钮在创建时都是没有选中的，但这可以用`set_value()`，（`CheckButton`可以使用的）`set_checked()`和（RadioButton可以使用的）`set_toggled()`等方法来默认选中一个按钮：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -102,7 +101,7 @@ fn main() {
     let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
     let mut btn1 = button::CheckButton::default().with_label("Option 1");
     btn1.set_value(true);
-    // Similarly you can use btn1.set_checked(true)
+    // 同样可以使用 btn1.set_checked(true)
     let btn2 = button::CheckButton::default().with_label("Option 2");
     let mut btn3 = button::Button::default().with_label("Submit");
     flex.end();

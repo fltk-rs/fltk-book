@@ -834,7 +834,7 @@ let but1 = Button::default()
 <p>它们的效果基本是相同的。</p>
 <p>目前位置，我们的程序会显示一个窗口和其中的按钮。这个按钮可以点击，但什么用都没有！但别担心，在下一节中，我们将学习为它添加一些行为（Actions）。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="按钮-buttons"><a class="header" href="#按钮-buttons">按钮 Buttons</a></h1>
-<p>Button widgets 有多种用途和多种形式：</p>
+<p>Button组件的用处很多，它有多种形式：</p>
 <ul>
 <li>Button</li>
 <li>RadioButton</li>
@@ -846,8 +846,8 @@ let but1 = Button::default()
 <li>RadioLightButton</li>
 <li>RadioRoundButton</li>
 </ul>
-<p>这些可以在可以在 button module 中找到。
-其中最简单的就是Button，它在用户点击时产生一些行为。当然所有的按钮都会这样：</p>
+<p>这些组件可以在 <code>Button mod</code> 中找到。
+其中最简单的就是<code>Button</code>组件，它能在发生点击事件时执行一些行为。当然所有的按钮都可以这样：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
 
 fn main() {
@@ -861,18 +861,19 @@ fn main() {
     but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
 
     app.run().unwrap();
+
 }
 </code></pre></pre>
-<p>然而其他按钮可以带有表示自己某些属性的其他值（value）：
-例如CheckButton, ToggleButton, LightButton 拥有它们当前状态（比如，是否被选中）的信息。</p>
-<p>单选按钮（RadioRoundButton、RadioLightButton和RadioButton）也带有它们的一些值，但在parent group（任何实现GroupExt的widget）中只有一个可以被切换。所以这些组件是知道其他按钮的值的：</p>
+<p>其他一些按钮可以带有表示自己某些属性的其他值：
+例如<code>CheckButton</code>, <code>ToggleButton</code>, <code>LightButton</code> 带有表示它们当前状态（比如，是否被选中）的信息。</p>
+<p>单选按钮（RadioRoundButton、RadioLightButton和RadioButton）也带有它们的一些值，但在父组件（任何实现GroupExt的组件都可以作为父组件）中只有一个可以被选中。因此说，这些组件是可以访问到同一个组合中其他相应组件的值的：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
-    // only one can be toggled by the user at a time, the other will be automatically untoggled
+    // 用户同一时间只能选中一个按钮，选中后，另一个会被取消选中
     let btn1 = button::RadioRoundButton::default().with_label(&quot;Option 1&quot;);
     let btn2 = button::RadioRoundButton::default().with_label(&quot;Option 2&quot;); 
     flex.end();
@@ -881,10 +882,10 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>(可以用clear_visible_focus()方法<code>btn1.clear_visible_focus()</code>来删除焦点框）</p>
+<p>可以用<code>clear_visible_focus()</code>方法来取消焦点（<code>btn1.clear_visible_focus()</code>）</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727291-8be40de6-8ec6-4e57-bb29-fa0f0ac3b251.png" alt="image" /></p>
-<p>其他可切换的按钮没有这个属性。</p>
-<p>你可以使用ButtonExt::value()方法查询一个按钮是否被切换：</p>
+<p>其他可选择的按钮没有这个属性。</p>
+<p><code>ButtonExt::value()</code>方法会返回一个布尔值，表示一个按钮是否被选中：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -903,16 +904,16 @@ fn main() {
             println!(&quot;btn1 is checked&quot;);
         }
         if btn2.value() {
-            println!(&quot;btn1 is checked&quot;);
+            println!(&quot;btn2 is checked&quot;);
         }
     });
 
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>CheckButton还提供了一个方便的方法is_checked()，而radio buttons提供了一个is_toggled()：</p>
+<p><code>CheckButton</code>还提供了一个方便的方法<code>is_checked()</code>，一系列<code>RadioButton</code>提供了<code>is_toggled()</code>用来判断：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727325-7e5bb45f-674e-4bb2-81c8-27d0ee391d34.png" alt="image" /></p>
-<p>默认情况下，可切换的按钮在创建时是不可切换的，然而这可以用set_value()，或者方便的方法set_checked()（对CheckButton使用）和set_toggled()（对radio buttons使用）来重写：</p>
+<p>默认情况下，可选择的按钮在创建时都是没有选中的，但这可以用<code>set_value()</code>，（<code>CheckButton</code>可以使用的）<code>set_checked()</code>和（RadioButton可以使用的）<code>set_toggled()</code>等方法来默认选中一个按钮：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -921,7 +922,7 @@ fn main() {
     let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
     let mut btn1 = button::CheckButton::default().with_label(&quot;Option 1&quot;);
     btn1.set_value(true);
-    // Similarly you can use btn1.set_checked(true)
+    // 同样可以使用 btn1.set_checked(true)
     let btn2 = button::CheckButton::default().with_label(&quot;Option 2&quot;);
     let mut btn3 = button::Button::default().with_label(&quot;Submit&quot;);
     flex.end();
@@ -942,46 +943,47 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727352-bf6dba5c-1a0c-4da4-8296-093e10470f0c.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="标签-labels"><a class="header" href="#标签-labels">标签 Labels</a></h1>
-<p>FLTK没有标签widget。因此，如果你要想显示文本，你可以使用一个Frame widget并给它一个label。</p>
-<p>所有widge件都可以使用::new()构造函数，或者用with_label()或set_label()来获取一个标签。</p>
+<p>FLTK没有可以用来显示文字的Label组件，但很多组件都具有Label属性。如果你想显示文本的话，你可以使用一个<code>Frame</code>组件，然后为它添加Label属性。</p>
+<p>所有组件都可以使用<code>::new()</code>构造函数来创建并设置Label，或者也可以用<code>with_label()</code>或<code>set_label()</code>来设置。</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let btn = button::Button::new(160, 200, 80, 30, &quot;Click&quot;);
 <span class="boring">}
 </span></code></pre></pre>
-<p>这个按钮有一个显示 &quot;点击 &quot;文字的标签。</p>
-<p>同样地，我们可以使用set_label()或with_label()：</p>
+<p>这个按钮上带有 &quot;Click&quot; 文字。</p>
+<p>我们也可以使用<code>set_label()</code>或<code>with_label()</code>：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let btn = button::Button::default().with_label(&quot;Click&quot;);
-// or
+// 或者
 let mut btn = button::Button::default();
 btn.set_label(&quot;Click&quot;);
 <span class="boring">}
 </span></code></pre></pre>
-<p>然而，::new()构造函数实际上是把一个可选的 static str 带到了这里，所以下面的代码会失败：</p>
+<p>然而，使用<code>::new()</code>方法来添加Label属性，需要的字符串是类型<code>&amp;'static str</code>，所以下面的代码不能正确运行：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let label = String::from(&quot;Click&quot;); // label is not a static str
+</span>let label = String::from(&quot;Click&quot;);  // label变量不是 &amp;'static str
 let mut btn = button::Button::new(160, 200, 80, 30, &amp;label);
 <span class="boring">}
 </span></code></pre></pre>
-<p>在这种情况下，你应该使用<code>btn.set_label(&amp;label);</code>。原因是FLTK期望的label是<code>const char *</code> 的，这相当于Rust的<code>&amp;'static str</code>。这些字符串存在于程序的二进制代码段中。如果你反汇编一个程序，会显示所有这些静态字符串。由于这些字符串有一个静态的生命周期，FLTK默认不会存储它们。而当使用set_label()和with_label()调用FLTK的Fl_Widget::copy_label()方法时，实际上是存储字符串。</p>
-<p>你也不限于文字标签，FLTK有预定义的符号，可以转换成图像。</p>
+<p>在这种情况下，你应该使用<code>btn.set_label(&amp;label);</code>。原因是FLTK本身要求传入的字符串是类型是<code>const char *</code> ，对应于Rust中则是<code>&amp;'static str</code>。这些字符串保存在程序的二进制代码中。如果你反汇编一个程序，是可以看到这些字符串的。这些字符串具有静态生命周期，因此FLTK在创建组件Label时默认不会保存下这些字符串。而当使用<code>set_label()</code>和<code>with_label()</code>时，FLTK将调用<code>Fl_Widget::copy_label()</code>，并将字符串进行存储。</p>
+<p>Label不限于文字，FLTK预定义了一些符号，在Label中可以转换成图像。</p>
 <p><img src="https://www.fltk.org/doc-1.4/symbols.png" alt="symbols" /></p>
-<p>@符号后面还可以加上以下可选的 &quot;格式化 &quot;字符，其顺序和规则如下：</p>
+<p><code>@</code>符号除了可以用来使用这些符号图像外，还可以加上下面这些格式化字符，其顺序和规则如下：</p>
 <ul>
-<li>'#'强制进行方形缩放，而不是对小部件的形状进行扭曲。</li>
-<li>+[1-9]或-[1-9]将缩放比例调大或调小一点。</li>
-<li>$'水平翻转符号，'%'垂直翻转符号。</li>
-<li>[0-9] - 旋转45度的倍数。5'和'6'不做旋转，而其他数字则指向数字键盘上的那个键的方向。'0'，后面还有四个数字，使符号按该度数旋转。</li>
+<li>'#'表示强制进行规则的缩放，因此可以避免组件的形状被扭曲。</li>
+<li>+[1-9]或-[1-9]可以改变缩放比例。</li>
+<li>'$'是水平翻转符号，'%'是垂直翻转符号。</li>
+<li>[0-9] - 旋转45度的倍数。是'5'和'6'时不会发生旋转，而其他数字则会使其指向数字键盘上那个键的方向。</li>
+<li>'0xxxx'，0后有四个数字表示角度，会使其按该度数旋转。</li>
 </ul>
 <p>因此，如果要显示一个非常大的指向下方的箭头，你可以使用标签字符串&quot;@+92-&gt;&quot;。</p>
-<p>符号和文本可以结合在一个标签中，但是符号必须在文本的开头和/或结尾处。如果文本跨越了多行，那么符号将被放大以匹配所有行的高度：</p>
+<p>符号和文本可以结合在一个Label中，但是符号必须放在文本的开头或结尾处。如果有多行文本，那么符号将被按比例放大以匹配所有行的高度：</p>
 <p><img src="https://www.fltk.org/doc-1.4/symbol-examples.png" alt="ex" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="组控件-group-widgets"><a class="header" href="#组控件-group-widgets">组控件 Group widgets</a></h1>
-<p>这些组件包括window类型和在group module中发现的其他部件：Group，Scroll，Pack，Tile，Flex ...等等。
-实现GroupExt trait的部件具有一个特点，即必须调用<code>::end()</code>方法来关闭它们：</p>
+<p>组控件包括窗口类型和在<code>Group</code> mod中的其他组件，如：Group，Scroll，Pack，Tile，Flex ...等等。
+它们都实现了<code>GroupExt Trait</code>，该Trait中定义了<code>end()</code>方法，这些控件必须调用<code>::end()</code>方法来表示其包含的范围结束：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
     app,
     button::Button,
@@ -998,9 +1000,9 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>在上面的例子中，按钮 &quot;btn &quot;的父部件将是window。
-在 <code>end</code>这样的GroupExt部件后，任何在 <code>end</code> 后实例化的其他widget，将在该部件外实例化。
-但这些widget仍然可以使用<code>::add(&amp;other_widget)</code>方法来添加进去（或使用<code>::insert</code>）。</p>
+<p>在上面的例子中，按钮 &quot;_btn&quot; 的父组件是Window。
+在组控件调用<code>end()</code>后创建的其他组件将不被包含在该控件中，即会创建在这个组控件的外面。
+但这些组件仍然可以使用<code>::add(&amp;other_widget)</code>或<code>::insert</code>添加进组控件中。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
     app,
     button::Button,
@@ -1020,7 +1022,7 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>另一个选择是重新begin该widget：</p>
+<p>另一个选择是重新调用组控件的<code>begin()</code>方法：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
     app,
     button::Button,
@@ -1041,8 +1043,8 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>虽然大多数GroupExt widget需要手动布局，但有几个widget具有自动布局功能。Flex widget在 <a href="Layouts.html">布局 layout</a>中会讨论。Pack需要子widget的height，这取决于Pack的方向。</p>
-<p>一个vertical pack只需要知道它的子widget的height：</p>
+<p>多数实现<code>GroupExt</code>的组控件需要手动布局，但还有几个控件可以自动布局。比如<code>Flex</code>组件，它会在 <a href="Layouts.html">布局 layout</a> 中介绍。<code>Pack</code>需要设置子组件的高度（height）或宽度（width）进行布局，这取决于Pack是垂直的还是水平的。</p>
+<p>Pack默认是垂直的（Vertical），我们只需要设置其中子组件的高度：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1054,7 +1056,7 @@ fn main() {
         frame::Frame::default().with_size(0, 40).with_label(&amp;format!(&quot;field {}&quot;, i));
         input::Input::default().with_size(0, 40);
     }
-    frame::Frame::default().with_size(0, 40); // a filler
+    frame::Frame::default().with_size(0, 40); // 占位
     button::Button::default().with_size(0, 40).with_label(&quot;Submit&quot;);
     pack.end();
     wind.end();
@@ -1064,7 +1066,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727469-a7181ebf-a3a3-4675-af23-ec40d847a593.png" alt="image" /></p>
-<p>对于一个horizontal pack，我们设置Pack type，然后我们只需要传递子widget的width：</p>
+<p>要设置水平（horizontal）的Pack，我们需要手动设置<code>with_type()</code>，然后只需要设置其中子组件的宽度：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1076,7 +1078,7 @@ fn main() {
         frame::Frame::default().with_size(40, 0).with_label(&amp;format!(&quot;field {}&quot;, i));
         input::Input::default().with_size(40, 0);
     }
-    frame::Frame::default().with_size(40, 0); // a filler
+    frame::Frame::default().with_size(40, 0); // 占位
     button::Button::default().with_size(40, 0).with_label(&quot;Submit&quot;);
     pack.end();
     wind.end();
@@ -1086,15 +1088,17 @@ fn main() {
 }
 </code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="菜单-menus"><a class="header" href="#菜单-menus">菜单 Menus</a></h1>
-<p>FLTK中的菜单是实现MenuExt trait的widget。Menu有下面这几种类型：</p>
+<p>FLTK提供了菜单组件，它们均实现了<code>MenuExt trait</code>。Menu组件有下面这几种：</p>
 <ul>
 <li>MenuBar</li>
 <li>MenuItem</li>
-<li>Choice (dropdown list)</li>
-<li>SysMenuBar (MacOS上则是出现在屏幕顶部的menu bar)</li>
+<li>Choice (下拉列表)</li>
+<li>SysMenuBar (在MacOS出现在屏幕顶部的menu bar)</li>
 </ul>
-<p>Menu类型主要有两个方面的功能：
-1- 使用add_choice()方法添加选项，然后在callback中处理用户的选择：</p>
+<p>Menu主要有两方面的作用：</p>
+<ol>
+<li>
+<p>使用<code>add_choice()</code>方法添加菜单选项，然后在设置回调处理不同选项执行的操作：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1104,7 +1108,7 @@ fn main() {
     choice.add_choice(&quot;Choice 1&quot;);
     choice.add_choice(&quot;Choice 2&quot;);
     choice.add_choice(&quot;Choice 3&quot;);
-    // You can also simply type choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    // 也可以直接输入 choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
     wind.end();
     wind.show();
 
@@ -1120,11 +1124,13 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
+</li>
+</ol>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png" alt="image" /></p>
-<p>另外，你也可以获取所选项目的文本内容来操作：</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
-
-fn main() {
+<p>另外，你也可以结构出菜单选项的字符串来进行匹配：
+```rust
+use fltk::{prelude::*, *};</p>
+<pre><code>fn main() {
     let app = app::App::default();
     let mut wind = window::Window::default().with_size(400, 300);
     let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
@@ -1145,8 +1151,11 @@ fn main() {
 
     app.run().unwrap();
 }
-</code></pre></pre>
-<p>2- 通过add()方法添加选项，你要明确地传递每个选项的回调：</p>
+```
+</code></pre>
+<ol start="2">
+<li>
+<p>通过<code>add()</code>方法添加菜单选项，你需要在其中设置好每个选项的回调：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1155,26 +1164,25 @@ fn main() {
     let mut choice = menu::Choice::default()
         .with_size(80, 30)
         .center_of_parent()
-        .with_label(&quot;Select item&quot;);
 
     choice.add(
         &quot;Choice 1&quot;,
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         |_| println!(&quot;choice 1 selected&quot;),
-    );
+        );
     choice.add(
         &quot;Choice 2&quot;,
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         |_| println!(&quot;choice 2 selected&quot;),
-    );
+        );
     choice.add(
         &quot;Choice 3&quot;,
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         |_| println!(&quot;choice 3 selected&quot;),
-    );
+        );
 
     wind.end();
     wind.show();
@@ -1182,10 +1190,12 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>另外，正如在 <a href="Events">事件 Events</a>中提到的，你可以使用一个函数对象，而不必传递闭包：</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::*, prelude::*, *};
-
-fn menu_cb(m: &amp;mut impl MenuExt) {
+</li>
+</ol>
+<p>另外在 <a href="Events">事件 Events</a> 还会提到，你可以不适用闭包而传递一个函数：
+```rust
+use fltk::{enums::<em>, prelude::</em>, *};</p>
+<pre><code>fn menu_cb(m: &amp;mut impl MenuExt) {
     if let Some(choice) = m.choice() {
         match choice.as_str() {
             &quot;New\t&quot; =&gt; println!(&quot;New&quot;),
@@ -1285,8 +1295,9 @@ fn main() {
 
     a.run().unwrap();
 }
-</code></pre></pre>
-<p>另外，你可以使用add_emit()来传递一个sender和一个message，而不必要传递回调：</p>
+```
+</code></pre>
+<p>此外，你还可以使用<code>add_emit()</code>方法来传递一个<code>sender</code>和一个<code>message</code>，不必直接设置回调，而是通过<code>App::wait()</code>中处理：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 #[derive(Clone)]
@@ -1341,8 +1352,8 @@ fn main() {
     }
 }
 </code></pre></pre>
-<p>你可能会问，为什么我们要从第一个例子中的几行代码，转到更复杂的方式。其实每种方法都有它的用途。
-对于简单的下拉widget，建议用第一种方法。对于一个程序的菜单栏，用第二种方法。它允许你指定Shortcuts和MenuFlags，并且可以更好地解耦事件，所以你不必在菜单的回调中处理一切。使用add()方法处理子菜单也更容易，就像在<a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">编辑器例子</a>中那样：</p>
+<p>你可能会问，为什么不直接用第一个例子那样简单的代码，还要使用其他更复杂的方式完成回调。其实每种方法都有它的用途。
+对于简单的<strong>下拉菜单</strong>，用第一种方法会更加方便。对于程序的<strong>菜单栏</strong>，用第二种方法会更好，它可以让你为菜单选项设置快捷键<code>Shortcuts</code>和选项的类型<code>MenuFlags</code>（例如下拉菜单，选择选项，用于分隔的占位菜单等），另外你不用再像第一个例子一样，在菜单的回调中处理所有事件。使用<code>add_emit()</code>方法处理子菜单一样很容易，就像在<a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">编辑器示例</a>中那样：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>        let mut menu = menu::SysMenuBar::default().with_size(800, 35);
@@ -1432,10 +1443,10 @@ fn main() {
         }
 <span class="boring">}
 </span></code></pre></pre>
-<p>注意到最后一个调用，它使用find_item()在menu中找到一个item，然后我们将其标签颜色设置为红色：</p>
+<p>注意到最后一个调用，它使用<code>find_item()</code>方法，在菜单中匹配到符合的选项，然后把它的Label颜色设为红色：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png" alt="image" /></p>
 <h2 id="系统菜单栏"><a class="header" href="#系统菜单栏">系统菜单栏</a></h2>
-<p>在MacOS上，你可能更喜欢使用系统菜单栏，它通常出现在屏幕的顶部。为此，你可以使用一个SysMenuBar widget。它与所有实现MenuExt trait的widget具有相同的api，当程序为MacOS以外的其他目标平台编译时，它将转化为一个普通的MenuBar。</p>
+<p>在MacOS上，你可能更喜欢使用系统提供的菜单栏，它通常出现在屏幕的顶部。为此，你可以使用<code>SysMenuBar</code>组件。它与所有实现<code>MenuExt Trait</code>的组件具有相同的API，当程序为MacOS以外的其他目标平台编译时，该组件将变为一个普通的<code>MenuBar</code>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="输入输出-input--output"><a class="header" href="#输入输出-input--output">输入输出 Input &amp; Output</a></h1>
 <p>输入和输出 widget 实现了InputExt trait。在input&amp;output modules中还可以找到这些：</p>
 <ul>

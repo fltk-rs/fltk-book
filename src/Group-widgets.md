@@ -1,7 +1,7 @@
 # 组控件 Group widgets
 
-这些组件包括window类型和在group module中发现的其他部件：Group，Scroll，Pack，Tile，Flex ...等等。
-实现GroupExt trait的部件具有一个特点，即必须调用`::end()`方法来关闭它们：
+组控件包括窗口类型和在`Group` mod中的其他组件，如：Group，Scroll，Pack，Tile，Flex ...等等。
+它们都实现了`GroupExt Trait`，该Trait中定义了`end()`方法，这些控件必须调用`::end()`方法来表示其包含的范围结束：
 
 ```rust
 use fltk::{
@@ -20,9 +20,9 @@ fn main() {
     a.run().unwrap();
 }
 ```
-在上面的例子中，按钮 "btn "的父部件将是window。
-在 `end`这样的GroupExt部件后，任何在 `end` 后实例化的其他widget，将在该部件外实例化。
-但这些widget仍然可以使用`::add(&other_widget)`方法来添加进去（或使用`::insert`）。
+在上面的例子中，按钮 "_btn" 的父组件是Window。
+在组控件调用`end()`后创建的其他组件将不被包含在该控件中，即会创建在这个组控件的外面。
+但这些组件仍然可以使用`::add(&other_widget)`或`::insert`添加进组控件中。
 
 ```rust
 use fltk::{
@@ -44,7 +44,7 @@ fn main() {
     a.run().unwrap();
 }
 ```
-另一个选择是重新begin该widget：
+另一个选择是重新调用组控件的`begin()`方法：
 ```rust
 use fltk::{
     app,
@@ -67,9 +67,9 @@ fn main() {
 }
 ```
 
-虽然大多数GroupExt widget需要手动布局，但有几个widget具有自动布局功能。Flex widget在 [布局 layout](Layouts.md)中会讨论。Pack需要子widget的height，这取决于Pack的方向。
+多数实现`GroupExt`的组控件需要手动布局，但还有几个控件可以自动布局。比如`Flex`组件，它会在 [布局 layout](Layouts.md) 中介绍。`Pack`需要设置子组件的高度（height）或宽度（width）进行布局，这取决于Pack是垂直的还是水平的。
 
-一个vertical pack只需要知道它的子widget的height：
+Pack默认是垂直的（Vertical），我们只需要设置其中子组件的高度：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -82,7 +82,7 @@ fn main() {
         frame::Frame::default().with_size(0, 40).with_label(&format!("field {}", i));
         input::Input::default().with_size(0, 40);
     }
-    frame::Frame::default().with_size(0, 40); // a filler
+    frame::Frame::default().with_size(0, 40); // 占位
     button::Button::default().with_size(0, 40).with_label("Submit");
     pack.end();
     wind.end();
@@ -94,7 +94,7 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727469-a7181ebf-a3a3-4675-af23-ec40d847a593.png)
 
-对于一个horizontal pack，我们设置Pack type，然后我们只需要传递子widget的width：
+要设置水平（horizontal）的Pack，我们需要手动设置`with_type()`，然后只需要设置其中子组件的宽度：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -107,7 +107,7 @@ fn main() {
         frame::Frame::default().with_size(40, 0).with_label(&format!("field {}", i));
         input::Input::default().with_size(40, 0);
     }
-    frame::Frame::default().with_size(40, 0); // a filler
+    frame::Frame::default().with_size(40, 0); // 占位
     button::Button::default().with_size(40, 0).with_label("Submit");
     pack.end();
     wind.end();
@@ -116,4 +116,3 @@ fn main() {
     app.run().unwrap();
 }
 ```
-

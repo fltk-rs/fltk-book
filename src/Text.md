@@ -1,11 +1,11 @@
 # 文字 Text
 
-Text widget实现了DisplayExt trait，共有3个，可以在text module中找到：
+`Text`组件实现了`DisplayExt trait`。FLTK提供了3个文字组件，可以在`text` mod中找到：
 - TextDisplay
 - TextEditor
 - SimpleTerminal
 
-这些部件的主要目的是显示/编辑文本。前两个部件需要一个TextBuffer，而SimpleTerminal有一个内部缓冲器：
+文本组件的主要作用是显示或编辑文本。前两个部件需要一个`TextBuffer`，`SimpleTerminal`内部有一个`TextBuffer`：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -29,8 +29,8 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727101-175fe355-1383-4789-ae40-2945ef0c63e2.png)
 
-大多数操作是通过TextBuffer完成的。可以用append()来追加文本，也可以用set_text()来设置其全部内容。
-你可以使用DisplayExt::buffer()方法取回缓冲区的clone（reference type）：
+在文本组件上，对内容的操作多数是使用`TextBuffer`完成的。可以用`append()`来添加文本，也可以用`set_text()`来设置Buffer的内容。
+你可以使用`DisplayExt::buffer()`方法得到Buffer的Clone（TextBuffer内部存储了一个对实际Buffer的可变指针引用），继而可以通过它来操作Buffer：
 
 ```rust
 use fltk::{prelude::*, *};
@@ -55,7 +55,7 @@ fn main() {
 }
 ```
 
-DisplayExt提供了其他方法来管理文本属性，wrapping，cursor position，font，color，size...等。
+`DisplayExt`定义了很多管理文本属性的方法，例如可以设置何时换行，光标位置，字体，颜色，大小等。
 ```rust
 use fltk::{enums::Color, prelude::*, *};
 
@@ -69,7 +69,10 @@ fn main() {
     let mut win = window::Window::default().with_size(400, 300);
     let mut txt = text::TextDisplay::default().with_size(390, 290).center_of_parent();
     txt.set_buffer(buf);
-    txt.wrap_mode(text::WrapMode::AtBounds, 0); // bounds don't require the second argument, unlike AtPixel and AtColumn
+    // 设置换行模式
+    // 不同于 AtPixel 和 AtColumn, AtBounds不需要第二个参数
+    // AtBounds 会设置文本到达输入框边界便会自动换行，对于大小可变的窗口很好用。
+    txt.wrap_mode(text::WrapMode::AtBounds, 0);
     txt.set_text_color(Color::Red);
     win.end();
     win.show();
@@ -80,7 +83,7 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727121-8396c77e-836d-4406-abd1-92af32ff7242.png)
 
-TextBuffer还有第二个用途，那就是提供一个样式缓冲区（style buffer）。样式缓冲区反映了你的文本缓冲区，并使用一个样式表（包含字体、颜色和大小）来为你的文本添加细粒度的样式，样式表本身是有索引的，具体说是使用相应的字母：
+`TextBuffer`还有第二个用途，它可以作为样式缓冲区（Style Buffer）。Style Buffer是你的Text Buffer的一个镜像，它使用样式表（包含字体、颜色和大小的配置）来为你的文本细粒度地设置样式，样式表中的样式本身是有索引的，具体说是使用相应的顺序字母作为索引：
 ```rust
 use fltk::{
     enums::{Color, Font},
@@ -111,9 +114,11 @@ fn main() {
     let mut buf = text::TextBuffer::default();
     let mut sbuf = text::TextBuffer::default();
     buf.set_text("Hello world!");
-    sbuf.set_text(&"A".repeat("Hello world!".len())); // A represents the first entry in the table, repeated for every letter
+    // A是样式表中的第一个元素的索引，这里为“Hello world!”的每个字母应用A代表的样式
+    sbuf.set_text(&"A".repeat("Hello world!".len())); 
     buf.append("\n"); 
-    sbuf.append("B"); // Although a new line and the style might not apply, but it's needed to avoid messing out subsequent entries
+    // 虽然针对换行的样式可能并没有显示出来，但是这里还需要将其写上，以免弄乱之后的文字样式
+    sbuf.append("B"); 
     buf.append("This is a text editor!");
     sbuf.append(&"C".repeat("This is a text editor!".len()));
 
@@ -132,4 +137,4 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727157-be992344-763d-41f9-b3d8-2dfa13fbaab1.png)
 
-Terminal的例子使用了SimpleTerminal和一个有样式的TextBuffer，你可以在 [这儿](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs) 找到
+`Terminal`的例子使用了`SimpleTerminal`和一个有样式的`TextBuffer`，点击这里查看这个例子 [Terminal](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs) 

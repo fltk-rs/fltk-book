@@ -149,7 +149,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="阅览器-browsers"><a class="header" href="#阅览器-browsers">阅览器 Browsers</a></h1>
-<p>Browser widgets 实现了 BrowserExt trait：</p>
+<p><code>Browser</code>组件实现了<code>BrowserExt trait</code>，可以在<code>Browser</code> mod中找到以下类型的Browser：</p>
 <ul>
 <li>Browser</li>
 <li>SelectBrowser</li>
@@ -158,8 +158,7 @@
 <li>FileBrowser</li>
 <li>CheckBrowser</li>
 </ul>
-<p>这些可以在 browser module中找到。</p>
-<p>为了实例化一个browser，需要提供每一项的列宽column widths，以及在add()方法中用于将item分成几列的分隔符column char：</p>
+<p>为了实例化一个阅览器，我们需要设置好每一项item的宽度，在<code>add()</code>方法中还需要使用分隔符来将每一个item分开：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -169,7 +168,7 @@ fn main() {
     let widths = &amp;[50, 50, 50, 70, 70, 40, 40, 70, 70, 50];
     b.set_column_widths(widths);
     b.set_column_char('\t');
-    // we can now use the '\t' char in our add method.
+    // 现在在我们的`add()`方法中可以使用'\t'来制表符
     b.add(&quot;USER\tPID\t%CPU\t%MEM\tVSZ\tRSS\tTTY\tSTAT\tSTART\tTIME\tCOMMAND&quot;);
     b.add(&quot;root\t2888\t0.0\t0.0\t1352\t0\ttty3\tSW\tAug15\t0:00\t@b@f/sbin/mingetty tty3&quot;);
     b.add(&quot;erco\t2889\t0.0\t13.0\t221352\t0\ttty3\tR\tAug15\t1:34\t@b@f/usr/local/bin/render a35 0004&quot;);
@@ -184,11 +183,11 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145733437-e3061015-12fa-4f2e-a1e3-01f59c4b189d.png" alt="image" /></p>
-<p>可以使用特殊字符<code>@</code>来实现其他丰富的格式化效果，我们需要后面跟一个格式化指定符：</p>
+<p>可以使用<code>@</code>并在后面跟上格式化符来实现其他丰富的格式化效果：</p>
 <ul>
-<li>'@.' 打印其余行，且不会再寻找其他的'@'符号</li>
+<li>'@.' 打印其余行，且让剩余的'@'符号无效</li>
 <li>'@@' 打印其余以'@'开头的行</li>
-<li>'@l'  使用大号字体(24 point) </li>
+<li>'@l' 使用大号字体(24 point) </li>
 <li>'@m' 使用中号字体(18 point)</li>
 <li>'@s' 使用小号字体(11 point)</li>
 <li>'@b' 使用宽字体(adds FL_BOLD to font)</li>
@@ -196,14 +195,14 @@ fn main() {
 <li>'@f' 或 '@t' 使用等距字体 (sets font to FL_COURIER)</li>
 <li>'@c' 水平居中</li>
 <li>'@r' 向右对齐文本</li>
-<li>'@B0', '@B1', ... '@B255' 使用fl_color(n)填充背景</li>
-<li>'@C0', '@C1', ... '@C255' 使用fl_color(n) 渲染文本</li>
-<li>'@F0', '@F1', ... 使用 fl_font(n) 渲染文本</li>
+<li>'@B0', '@B1', ... '@B255' 使用<code>fl_color(n)</code>填充背景</li>
+<li>'@C0', '@C1', ... '@C255' 使用<code>fl_color(n)</code>渲染文本</li>
+<li>'@F0', '@F1', ... 使用 <code>fl_font(n)</code> 渲染文本</li>
 <li>'@S1', '@S2', ... 使用相应的尺寸来渲染文本</li>
 <li>'@u' or '@_' 字体添加下划线</li>
 <li>'@-' 字体中间添加修改线</li>
 </ul>
-<p>在下面的例子中，我们在%CPU前面加上@C88，将其渲染成红色：</p>
+<p>在下面的例子中，我们在<code>%CPU</code>前面加上<code>@C88</code>，将其渲染成红色：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -219,9 +218,9 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p><img src="https://user-images.githubusercontent.com/37966791/145733713-2fe3207d-25f7-4acd-ae91-754679c5696a.png" alt="image" /></p>
-<p>这些颜色遵循FLTK的颜色映射，可以从0到255进行索引。</p>
-<p><img src="https://www.fltk.org/doc-1.4/fltk-colormap.png" alt="colormap" /></p>
+<p><img src="https://user-images.githubusercontent.com/37966791/145733713-2fe3207d-25f7-4acd-ae91-754679c5696a.png" alt="图像 image" /></p>
+<p>这些颜色表示遵循FLTK的色彩映射规则，可以从0到255进行索引。</p>
+<p><img src="https://www.fltk.org/doc-1.4/fltk-colormap.png" alt="色彩映射 colormap" /></p>
 
                     </main>
 

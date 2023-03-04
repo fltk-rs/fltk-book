@@ -1,6 +1,6 @@
 # 输入输出 Input & Output
 
-输入和输出 widget 实现了InputExt trait。在input&output modules中还可以找到这些：
+FLTK提供的输入/输出组件均实现了`InputExt trait`。在`Input`和`Output` mod中可以找到这些组件：
 - Input
 - IntInput
 - FloatInput
@@ -10,7 +10,7 @@
 - Output
 - MultilineOutput
 
-这种trait的特点是，这些widget会带有一个文本值，可以用value()方法查询，用set_value()方法改变：
+实现了`InputExt trait`的组件都会携带一个文本值，对应用户输入的文本，可以用`value()`方法获得文本值，用`set_value()`方法修改文本值：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -35,9 +35,9 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727249-2fa4d384-2bd3-41fd-bbae-61a3a33b12f6.png)
 
-请注意，我们使用了一个IntInput来限制输入整数值。虽然用户不能输入字符串，但就开发者而言，value()的返回值仍然是一个String。
+需要注意的是，我们使用了`IntInput`来限制用户只能输入整数值。虽然用户不能再输入字符了，但就开发者而言，`value()`获取到的文本值仍然是一个`String`。
 
-输出部件不允许用户修改其数值：
+`Output`组件的值不能被用户修改，可以视作一个无法编辑的输入框：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -57,7 +57,7 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/145727261-88ec533f-200b-4df7-a570-76ebd2ba520a.png)
 
-输入部件也可以使用 InputExt::set_readonly(bool) 方法变成只读：
+也可以使用`InputExt::set_readonly(bool)`方法将`Input`组件设置为只读：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -80,4 +80,4 @@ fn main() {
     a.run().unwrap();
 }
 ```
-这使我们的输入在用户点击按钮后成为只读。
+这会在用户输入内容并按下按钮后让文本框不可修改。

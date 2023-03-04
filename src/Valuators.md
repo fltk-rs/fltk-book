@@ -1,7 +1,7 @@
 # 估值器 Valuators
 
-估值器widget实现了ValuatorExt trait。这些widget跟踪（以图形和内部方式）跟踪steps，ranges和bounds。
-你可能熟悉滚动条和滑块（scrollbars and sliders）这种估值器。可以在valuator模块中找到fltk提供的这些估值器：
+FLTK提供的`Valuator`组件均实现了`ValuatorExt trait`。这些组件会在内部跟踪步长`step`，范围`range`和边界`bound`这些数据，你会在图形界面上看到它们的具体作用。
+你可能在别的地方使用过`Scrollbar`和`Sliders`这些组件。可以在`Valuator` mod中找到这些组件：
 
 - Slider
 - NiceSlider
@@ -21,7 +21,7 @@
 - HorNiceSlider
 - HorValueSlider
 
-在gui中改变valuator的值会触发其回调。Valuator的当前值可以通过value()方法来查询。它也可以用set_value()来为它设置一个值。range和step也可以根据你的使用情况进行查询和改变：
+在图形界面通过拖动等方式改变`Valuator`的值会触发其回调。`Valuator`的当前值可以通过`value()`方法来获取，可以用`set_value()`来设置其值。根据使用情况，你也可以获取和改变`range`和`step`的值：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -31,8 +31,8 @@ fn main() {
     let mut slider = valuator::HorNiceSlider::default().with_size(400, 20).center_of_parent();
     slider.set_minimum(0.);
     slider.set_maximum(100.);
-    slider.set_step(1., 1); // 每一step增长10
-    slider.set_value(50.); // 从中间开始
+    slider.set_step(1., 1); // 设置步长为10
+    slider.set_value(50.); // 设置开始
     win.end();
     win.show();
 

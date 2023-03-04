@@ -149,7 +149,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="输入输出-input--output"><a class="header" href="#输入输出-input--output">输入输出 Input &amp; Output</a></h1>
-<p>输入和输出 widget 实现了InputExt trait。在input&amp;output modules中还可以找到这些：</p>
+<p>FLTK提供的输入/输出组件均实现了<code>InputExt trait</code>。在<code>Input</code>和<code>Output</code> mod中可以找到这些组件：</p>
 <ul>
 <li>Input</li>
 <li>IntInput</li>
@@ -160,7 +160,7 @@
 <li>Output</li>
 <li>MultilineOutput</li>
 </ul>
-<p>这种trait的特点是，这些widget会带有一个文本值，可以用value()方法查询，用set_value()方法改变：</p>
+<p>实现了<code>InputExt trait</code>的组件都会携带一个文本值，对应用户输入的文本，可以用<code>value()</code>方法获得文本值，用<code>set_value()</code>方法修改文本值：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -182,8 +182,8 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727249-2fa4d384-2bd3-41fd-bbae-61a3a33b12f6.png" alt="image" /></p>
-<p>请注意，我们使用了一个IntInput来限制输入整数值。虽然用户不能输入字符串，但就开发者而言，value()的返回值仍然是一个String。</p>
-<p>输出部件不允许用户修改其数值：</p>
+<p>需要注意的是，我们使用了<code>IntInput</code>来限制用户只能输入整数值。虽然用户不能再输入字符了，但就开发者而言，<code>value()</code>获取到的文本值仍然是一个<code>String</code>。</p>
+<p><code>Output</code>组件的值不能被用户修改，可以视作一个无法编辑的输入框：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -200,7 +200,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727261-88ec533f-200b-4df7-a570-76ebd2ba520a.png" alt="image" /></p>
-<p>输入部件也可以使用 InputExt::set_readonly(bool) 方法变成只读：</p>
+<p>也可以使用<code>InputExt::set_readonly(bool)</code>方法将<code>Input</code>组件设置为只读：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -222,7 +222,7 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>这使我们的输入在用户点击按钮后成为只读。</p>
+<p>这会在用户输入内容并按下按钮后让文本框不可修改。</p>
 
                     </main>
 

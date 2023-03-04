@@ -146,7 +146,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>翻译最近更新于：2023/3/27</p>
+                        <p>翻译最近更新于：2023/3/4</p>
 <h1 id="开始"><a class="header" href="#开始">开始</a></h1>
 <p>欢迎来到 <a href="https://github.com/fltk-rs/fltk-rs">fltk-rs</a> 教程 !</p>
 <p>这是为 <a href="https://crates.io/crates/fltk">fltk crate</a> 而写的一本说明书。 其他资源有:</p>
@@ -1127,7 +1127,7 @@ fn main() {
 </li>
 </ol>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png" alt="image" /></p>
-<p>另外，你也可以结构出菜单选项的字符串来进行匹配：</p>
+<p>另外，你也可以解构出菜单选项的字符串来进行匹配：</p>
 <pre><code>```rust
 use fltk::{prelude::*, *};
 
@@ -1191,11 +1191,8 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-</li>
-</ol>
-<p>另外在 <a href="Events">事件 Events</a> 还会提到，你可以不适用闭包而传递一个函数：</p>
-<pre><code>```rust
-use fltk::{enums::*, prelude::*, *};
+<p>另外在 <a href="Events">事件 Events</a> 还会提到，你可以直接传递一个函数而不适用闭包：</p>
+<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::*, prelude::*, *};
 
 fn menu_cb(m: &amp;mut impl MenuExt) {
     if let Some(choice) = m.choice() {
@@ -1297,9 +1294,8 @@ fn main() {
 
     a.run().unwrap();
 }
-```
-</code></pre>
-<p>此外，你还可以使用<code>add_emit()</code>方法来传递一个<code>sender</code>和一个<code>message</code>，不必直接设置回调，而是通过<code>App::wait()</code>中处理：</p>
+</code></pre></pre>
+<p>此外，你还可以使用<code>add_emit()</code>方法来传递一个<code>sender</code>和一个<code>message</code>，这样就不用直接使用回调，而是可以集中在<code>App::wait()</code>中处理：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 #[derive(Clone)]
@@ -1354,10 +1350,13 @@ fn main() {
     }
 }
 </code></pre></pre>
-<p>你可能会问，为什么不直接用第一个例子那样简单的代码，还要使用其他更复杂的方式完成回调。其实每种方法都有它的用途。
+</li>
+</ol>
+<p>你可能会问，为什么不直接用第一个例子那样简单的代码，还要使用其他更复杂的方式完成回调方法。其实每种方法都有它的用途。
 对于简单的<strong>下拉菜单</strong>，用第一种方法会更加方便。对于程序的<strong>菜单栏</strong>，用第二种方法会更好，它可以让你为菜单选项设置快捷键<code>Shortcuts</code>和选项的类型<code>MenuFlags</code>（例如下拉菜单，选择选项，用于分隔的占位菜单等），另外你不用再像第一个例子一样，在菜单的回调中处理所有事件。使用<code>add_emit()</code>方法处理子菜单一样很容易，就像在<a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">编辑器示例</a>中那样：</p>
-<pre><code>```rust
-    let mut menu = menu::SysMenuBar::default().with_size(800, 35);
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    let mut menu = menu::SysMenuBar::default().with_size(800, 35);
     menu.set_frame(FrameType::FlatBox);
     menu.add_emit(
         &quot;&amp;File/New...\t&quot;,
@@ -1442,14 +1441,14 @@ fn main() {
     if let Some(mut item) = menu.find_item(&quot;&amp;File/Quit\t&quot;) {
         item.set_label_color(Color::Red);
     }
-```
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>注意最后一个调用，它使用<code>find_item()</code>方法，在菜单中匹配到符合的选项，然后把它的Label颜色设为红色：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png" alt="image" /></p>
 <h2 id="系统菜单栏"><a class="header" href="#系统菜单栏">系统菜单栏</a></h2>
-<p>在MacOS上，你可能更喜欢使用系统提供的菜单栏，它通常出现在屏幕的顶部。为此，你可以使用<code>SysMenuBar</code>组件。它与所有实现<code>MenuExt Trait</code>的组件具有相同的API，当程序为MacOS以外的其他目标平台编译时，该组件将变为一个普通的<code>MenuBar</code>。</p>
+<p>在MacOS上，你可能更喜欢使用系统提供的菜单栏，它通常出现在屏幕的顶部。为此可以使用<code>SysMenuBar</code>组件。它与所有实现<code>MenuExt Trait</code>的组件具有相同的API，当程序为MacOS以外的其他目标平台编译时，该组件将变为一个普通的<code>MenuBar</code>。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="输入输出-input--output"><a class="header" href="#输入输出-input--output">输入输出 Input &amp; Output</a></h1>
-<p>输入和输出 widget 实现了InputExt trait。在input&amp;output modules中还可以找到这些：</p>
+<p>FLTK提供的输入/输出组件均实现了<code>InputExt trait</code>。在<code>Input</code>和<code>Output</code> mod中可以找到这些组件：</p>
 <ul>
 <li>Input</li>
 <li>IntInput</li>
@@ -1460,7 +1459,7 @@ fn main() {
 <li>Output</li>
 <li>MultilineOutput</li>
 </ul>
-<p>这种trait的特点是，这些widget会带有一个文本值，可以用value()方法查询，用set_value()方法改变：</p>
+<p>实现了<code>InputExt trait</code>的组件都会携带一个文本值，对应用户输入的文本，可以用<code>value()</code>方法获得文本值，用<code>set_value()</code>方法修改文本值：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1482,8 +1481,8 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727249-2fa4d384-2bd3-41fd-bbae-61a3a33b12f6.png" alt="image" /></p>
-<p>请注意，我们使用了一个IntInput来限制输入整数值。虽然用户不能输入字符串，但就开发者而言，value()的返回值仍然是一个String。</p>
-<p>输出部件不允许用户修改其数值：</p>
+<p>需要注意的是，我们使用了<code>IntInput</code>来限制用户只能输入整数值。虽然用户不能再输入字符了，但就开发者而言，<code>value()</code>获取到的文本值仍然是一个<code>String</code>。</p>
+<p><code>Output</code>组件的值不能被用户修改，可以视作一个无法编辑的输入框：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1500,7 +1499,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727261-88ec533f-200b-4df7-a570-76ebd2ba520a.png" alt="image" /></p>
-<p>输入部件也可以使用 InputExt::set_readonly(bool) 方法变成只读：</p>
+<p>也可以使用<code>InputExt::set_readonly(bool)</code>方法将<code>Input</code>组件设置为只读：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1522,10 +1521,10 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>这使我们的输入在用户点击按钮后成为只读。</p>
+<p>这会在用户输入内容并按下按钮后让文本框不可修改。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="估值器-valuators"><a class="header" href="#估值器-valuators">估值器 Valuators</a></h1>
-<p>估值器widget实现了ValuatorExt trait。这些widget跟踪（以图形和内部方式）跟踪steps，ranges和bounds。
-你可能熟悉滚动条和滑块（scrollbars and sliders）这种估值器。可以在valuator模块中找到fltk提供的这些估值器：</p>
+<p>FLTK提供的<code>Valuator</code>组件均实现了<code>ValuatorExt trait</code>。这些组件会在内部跟踪步长<code>step</code>，范围<code>range</code>和边界<code>bound</code>这些数据，你会在图形界面上看到它们的具体作用。
+你可能在别的地方使用过<code>Scrollbar</code>和<code>Sliders</code>这些组件。可以在<code>Valuator</code> mod中找到这些组件：</p>
 <ul>
 <li>Slider</li>
 <li>NiceSlider</li>
@@ -1545,7 +1544,7 @@ fn main() {
 <li>HorNiceSlider</li>
 <li>HorValueSlider</li>
 </ul>
-<p>在gui中改变valuator的值会触发其回调。Valuator的当前值可以通过value()方法来查询。它也可以用set_value()来为它设置一个值。range和step也可以根据你的使用情况进行查询和改变：</p>
+<p>在图形界面通过拖动等方式改变<code>Valuator</code>的值会触发其回调。<code>Valuator</code>的当前值可以通过<code>value()</code>方法来获取，可以用<code>set_value()</code>来设置其值。根据使用情况，你也可以获取和改变<code>range</code>和<code>step</code>的值：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1554,8 +1553,8 @@ fn main() {
     let mut slider = valuator::HorNiceSlider::default().with_size(400, 20).center_of_parent();
     slider.set_minimum(0.);
     slider.set_maximum(100.);
-    slider.set_step(1., 1); // 每一step增长10
-    slider.set_value(50.); // 从中间开始
+    slider.set_step(1., 1); // 设置步长为10
+    slider.set_value(50.); // 设置开始
     win.end();
     win.show();
 
@@ -1567,13 +1566,13 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727188-4ac06d45-7fd1-44f7-9adc-366d9bb79d8f.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="文字-text"><a class="header" href="#文字-text">文字 Text</a></h1>
-<p>Text widget实现了DisplayExt trait，共有3个，可以在text module中找到：</p>
+<p><code>Text</code>组件实现了<code>DisplayExt trait</code>。FLTK提供了3个文字组件，可以在<code>text</code> mod中找到：</p>
 <ul>
 <li>TextDisplay</li>
 <li>TextEditor</li>
 <li>SimpleTerminal</li>
 </ul>
-<p>这些部件的主要目的是显示/编辑文本。前两个部件需要一个TextBuffer，而SimpleTerminal有一个内部缓冲器：</p>
+<p>文本组件的主要作用是显示或编辑文本。前两个部件需要一个<code>TextBuffer</code>，<code>SimpleTerminal</code>内部有一个<code>TextBuffer</code>：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1594,8 +1593,8 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727101-175fe355-1383-4789-ae40-2945ef0c63e2.png" alt="image" /></p>
-<p>大多数操作是通过TextBuffer完成的。可以用append()来追加文本，也可以用set_text()来设置其全部内容。
-你可以使用DisplayExt::buffer()方法取回缓冲区的clone（reference type）：</p>
+<p>在文本组件上，对内容的操作多数是使用<code>TextBuffer</code>完成的。可以用<code>append()</code>来添加文本，也可以用<code>set_text()</code>来设置Buffer的内容。
+你可以使用<code>DisplayExt::buffer()</code>方法得到Buffer的Clone（TextBuffer内部存储了一个对实际Buffer的可变指针引用），继而可以通过它来操作Buffer：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1617,7 +1616,7 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>DisplayExt提供了其他方法来管理文本属性，wrapping，cursor position，font，color，size...等。</p>
+<p><code>DisplayExt</code>定义了很多管理文本属性的方法，例如可以设置何时换行，光标位置，字体，颜色，大小等。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::Color, prelude::*, *};
 
 fn main() {
@@ -1630,7 +1629,10 @@ fn main() {
     let mut win = window::Window::default().with_size(400, 300);
     let mut txt = text::TextDisplay::default().with_size(390, 290).center_of_parent();
     txt.set_buffer(buf);
-    txt.wrap_mode(text::WrapMode::AtBounds, 0); // bounds don't require the second argument, unlike AtPixel and AtColumn
+    // 设置换行模式
+    // 不同于 AtPixel 和 AtColumn, AtBounds不需要第二个参数
+    // AtBounds 会设置文本到达输入框边界便会自动换行，对于大小可变的窗口很好用。
+    txt.wrap_mode(text::WrapMode::AtBounds, 0);
     txt.set_text_color(Color::Red);
     win.end();
     win.show();
@@ -1639,7 +1641,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727121-8396c77e-836d-4406-abd1-92af32ff7242.png" alt="image" /></p>
-<p>TextBuffer还有第二个用途，那就是提供一个样式缓冲区（style buffer）。样式缓冲区反映了你的文本缓冲区，并使用一个样式表（包含字体、颜色和大小）来为你的文本添加细粒度的样式，样式表本身是有索引的，具体说是使用相应的字母：</p>
+<p><code>TextBuffer</code>还有第二个用途，它可以作为样式缓冲区（Style Buffer）。Style Buffer是你的Text Buffer的一个镜像，它使用样式表（包含字体、颜色和大小的配置）来为你的文本细粒度地设置样式，样式表中的样式本身是有索引的，具体说是使用相应的顺序字母作为索引：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
     enums::{Color, Font},
     prelude::*,
@@ -1669,9 +1671,11 @@ fn main() {
     let mut buf = text::TextBuffer::default();
     let mut sbuf = text::TextBuffer::default();
     buf.set_text(&quot;Hello world!&quot;);
-    sbuf.set_text(&amp;&quot;A&quot;.repeat(&quot;Hello world!&quot;.len())); // A represents the first entry in the table, repeated for every letter
+    // A是样式表中的第一个元素的索引，这里为“Hello world!”的每个字母应用A代表的样式
+    sbuf.set_text(&amp;&quot;A&quot;.repeat(&quot;Hello world!&quot;.len())); 
     buf.append(&quot;\n&quot;); 
-    sbuf.append(&quot;B&quot;); // Although a new line and the style might not apply, but it's needed to avoid messing out subsequent entries
+    // 虽然针对换行的样式可能并没有显示出来，但是这里还需要将其写上，以免弄乱之后的文字样式
+    sbuf.append(&quot;B&quot;); 
     buf.append(&quot;This is a text editor!&quot;);
     sbuf.append(&amp;&quot;C&quot;.repeat(&quot;This is a text editor!&quot;.len()));
 
@@ -1688,9 +1692,9 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727157-be992344-763d-41f9-b3d8-2dfa13fbaab1.png" alt="image" /></p>
-<p>Terminal的例子使用了SimpleTerminal和一个有样式的TextBuffer，你可以在 <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs">这儿</a> 找到</p>
+<p><code>Terminal</code>的例子使用了<code>SimpleTerminal</code>和一个有样式的<code>TextBuffer</code>，点击这里查看这个例子 <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs">Terminal</a> </p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="阅览器-browsers"><a class="header" href="#阅览器-browsers">阅览器 Browsers</a></h1>
-<p>Browser widgets 实现了 BrowserExt trait：</p>
+<p><code>Browser</code>组件实现了<code>BrowserExt trait</code>，可以在<code>Browser</code> mod中找到以下类型的Browser：</p>
 <ul>
 <li>Browser</li>
 <li>SelectBrowser</li>
@@ -1699,8 +1703,7 @@ fn main() {
 <li>FileBrowser</li>
 <li>CheckBrowser</li>
 </ul>
-<p>这些可以在 browser module中找到。</p>
-<p>为了实例化一个browser，需要提供每一项的列宽column widths，以及在add()方法中用于将item分成几列的分隔符column char：</p>
+<p>为了实例化一个阅览器，我们需要设置好每一项item的宽度，在<code>add()</code>方法中还需要使用分隔符来将每一个item分开：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1710,7 +1713,7 @@ fn main() {
     let widths = &amp;[50, 50, 50, 70, 70, 40, 40, 70, 70, 50];
     b.set_column_widths(widths);
     b.set_column_char('\t');
-    // we can now use the '\t' char in our add method.
+    // 现在在我们的`add()`方法中可以使用'\t'来制表符
     b.add(&quot;USER\tPID\t%CPU\t%MEM\tVSZ\tRSS\tTTY\tSTAT\tSTART\tTIME\tCOMMAND&quot;);
     b.add(&quot;root\t2888\t0.0\t0.0\t1352\t0\ttty3\tSW\tAug15\t0:00\t@b@f/sbin/mingetty tty3&quot;);
     b.add(&quot;erco\t2889\t0.0\t13.0\t221352\t0\ttty3\tR\tAug15\t1:34\t@b@f/usr/local/bin/render a35 0004&quot;);
@@ -1725,11 +1728,11 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145733437-e3061015-12fa-4f2e-a1e3-01f59c4b189d.png" alt="image" /></p>
-<p>可以使用特殊字符<code>@</code>来实现其他丰富的格式化效果，我们需要后面跟一个格式化指定符：</p>
+<p>可以使用<code>@</code>并在后面跟上格式化符来实现其他丰富的格式化效果：</p>
 <ul>
-<li>'@.' 打印其余行，且不会再寻找其他的'@'符号</li>
+<li>'@.' 打印其余行，且让剩余的'@'符号无效</li>
 <li>'@@' 打印其余以'@'开头的行</li>
-<li>'@l'  使用大号字体(24 point) </li>
+<li>'@l' 使用大号字体(24 point) </li>
 <li>'@m' 使用中号字体(18 point)</li>
 <li>'@s' 使用小号字体(11 point)</li>
 <li>'@b' 使用宽字体(adds FL_BOLD to font)</li>
@@ -1737,14 +1740,14 @@ fn main() {
 <li>'@f' 或 '@t' 使用等距字体 (sets font to FL_COURIER)</li>
 <li>'@c' 水平居中</li>
 <li>'@r' 向右对齐文本</li>
-<li>'@B0', '@B1', ... '@B255' 使用fl_color(n)填充背景</li>
-<li>'@C0', '@C1', ... '@C255' 使用fl_color(n) 渲染文本</li>
-<li>'@F0', '@F1', ... 使用 fl_font(n) 渲染文本</li>
+<li>'@B0', '@B1', ... '@B255' 使用<code>fl_color(n)</code>填充背景</li>
+<li>'@C0', '@C1', ... '@C255' 使用<code>fl_color(n)</code>渲染文本</li>
+<li>'@F0', '@F1', ... 使用 <code>fl_font(n)</code> 渲染文本</li>
 <li>'@S1', '@S2', ... 使用相应的尺寸来渲染文本</li>
 <li>'@u' or '@_' 字体添加下划线</li>
 <li>'@-' 字体中间添加修改线</li>
 </ul>
-<p>在下面的例子中，我们在%CPU前面加上@C88，将其渲染成红色：</p>
+<p>在下面的例子中，我们在<code>%CPU</code>前面加上<code>@C88</code>，将其渲染成红色：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1760,11 +1763,11 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p><img src="https://user-images.githubusercontent.com/37966791/145733713-2fe3207d-25f7-4acd-ae91-754679c5696a.png" alt="image" /></p>
-<p>这些颜色遵循FLTK的颜色映射，可以从0到255进行索引。</p>
-<p><img src="https://www.fltk.org/doc-1.4/fltk-colormap.png" alt="colormap" /></p>
+<p><img src="https://user-images.githubusercontent.com/37966791/145733713-2fe3207d-25f7-4acd-ae91-754679c5696a.png" alt="图像 image" /></p>
+<p>这些颜色表示遵循FLTK的色彩映射规则，可以从0到255进行索引。</p>
+<p><img src="https://www.fltk.org/doc-1.4/fltk-colormap.png" alt="色彩映射 colormap" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="树-trees"><a class="header" href="#树-trees">树 Trees</a></h1>
-<p>Tree widgets 让你可以以树状的形式显示一些元素。这里并没有 tree trait，所有方法来自 Tree type。可以使用add方法添加元素：</p>
+<p><code>Tree</code>组件可以实现元素按照的。你可能会想，它是不是定义在<code>TreeExt trait</code>中，哈哈哈，然而这里并没有。所有方法都是来自<code>Tree</code>结构体类型。可以使用<code>add()</code>方法为Tree添加元素：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1781,7 +1784,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726958-f1f2a095-39c5-496f-b772-18d024dd609d.png" alt="image" /></p>
-<p>子项目可以使用正斜线分隔符来添加：</p>
+<p>Item下还可以子Item，可以使用正斜线分隔符<code>/</code>来添加：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1801,7 +1804,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727026-bfcff44f-2b01-4679-937b-3e7d441dfdf0.png" alt="image" /></p>
-<p>如果你试试上面的代码，你会发现根项标签总是 &quot;ROOT &quot;。可以通过set_root_label()方法来改变根标签：</p>
+<p>看过上面代码的例子，你会发现树的根标签总是 &quot;ROOT &quot;。可以通过<code>set_root_label()</code>方法来设置根标签：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1822,8 +1825,8 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727045-a25be6bc-a514-4b4a-b7b9-0a7ee2e359b4.png" alt="image" /></p>
-<p>甚至可以使用set_show_root(false)方法隐藏根标签。</p>
-<p>树中的元素可以使用first_selected_item()方法进行查询：</p>
+<p>还能调用<code>set_show_root(false)</code>方法来隐藏根标签。</p>
+<p>可以使用<code>first_selected_item()</code>方法来获取被点击到的元素：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1851,13 +1854,14 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727072-8596cf09-100c-4cb6-a427-0d3c66702b39.png" alt="image" /></p>
-<p>目前我们的树只允许单选，让我们把它改成多选（我们也要改变连接器connecter的样式）：</p>
+<p>现在我们的Tree中的元素只能单选，让我们把它改成允许多选的树（这里我们也改变了元素之间连线的样式）：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
+    // 设置Tree的选择模式为多选
     tree.set_select_mode(tree::TreeSelect::Multi);
     tree.set_connector_style(tree::TreeConnectorStyle::Solid);
     tree.set_connector_color(enums::Color::Red.inactive());
@@ -1881,7 +1885,7 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>现在的问题是，我们需要得到所有的选项，而不只是第一个被选中的项目，这里我们使用get_selected_items()方法，该方法返回一个可选的Vec，而不是只得到标签，我们将得到item的整个路径。</p>
+<p>现在的问题是，我们需要获取选择到的所有选项，而不只是第一个被选中的项目，这里我们使用<code>get_selected_items()</code>方法，该方法返回一个<code>Option&lt;Vec&gt;</code>。这里我们使用<code>item_pathname()</code>来获取Item在树中的路径。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1915,7 +1919,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727000-4b881896-309d-465d-8305-9a7e0a92eaea.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="表格-tables"><a class="header" href="#表格-tables">表格 Tables</a></h1>
-<p>fltk提供了table widget，其使用代码可以在例子中找到。然而，使用<a href="https://crates.io/crates/fltk-table">fltk-table crate</a>将需要更少的模板代码，并且还提供了一个更简单、更直观的界面。</p>
+<p>FLTK还提供了<code>Table</code>组件，Table的使用方法可以参见GitHub库中的例子<a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/table.rs">示例</a>。有个好处是，我们提供了<a href="https://crates.io/crates/fltk-table">fltk-table crate</a>，使用它的话我们可以写更少的样板代码，写出的界面也会更简单、直观。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">extern crate fltk_table;
 
 use fltk::{
@@ -1929,7 +1933,7 @@ fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gtk);
     let mut wind = window::Window::default().with_size(800, 600);
 
-    /// 我们通过 TableOpts 域传递行和列
+    // 通过 TableOpts 结构体设置行和列
     let mut table = SmartTable::default()
     .with_size(790, 590)
     .center_of_parent()
@@ -1943,19 +1947,19 @@ fn main() {
     wind.end();
     wind.show();
 
-    // 用一些值填充
+    // 用一些值填充表格
     for i in 0..30 {
         for j in 0..15 {
             table.set_cell_value(i, j, &amp;(i + j).to_string());
         }
     }
 
-    // 把行列为4，5的单元设置为&quot;another&quot;, 注意索引是从0开始的
+    // 把 第4行第5列 的表格设置为&quot;another&quot;, 需要注意索引是从0开始的
     table.set_cell_value(3, 4, &quot;another&quot;);
 
     assert_eq!(table.cell_value(3, 4), &quot;another&quot;);
 
-    // 防治点击空格键的时候关闭窗口
+    // 防止按 Esc键 时关闭窗口
     wind.set_callback(move |_| {
         if app::event() == enums::Event::Close {
             app.quit();
@@ -1967,8 +1971,10 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://github.com/fltk-rs/fltk-table/raw/HEAD/screenshots/styled.jpg" alt="fltk-table" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="自定义组件-custom-widgets"><a class="header" href="#自定义组件-custom-widgets">自定义组件 Custom widgets</a></h1>
-<p>fltk-rs允许你创建自定义widget。我们需要定义一个struct，它需要扩展一个已经存在的widget和widget type。最基本的widget type是widget::Widget。
-1- 定义你的struct和任何其他需要存储在其中的内部数据：</p>
+<p>fltk-rs允许你创建自定义组件。我们需要定义一个<code>Struct</code>来作为自定义组件的类型，我们需要用一个已经存在的<code>Widget</code>和<code>widget type</code>来扩展它。最基本的<code>Widget type</code>是<code>widget::Widget</code>。</p>
+<ol>
+<li>
+<p>定义你的<code>Struct</code>，以及它需要维护的内部数据：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use fltk::{prelude::*, *};
@@ -1981,12 +1987,16 @@ struct MyCustomButton {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>你会注意到两件事，我们正在使用一个Rc RefCell来存储数据。这在一般情况下是没有必要的，但是，由于我们需要将这些数据所有权move到一个回调中，同时在我们修改它之后仍然可以访问它，我们将把它包装在一个Rc RefCell中。我们已经导入了必要的模块。</p>
-<p>2- 定义结构的impl。其中最重要的是构造函数，因为我们要通过它来初始化内部数据：</p>
+</li>
+</ol>
+<p>你会注意到两件事，我们正在使用一个<code>Rc&lt;RefCell&lt;T&gt;&gt;</code>来存储我们需要用到的数据。在一般情况下这是没有必要的。但是，在它的回调方法被调用时它的所有权会被移动，为了在执行完一次回调之后仍能使用它，我们将把它包装在一个<code>Rc&lt;RefCell&lt;&gt;&gt;</code>中。这段代码中我们已经导入了必要的模块。</p>
+<ol start="2">
+<li>
+<p>为组件实现方法。最重要的是要有构造函数，因为我们要通过它来初始化组件和内部数据：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl MyCustomButton {
-    // 我们定义的结构体
+
     pub fn new(radius: i32, label: &amp;str) -&gt; Self {
         let mut inner = widget::Widget::default()
             .with_size(radius * 2, radius * 2)
@@ -1996,16 +2006,20 @@ struct MyCustomButton {
         let num_clicks = 0;
         let num_clicks = Rc::from(RefCell::from(num_clicks));
         let clicks = num_clicks.clone();
-        inner.draw(|i| { // 我们需要一个绘图的实现 draw implementation
+        inner.draw(|i| { 
+            // 我们需要实现绘制方法
             draw::draw_box(i.frame(), i.x(), i.y(), i.w(), i.h(), i.color());
-            draw::set_draw_color(enums::Color::Black); // 设置文字颜色
+            draw::set_draw_color(enums::Color::Black);
+            // 设置文字的颜色
             draw::set_font(enums::Font::Helvetica, app::font_size());
             draw::draw_text2(&amp;i.label(), i.x(), i.y(), i.w(), i.h(), i.align());
         });
         inner.handle(move |i, ev| match ev {
             enums::Event::Push =&gt; {
-                *clicks.borrow_mut() += 1; // 递增 num_clicks
-                i.do_callback(); // 使用 set_callback() 时设置的回调
+                *clicks.borrow_mut() += 1; 
+                // 使 num_clicks 在点击时递增
+                i.do_callback(); 
+                // 执行我们使用 set_callback() 设置的回调方法
                 true
             }
             _ =&gt; false,
@@ -2023,21 +2037,25 @@ struct MyCustomButton {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>3- 对我们的struct应用widget_extends！宏，该宏需要基本类型，已经我们通过该成员扩展的自定义类型。这是通过实现Deref和DerefMut trait实现的。该宏还添加了其他方便的构造函数和锚定方法（anchoring methods）：</p>
+</li>
+<li>
+<p>在我们的自定义组件上应用<code>widget_extends！</code>宏，该宏需要传入我们的小组件，它扩展的基本类型，以及结构体中表示该基本类型的成员。这是通过实现<code>Deref Trait</code>和<code>DerefMut Trait</code>实现的。该宏还会自动为我们的自定义组件添加了其他函数和固定的方法（anchoring methods）：</p>
+</li>
+</ol>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// 通过成员`inner`扩展widget::Widget，并添加其他初始化器和构造函数
+</span>// 通过宏扩展widget::Widget
 widget_extends!(MyCustomButton, widget::Widget, inner);
 <span class="boring">}
 </span></code></pre></pre>
-<p>现在来试一试我们的struct：</p>
+<p>现在来试一试我们的自定义组件：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
     app::background(255, 255, 255); // 设置白色背景
     let mut wind = window::Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
     
     let mut btn = MyCustomButton::new(50, &quot;Click&quot;);
-    // 注意，set_color和set_callback已经自动为我们实现了
+    // 注意，set_color和set_callback是宏自动为我们实现了
     btn.set_color(enums::Color::Cyan);
     btn.set_callback(|_| println!(&quot;Clicked&quot;));
     
@@ -2061,7 +2079,7 @@ struct MyCustomButton {
 }
 
 impl MyCustomButton {
-    // 我们定义的结构体
+
     pub fn new(radius: i32, label: &amp;str) -&gt; Self {
         let mut inner = widget::Widget::default()
             .with_size(radius * 2, radius * 2)
@@ -2071,7 +2089,8 @@ impl MyCustomButton {
         let num_clicks = 0;
         let num_clicks = Rc::from(RefCell::from(num_clicks));
         let clicks = num_clicks.clone();
-        inner.draw(|i| { // 我们需要一个绘图的实现 draw implementation
+        inner.draw(|i| { 
+            // 我们需要一个绘制的方法
             draw::draw_box(i.frame(), i.x(), i.y(), i.w(), i.h(), i.color());
             draw::set_draw_color(enums::Color::Black); // 设置文字颜色
             draw::set_font(enums::Font::Helvetica, app::font_size());
@@ -2079,8 +2098,10 @@ impl MyCustomButton {
         });
         inner.handle(move |i, ev| match ev {
             enums::Event::Push =&gt; {
-                *clicks.borrow_mut() += 1; // 递增 num_clicks
-                i.do_callback(); // 使用 set_callback() 时设置的回调
+                *clicks.borrow_mut() += 1;
+                // 使 num_clicks 在点击时递增
+                i.do_callback(); 
+                // 执行我们使用 set_callback() 设置的回调方法
                 true
             }
             _ =&gt; false,
@@ -2097,12 +2118,13 @@ impl MyCustomButton {
     }
 }
 
-// 通过成员`inner`扩展widget::Widget，并添加其他初始化器和构造函数
+// 通过宏扩展widget::Widget
 widget_extends!(MyCustomButton, widget::Widget, inner);
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
-    app::background(255, 255, 255); // 设置白色背景
+    // 设置背景为白色
+    app::background(255, 255, 255);
     let mut wind = window::Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
     let mut btn = MyCustomButton::new(50, &quot;Click&quot;);
     btn.set_color(enums::Color::Cyan);

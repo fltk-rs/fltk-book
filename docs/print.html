@@ -146,7 +146,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>翻译最近更新于：2023/3/4</p>
+                        <p>翻译最近更新于：2023/3/5</p>
 <h1 id="开始"><a class="header" href="#开始">开始</a></h1>
 <p>欢迎来到 <a href="https://github.com/fltk-rs/fltk-rs">fltk-rs</a> 教程 !</p>
 <p>这是为 <a href="https://crates.io/crates/fltk">fltk crate</a> 而写的一本说明书。 其他资源有:</p>
@@ -2140,11 +2140,11 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727718-fd0ee71f-f0c2-4438-a038-9b6950638a35.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="对话框-dialogs"><a class="header" href="#对话框-dialogs">对话框 Dialogs</a></h1>
-<p>fltk提供了几种对话框类型，有文件对话框和其他一些。</p>
+<p>FLTK提供了文件对话框等一系列对话框类型</p>
 <h2 id="文件对话框-file-dialogs"><a class="header" href="#文件对话框-file-dialogs">文件对话框 File dialogs</a></h2>
-<p>有2种类型，原生文件对话框和FLTK自己的文件对话框。原生对话框只是显示操作系统自己的对话框。对于windows来说，那是win32对话框，对于MacOS来说，那是Cocoa对话框，而对于其他posix系统来说，取决于你正在运行什么。在GNOME和其他基于gtk的桌面上，它显示gtk对话框，在KDE上它显示kdialog。</p>
+<p>有2种文件对话框类型，系统原生的文件对话框和FLTK自己的文件对话框。原生文件对话框即进行文件选择时会弹出系统的文件选择窗口。对于Windows，弹出的便是Win32对话框，对于MacOS，弹出的是Cocoa对话框，对于其他Posix系统来说，它取决于你的桌面环境。在GNOME和其他基于GTK的桌面上，弹出的是GTK对话框，在KDE上弹出的是kdialog。</p>
 <h3 id="原生对话框-native-dialogs"><a class="header" href="#原生对话框-native-dialogs">原生对话框 Native dialogs</a></h3>
-<p>唤起一个原生对话框：</p>
+<p>这样可以调出一个原生对话框：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2169,7 +2169,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/146625105-94b11a5d-0938-4962-96d1-aaff5424ffe8.png" alt="image" /></p>
-<p>这将打印出所选文件的路径。有几种类型可以作为NativeFileChooserType被传递，这里我们浏览文件，你可以选择BrowseDir来代替，也可以启用多文件/目录选择。如果你选择了多个文件，你可以使用filenames()方法得到一个Vec：</p>
+<p>运行这段代码会弹出一个系统原生的文件对话框，选择一个文件后将在终端打印出文件名。你需要为<code>new()</code>提供一个<code>NativeFileChooserType</code>类型的参数，它表明你该对话框要选择的文件类型，是多个文件还是文件夹之类的。这段代码我们选择了<code>BrowseFile</code>，你可以用<code>BrowseDir</code>替换掉来试试，也可试试多文件/目录的类型选项。如果你选择了多个文件，你可以使用<code>filenames()</code>方法得到一个包含多个文件名的Vector：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2193,7 +2193,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>你也可以选择添加过滤器来有选择地选取文件：</p>
+<p>你可以通过添加过滤器来限制文件类型：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    btn.set_callback(|_| {
@@ -2204,7 +2204,7 @@ fn main() {
     });
 <span class="boring">}
 </span></code></pre></pre>
-<p>这将只显示.txt、.rs和.toml文件。</p>
+<p>这将让对话框只能选取<code>.txt</code>、<code>.rs</code>和<code>.toml</code>文件。</p>
 <h3 id="fltl提供的文件选择器-fltks-own-file-chooser"><a class="header" href="#fltl提供的文件选择器-fltks-own-file-chooser">FLTL提供的文件选择器 FLTK's own file chooser</a></h3>
 <p>FLTK也提供了自己的文件选择器：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
@@ -2223,10 +2223,10 @@ fn main() {
 
     btn.set_callback(|_| {
         let mut dialog = dialog::FileChooser::new(
-            /*start dir*/ &quot;.&quot;,
-            /*pattern*/ &quot;*.{txt,rs,toml}&quot;,
-            /*type*/ dialog::FileChooserType::Multi,
-            /*title*/ &quot;Select file:&quot;,
+            &quot;.&quot;,                            /*对话框弹出时所在目录*/
+            &quot;*.{txt,rs,toml}&quot;,              /*文件类型限定*/
+            dialog::FileChooserType::Multi, /*对话框类型*/
+            &quot;Select file:&quot;,                 /*对话框标题*/
         );
         dialog.show();
         while dialog.shown() {
@@ -2243,7 +2243,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726912-600e4c58-32b7-4a1b-8e6a-44e640549722.png" alt="image" /></p>
-<p>用file_chooser()和dir_chooser()函数提供了一个方便的函数：</p>
+<p>使用<code>file_chooser()</code>和<code>dir_chooser()</code>方法可以简化一些操作：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2273,8 +2273,8 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<h3 id="帮助对话框-help-dialog"><a class="header" href="#帮助对话框-help-dialog">帮助对话框 Help dialog</a></h3>
-<p>FLTK提供了一个帮助对话框，可以显示html 2文档：</p>
+<h3 id="帮助文档对话框-help-dialog"><a class="header" href="#帮助文档对话框-help-dialog">帮助文档对话框 Help dialog</a></h3>
+<p>FLTK提供了一个帮助文档对话框，可以用来将HTML文件转换为文档显示出来：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2301,16 +2301,16 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>html文件也可以用HelpDialog::load(path_to_html_file)方法加载：</p>
+<p>也可以用<code>HelpDialog::load(path_to_html_file)</code>方法加载一个HTML文件：</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726889-442d0453-e1d0-4b41-8717-f121fdf860fa.png" alt="image" /></p>
 <h3 id="提示对话框-alert-dialogs"><a class="header" href="#提示对话框-alert-dialogs">提示对话框 Alert dialogs</a></h3>
-<p>FLTK还提供了几种对话框类型，可以使用自由函数方便地显示：</p>
+<p>FLTK还提供了下面几种使用很方便的对话框类型，只需要调用相关函数即可显示：</p>
 <ul>
 <li>message</li>
 <li>alert</li>
 <li>choice</li>
 <li>input</li>
-<li>password (类似于input，但不显示输入内容)</li>
+<li>password (类似于input，但会隐藏输入的内容)</li>
 </ul>
 <p>显示一个简单的message对话框：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
@@ -2334,7 +2334,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>这将在默认的位置（基本上在指针附近）显示一个message。如果你想手动输入坐标，你可以使用 message() 函数：</p>
+<p>执行这段代码，将在默认位置（大致在鼠标位置）显示一个message对话框。如果你想手动设置显示的坐标，可以使用<code>message()</code>函数：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    btn.set_callback(|_| {
@@ -2342,8 +2342,8 @@ fn main() {
     });
 <span class="boring">}
 </span></code></pre></pre>
-<p>前面提到的所有函数都有变体，一个有_default()后缀，不需要坐标，另一个没有，需要坐标。
-有些对话框会返回一个值，比如choice，input，and password。input和password返回输入的文本，而choice则返回选择值的索引：</p>
+<p>这些函数都有相对的变体，一个有<code>_default()</code>后缀，不需要设置坐标，另一个没有后缀，需要手动输入坐标。
+有些对话框会返回一个值，比如<code>choice</code>，<code>input</code> 和 <code>password</code>。<code>input</code>和<code>password</code>返回用户输入的文本，而<code>choice</code>则返回选择值的索引：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2359,7 +2359,7 @@ fn main() {
     wind.show();
 
     btn.set_callback(|_| {
-        // 密码和输入也需要第二个参数，这是默认值
+        // password() 和 input() 需要第二个参数来表示默认显示的值
         let pass = dialog::password_default(&quot;Enter password:&quot;, &quot;&quot;);
         if let Some(pass) = pass {
             println!(&quot;{}&quot;, pass);
@@ -2370,7 +2370,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726850-61fc17e4-cd6e-4821-a9b5-396203806066.png" alt="image" /></p>
-<p>使用choice的一个例子：</p>
+<p>使用<code>choice</code>的示例：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2393,16 +2393,16 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>这将打印索引，即选择No将打印0，Yes将打印1，Cancel将打印2。</p>
+<p>在用户选择按钮后将在控制台打印出选项索引，选择No将打印0，Yes将打印1，Cancel将打印2。</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726775-d000a807-8bf5-439b-a991-8bf25fcd5049.png" alt="image" /></p>
-<p>你已经注意到，所有这些对话框都没有一个。你也可以在对话框前调用函数来添加一个title：</p>
+<p>你可能已经发现这些对话框没有标题。你可以在调用对话框前调用这个函数来为对话框添加标题：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>        dialog::message_title(&quot;Exit!&quot;);
         let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
 <span class="boring">}
 </span></code></pre></pre>
-<p>你也可以使用 dialog::message_title_default() 来设置所有这些对话框的默认标题，你要在你的程序的开始部分这样做：</p>
+<p>你也可以在程序的开头调用<code>dialog::message_title_default()</code>来设置所有对话框的默认标题：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2428,7 +2428,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726685-f086bde2-db63-4fa8-a579-954dbacbe44d.png" alt="image" /></p>
 <h2 id="自定义对话框-custom-dialogs"><a class="header" href="#自定义对话框-custom-dialogs">自定义对话框 Custom dialogs</a></h2>
-<p>所有这些对话框与你的程序设想的样子可能不相符合，特别是关于颜色和字体。如果你有一个深度定制的程序，你可能也会想要定制对话框。对话框基本上是一个在应用程序中生成的模式窗口。它可以与你的应用程序的其他部分具有相同的风格：</p>
+<p>上面这些对话框可能并不是你想要的样子，尤其是颜色和字体。如果你的程序是高度风格化的，你绝对还需要自定义对话框。对话框基本是在程序运行期间生成的一个模型窗口（Modal Windows），我们想要制作自定义对话框，只要制作一个窗口即可，它的主题与你为程序设置的主题将是一致的：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
     app, button,
     enums::{Color, Font, FrameType},
@@ -2512,8 +2512,8 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726727-a0018457-1d87-4519-9d6e-08d8f8030d1a.png" alt="image" /></p>
-<h2 id="打印机话框-printer-dialog"><a class="header" href="#打印机话框-printer-dialog">打印机话框 Printer dialog</a></h2>
-<p>FLTK还提供了一个打印机对话框，它使用你的系统平台的本地打印机对话框：</p>
+<h2 id="打印对话框-printer-dialog"><a class="header" href="#打印对话框-printer-dialog">打印对话框 Printer dialog</a></h2>
+<p>FLTK还提供了打印对话框，它会调用你的系统平台的本地打印机对话框：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use fltk::{prelude::*, *};
@@ -2535,9 +2535,9 @@ but.set_callback(|widget| {
 });
 <span class="boring">}
 </span></code></pre></pre>
-<p>这里只是打印按钮的图像并指定它在纸上显示的位置。你可以传递任何widget（主要是像TextEditor widget）作为打印widget。</p>
+<p>这里打印了按钮的图像并指定了它的位置。你可以传递任何组件（像TextEditor组件之类的）作为被打印的组件。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="图像-images"><a class="header" href="#图像-images">图像 Images</a></h1>
-<p>FLTK支持矢量图和位图，开箱即提供下列几种图像类型：</p>
+<p>FLTK支持矢量图和位图，提供下面几种开箱即用的图像类型：</p>
 <ul>
 <li>BmpImage</li>
 <li>JpegImage</li>
@@ -2552,21 +2552,21 @@ but.set_callback(|widget| {
 </ul>
 <p>它还提供了两个helper types：</p>
 <ul>
-<li>SharedImage：它包装了之前所有的类型，所以你不需要指定图像类型。</li>
-<li>TiledImage：它提供了一个任何具体类型的平铺图像（图形学术语）。</li>
+<li>SharedImage：它包装了上述所有的类型，使用时不需要提供图像的类型。</li>
+<li>TiledImage：它提供了任何具体类型的平铺图像（Tiled Image）。</li>
 </ul>
-<p>图像类型实现了ImageExt trait，提供了允许缩放和检索图像元数据的方法。
-Image可以通过向它的load()构造函数传递路径来构建，或者对某些类型可以使用接受图像数据的from_data()构造函数：</p>
+<p>图像类型均实现了<code>ImageExt Trait</code>，该Trait中定义了缩放和检索图像元数据的方法。
+可以通过向图像类型的<code>load()</code>函数传递图像路径来显示图像，对于某些类型，可以使用<code>from_data()</code>接收图像数据来构建图像：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>/// 需要一个路径
+</span>/// 需要图像路径
 let image = image::SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
 
 /// 需要图像数据
 let image= image::SvgImage::from_data(&amp;data).unwrap();
 <span class="boring">}
 </span></code></pre></pre>
-<p>Image可以通过WidgetExt::set_image()/set_image_scaled()或set_deimage()/set_deimage_scaled()（用于deactivated/grayed image）与widget一起使用。</p>
+<p>可以通过使用<code>WidgetExt::set_image()</code>/<code>set_image_scaled()</code>或<code>set_deimage()</code>/<code>set_deimage_scaled()</code>（用于deactivated/grayed image）在其他组件上使用<code>Image</code>组件：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
 fn main() {
@@ -2586,7 +2586,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>或者通过WidgetExt::draw()方法：</p>
+<p>或者通过<code>WidgetExt::draw()</code>方法：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
 fn main() {
@@ -2609,17 +2609,17 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/hello.jpg" alt="svg" /></p>
-<p>在你的应用程序中使用图像作为图标和背景也有助于赋予你的应用程序以风格。</p>
+<p>使用<code>Image</code>作为你的程序的图标或背景将让你的程序更具风格化，更加美观（在FLTK中你可能需要使用其他主题或自定义）。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="事件-events"><a class="header" href="#事件-events">事件 Events</a></h1>
-<p>在前面提到的例子中，你主要看到了回调（Callback），除此之外，FLTK还提供了多种处理事件的方式：</p>
+<p>在之前章节的示例中，我们处理事件的方法主要是使用回调（Callback）。但是我们可以根据具体的使用情况选择其他方法，FLTK提供的处理事件的方式有这几种：</p>
 <ul>
-<li>我们可以使用set_callback()方法，在点击我们的按钮时自动触发该方法。</li>
-<li>我们可以使用handle()方法进行细粒度的事件处理。</li>
-<li>我们可以使用emit()方法，该方法接收一个sender和一个message，这使我们可以在event loop中处理事件。</li>
-<li>我们可以定义我们自己的事件，它可以在另一个部件的处理方法中被处理。</li>
+<li><code>set_callback()</code>方法，在点击按钮时自动触发。</li>
+<li><code>handle()</code>方法，用于进行细粒度的事件处理。</li>
+<li><code>emit()</code>方法，接收一个<code>sender</code>和一个<code>message</code>将触发的事件类型发送，之后在<code>event loop</code>中处理事件。</li>
+<li>我们还可以自定义一个可以在另一个组件的处理方法中被处理的事件。</li>
 </ul>
 <h3 id="设置回调-callback"><a class="header" href="#设置回调-callback">设置回调 Callback</a></h3>
-<p>WidgetExt trait 提供了set_callback方法。</p>
+<p><code>WidgetExt trait</code> 中定义了<code>set_callback</code>方法。</p>
 <h4 id="使用闭包"><a class="header" href="#使用闭包">使用闭包</a></h4>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
@@ -2633,7 +2633,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>捕获的参数是你所设置了回调的widget的可变借用<code>&amp;mut Self</code>： </p>
+<p>这里闭包捕获的环境是设置回调的组件自身的<code>&amp;mut self</code>： </p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2646,8 +2646,8 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>set_callback()方法有默认的触发器，不同widget可能有不同的触发器。对按钮来说，当它有焦点时，触发器是点击或按下回车。
-可以通过set_trigger()方法为widget改变触发器。对于按钮可能没什么意义，但是对于Input widget来说，触发器可以被设置为 &quot;CallbackTrigger::Changed&quot;，这可以使Input widget的状态改变时触发回调：</p>
+<p>你的按钮何时执行回调方法，点击时？还是鼠标松开时？你需要设置触发器来决定何时执行回调，<code>set_callback()</code>方法会设置默认的触发器，不同组件的触发器可能不同。例如按钮组件的触发器便是，当它具有鼠标焦点时的点击或按下回车。
+某个组件的触发器是可以通过<code>set_trigger()</code>方法改变的。改变按钮的触发方式可能没有意义，但是对于<code>Input</code>组建来说，触发器可以被设置为<code>CallbackTrigger::Changed</code>，这可以使<code>Input</code>组件在状态改变时就触发回调：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2663,8 +2663,8 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>用户每输入一个字符就会打印一次。</p>
-<p>使用闭包的好处是能够“关闭”作用域参数，即你也可以将周围作用域中的变量传递到闭包中：</p>
+<p>在这个示例中，用户每输入一个字符都会打印一次。</p>
+<p>使用闭包的好处便是因为它能够捕获环境，你可以将闭包环境作用域中的其他变量传递进去：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2679,9 +2679,9 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>你会注意到在<a href="Menus">菜单</a>中，处理是在每个MenuI tem基础上进行的。</p>
-<h4 id="使用方法对象"><a class="header" href="#使用方法对象">使用方法对象</a></h4>
-<p>如果你喜欢的话你也可以直接设置方法对象：</p>
+<p>在<a href="Menus">菜单</a>中，事件处理是在每个<code>MenuItem</code>上进行的。</p>
+<h4 id="使用方法对象-function-object"><a class="header" href="#使用方法对象-function-object">使用方法对象 Function Object</a></h4>
+<p>如果你喜欢的话你也可以直接传递函数对象：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn button_cb(w: &amp;mut impl WidgetExt) {
@@ -2698,8 +2698,8 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>我们使用<code>&amp;mut impl WidgetExt</code>，以便能够在多种不同的widget类型中重复使用这个函数对象。或者，你可以直接使用<code>&amp;mut button::Button</code>来表示只有Button可以使用。
-这种方法的一个缺点是，为了处理状态，你必须管理全局状态：</p>
+<p>我们使用<code>&amp;mut impl WidgetExt</code>，以便让所有组件都能使用这个回调。或者，你可以直接使用<code>&amp;mut button::Button</code>只让<code>Button</code>使用。
+这种方法的一个缺点是，有时候你必须维护全局状态：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">extern crate lazy_static;
 
 use fltk::{prelude::*, *};
@@ -2738,11 +2738,11 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>这里我们使用lazy_static，也有其他的crate来优化状态管理。</p>
-<p>同样，对菜单来说，在<code>MenuExt::add()/insert()</code>或<code>MenuItem::add()/insert()</code>方法中，我们可以使用<code>&amp;mut impl MenuExt</code>来设置menu widget和menu item的回调。</p>
+<p>这里我们用了<code>lazy_static</code>，当然也有其他的<code>crate</code>来用来进行状态管理。</p>
+<p>同样，对菜单来说，在<code>MenuExt::add()/insert()</code>或<code>MenuItem::add()/insert()</code>方法中，我们可以使用<code>&amp;mut impl MenuExt</code>来设置<code>Menu</code>和<code>Menu Item</code>的回调。</p>
 <h3 id="使用处理方法-handle-method"><a class="header" href="#使用处理方法-handle-method">使用处理方法 handle method</a></h3>
-<p>handle方法接收一个参数为事件的闭包，并为已处理的事件返回一个bool。这个bool值让FLTK知道该事件是否被处理。
-它的调用是这样的：</p>
+<p><code>handle</code>方法接收一个有事件参数的闭包，并在处理后返回一个<code>bool</code>。这个返回值让FLTK知道该事件是否被处理。
+它的使用是这样的：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2760,7 +2760,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>这将打印出event，但并不处理它，因为我们返回false。很明显，我们想做一些有用的事情，所以把处理调用改为：</p>
+<p>这段代码将打印出<code>event</code>，但并不做其他处理，所以我们返回false。很明显，我们应该做一些有用的处理，所以我们把它改成这样：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    but.handle(|_, event| match event {
@@ -2772,7 +2772,7 @@ fn main() {
     });
 <span class="boring">}
 </span></code></pre></pre>
-<p>在这里，我们做一些有用的事情来处理推送事件并返回真，将其他事件都忽略并返回假。</p>
+<p>在这里，我们处理事件<code>Event</code>然后返回<code>true</code>，将其他事件将被忽略并返回<code>false</code>。</p>
 <p>另一个例子：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2786,7 +2786,7 @@ fn main() {
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="使用messages"><a class="header" href="#使用messages">使用messages</a></h3>
-<p>这允许我们创建Channel和一个Sender Receiver结构，然后我们可以发射Message（必须是Send + Sync安全的），并在我们的事件循环中处理。这样做的好处是，当我们需要将我们的类型传递到闭包或生成的线程中时，我们不必用智能指针来包装它们。</p>
+<p>这允许我们创建Channel和<code>Sender</code> <code>Receiver</code>的结构，在触发后发送Message（Message必须是<code>Send + Sync</code>），并在<code>event loop</code>中处理。这样做的好处是，当我们需要将我们的一些量传递到闭包或线程中时，不必再使用智能指针来包装它们。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2800,19 +2800,19 @@ fn main() {
     let (s, r) = app::channel();
     
     but.emit(s, true);
-    // 这等同于调用but.set_callback(move |_| s.send(true))
+    // 相当于 but.set_callback(move |_| s.send(true))
 
     while app.wait() {
         if let Some(msg) = r.recv() {
             match msg {
                 true =&gt; println!(&quot;Clicked&quot;),
-                false =&gt; (), // 这里不作任何事
+                false =&gt; (), // 什么都不做
             }
         }
     }
 }
 </code></pre></pre>
-<p>跟之前的例子一样，Messages 可以在事件循环中被接受， 另外你也可以在后台线程或app::add_idle()的回调中接收Message：</p>
+<p>跟之前的例子一样，Messages 可以在<code>event loop</code>中被接受，另外你也可以在后台线程或<code>app::add_idle()</code>的回调中接收<code>Message</code>：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    app::add_idle(move || {
@@ -2825,7 +2825,7 @@ fn main() {
     });
 <span class="boring">}
 </span></code></pre></pre>
-<p>你也不限于使用fltk channel，你可以使用任何channel。例如，这个使例子用std channel：</p>
+<p>这里也不限于使用<code>fltk channel</code>，你可以使用任何channel。例如，这个例子用使用了<code>std channel</code>：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let (s, r) = std::sync::mpsc::channel::&lt;Message&gt;();
@@ -2834,7 +2834,7 @@ btn.set_callback(move |_| {
 });
 <span class="boring">}
 </span></code></pre></pre>
-<p>你也可以定义一个适用于所有widget的方法，类似于emit()方法：</p>
+<p>类似于<code>emit()</code>方法，你也可以定义一个适用于所有组件的<code>send()</code>方法，：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use std::sync::mpsc::Sender;
 
 pub trait SenderWidget&lt;W, T&gt;
@@ -2863,9 +2863,9 @@ fn main() {
     btn.send(s.clone(), Message::SomeMessage);
 }
 </code></pre></pre>
-<h3 id="创建自己的events"><a class="header" href="#创建自己的events">创建自己的events</a></h3>
-<p>FLTK识别了29个事件，这些事件在enums::Event中可以看到。然而，它允许我们使用app::handle(impl Into<i32>, window)调用创建我们自己的事件。handle函数接受一个任意的i32（&gt;30）值作为信号，理想情况下，这些值应该是预定义的，可以在另一个widget的handle()方法中处理，另一个widget需要在传递给app::handle的窗口中。
-在下面的例子中，我们创建了一个带有Frame和button的窗口。button的回调通过app::handle_main函数发送一个CHANGED事件。该CHANGED信号在框架的handle方法中被查询到：</p>
+<h3 id="创建自己的事件"><a class="header" href="#创建自己的事件">创建自己的事件</a></h3>
+<p>FLTK在<code>enums::Event</code>中预先定义了29个事件。我们还可以使用调用<code>app::handle(impl Into&lt;i32&gt;, window)</code>创建我们自己的事件。<code>handle</code>函数以任意一个大于30的<code>i32</code>类型值作为信号标识，最好提前定义好信号标识。我们可以在另一个组件的<code>handle()</code>方法中处理事件，注意这个组件需要放在传递给<code>app::handle</code>的那个窗口内部。
+在下面的例子中，我们创建了一个带有<code>Frame</code>和<code>Button</code>的窗口。<code>Button</code>的回调函数在执行时，通过<code>app::handle_main</code>函数发送一个<code>CHANGED</code>事件。该<code>CHANGED</code>信号在<code>Frame</code>的<code>handle</code>方法中被接收到并做出处理：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, button::*, enums::*, frame::*, group::*, prelude::*, window::*};
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -2940,19 +2940,19 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     Ok(app.run()?)
 }
 </code></pre></pre>
-<p>发送的i32信号可以即时创建，或者也可以添加到局部/全局常量中，或者添加到一个枚举中。</p>
+<p>发送的<code>i32</code>信号可以是动态创建的，也可以把它存在一个局部或全局常量中，或者存放在一个枚举中。</p>
 <h4 id="优点"><a class="header" href="#优点">优点</a></h4>
 <ul>
 <li>无开销。</li>
-<li>该信号的处理与任何fltk事件一样。</li>
-<li>app::handle函数可以返回一个bool，表示该事件是否被处理。</li>
+<li>信号的处理方式与其他任何FLTK事件一样。</li>
+<li><code>app::handle</code>函数可以返回一个bool，表示该事件是否被处理。</li>
 <li>允许在事件循环之外处理自定义信号/事件。</li>
-<li>允许在你的应用程序中采用MVC或SVU架构。</li>
+<li>允许在程序中使用MVC或SVU架构。</li>
 </ul>
 <h4 id="缺点"><a class="header" href="#缺点">缺点</a></h4>
 <ul>
-<li>该信号只能在一个widget的处理方法中处理。</li>
-<li>该信号在事件循环中是不可访问的（为此，你可能想使用WidgetExt::emit或本页之前描述的channel）。</li>
+<li>信号只能在一个组件的处理方法中处理。</li>
+<li>该信号在事件循环中是不可访问的（为解决，可以使用<code>WidgetExt::emit</code>或本节前面部分描述的<code>channel</code>）。</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="拖放-drag--drop"><a class="header" href="#拖放-drag--drop">拖放 Drag &amp; Drop</a></h1>
 <p>拖放是FLTK支持的事件类型。如果你实现了这些事件，你就可以拖动组件，也可以将外部文件拖入FLTK应用程序。你可能还想实现在widget上绘图，这就要求处理Event::Drag。</p>

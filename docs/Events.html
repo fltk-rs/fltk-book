@@ -149,15 +149,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="事件-events"><a class="header" href="#事件-events">事件 Events</a></h1>
-<p>在前面提到的例子中，你主要看到了回调（Callback），除此之外，FLTK还提供了多种处理事件的方式：</p>
+<p>在之前章节的示例中，我们处理事件的方法主要是使用回调（Callback）。但是我们可以根据具体的使用情况选择其他方法，FLTK提供的处理事件的方式有这几种：</p>
 <ul>
-<li>我们可以使用set_callback()方法，在点击我们的按钮时自动触发该方法。</li>
-<li>我们可以使用handle()方法进行细粒度的事件处理。</li>
-<li>我们可以使用emit()方法，该方法接收一个sender和一个message，这使我们可以在event loop中处理事件。</li>
-<li>我们可以定义我们自己的事件，它可以在另一个部件的处理方法中被处理。</li>
+<li><code>set_callback()</code>方法，在点击按钮时自动触发。</li>
+<li><code>handle()</code>方法，用于进行细粒度的事件处理。</li>
+<li><code>emit()</code>方法，接收一个<code>sender</code>和一个<code>message</code>将触发的事件类型发送，之后在<code>event loop</code>中处理事件。</li>
+<li>我们还可以自定义一个可以在另一个组件的处理方法中被处理的事件。</li>
 </ul>
 <h3 id="设置回调-callback"><a class="header" href="#设置回调-callback">设置回调 Callback</a></h3>
-<p>WidgetExt trait 提供了set_callback方法。</p>
+<p><code>WidgetExt trait</code> 中定义了<code>set_callback</code>方法。</p>
 <h4 id="使用闭包"><a class="header" href="#使用闭包">使用闭包</a></h4>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
@@ -171,7 +171,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>捕获的参数是你所设置了回调的widget的可变借用<code>&amp;mut Self</code>： </p>
+<p>这里闭包捕获的环境是设置回调的组件自身的<code>&amp;mut self</code>： </p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -184,8 +184,8 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>set_callback()方法有默认的触发器，不同widget可能有不同的触发器。对按钮来说，当它有焦点时，触发器是点击或按下回车。
-可以通过set_trigger()方法为widget改变触发器。对于按钮可能没什么意义，但是对于Input widget来说，触发器可以被设置为 &quot;CallbackTrigger::Changed&quot;，这可以使Input widget的状态改变时触发回调：</p>
+<p>你的按钮何时执行回调方法，点击时？还是鼠标松开时？你需要设置触发器来决定何时执行回调，<code>set_callback()</code>方法会设置默认的触发器，不同组件的触发器可能不同。例如按钮组件的触发器便是，当它具有鼠标焦点时的点击或按下回车。
+某个组件的触发器是可以通过<code>set_trigger()</code>方法改变的。改变按钮的触发方式可能没有意义，但是对于<code>Input</code>组建来说，触发器可以被设置为<code>CallbackTrigger::Changed</code>，这可以使<code>Input</code>组件在状态改变时就触发回调：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -201,8 +201,8 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>用户每输入一个字符就会打印一次。</p>
-<p>使用闭包的好处是能够“关闭”作用域参数，即你也可以将周围作用域中的变量传递到闭包中：</p>
+<p>在这个示例中，用户每输入一个字符都会打印一次。</p>
+<p>使用闭包的好处便是因为它能够捕获环境，你可以将闭包环境作用域中的其他变量传递进去：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -217,9 +217,9 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>你会注意到在<a href="Menus">菜单</a>中，处理是在每个MenuI tem基础上进行的。</p>
-<h4 id="使用方法对象"><a class="header" href="#使用方法对象">使用方法对象</a></h4>
-<p>如果你喜欢的话你也可以直接设置方法对象：</p>
+<p>在<a href="Menus">菜单</a>中，事件处理是在每个<code>MenuItem</code>上进行的。</p>
+<h4 id="使用方法对象-function-object"><a class="header" href="#使用方法对象-function-object">使用方法对象 Function Object</a></h4>
+<p>如果你喜欢的话你也可以直接传递函数对象：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn button_cb(w: &amp;mut impl WidgetExt) {
@@ -236,8 +236,8 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>我们使用<code>&amp;mut impl WidgetExt</code>，以便能够在多种不同的widget类型中重复使用这个函数对象。或者，你可以直接使用<code>&amp;mut button::Button</code>来表示只有Button可以使用。
-这种方法的一个缺点是，为了处理状态，你必须管理全局状态：</p>
+<p>我们使用<code>&amp;mut impl WidgetExt</code>，以便让所有组件都能使用这个回调。或者，你可以直接使用<code>&amp;mut button::Button</code>只让<code>Button</code>使用。
+这种方法的一个缺点是，有时候你必须维护全局状态：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">extern crate lazy_static;
 
 use fltk::{prelude::*, *};
@@ -276,11 +276,11 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>这里我们使用lazy_static，也有其他的crate来优化状态管理。</p>
-<p>同样，对菜单来说，在<code>MenuExt::add()/insert()</code>或<code>MenuItem::add()/insert()</code>方法中，我们可以使用<code>&amp;mut impl MenuExt</code>来设置menu widget和menu item的回调。</p>
+<p>这里我们用了<code>lazy_static</code>，当然也有其他的<code>crate</code>来用来进行状态管理。</p>
+<p>同样，对菜单来说，在<code>MenuExt::add()/insert()</code>或<code>MenuItem::add()/insert()</code>方法中，我们可以使用<code>&amp;mut impl MenuExt</code>来设置<code>Menu</code>和<code>Menu Item</code>的回调。</p>
 <h3 id="使用处理方法-handle-method"><a class="header" href="#使用处理方法-handle-method">使用处理方法 handle method</a></h3>
-<p>handle方法接收一个参数为事件的闭包，并为已处理的事件返回一个bool。这个bool值让FLTK知道该事件是否被处理。
-它的调用是这样的：</p>
+<p><code>handle</code>方法接收一个有事件参数的闭包，并在处理后返回一个<code>bool</code>。这个返回值让FLTK知道该事件是否被处理。
+它的使用是这样的：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -298,7 +298,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>这将打印出event，但并不处理它，因为我们返回false。很明显，我们想做一些有用的事情，所以把处理调用改为：</p>
+<p>这段代码将打印出<code>event</code>，但并不做其他处理，所以我们返回false。很明显，我们应该做一些有用的处理，所以我们把它改成这样：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    but.handle(|_, event| match event {
@@ -310,7 +310,7 @@ fn main() {
     });
 <span class="boring">}
 </span></code></pre></pre>
-<p>在这里，我们做一些有用的事情来处理推送事件并返回真，将其他事件都忽略并返回假。</p>
+<p>在这里，我们处理事件<code>Event</code>然后返回<code>true</code>，将其他事件将被忽略并返回<code>false</code>。</p>
 <p>另一个例子：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -324,7 +324,7 @@ fn main() {
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="使用messages"><a class="header" href="#使用messages">使用messages</a></h3>
-<p>这允许我们创建Channel和一个Sender Receiver结构，然后我们可以发射Message（必须是Send + Sync安全的），并在我们的事件循环中处理。这样做的好处是，当我们需要将我们的类型传递到闭包或生成的线程中时，我们不必用智能指针来包装它们。</p>
+<p>这允许我们创建Channel和<code>Sender</code> <code>Receiver</code>的结构，在触发后发送Message（Message必须是<code>Send + Sync</code>），并在<code>event loop</code>中处理。这样做的好处是，当我们需要将我们的一些量传递到闭包或线程中时，不必再使用智能指针来包装它们。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -338,19 +338,19 @@ fn main() {
     let (s, r) = app::channel();
     
     but.emit(s, true);
-    // 这等同于调用but.set_callback(move |_| s.send(true))
+    // 相当于 but.set_callback(move |_| s.send(true))
 
     while app.wait() {
         if let Some(msg) = r.recv() {
             match msg {
                 true =&gt; println!(&quot;Clicked&quot;),
-                false =&gt; (), // 这里不作任何事
+                false =&gt; (), // 什么都不做
             }
         }
     }
 }
 </code></pre></pre>
-<p>跟之前的例子一样，Messages 可以在事件循环中被接受， 另外你也可以在后台线程或app::add_idle()的回调中接收Message：</p>
+<p>跟之前的例子一样，Messages 可以在<code>event loop</code>中被接受，另外你也可以在后台线程或<code>app::add_idle()</code>的回调中接收<code>Message</code>：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    app::add_idle(move || {
@@ -363,7 +363,7 @@ fn main() {
     });
 <span class="boring">}
 </span></code></pre></pre>
-<p>你也不限于使用fltk channel，你可以使用任何channel。例如，这个使例子用std channel：</p>
+<p>这里也不限于使用<code>fltk channel</code>，你可以使用任何channel。例如，这个例子用使用了<code>std channel</code>：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let (s, r) = std::sync::mpsc::channel::&lt;Message&gt;();
@@ -372,7 +372,7 @@ btn.set_callback(move |_| {
 });
 <span class="boring">}
 </span></code></pre></pre>
-<p>你也可以定义一个适用于所有widget的方法，类似于emit()方法：</p>
+<p>类似于<code>emit()</code>方法，你也可以定义一个适用于所有组件的<code>send()</code>方法，：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use std::sync::mpsc::Sender;
 
 pub trait SenderWidget&lt;W, T&gt;
@@ -401,9 +401,9 @@ fn main() {
     btn.send(s.clone(), Message::SomeMessage);
 }
 </code></pre></pre>
-<h3 id="创建自己的events"><a class="header" href="#创建自己的events">创建自己的events</a></h3>
-<p>FLTK识别了29个事件，这些事件在enums::Event中可以看到。然而，它允许我们使用app::handle(impl Into<i32>, window)调用创建我们自己的事件。handle函数接受一个任意的i32（&gt;30）值作为信号，理想情况下，这些值应该是预定义的，可以在另一个widget的handle()方法中处理，另一个widget需要在传递给app::handle的窗口中。
-在下面的例子中，我们创建了一个带有Frame和button的窗口。button的回调通过app::handle_main函数发送一个CHANGED事件。该CHANGED信号在框架的handle方法中被查询到：</p>
+<h3 id="创建自己的事件"><a class="header" href="#创建自己的事件">创建自己的事件</a></h3>
+<p>FLTK在<code>enums::Event</code>中预先定义了29个事件。我们还可以使用调用<code>app::handle(impl Into&lt;i32&gt;, window)</code>创建我们自己的事件。<code>handle</code>函数以任意一个大于30的<code>i32</code>类型值作为信号标识，最好提前定义好信号标识。我们可以在另一个组件的<code>handle()</code>方法中处理事件，注意这个组件需要放在传递给<code>app::handle</code>的那个窗口内部。
+在下面的例子中，我们创建了一个带有<code>Frame</code>和<code>Button</code>的窗口。<code>Button</code>的回调函数在执行时，通过<code>app::handle_main</code>函数发送一个<code>CHANGED</code>事件。该<code>CHANGED</code>信号在<code>Frame</code>的<code>handle</code>方法中被接收到并做出处理：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, button::*, enums::*, frame::*, group::*, prelude::*, window::*};
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -478,19 +478,19 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     Ok(app.run()?)
 }
 </code></pre></pre>
-<p>发送的i32信号可以即时创建，或者也可以添加到局部/全局常量中，或者添加到一个枚举中。</p>
+<p>发送的<code>i32</code>信号可以是动态创建的，也可以把它存在一个局部或全局常量中，或者存放在一个枚举中。</p>
 <h4 id="优点"><a class="header" href="#优点">优点</a></h4>
 <ul>
 <li>无开销。</li>
-<li>该信号的处理与任何fltk事件一样。</li>
-<li>app::handle函数可以返回一个bool，表示该事件是否被处理。</li>
+<li>信号的处理方式与其他任何FLTK事件一样。</li>
+<li><code>app::handle</code>函数可以返回一个bool，表示该事件是否被处理。</li>
 <li>允许在事件循环之外处理自定义信号/事件。</li>
-<li>允许在你的应用程序中采用MVC或SVU架构。</li>
+<li>允许在程序中使用MVC或SVU架构。</li>
 </ul>
 <h4 id="缺点"><a class="header" href="#缺点">缺点</a></h4>
 <ul>
-<li>该信号只能在一个widget的处理方法中处理。</li>
-<li>该信号在事件循环中是不可访问的（为此，你可能想使用WidgetExt::emit或本页之前描述的channel）。</li>
+<li>信号只能在一个组件的处理方法中处理。</li>
+<li>该信号在事件循环中是不可访问的（为解决，可以使用<code>WidgetExt::emit</code>或本节前面部分描述的<code>channel</code>）。</li>
 </ul>
 
                     </main>

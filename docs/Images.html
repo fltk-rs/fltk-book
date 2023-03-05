@@ -149,7 +149,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="图像-images"><a class="header" href="#图像-images">图像 Images</a></h1>
-<p>FLTK支持矢量图和位图，开箱即提供下列几种图像类型：</p>
+<p>FLTK支持矢量图和位图，提供下面几种开箱即用的图像类型：</p>
 <ul>
 <li>BmpImage</li>
 <li>JpegImage</li>
@@ -164,21 +164,21 @@
 </ul>
 <p>它还提供了两个helper types：</p>
 <ul>
-<li>SharedImage：它包装了之前所有的类型，所以你不需要指定图像类型。</li>
-<li>TiledImage：它提供了一个任何具体类型的平铺图像（图形学术语）。</li>
+<li>SharedImage：它包装了上述所有的类型，使用时不需要提供图像的类型。</li>
+<li>TiledImage：它提供了任何具体类型的平铺图像（Tiled Image）。</li>
 </ul>
-<p>图像类型实现了ImageExt trait，提供了允许缩放和检索图像元数据的方法。
-Image可以通过向它的load()构造函数传递路径来构建，或者对某些类型可以使用接受图像数据的from_data()构造函数：</p>
+<p>图像类型均实现了<code>ImageExt Trait</code>，该Trait中定义了缩放和检索图像元数据的方法。
+可以通过向图像类型的<code>load()</code>函数传递图像路径来显示图像，对于某些类型，可以使用<code>from_data()</code>接收图像数据来构建图像：</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>/// 需要一个路径
+</span>/// 需要图像路径
 let image = image::SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
 
 /// 需要图像数据
 let image= image::SvgImage::from_data(&amp;data).unwrap();
 <span class="boring">}
 </span></code></pre></pre>
-<p>Image可以通过WidgetExt::set_image()/set_image_scaled()或set_deimage()/set_deimage_scaled()（用于deactivated/grayed image）与widget一起使用。</p>
+<p>可以通过使用<code>WidgetExt::set_image()</code>/<code>set_image_scaled()</code>或<code>set_deimage()</code>/<code>set_deimage_scaled()</code>（用于deactivated/grayed image）在其他组件上使用<code>Image</code>组件：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
 fn main() {
@@ -198,7 +198,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>或者通过WidgetExt::draw()方法：</p>
+<p>或者通过<code>WidgetExt::draw()</code>方法：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
 fn main() {
@@ -221,7 +221,7 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/hello.jpg" alt="svg" /></p>
-<p>在你的应用程序中使用图像作为图标和背景也有助于赋予你的应用程序以风格。</p>
+<p>使用<code>Image</code>作为你的程序的图标或背景将让你的程序更具风格化，更加美观（在FLTK中你可能需要使用其他主题或自定义）。</p>
 
                     </main>
 

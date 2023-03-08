@@ -146,7 +146,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>翻译最近更新于：2023/3/5</p>
+                        <p>翻译最近更新于：2023/3/8</p>
 <h1 id="开始"><a class="header" href="#开始">开始</a></h1>
 <p>欢迎来到 <a href="https://github.com/fltk-rs/fltk-rs">fltk-rs</a> 教程 !</p>
 <p>这是为 <a href="https://crates.io/crates/fltk">fltk crate</a> 而写的一本说明书。 其他资源有:</p>
@@ -2955,9 +2955,9 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 <li>该信号在事件循环中是不可访问的（为解决，可以使用<code>WidgetExt::emit</code>或本节前面部分描述的<code>channel</code>）。</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="拖放-drag--drop"><a class="header" href="#拖放-drag--drop">拖放 Drag &amp; Drop</a></h1>
-<p>拖放是FLTK支持的事件类型。如果你实现了这些事件，你就可以拖动组件，也可以将外部文件拖入FLTK应用程序。你可能还想实现在widget上绘图，这就要求处理Event::Drag。</p>
+<p>FLTK支持拖放的事件类型。如果你为组件实现了拖放事件，你就可以拖动组件，也可以把文件拖入程序框内。如果还想在组件上绘图，处理<code>Event::Drag</code>事件将会帮你做到。</p>
 <h2 id="拖动组件"><a class="header" href="#拖动组件">拖动组件</a></h2>
-<p>这里我们将为窗口本身实现拖动。我们将创建一个没有边框的窗口。通常情况下，你可以使用边框来拖动窗口。</p>
+<p>通常情况下，你可以拖动窗口边框来移动窗口。现在我们将窗口设置为无边框，然后再为窗口本身实现拖放事件：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2990,7 +2990,7 @@ fn main() {
 }
 </code></pre></pre>
 <h2 id="拖动文件"><a class="header" href="#拖动文件">拖动文件</a></h2>
-<p>将一个文件拖入程序中会调用Paste事件，并将文件的路径填入app::event_text()。因此，当我们处理拖动时，我们想在Event::Paste中捕获路径，检查文件是否存在，读取其内容并填充我们的text widget：</p>
+<p>将一个文件拖入程序框中会触发<code>Paste</code>事件，并将文件的路径传入<code>app::event_text()</code>。因此，当我们处理文件拖放时，我们需要在<code>Event::Paste</code>中捕获路径，这里我们将检查文件是否存在，读取其内容并填充我们的<code>text</code>组件：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, enums::Event, *};
 
 fn main() {
@@ -3023,7 +3023,7 @@ fn main() {
                     let path = path.replace(&quot;file://&quot;, &quot;&quot;);
                     let path = std::path::PathBuf::from(&amp;path);
                     if path.exists() {
-                        // we use a timeout to avoid pasting the path into the buffer
+                        // 我们使用 timeout 来避免路径传入缓冲区
                         app::add_timeout3(0.0, {
                             let mut buf = buf.clone();
                             move |_| {
@@ -3049,7 +3049,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>如果你对文件的内容不感兴趣，你可以只取路径并显示给用户：</p>
+<p>如果你对文件的内容不感兴趣，你可以只取得文件的路径并显示：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, enums::Event, *};
 
 fn main() {
@@ -3098,11 +3098,11 @@ fn main() {
 }
 </code></pre></pre>
 <h2 id="拖动绘图"><a class="header" href="#拖动绘图">拖动绘图</a></h2>
-<p>你可以在事件里面绘图，但你会可能想使用屏幕外的画法。在widget绘图方法中，你只是把屏幕外的内容复制到widget中。一个更详细的例子可以在<a href="Drawing.html#offscreen-drawing">绘图</a>中的屏幕外绘图部分看到。</p>
+<p>我们已经学会了如何在屏幕内通过拖放绘制组件，现在我们还可以响应屏幕外的事件，比如用鼠标绘画这些。我们会将屏幕外事件，如鼠标的移动坐标等等，复制到组件中，然后进行绘制。一个更详细的例子可以在<a href="Drawing.html#offscreen-drawing">绘图 Drawing</a>中看到。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="状态管理器-state-management"><a class="header" href="#状态管理器-state-management">状态管理器 State management</a></h1>
-<p>FLTK并不强加某种形式的状态管理或应用程序架构。这是留给用户自己选择的。fltk-rs repo和本书中的所有例子都已经使用了回调（Callback）或消息（message），你会发现很多这两种方法的例子。
+<p>FLTK没有固化的某种形式的状态管理方法或程序架构，这些部分交由开发者自行设计选择。fltk-rs仓库和本书中的所有示例几乎都使用了回调（Callback）和消息（message）的方式来处理事件和管理状态，你能找它们的很多例子。
 这些都在<a href="Events.html">事件 Event</a>中讨论过。</p>
-<p>此外，所有的例子可能看起来都是在主函数中处理一切，这只是为了简化。您可以创建自己的应用程序结构，将主窗口和您的应用程序的状态包含在其中：</p>
+<p>此外，为了简单起见，所有的示例都是在<code>main</code>函数中处理一切。您可以创建自己的<code>App</code>结构，将主窗口和你维护的数据状态放在里面：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 #[derive(Copy, Clone)]
@@ -3164,19 +3164,19 @@ fn main() {
     a.run();
 }
 </code></pre></pre>
-<h2 id="helper-crates"><a class="header" href="#helper-crates">Helper crates</a></h2>
-<p>crates生态系统给出了许多提供状态管理的crates。此外，在fltk-rs组织下有2个crate，它们提供了架构你的应用程序和管理其状态的方法：</p>
+<h2 id="辅助-crates"><a class="header" href="#辅助-crates">辅助 crates</a></h2>
+<p>Rust的Crate生态为我们提供了很多用于进行状态管理的Crate。在<code>fltk-rs</code> GitHub组织下有2个crate，它们提供了几种程序架构设计和状态管理的方法：</p>
 <ul>
 <li><a href="https://github.com/fltk-rs/flemish">flemish</a>:</li>
 </ul>
-<p>提供了一个类似Elm的SVU架构。这是反应式（reactive）的，本质上是不可变的，而且拆解了每个Message的view。</p>
+<p>提供了一个类似<code>Elm</code>的SVU架构。它是反应式（reactive）的，本质上不可变，每次发送消息都会让视图进行重绘，参见Elm的设计。</p>
 <ul>
 <li><a href="https://github.com/fltk-rs/fltk-evented">fltk-evented</a>:</li>
 </ul>
-<p>这类似于即时模式的guis，所有事件都在事件循环中处理。在现实中，它也是反应式的，但却是可变的和无状态的。这不会引起触发器的重绘。</p>
-<p>这两个crate都避免使用回调，因为在Rust中，由于生命周期和借用机制，处理这些回调极其麻烦。你需要使用具有内部可变性的共享智能指针，才能够借用回调。</p>
-<p>你可以看一下这两个crate以获得灵感。</p>
-<p>在这两个crate中都展示了一个示例计数器：</p>
+<p>类似于即时模式的GUI界面，所有事件都在事件循环中处理。实际上它也是反应式的，但它是可变且无状态的。使用它可以避免触发事件引起视图重绘。</p>
+<p>这两个crate都尽量避免使用回调方法，由于Rust的生命周期和借用检查机制，处理回调极其麻烦。你需要使用内部可变性的智能指针，才能够在回调中借用。</p>
+<p>你可以看一下这两个crate，或许会启发你的灵感。</p>
+<p>下面是分别使用这两个Crate实现计时器的示例：</p>
 <h2 id="flemish"><a class="header" href="#flemish">Flemish</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">use flemish::{
     button::Button, color_themes, frame::Frame, group::Flex, prelude::*, OnEvent, Sandbox, Settings,
@@ -3277,15 +3277,15 @@ fn main() {
 }
 </code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="布局-layouts"><a class="header" href="#布局-layouts">布局 Layouts</a></h1>
-<p>Rust提供了开箱即用的：</p>
+<p>FLTK-rs提供了这些开箱即用的布局组件：</p>
 <ul>
-<li>A Flex widget</li>
+<li>Flex</li>
 <li>Pack</li>
 <li>Grid</li>
-<li>Widget relative positioning.</li>
+<li>组件相对定位</li>
 </ul>
 <h3 id="flex"><a class="header" href="#flex">Flex</a></h3>
-<p>Flex widget允许进行灵活的布局。它在group module中，实现了GroupExt trait。有2种形式的Flexwidget，可以使用set_type或with_type方法指定。比如列（Column） 和 行（Row）：</p>
+<p><code>Flex</code>组件可以让你灵活的布局。它在<code>group mod</code>中定义，实现了<code>GroupExt Trait</code>。可以使用<code>set_type</code>或<code>with_type</code>方法选择Flex的布局形式。比如列（Column）和行（Row）布局：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -3302,12 +3302,12 @@ fn main() {
     a.run().unwrap();
 }
 </code></pre></pre>
-<p>set_size方法接收另一个widget并将其大小固定为所传递的值，在这个例子中是30。因为这是一个column，所以30代表要设置的widget的高度。
-另一个widget是可扩展的，因为没有为它设置尺寸。一个完整的例子可以在这里找到。</p>
-<p><a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs">第一个例子</a></p>
+<p><code>set_size</code>方法接收一个放在Flex内部的组件，将其大小（高度或宽度）设置为传递的值，示例中设置高度为30。因为这是一个Column类型的Flex，所以传入的值代表组件的高度。
+示例中另一个按钮大小是变的，因为没有为它设置尺寸。参见这个完整的例子：</p>
+<p><a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs">示例1</a></p>
 <p><img src="https://github.com/osen/FL_Flex/raw/main/doc/login.png" alt="image" /></p>
 <h3 id="packs"><a class="header" href="#packs">Packs</a></h3>
-<p>pack widget（在group module中）也实现了GroupExt trait。有两种形式的Pack，Vertical Pack 和 Horizontal Pack，Vertical Pack是默认的。它只需要子widget的高度，而Horizontal Pack只需要它的子widget的宽度，像下面的例子：</p>
+<p><code>Pack</code>组件同样在<code>group mod</code>中，并实现了<code>GroupExt trait</code>。类似的，也有两种形式的Pack，<code>Vertical Pack</code> 和 <code>Horizontal Pack</code>，Pack默认是Vertical，它需要设置子组件的高度，而Horizontal Pack需要设置它的子组件的宽度，比如这个示例：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -3326,8 +3326,7 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>这就在窗口内创建了一个Pack Widget，并在其中填入2个按钮。注意，按钮的x和y坐标不再需要了。你也可以像 repo 中的Calculator示例一样，在Pack中嵌入Pack。
-你也可以使用Pack::auto_layout()方法：</p>
+<p>我们在窗口内创建了一个<code>Pack</code>，并在其中创建2个按钮。我们不需要设置按钮的坐标。你也可以像 FLTK仓库的示例 中的<code>Calculator</code>一样，将Pack互相嵌套。可以试试<code>Pack::auto_layout()</code>方法自动布局：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -3347,10 +3346,10 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p>在这种情况下，我们甚至不需要按钮的大小。</p>
+<p>这种情况下，我们甚至不需要设置按钮的大小。</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937983-ef8bf400-3504-11eb-9da1-09c5ac1aade4.png" alt="image" /></p>
 <h3 id="grid"><a class="header" href="#grid">Grid</a></h3>
-<p><a href="https://github.com/fltk-rs/fltk-grid">Grid</a>目前是在一个external crate中实现的。它需要一个layout，使用<code>Grid::set_layout(&amp;mut self, rows, columns)</code>来设置。然后通过<code>Grid::insert(&amp;mut self, row, column)</code>或<code>Grid::insert_ext(&amp;mut self, row, column, row_span, column_span)</code>方法插入widget。</p>
+<p><a href="https://github.com/fltk-rs/fltk-grid">Grid Crate</a>实现在另一个Crate中的。它需要使用<code>Grid::set_layout(&amp;mut self, rows, columns)</code>来设置一个Layout。然后通过<code>Grid::insert(&amp;mut self, row, column)</code>或<code>Grid::insert_ext(&amp;mut self, row, column, row_span, column_span)</code>方法添加组件。</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 use fltk_grid::Grid;
 
@@ -3358,13 +3357,13 @@ fn main() {
     let a = app::App::default().with_scheme(app::Scheme::Gtk);
     let mut win = window::Window::default().with_size(500, 300);
     let mut grid = Grid::default_fill();
-    // 设置为 &quot;true &quot;以显示单元格的框线和数字
+    // 若为 &quot;true&quot; 便会显示网格的框线和数字
     grid.debug(false); 
-    // 5 行，5 列
+    // 设置Grid为 5 行，5 列
     grid.set_layout(5, 5); 
-    // 组件，行，列
+    // 设置组件和所在的行列
     grid.insert(&amp;mut button::Button::default().with_label(&quot;Click&quot;), 0, 1); 
-    // widget, row, col, row_span, col_span
+    // 设置组件和所在的行列以及行高列宽
     grid.insert_ext(&amp;mut button::Button::default().with_label(&quot;Button 2&quot;), 2, 1, 3, 1); 
     win.end();
     win.show();
@@ -3374,7 +3373,7 @@ fn main() {
 <p><a href="https://github.com/fltk-rs/fltk-grid/blob/main/examples/form.rs">Grid example</a></p>
 <p><img src="https://user-images.githubusercontent.com/37966791/160347418-b8b54408-3dc9-4fc4-93e8-fb6c1c0282e9.png" alt="image" /></p>
 <h3 id="relative-positioning"><a class="header" href="#relative-positioning">Relative positioning</a></h3>
-<p>WidgetExt trait提供了几个构造方法，允许我们相对于其他widget的大小和位置来构造widget。这类似于Qml的锚定（anchoring）：</p>
+<p><code>WidgetExt Trait</code>中定义了几个构造方法，允许我们相基于其他组件的大小和位置构建组件。这类似于Qt中Qml的锚定（anchoring）：</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
 
 fn main() {
@@ -3401,22 +3400,22 @@ fn main() {
 }
 </code></pre></pre>
 <p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/counter.jpg" alt="counter" /></p>
-<p>(有一些跳过的主题设计)</p>
+<p>(我们跳过了一些主题的设计)</p>
 <p>这些方法是：</p>
 <ul>
-<li><code>above_of(&amp;widget, padding)</code>: 将该widget置于所传递的widget之上</li>
-<li><code>below_of(&amp;widget, padding)</code>: 将该widget置于所传递的widget之下</li>
-<li><code>right_of(&amp;widget, padding)</code>: 将该widget置于所传递的widget右边</li>
-<li><code>left_of(&amp;widget, padding)</code>:将该widget置于所传递的widget左边</li>
-<li><code>center_of(&amp;widget)</code>: 将widget放置在所传递的widget的中心（包括x和y轴）</li>
-<li><code>center_of_parent()</code>: 将widget放在父widget的中心位置（包括x轴和y轴）</li>
-<li><code>center_x(&amp;widget)</code>: 将widget放置在所传递的widget的中心（X轴）</li>
-<li><code>center_y(&amp;widget)</code>: 将widget放置在所传递的widget的中心（Y轴）</li>
-<li><code>size_of(&amp;widget)</code>: 构建与所传widget相同大小的widget</li>
-<li><code>size_of_parent()</code>: 构建与其父widget相同大小的widget</li>
+<li><code>above_of(&amp;widget, padding)</code>: 将该组件放在所传递的组件上面</li>
+<li><code>below_of(&amp;widget, padding)</code>: 将该组件放在所传递的组件下面</li>
+<li><code>right_of(&amp;widget, padding)</code>: 将该组件放在所传递的组件右边</li>
+<li><code>left_of(&amp;widget, padding)</code>:将该组件置于所传递的组件左边</li>
+<li><code>center_of(&amp;widget)</code>: 将组件放置在所传递的组件的中间（包括x和y轴）</li>
+<li><code>center_of_parent()</code>: 将组件放在父组件的中间（包括x轴和y轴）</li>
+<li><code>center_x(&amp;widget)</code>: 将组件放置在所传递的组件的中心（X轴）</li>
+<li><code>center_y(&amp;widget)</code>: 将组件放置在所传递的组件的中心（Y轴）</li>
+<li><code>size_of(&amp;widget)</code>: 构建与所传组件相同大小的组件</li>
+<li><code>size_of_parent()</code>: 构建与其父组件相同大小的组件</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="样式-style"><a class="header" href="#样式-style">样式 Style</a></h1>
-<p>FLTK为你的应用程序提供了广泛的自定义style选项，从改变应用程序的总体方案，到自定义颜色、字体、框架类型、自定义绘图...等等。</p>
+<p>FLTK为你的应用程序提供了丰富的自定义选项，包括改变程序的总体主题，到自定义颜色、字体、Frame、自定义绘图...等等。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="颜色-colors"><a class="header" href="#颜色-colors">颜色 Colors</a></h1>
 <p>FLTK可以处理<a href="https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)">true color</a>。一些方便的颜色在enums::Color枚举中列举：</p>
 <ul>

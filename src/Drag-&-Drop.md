@@ -1,10 +1,10 @@
 # 拖放 Drag & Drop
 
-拖放是FLTK支持的事件类型。如果你实现了这些事件，你就可以拖动组件，也可以将外部文件拖入FLTK应用程序。你可能还想实现在widget上绘图，这就要求处理Event::Drag。
+FLTK支持拖放的事件类型。如果你为组件实现了拖放事件，你就可以拖动组件，也可以把文件拖入程序框内。如果还想在组件上绘图，处理`Event::Drag`事件将会帮你做到。
 
 ## 拖动组件
 
-这里我们将为窗口本身实现拖动。我们将创建一个没有边框的窗口。通常情况下，你可以使用边框来拖动窗口。
+通常情况下，你可以拖动窗口边框来移动窗口。现在我们将窗口设置为无边框，然后再为窗口本身实现拖放事件：
 ```rust
 use fltk::{prelude::*, *};
 
@@ -40,7 +40,7 @@ fn main() {
 
 ## 拖动文件
 
-将一个文件拖入程序中会调用Paste事件，并将文件的路径填入app::event_text()。因此，当我们处理拖动时，我们想在Event::Paste中捕获路径，检查文件是否存在，读取其内容并填充我们的text widget：
+将一个文件拖入程序框中会触发`Paste`事件，并将文件的路径传入`app::event_text()`。因此，当我们处理文件拖放时，我们需要在`Event::Paste`中捕获路径，这里我们将检查文件是否存在，读取其内容并填充我们的`text`组件：
 ```rust
 use fltk::{prelude::*, enums::Event, *};
 
@@ -74,7 +74,7 @@ fn main() {
                     let path = path.replace("file://", "");
                     let path = std::path::PathBuf::from(&path);
                     if path.exists() {
-                        // we use a timeout to avoid pasting the path into the buffer
+                        // 我们使用 timeout 来避免路径传入缓冲区
                         app::add_timeout3(0.0, {
                             let mut buf = buf.clone();
                             move |_| {
@@ -101,7 +101,7 @@ fn main() {
 }
 ```
 
-如果你对文件的内容不感兴趣，你可以只取路径并显示给用户：
+如果你对文件的内容不感兴趣，你可以只取得文件的路径并显示：
 ```rust
 use fltk::{prelude::*, enums::Event, *};
 
@@ -152,4 +152,4 @@ fn main() {
 ```
 
 ## 拖动绘图
-你可以在事件里面绘图，但你会可能想使用屏幕外的画法。在widget绘图方法中，你只是把屏幕外的内容复制到widget中。一个更详细的例子可以在[绘图](Drawing.md#offscreen-drawing)中的屏幕外绘图部分看到。
+我们已经学会了如何在屏幕内通过拖放绘制组件，现在我们还可以响应屏幕外的事件，比如用鼠标绘画这些。我们会将屏幕外事件，如鼠标的移动坐标等等，复制到组件中，然后进行绘制。一个更详细的例子可以在[绘图 Drawing](Drawing.md#offscreen-drawing)中看到。

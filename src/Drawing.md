@@ -1,10 +1,10 @@
 # 绘制事物 Drawing things
 
-fltk-rs在draw module中提供了让你绘制自定义元素的自由函数。只有当调用是在允许绘制的上下文中进行时，例如在WidgetBase::draw()方法中或在Offscreen上下文中，绘制才有效：
+`fltk-rs`在`draw mod`中提供了可以绘制自定义元素的函数。但是只有当绘制函数的调用是在特定的上下文中时，例如在`WidgetBase::draw()`方法中或在`Offscreen`上下文中，绘制才有效：
 
 ## 在组件上绘制
 
-注意，我们在widget的draw方法中使用了draw调用：
+注意，我们在组件的draw方法中使用了`draw`：
 ```rust
 use fltk::{enums, prelude::*, *};
 
@@ -21,7 +21,7 @@ fn main() {
         // 画一个蓝色的圆
         set_draw_color(enums::Color::Blue.inactive());
         draw_pie(w.w() / 2 - 50, w.h() / 2 - 50, 100, 100, 0.0, 360.0);
-        // 绘制具有角度的字体
+        // 让文字旋转一定角度
         set_draw_color(enums::Color::Red);
         set_font(enums::Font::Courier, 16);
         draw_text_angled(45, "Hello World", w.w() / 2, w.h() / 2);
@@ -33,10 +33,10 @@ fn main() {
 
 ![draw](https://user-images.githubusercontent.com/37966791/145693473-defb2298-fc6b-4d2f-8a0c-3d4902b39dd3.jpg)
 
-我们用整个窗口作为我们的画布，也可以是在任何widget上。其他可用的功能允许绘制直线、矩形、弧线、饼、循环、多边形，甚至图像。
+我们用了整个窗口当绘制的画板，任何其他组件理论上都可以进行绘制。还有许多其他函数可以让你绘制直线、矩形、弧线、饼、循环、多边形，甚至图像。
 
-## 在屏幕外绘制
-有时你想根据事件来画东西，比如推拖光标的时候。在这种情况下，你可以使用draw::Offscreen来做到这一点。在这种情况下，我们使用widget的draw方法只是复制屏幕外的内容，而绘制是在widget的handle方法中进行的。
+## 屏幕外事件的绘制
+有时可能会需要通过绘制来响应一些事件，例如拖动鼠标时，在屏幕上绘制出鼠标的轨迹。在这种情况下，你可以使用`draw::Offscreen`来做到这一点。我们所用组件的`draw`方法只是复制屏幕外事件的内容，例如鼠标的坐标，而绘制是在组件的`handle`方法中进行的。
 ```rust
 use fltk::{
     app,
@@ -69,7 +69,7 @@ fn main() {
     wind.end();
     wind.show();
 
-    // We fill our offscreen with white
+    // 用白色填充
     let offs = Offscreen::new(frame.width(), frame.height()).unwrap();
     #[cfg(not(target_os = "macos"))]
     {
@@ -140,6 +140,6 @@ fn main() {
 }
 ```
 
-注意我们是如何用offs.begin()打开一个Offscreen上下文，然后用offs.end()关闭它。这使得我们可以在Offscreen内调用绘图函数：
+注意，这里我们用`offs.begin()`开始了`OffScreen`上下文，用`offs.end()`表示上下文结束。只有在上下文内，我们才能调用`Offscreen`绘图函数：
 
 ![image](https://user-images.githubusercontent.com/37966791/146173813-67038a94-7739-480e-a181-29498aac842a.png)

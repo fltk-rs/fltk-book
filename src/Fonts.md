@@ -1,6 +1,6 @@
 # 字体 Fonts
 
-FLTK已经有16种字体，可以在enums::Font中找到：
+FLTK自带了16种字体，可以在`enums::Font`中找到：
 - Helvetica
 - HelveticaBold
 - HelveticaItalic
@@ -18,18 +18,18 @@ FLTK已经有16种字体，可以在enums::Font中找到：
 - ScreenBold 
 - Zapfdingbats
 
-它还允许加载系统字体和捆绑字体。
+FLTK也允许加载系统默认字体或者将字体文件编译进二进制文件中。
 
-系统字体依赖于系统，默认情况下不被加载。这些字体可以用App::load_system_fonts()方法加载。
-然后可以使用app::fonts()函数获取字体，还可以使用app::font_count()、app::font_name()和app::font_index()函数进行查询。
-然后可以使用Font::by_index()或Font::by_name()方法来使用。
+系统字体依赖于用户的系统，默认情况下FLTK并不会加载。但你可以用`App::load_system_fonts()`方法来让程序加载系统字体。
+然后可以使用`app::fonts()`函数获取加载到的字体，或者用`app::font_count()`、`app::font_name()`和`app::font_index()`函数查看字体的数量，名称等。
+查询到后，便可以使用`Font::by_index()`或`Font::by_name()`方法来为程序应用字体。
 
 ```rust
 use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default().load_system_fonts();
-    // 要按路径加载字体，请检查App::load_font()方法
+    // 要加载指定路径的字体的话，参见 App::load_font() 函数
     let fonts = app::fonts();
     // println!("{:?}", fonts);
     let mut wind = window::Window::default().with_size(400, 300);
@@ -52,7 +52,7 @@ fn main() {
 }
 ```
 
-如果你想加载一个不在系统中的捆绑字体，你可以选择使用Font::load_font()和Font::set_font()，这允许你用自定义字体替换FLTK的预定义字体：
+如果你想加载一个自己的字体，你可以选择使用`Font::load_font()`和`Font::set_font()`方法：
 ```rust
 use fltk::{app, enums::Font, button::Button, frame::Frame, prelude::*, window::Window};
 
@@ -75,6 +75,6 @@ fn main() {
 }
 ```
 
-load_font()从.ttf文件中加载字体，set_font()用我们加载的字体替换Font::Helvetica（FLTK的默认字体）：
+`load_font()`会加载`.ttf`格式的字体，然后我们使用`set_font()`用我们这个字体替换FLTK的默认字体`Font::Helvetica`：
 
 ![image](https://user-images.githubusercontent.com/37966791/145735197-130f7dd6-a31f-4bc6-a362-90a13493a556.png)

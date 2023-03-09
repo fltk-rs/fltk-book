@@ -1,14 +1,14 @@
 # 动画 Animations
 
-动画可以通过几种机制在fltk-rs中显示：
-- 利用事件循环 Leveraging the event loop
+可以通过这几种机制在FLTK-rs中制作动画效果：
+- 利用事件循环 Event loop
 - 使用线程 Spawning threads
 - 超时 Timeouts
 
 
 ## 利用事件循环
 
-fltk提供了app::wait()和app::check()，允许在一个阻塞操作中更新ui：
+fltk提供了`app::wait()`和`app::check()`，允许使用一个阻塞操作更新UI：
 ```rust
 use fltk::{enums::*, prelude::*, *};
 
@@ -24,13 +24,13 @@ fn main() {
 
     sliding_btn.set_callback(|btn| {
         if btn.w() > 0 && btn.w() < 100 {
-            return; // we're still animating
+            return; // 绘制已经完成
         }
         while btn.w() != 0 {
             btn.set_size(btn.w() - 2, btn.h());
             app::sleep(0.016);
             btn.parent().unwrap().redraw();
-            app::wait(); // or app::check();
+            app::wait(); // 或 app::check();
         }
     });
     a.run().unwrap();
@@ -45,7 +45,7 @@ fn style_btn(btn: &mut button::Button) {
 
 ## 使用线程
 
-这确保我们不会阻塞主/ui线程：
+使用线程可以让我们不会阻塞主/ui线程：
 ```rust
 use fltk::{enums::*, prelude::*, *};
 
@@ -53,7 +53,7 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     win.set_color(Color::White);
-    // our button takes the whole left side of the window
+    // 我们的按钮占据了窗口的左侧
     let mut sliding_btn = button::Button::new(0, 0, 100, 300, None);
     style_btn(&mut sliding_btn);
     win.end();
@@ -61,7 +61,7 @@ fn main() {
 
     sliding_btn.set_callback(|btn| {
         if btn.w() > 0 && btn.w() < 100 {
-            return; // we're still animating
+            return; // 绘制已经完成
         }
         std::thread::spawn({
             let mut btn = btn.clone();
@@ -69,7 +69,7 @@ fn main() {
                 while btn.w() != 0 {
                     btn.set_size(btn.w() - 2, btn.h());
                     app::sleep(0.016);
-                    app::awake(); // to awaken the ui thread
+                    app::awake(); // 唤醒UI线程进行绘制
                     btn.parent().unwrap().redraw();
                 }
             }
@@ -87,7 +87,7 @@ fn style_btn(btn: &mut button::Button) {
 
 ## 超时
 
-fltk为重复性操作提供了timeout功能。我们可以添加一个timeout，重复操作或让它消失。
+fltk为重复性操作提供了`timeout`功能。使用`timeout`会像循环一样持续性执行一段代码，我们可以添加条件让它持续重复，或者删除`timeout`让它停止。
 ```rust
 use fltk::{enums::*, prelude::*, *};
 
@@ -129,4 +129,4 @@ fn style_btn(btn: &mut button::Button) {
 }
 ```
 
-我们是在用户点击按钮时加入timeout，根据按钮的大小，我可以重复使用或者删除它。
+这段代码在用户点击时添加`timeout`，当按钮宽度到达预定值时，删除`timeout`使其停止重复。

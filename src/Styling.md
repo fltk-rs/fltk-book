@@ -1,12 +1,12 @@
-# 样式设计 Styling
+# 自定义风格 Styling
 
-FLTK在风格化应用方面提供了许多东西。我们已经看到，我们可以使用true color和不同的字体，此外还可以进行自定义绘制。Styling就是利用所有这些。它可以利用WidgetExt中的方法在每个widget上进行，也可以使用app模块中的函数在全局上完成。
+FLTK提供了自定义程序风格的很多方法（不然实在有点丑）。我们可以设置颜色，不同的字体，自定义绘制组件等等。自定义风格用到了所有这些。我们可以使用`WidgetExt`中定义的方法为每个组件单独设置风格，也可以使用`app`模块中的函数为程序全局设置风格。
 
 ## WidgetExt
-大多数WidgetExt trait与修改框架类型、标签类型、widget颜色、文本颜色、文本字体和文本大小有关。
-这些都有setter和 getter，可以在[这里]（https://docs.rs/fltk/*/fltk/prelude/trait.WidgetExt.html）找到。
+`WidgetExt Trait`的大多数方法与修改边框、标签、组件颜色、文本颜色、字体和文本大小这些自定义的功能有关。
+对相应的属性，都提供了`setter`和`getter`方法，可以在[WidgetExt]（https://docs.rs/fltk/*/fltk/prelude/trait.WidgetExt.html）找到。
 
-一个例子：
+看看这个示例：
 
 ```rust
 use fltk::{
@@ -41,7 +41,7 @@ fn main() {
     win.make_resizable(true);
     win.show();
 
-    // Theming
+    // 设置风格
     app::background(255, 255, 255);
     app::set_visible_focus(false);
 
@@ -64,7 +64,7 @@ fn main() {
     but.set_selection_color(SEL_BLUE);
     but.set_label_color(Color::White);
     but.set_frame(FrameType::OFlatFrame);
-    // End theming
+    // 风格应用结束
 
     but.set_callback(move |_| {
         let label = (count.label().parse::<i32>().unwrap() + 1).to_string();
@@ -77,22 +77,22 @@ fn main() {
 
 ![counter](https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/flutter_like.jpg)
 
-widget也支持在其中显示图像，这在image章节有更多讨论。
+理论上所有组件都支持在其中显示图像，参见 图像 章节。
 
 ## Global styling
 
-这些可以在程序module中找到。从改变程序的主题开始：
+全局风格化方法可以在 `app` mod中找到。先看看如何改变程序的主题：
 ```rust
 use fltk::{prelude::*, enums::*, *};
 let app = app::App::default().with_scheme(app::Scheme::Plastic);
 ```
-提供有四个主题：
+FLTK本身提供四个主题：
 - Base
 - Gtk
 - Gleam
 - Plastic
 
-设置应用程序的颜色、默认字体、默认框架类型和是否在widget上显示焦点：
+这个例子设置了程序的颜色、默认字体、默认边框和是否在组件上显示焦点：
 ```rust
 use fltk::{app, button::Button, enums, frame::Frame, prelude::*, window::Window};
 
@@ -120,13 +120,13 @@ fn main() {
 ![image](https://user-images.githubusercontent.com/37966791/145727821-5923fcd4-3a57-4a15-b36f-574b3e5321ea.png)
 
 ### Custom Drawing
-FLTK还提供了原始绘图drawing primitives，这使得给widget自定义外观非常容易。这是用draw()方法完成的，它需要一个闭包。让我们来绘制一个自己的按钮（虽然FLTK提供了一个ShadowFrame FrameType），在这里创建一个我们自己的：
+FLTK还提供了绘图基本图形（drawing primitives），这可以大大简化为组件自定义外观的步骤。我们使用接收一个闭包参数的`draw()`方法完成绘制。让我们来绘制一个自己的按钮，虽然FLTK已经提供了`ShadowFrame`框架类型，为了演示我们自己再做一个：
 ```rust
 use fltk::{prelude::*, enums::*, *};
 
 fn main() {
     let app = app::App::default();
-    app::set_color(255, 255, 255); // white
+    app::set_color(255, 255, 255); // 白色
     let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
 
     let mut but = button::Button::default()
@@ -159,10 +159,12 @@ fn main() {
 
 ![draw](https://user-images.githubusercontent.com/37966791/100938232-62956a80-3505-11eb-888f-ffe655e7aadc.jpg)
 
-draw()方法也支持在widget内部绘制图像，这将在下一节看到。
+`draw()`方法也支持在组件内部的绘制，你可以在下一节看到。
 
 ## fltk-theme
-这是一个[crate](https://github.com/fltk-rs/fltk-theme)，它提供了几个预定义的主题，只要加载主题就可以使用
+这是一个[FLTK主题crate](https://github.com/fltk-rs/fltk-theme)，它提供了好几个预定义的主题，只需要加载就可以使用。
+
+这里有很多好看的FLTK主题，或许可以挽留一下被界面劝退的你：
 ```rust
 use fltk::{prelude::*, *};
 use fltk_theme::{widget_themes, WidgetTheme, ThemeType};

@@ -1,9 +1,9 @@
-# 帧类型 FrameTypes
+# 边框类型 FrameTypes
 
-FLTK有广泛的帧类型。这些可以在enums模块下找到：
+FLTK提供了丰富的边框类型。这些可以在`enums`mod下找到：
 ![image](https://github.com/fltk-rs/fltk-rs/raw/master/screenshots/frames.jpg)
 
-这些可以用WidgetExt::set_frame()来设置。一些widget/traits也支持set_down_frame()：
+你可以用`WidgetExt::set_frame()`来为组件选择边框。一些组件或Trait也支持`set_down_frame()`方法：
 ```rust
 use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
@@ -25,15 +25,16 @@ fn main() {
 }
 ```
 ![image](https://github.com/fltk-rs/fltk-rs/raw/master/screenshots/hello.jpg)
-在这里，我们将Frame的FrameType设置为EngravedBox，你可以看到图像周围的情况。
 
-​	ButtonExt支持set_down_frame()：
+在这里，我们将Frame的`FrameType`设置为`EngravedBox`，你可以看到图片周围出现的边框。
+
+​`ButtonExt Trait`支持使用`set_down_frame()`：
 ```rust
 btn1.set_frame(enums::FrameType::RFlatBox);
 btn1.set_down_frame(enums::FrameType::RFlatBox);
 ```
 
-此外，我们可以使用app::set_frame_type_cb()来改变我们的FrameTypes的绘制程序：
+此外，我们可以使用`app::set_frame_type_cb()`来改变我们选择的相应`FrameTypes`的绘制方式：
 ```rust
 use fltk::{
     enums::{Color, FrameType},
@@ -63,4 +64,4 @@ fn main() {
 
 ![image](https://user-images.githubusercontent.com/37966791/146932070-ae63fd63-3f37-4d97-978e-4604d2bc0e4b.png)
 
-这就用一个自定义的down_box路径改变了默认的DownBox。我们也可以在我们的绘制例程中使用ImageExt::draw()来绘制图像（比如svg图像，以获得可伸缩的圆角边框）。
+这就用自定义的`down_box`绘制方法改变了默认的`DownBox`。我们还可以在绘制方法中使用`ImageExt::draw()`来绘制图像（比如画一个svg图像，以获得可缩放的圆角边框）。

@@ -173,8 +173,8 @@ linker = &quot;aarch64-linux-gnu-gcc&quot;
 <pre><code>cargo install cross
 cross build --target=x86_64-pc-windows-gnu # replace with your target, the Docker daemon has to be running, no need to add via rustup
 </code></pre>
-<p>If your target requires external dependencies, like on Linux, you would have to create a custom docker image and use it for your cross-compilation via:
-1- a Cross.toml file.</p>
+<p>If your target requires external dependencies, like on Linux, you would have to create a custom docker image and use it for your cross-compilation via either:</p>
+<p>1- a Cross.toml file + Dockerfile:</p>
 <p>For example, for a project of the following structure:</p>
 <pre><code>myapp
      |_src

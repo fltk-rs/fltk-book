@@ -163,7 +163,7 @@
 </ul>
 <p>Image types implement the ImageExt trait which offers methods to allow scaling, and retrieving image metadata. 
 Images can be constructed by passing a path to the image's load() constructor, or for some types, by using a from_data() constructor which accepts image data.</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Takes a path
 let image = image::SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
@@ -173,7 +173,7 @@ let image= image::SvgImage::from_data(&amp;data).unwrap();
 <span class="boring">}
 </span></code></pre></pre>
 <p>Images can be used with widgets either via the WidgetExt::set_image()/set_image_scaled() or set_deimage()/set_deimage_scaled() (for deactivated/grayed image):</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
@@ -193,7 +193,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Or via WidgetExt::draw() method:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);

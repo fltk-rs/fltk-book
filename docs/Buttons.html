@@ -157,7 +157,7 @@
 </ul>
 <p>These can be found in the button module.
 The simplest of which is the Button widget, which basically runs some action when clicked. This applies to all buttons as well:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
 
 fn main() {
     let app = app::App::default();
@@ -175,7 +175,7 @@ fn main() {
 <p>However other buttons can have other value.
 CheckButton, ToggleButton, LightButton for example hold their current value, i.e. whether they were toggled or not:</p>
 <p>Radio buttons (RadioRoundButton, RadioLightButton and RadioButton) also hold their value, but only one can be toggled in the parent group (any widget implementing GroupExt). So they are aware of the values of other radio buttons:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -194,7 +194,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/37966791/145727291-8be40de6-8ec6-4e57-bb29-fa0f0ac3b251.png" alt="image" /></p>
 <p>Other toggle-able buttons don't have this property.</p>
 <p>You can query whether a button is toggled or not using the ButtonExt::value() method:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -222,7 +222,7 @@ fn main() {
 <p>CheckButton also provides a convenience method is_checked(), while radio buttons provide an is_toggled().</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727325-7e5bb45f-674e-4bb2-81c8-27d0ee391d34.png" alt="image" /></p>
 <p>By default, toggle-able buttons are created untoggled, however this can be overridden using set_value(), or the convenience methods set_checked() (for CheckButton) and set_toggled() (for radio buttons):</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();

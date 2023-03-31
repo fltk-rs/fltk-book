@@ -166,7 +166,7 @@
 <p>System fonts depend on the system, and are not loaded by default. These can be loaded using the App::load_system_fonts() method.
 The fonts can then be acquired using the app::fonts() function or be queried using the app::font_count(), app::font_name() and app::font_index() functions.
 And then can be used using the Font::by_index() or Font::by_name() methods.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default().load_system_fonts();
@@ -193,7 +193,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>If you would like to load a bundled font without it being in the system, you can alternatively use Font::load_font() and Font::set_font(), this allows you to replace one of FLTK's predefined fonts with a custom font:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, enums::Font, button::Button, frame::Frame, prelude::*, window::Window};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, enums::Font, button::Button, frame::Frame, prelude::*, window::Window};
 
 fn main() {
     let app = app::App::default();

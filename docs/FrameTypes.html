@@ -146,7 +146,7 @@
 <p>FLTK has a wide range of frame types. These can be found under the enums module:
 <img src="https://github.com/fltk-rs/fltk-rs/raw/master/screenshots/frames.jpg" alt="image" /></p>
 <p>These can be set using WidgetExt::set_frame(). Some widgets/traits also support set_down_frame():</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
@@ -168,14 +168,14 @@ fn main() {
 <p><img src="https://github.com/fltk-rs/fltk-rs/raw/master/screenshots/hello.jpg" alt="image" />
 Here we set the frame's FrameType to EngravedBox, which you can see around the image.</p>
 <p>ButtonExt supports set_down_frame():</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>btn1.set_frame(enums::FrameType::RFlatBox);
 btn1.set_down_frame(enums::FrameType::RFlatBox);
 <span class="boring">}
 </span></code></pre></pre>
 <p>Furthermore, we can change the draw routine for our FrameTypes using app::set_frame_type_cb():</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
     enums::{Color, FrameType},
     prelude::*,
     *

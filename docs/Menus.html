@@ -152,7 +152,7 @@
 </ul>
 <p>Menu types function in 2 main ways:
 1- Add choices using the add_choice() method, then handling the user's selection in the callback:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -179,7 +179,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png" alt="image" /></p>
 <p>Alternatively you can query the textual value of the selected item:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -204,7 +204,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>2- Adding choices via the add() method, you pass each choice's callback distinctively.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -240,7 +240,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Also as mentioned in the <a href="Events">Events section</a>, you can use a function object instead of passing closures:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::*, prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{enums::*, prelude::*, *};
 
 fn menu_cb(m: &amp;mut impl MenuExt) {
     if let Some(choice) = m.choice() {
@@ -344,7 +344,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Alternatively, you can use the add_emit() to pass a Sender and a message instead of passing callbacks:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 #[derive(Clone)]
 enum Message {
@@ -400,7 +400,7 @@ fn main() {
 </code></pre></pre>
 <p>You might wonder, why go from a handful of lines in the first examples to a more complex manner of doing things. Each method has it's uses. 
 For simple drop down widgets, go with the first method. For an application's menu bar, go with the second. It allows you to specify Shortcuts and MenuFlags, and allows better decoupling of events, so you won't have to handle everything in the menu's callback. It's also easier to deal with submenus using the add() method, as in the <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">editor example</a>:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>        let mut menu = menu::SysMenuBar::default().with_size(800, 35);
         menu.set_frame(FrameType::FlatBox);

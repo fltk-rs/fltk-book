@@ -242,7 +242,7 @@ But that should rarely be required.</p>
 <h2 id="windowing"><a class="header" href="#windowing">Windowing</a></h2>
 <h3 id="why-does-fltk-exit-when-i-hit-the-escape-key"><a class="header" href="#why-does-fltk-exit-when-i-hit-the-escape-key">Why does FLTK exit when I hit the escape key?</a></h3>
 <p>This is the default behavior in FLTK. You can easily override it by setting a callback for your main window:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    wind.set_callback(|_| {
         if fltk::app::event() == fltk::enums::Event::Close {
@@ -265,7 +265,7 @@ This locking might lead to some performance degradation as compared to the origi
 <h3 id="can-i-get-memory-leaks-with-fltk-rs"><a class="header" href="#can-i-get-memory-leaks-with-fltk-rs">Can I get memory leaks with fltk-rs?</a></h3>
 <p>Non-parented widgets that can no longer be accessed are a memory leak. Otherwise, as mentioned in the previous section all parented widgets lifetimes' are managed by the parent.
 An example of a leaking widget:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2021">fn main() {
     let a = app::App::default();
     let mut win = window::Window::default();
     win.end();
@@ -277,7 +277,7 @@ An example of a leaking widget:</p>
 }
 </code></pre></pre>
 <p>A more subtle cause of leaks, is removing a widget from a group, then the scope ends without it being added to another group or deleted:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2021">fn main() {
     let a = app::App::default();
     let mut win = window::Window::default();
     {

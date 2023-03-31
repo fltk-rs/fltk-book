@@ -150,7 +150,7 @@
 <li>SimpleTerminal</li>
 </ul>
 <p>The main purpose of these widgets is displaying/editing text. The first 2 widgets require a TextBuffer, while the SimpleTerminal has an internal buffer:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -172,7 +172,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/37966791/145727101-175fe355-1383-4789-ae40-2945ef0c63e2.png" alt="image" /></p>
 <p>Most operations are done through the TextBuffer. Text can be appended using append() or the whole content can be set using set_text().
 You can get back a clone (reference type) of the buffer using the DisplayExt::buffer() method:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -194,7 +194,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>The DisplayExt offers other methods to manage the text properties such as wrapping, cursor position, font, color, size...etc:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::Color, prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{enums::Color, prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -216,7 +216,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727121-8396c77e-836d-4406-abd1-92af32ff7242.png" alt="image" /></p>
 <p>The TextBuffer has also a second purpose, and that's to provide a style buffer. A style buffer mirrors your text buffer and uses a style table (containing font, color and size) to add granular styling to your text, the style table itself is indexed, so to speak, using the corresponding letter:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
     enums::{Color, Font},
     prelude::*,
     *,

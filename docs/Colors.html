@@ -156,7 +156,7 @@
 <ul>
 <li>by_index(). This uses fltk's colormap. Values range from 0 to 255:</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let red = Color::by_index(88);
 <span class="boring">}
@@ -165,7 +165,7 @@
 <ul>
 <li>from_hex(). This takes a 24-bit hex value in the form RGB:</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const RED: Color = Color::from_hex(0xff0000); // notice it's a const functions
 <span class="boring">}
@@ -173,19 +173,19 @@
 <ul>
 <li>from_rgb(). This takes 3 values r, g, b:</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const RED: Color = Color::from_rgb(255, 0, 0); // notice it's a const functions
 <span class="boring">}
 </span></code></pre></pre>
 <p>The Color enum also offers some convenience methods to generate different shades of the chosen color, using .darker(), .lighter(), .inactive() methods and others:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let col = Color::from_rgb(176, 100, 50).lighter();
 <span class="boring">}
 </span></code></pre></pre>
 <p>If you prefer html hex string colors, you can use the from_hex_str() method:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let col = Color::from_hex_str(&quot;#ff0000&quot;);
 <span class="boring">}

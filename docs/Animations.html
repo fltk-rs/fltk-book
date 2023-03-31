@@ -151,7 +151,7 @@
 </ul>
 <h2 id="leveraging-the-event-loop"><a class="header" href="#leveraging-the-event-loop">Leveraging the event loop</a></h2>
 <p>fltk offers app::wait() and app::check() which allow updating the ui during a blocking operation:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::*, prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{enums::*, prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -185,7 +185,7 @@ fn style_btn(btn: &amp;mut button::Button) {
 </code></pre></pre>
 <h2 id="spawning-threads"><a class="header" href="#spawning-threads">Spawning threads</a></h2>
 <p>This ensures we don't block the main/ui thread:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::*, prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{enums::*, prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -224,7 +224,7 @@ fn style_btn(btn: &amp;mut button::Button) {
 </code></pre></pre>
 <h2 id="timeouts"><a class="header" href="#timeouts">Timeouts</a></h2>
 <p>fltk offers timeouts for recurring operations. We can add a timeout, repeat it and remove it:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{enums::*, prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{enums::*, prelude::*, *};
 
 fn move_button(mut btn: button::Button, handle: app::TimeoutHandle) {
     btn.set_size(btn.w() - 2, btn.h());

@@ -152,7 +152,7 @@
 </ul>
 <h3 id="flex"><a class="header" href="#flex">Flex</a></h3>
 <p>The Flex widget allows flexbox layouts. It's in group module and implements the GroupExt trait. There are 2 forms of Flex widgets, which can be specified using the set_type or with_type methods. These are the column and row:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default().with_scheme(app::Scheme::Gtk);
@@ -174,7 +174,7 @@ The other widget will be expandable since no size is set for it. A full example 
 <p><img src="https://github.com/osen/FL_Flex/raw/main/doc/login.png" alt="image" /></p>
 <h3 id="packs"><a class="header" href="#packs">Packs</a></h3>
 <p>The Pack widget (in the group module) also implement the GroupExt trait. There are 2 forms of packs, Vertical and Horizontal packs, Vertical being the default. Vertical packs only require the height of its children widgets, while horizontal packs only require the width of its children widgets, like in the example below:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -194,7 +194,7 @@ fn main() {
 </code></pre></pre>
 <p>This creates a pack widget inside the window, and fills it with 2 buttons. Notice that the x and y coordinates are no longer needed for the buttons. You can also embed packs inside packs like in the calculator example in the repo. 
 You can also use the Pack::auto_layout() method:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -217,7 +217,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/37966791/100937983-ef8bf400-3504-11eb-9da1-09c5ac1aade4.png" alt="image" /></p>
 <h3 id="grid"><a class="header" href="#grid">Grid</a></h3>
 <p><a href="https://github.com/fltk-rs/fltk-grid">Grid</a> is implemented currently in an external crate. It requires a layout which is set using <code>Grid::set_layout(&amp;mut self, rows, columns)</code>. Then widgets are inserted via the <code>Grid::insert(&amp;mut self, row, column)</code> or <code>Grid::insert_ext(&amp;mut self, row, column, row_span, column_span)</code> methods:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 use fltk_grid::Grid;
 
 fn main() {
@@ -241,7 +241,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/37966791/160347418-b8b54408-3dc9-4fc4-93e8-fb6c1c0282e9.png" alt="image" /></p>
 <h3 id="relative-positioning"><a class="header" href="#relative-positioning">Relative positioning</a></h3>
 <p>The WidgetExt trait offers several constructor methods which allow us to construct widgets relative to other widgets size and position. This is similar to Qml's anchoring.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();

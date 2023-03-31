@@ -153,7 +153,7 @@
 <h3 id="setting-the-callback"><a class="header" href="#setting-the-callback">Setting the callback</a></h3>
 <p>Part of the WidgetExt trait is the set_callback method:</p>
 <h4 id="using-closures"><a class="header" href="#using-closures">Using closures</a></h4>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -166,7 +166,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>The capture argument is the <code>&amp;mut Self</code> of the widget for which the callback is set:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -180,7 +180,7 @@ fn main() {
 </code></pre></pre>
 <p>The set_callback() methods have default triggers varying by the type of the widget. For buttons it's clicking or pressing enter when the button has focus.
 This can be changed using the set_trigger() method. For buttons this might not make much sense, however for input widgets, the trigger can be set to &quot;CallbackTrigger::Changed&quot; and this will cause changes in the input widget to trigger the callback.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
@@ -197,7 +197,7 @@ fn main() {
 </code></pre></pre>
 <p>This will print on every character input by the user.</p>
 <p>The advanatage of using closures is the ability to &quot;close&quot; on scope arguments, i.e. you can also pass variables from the surrounding scope into the closure:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -214,7 +214,7 @@ fn main() {
 <p>You will notice in the <a href="Menus">Menus section</a> that the handling is done on a per MenuItem basis.</p>
 <h4 id="using-function-objects"><a class="header" href="#using-function-objects">Using function objects</a></h4>
 <p>You can also use function objects directly if you prefer:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn button_cb(w: &amp;mut impl WidgetExt) {
     w.set_label(&quot;Clicked&quot;);
@@ -232,7 +232,7 @@ fn main() {
 </code></pre></pre>
 <p>We use <code>&amp;mut impl WidgetExt</code> to be able to reuse the function object with multiple different widget types, otherwise, you can use <code>&amp;mut button::Button</code> for the button.
 A disadvantage to this approach, is that to handle state, you would have to manage global state.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">extern crate lazy_static;
+<pre><pre class="playground"><code class="language-rust edition2021">extern crate lazy_static;
 
 use fltk::{prelude::*, *};
 use std::sync::Mutex;
@@ -275,7 +275,7 @@ fn main() {
 <h3 id="using-the-handle-method"><a class="header" href="#using-the-handle-method">Using the handle method</a></h3>
 <p>The handle method takes a closure whose parameter is an Event, and returns a bool for handled events. The bool lets FLTK know whether the event was handled or not.
 The call looks like this:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -293,7 +293,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>This prints the event, and doesn't handle it since we return false. Obviously we would like to do something useful, so change the handle call to:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    but.handle(|_, event| match event {
         Event::Push =&gt; {
@@ -306,7 +306,7 @@ fn main() {
 </span></code></pre></pre>
 <p>Here we handle the Push event by doing something useful then  returning true, all other events are ignored and we return false.</p>
 <p>Another example:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    but.handle(|b, event| match event {
         Event::Push =&gt; {
@@ -319,7 +319,7 @@ fn main() {
 </span></code></pre></pre>
 <h3 id="using-messages"><a class="header" href="#using-messages">Using messages</a></h3>
 <p>This allows us to create channels and a Sender and Receiver structs, we can then emit messages (which have to be Send + Sync safe) to be handled in our event loop. The advantage is that we avoid having to wrap our types in smart pointers when we need to pass them into closures or into spawned threads.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -345,7 +345,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Messages can be received in the event loop like in the previous example, otherwise you can receive messages in a background thread or in app::add_idle()' s callback:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    app::add_idle(move || {
         if let Some(msg) = r.recv() {
@@ -358,7 +358,7 @@ fn main() {
 <span class="boring">}
 </span></code></pre></pre>
 <p>You're also not limited to using fltk channels, you can use any channel. For example, this uses the std channel:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let (s, r) = std::sync::mpsc::channel::&lt;Message&gt;();
 btn.set_callback(move |_| {
@@ -367,7 +367,7 @@ btn.set_callback(move |_| {
 <span class="boring">}
 </span></code></pre></pre>
 <p>You can also define a method which applies to all widgets, similar to the emit() method:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use std::sync::mpsc::Sender;
+<pre><pre class="playground"><code class="language-rust edition2021">use std::sync::mpsc::Sender;
 
 pub trait SenderWidget&lt;W, T&gt;
 where
@@ -398,7 +398,7 @@ fn main() {
 <h3 id="creating-our-own-events"><a class="header" href="#creating-our-own-events">Creating our own events</a></h3>
 <p>FLTK recognizes 29 events which are listed in enums::Event. However it allows us to create our own events using the app::handle(impl Into<i32>, window) call. The handle function takes an arbitrary i32 (&gt; 30) value as a signal, ideally the values should be predefined, which can be handled within another widget's handle() method, the other widget needs to be within the window that was passed to app::handle.
 In the following example, we create a window with a frame and a button. The button's callback sends a CHANGED Event through the app::handle_main function. The CHANGED signal is queried in the frame's handle method.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{app, button::*, enums::*, frame::*, group::*, prelude::*, window::*};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, button::*, enums::*, frame::*, group::*, prelude::*, window::*};
 use std::cell::RefCell;
 use std::rc::Rc;
 

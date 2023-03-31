@@ -144,7 +144,7 @@
                     <main>
                         <h1 id="the-app-struct"><a class="header" href="#the-app-struct">The App struct</a></h1>
 <p>The crate offers an App struct in the app module. Initializing the App struct initializes all the internal styles, fonts and supported image types. It also initializes the multithreaded environment in which the app will run.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::*;
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::*;
 
 fn main() {
     let app = app::App::default();
@@ -153,7 +153,7 @@ fn main() {
 </code></pre></pre>
 <p>The run methods runs the event loop of the gui application.
 To have fine grained control of events, you can use the wait() method.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::*;
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::*;
 
 fn main() {
     let app = app::App::default();
@@ -163,7 +163,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Furthermore, the App struct allows you to set the global scheme of your application using the with_scheme() initializer:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::*;
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::*;
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gtk);

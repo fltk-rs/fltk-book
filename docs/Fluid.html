@@ -168,7 +168,7 @@ fltk = &quot;1&quot;
 fl2rust = &quot;0.4&quot;
 </code></pre>
 <p>Then it can be used in the build.rs file (which is run pre-build) to generate Rust code:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">// build.rs
+<pre><pre class="playground"><code class="language-rust edition2021">// build.rs
 fn main() {
     use std::path::PathBuf;
     use std::env;
@@ -183,7 +183,7 @@ However to include it, you need to create a Rust source file, it can be the same
 <pre><code>touch src/myuifile.rs
 </code></pre>
 <p>We'll have to import the contents from the auto-generated file using the include! macro:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// src/myuifile.rs
 #![allow(unused_variables)]
@@ -195,7 +195,7 @@ include!(concat!(env!(&quot;OUT_DIR&quot;), &quot;/myuifile.rs&quot;));
 <span class="boring">}
 </span></code></pre></pre>
 <p>Then we'll be able to use the contents in main.rs:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">// src/main.rs
+<pre><pre class="playground"><code class="language-rust edition2021">// src/main.rs
 use fltk::{prelude::*, *};
 mod myuifile;
 
@@ -205,7 +205,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Now comes the gui part. Open fluid:</p>
-<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fltk-fluid &amp; #or just fluid if installed from a package manager
 <span class="boring">}
@@ -240,7 +240,7 @@ We'll also accept the default name which is <code>make_window()</code>.</p>
 <p>We'll now save the file using <code>File/Save As...</code> as myuifile.fl in the src directory.</p>
 <p>We can now run <code>cargo run</code> to check our build succeeds, but we still haven't call the <code>make_window()</code> method, so we won't see anything yet.
 Now you can modify src/main.rs to show the window and add a callback to our button:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 mod myuifile;
 
 fn main() {

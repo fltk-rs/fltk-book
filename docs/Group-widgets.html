@@ -145,7 +145,7 @@
                         <h1 id="group-widgets"><a class="header" href="#group-widgets">Group widgets</a></h1>
 <p>These widgets include Window types and others found in the group module: Group, Scroll, Pack, Tile, Flex ...etc.
 Widgets implementing the GroupExt trait, are characterized by having to call <code>::end()</code> method to basically close them.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
     app,
     button::Button,
     prelude::{GroupExt, WidgetBase, WidgetExt},
@@ -164,7 +164,7 @@ fn main() {
 <p>In the above example, the button <code>btn</code> will be parented by the window.
 After <code>end</code>ing such GroupExt widgets, any other widgets instantiated after the <code>end</code> call, will be instantiated outside.
 These can still be added using the <code>::add(&amp;other_widget)</code> method (or using <code>::insert</code>):</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
     app,
     button::Button,
     prelude::{GroupExt, WidgetBase, WidgetExt},
@@ -184,7 +184,7 @@ fn main() {
 }
 </code></pre></pre>
 <p>Another option is to reopen the widget:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
     app,
     button::Button,
     prelude::{GroupExt, WidgetBase, WidgetExt},
@@ -206,7 +206,7 @@ fn main() {
 </code></pre></pre>
 <p>While most GroupExt widgets require manual layouts, several have automatic layouting. The Flex widget was discussed in the <a href="Layouts.html">layouts page</a>. Packs require the widget or height of the child widget, depending on the Pack's orientation.</p>
 <p>A vertical Pack needs to know only the heights of its children:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
@@ -228,7 +228,7 @@ fn main() {
 </code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727469-a7181ebf-a3a3-4675-af23-ec40d847a593.png" alt="image" /></p>
 <p>For a horizontal pack, we set the Pack type, then we only need to pass the widths of the children:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">use fltk::{prelude::*, *};
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();

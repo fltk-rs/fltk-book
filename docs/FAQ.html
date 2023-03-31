@@ -153,7 +153,7 @@
 </ul>
 <p>If you're not running one of the aforementioned platforms, you'll have to remove the fltk-bundled feature flag in your Cargo.toml file:</p>
 <pre><code class="language-toml">[dependencies]
-fltk = &quot;^1.3&quot;
+fltk = &quot;^1.4&quot;
 </code></pre>
 <p>Furthermore, the fltk-bundled flag assumes you have curl and tar installed (for Windows, they're available in the Native Tools Command Prompt).</p>
 <h3 id="build-fails-on-windows-why-cant-cmake-find-my-toolchain"><a class="header" href="#build-fails-on-windows-why-cant-cmake-find-my-toolchain">Build fails on windows, why can't CMake find my toolchain?</a></h3>
@@ -164,7 +164,7 @@ fltk = &quot;^1.3&quot;
 <h3 id="why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows"><a class="header" href="#why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows">Why do I get a Link error while using the mingw toolchain on windows?</a></h3>
 <p>If the linking fails because of this <a href="https://github.com/rust-lang/rust/issues/47048">issue</a> with older toolchains, it should work by using the fltk-shared feature (an issue with older compilers). Which would also generate a dynamic library which would need to be deployed with your application.</p>
 <pre><code class="language-toml">[dependencies]
-fltk = { version = &quot;^1.3&quot;, features = [&quot;fltk-shared&quot;] }
+fltk = { version = &quot;^1.4&quot;, features = [&quot;fltk-shared&quot;] }
 </code></pre>
 <h3 id="why-does-my-msys2-mingw-built-fltk-app-using-fltk-bundled-isnt-self-contained-and-requires-several-dlls"><a class="header" href="#why-does-my-msys2-mingw-built-fltk-app-using-fltk-bundled-isnt-self-contained-and-requires-several-dlls">Why does my msys2 mingw built fltk app using, fltk-bundled, isn't self-contained and requires several dlls?</a></h3>
 <p>If you have installed libgdiplus via pacman, it would require those dependencies on other systems. If you're using the windows sdk-provided libgdiplus, it shouldn't require extra dlls. You can either uninstall libgdiplus that was installed via pacman, or or you can build using the feature flag: <code>no-gdiplus</code>.</p>
@@ -207,7 +207,7 @@ lto = true
 codegen-units = 1
 panic = &quot;abort&quot;
 </code></pre>
-<p>Newer versions of cargo (&gt;1.46) support automatically stripping binaries in the post-build phase:</p>
+<p>Newer versions of cargo (&gt;1.55) support automatically stripping binaries in the post-build phase:</p>
 <pre><code class="language-toml">cargo-features = [&quot;strip&quot;]
 
 [profile.release]

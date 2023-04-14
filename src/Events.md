@@ -355,3 +355,140 @@ The sent i32 signal can be created on the fly, or added to a const local or glob
 #### Disadvantages:
 - The signal can only be handled in a widget's handle method.
 - The signal is inaccessible within the event loop (for that, you might want to use WidgetExt::emit or channels described previously in this page). 
+
+## Handling top-level events
+Lets say our app wants to deal with certain key strokes, we can either handle it in our event-loop or as part of our app window's handle method:
+
+Lets write our handler function:
+```rust
+// handler.rs
+use fltk::enums::Key;
+
+pub(crate) fn handle_key(key: Key) {
+    match key {
+        Key::Left => println!("ArrowLeft"),
+        Key::Up => println!("ArrowUp"),
+        Key::Right => println!("ArrowRight"),
+        Key::Down => println!("ArrowDown"),
+        Key::Escape => println!("Escape"),
+        Key::Tab => println!("Tab"),
+        Key::BackSpace => println!("Backspace"),
+        Key::Insert => println!("Insert"),
+        Key::Home => println!("Home"),
+        Key::Delete => println!("Delete"),
+        Key::End => println!("End"),
+        Key::PageDown => println!("PageDown"),
+        Key::PageUp => println!("PageUp"),
+        Key::Enter => println!("Enter"),
+        _ => {
+            if let Some(k) = key.to_char() {
+                match k {
+                    ' ' => println!("Space"),
+                    'a' => println!("A"),
+                    'b' => println!("B"),
+                    'c' => println!("C"),
+                    'd' => println!("D"),
+                    'e' => println!("E"),
+                    'f' => println!("F"),
+                    'g' => println!("G"),
+                    'h' => println!("H"),
+                    'i' => println!("I"),
+                    'j' => println!("J"),
+                    'k' => println!("K"),
+                    'l' => println!("L"),
+                    'm' => println!("M"),
+                    'n' => println!("N"),
+                    'o' => println!("O"),
+                    'p' => println!("P"),
+                    'q' => println!("Q"),
+                    'r' => println!("R"),
+                    's' => println!("S"),
+                    't' => println!("T"),
+                    'u' => println!("U"),
+                    'v' => println!("V"),
+                    'w' => println!("W"),
+                    'x' => println!("X"),
+                    'y' => println!("Y"),
+                    'z' => println!("Z"),
+                    '0' => println!("Num0"),
+                    '1' => println!("Num1"),
+                    '2' => println!("Num2"),
+                    '3' => println!("Num3"),
+                    '4' => println!("Num4"),
+                    '5' => println!("Num5"),
+                    '6' => println!("Num6"),
+                    '7' => println!("Num7"),
+                    '8' => println!("Num8"),
+                    '9' => println!("Num9"),
+                    _ => println!("Ignored char!"),
+                }
+            } else {
+                println!("Ignored key!");
+            }
+        }
+    }
+}
+```
+
+Notice how fltk-rs doesn't have an enum for all character keys, instead we use key.to_char() when we have already matched the keys we're interested in. 
+
+Now lets use our handle_key(). As stated previously, it can be used as part of the event-loop:
+```rust
+// main.rs
+use fltk::{
+    *,
+    prelude::*,
+    enums::*,
+};
+
+mod handler;
+use handler::handle_key;
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gleam);
+    let mut wind = window::Window::default().with_size(400, 300);
+    wind.set_color(Color::White);
+    wind.end();
+    wind.show();
+
+    while a.wait() {
+        if app::event() == Event::KeyUp {
+            let key = app::event_key();
+            handle_key(key);
+        }
+    }
+}
+```
+
+Otherwise we can use our main window's handle method:
+```rust
+// main.rs
+use fltk::{
+    *,
+    prelude::*,
+    enums::*,
+};
+
+mod handler;
+use handler::handle_key;
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gleam);
+    let mut wind = window::Window::default().with_size(400, 300);
+    wind.set_color(Color::White);
+    wind.end();
+    wind.show();
+    
+    wind.handle(|w, event| {
+        match event {
+            Event::KeyUp => {
+                handle_key(app::event_key());
+                true
+            }
+            _ => false,
+        }
+    });
+
+    a.run().unwrap();
+}
+```

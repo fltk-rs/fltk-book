@@ -486,6 +486,138 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 <li>The signal can only be handled in a widget's handle method.</li>
 <li>The signal is inaccessible within the event loop (for that, you might want to use WidgetExt::emit or channels described previously in this page). </li>
 </ul>
+<h2 id="handling-top-level-events"><a class="header" href="#handling-top-level-events">Handling top-level events</a></h2>
+<p>Lets say our app wants to deal with certain key strokes, we can either handle it in our event-loop or as part of our app window's handle method:</p>
+<p>Lets write our handler function:</p>
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// handler.rs
+use fltk::enums::Key;
+
+pub(crate) fn handle_key(key: Key) {
+    match key {
+        Key::Left =&gt; println!(&quot;ArrowLeft&quot;),
+        Key::Up =&gt; println!(&quot;ArrowUp&quot;),
+        Key::Right =&gt; println!(&quot;ArrowRight&quot;),
+        Key::Down =&gt; println!(&quot;ArrowDown&quot;),
+        Key::Escape =&gt; println!(&quot;Escape&quot;),
+        Key::Tab =&gt; println!(&quot;Tab&quot;),
+        Key::BackSpace =&gt; println!(&quot;Backspace&quot;),
+        Key::Insert =&gt; println!(&quot;Insert&quot;),
+        Key::Home =&gt; println!(&quot;Home&quot;),
+        Key::Delete =&gt; println!(&quot;Delete&quot;),
+        Key::End =&gt; println!(&quot;End&quot;),
+        Key::PageDown =&gt; println!(&quot;PageDown&quot;),
+        Key::PageUp =&gt; println!(&quot;PageUp&quot;),
+        Key::Enter =&gt; println!(&quot;Enter&quot;),
+        _ =&gt; {
+            if let Some(k) = key.to_char() {
+                match k {
+                    ' ' =&gt; println!(&quot;Space&quot;),
+                    'a' =&gt; println!(&quot;A&quot;),
+                    'b' =&gt; println!(&quot;B&quot;),
+                    'c' =&gt; println!(&quot;C&quot;),
+                    'd' =&gt; println!(&quot;D&quot;),
+                    'e' =&gt; println!(&quot;E&quot;),
+                    'f' =&gt; println!(&quot;F&quot;),
+                    'g' =&gt; println!(&quot;G&quot;),
+                    'h' =&gt; println!(&quot;H&quot;),
+                    'i' =&gt; println!(&quot;I&quot;),
+                    'j' =&gt; println!(&quot;J&quot;),
+                    'k' =&gt; println!(&quot;K&quot;),
+                    'l' =&gt; println!(&quot;L&quot;),
+                    'm' =&gt; println!(&quot;M&quot;),
+                    'n' =&gt; println!(&quot;N&quot;),
+                    'o' =&gt; println!(&quot;O&quot;),
+                    'p' =&gt; println!(&quot;P&quot;),
+                    'q' =&gt; println!(&quot;Q&quot;),
+                    'r' =&gt; println!(&quot;R&quot;),
+                    's' =&gt; println!(&quot;S&quot;),
+                    't' =&gt; println!(&quot;T&quot;),
+                    'u' =&gt; println!(&quot;U&quot;),
+                    'v' =&gt; println!(&quot;V&quot;),
+                    'w' =&gt; println!(&quot;W&quot;),
+                    'x' =&gt; println!(&quot;X&quot;),
+                    'y' =&gt; println!(&quot;Y&quot;),
+                    'z' =&gt; println!(&quot;Z&quot;),
+                    '0' =&gt; println!(&quot;Num0&quot;),
+                    '1' =&gt; println!(&quot;Num1&quot;),
+                    '2' =&gt; println!(&quot;Num2&quot;),
+                    '3' =&gt; println!(&quot;Num3&quot;),
+                    '4' =&gt; println!(&quot;Num4&quot;),
+                    '5' =&gt; println!(&quot;Num5&quot;),
+                    '6' =&gt; println!(&quot;Num6&quot;),
+                    '7' =&gt; println!(&quot;Num7&quot;),
+                    '8' =&gt; println!(&quot;Num8&quot;),
+                    '9' =&gt; println!(&quot;Num9&quot;),
+                    _ =&gt; println!(&quot;Ignored char!&quot;),
+                }
+            } else {
+                println!(&quot;Ignored key!&quot;);
+            }
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Notice how fltk-rs doesn't have an enum for all character keys, instead we use key.to_char() when we have already matched the keys we're interested in. </p>
+<p>Now lets use our handle_key(). As stated previously, it can be used as part of the event-loop:</p>
+<pre><pre class="playground"><code class="language-rust edition2021">// main.rs
+use fltk::{
+    *,
+    prelude::*,
+    enums::*,
+};
+
+mod handler;
+use handler::handle_key;
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gleam);
+    let mut wind = window::Window::default().with_size(400, 300);
+    wind.set_color(Color::White);
+    wind.end();
+    wind.show();
+
+    while a.wait() {
+        if app::event() == Event::KeyUp {
+            let key = app::event_key();
+            handle_key(key);
+        }
+    }
+}
+</code></pre></pre>
+<p>Otherwise we can use our main window's handle method:</p>
+<pre><pre class="playground"><code class="language-rust edition2021">// main.rs
+use fltk::{
+    *,
+    prelude::*,
+    enums::*,
+};
+
+mod handler;
+use handler::handle_key;
+
+fn main() {
+    let a = app::App::default().with_scheme(app::Scheme::Gleam);
+    let mut wind = window::Window::default().with_size(400, 300);
+    wind.set_color(Color::White);
+    wind.end();
+    wind.show();
+    
+    wind.handle(|w, event| {
+        match event {
+            Event::KeyUp =&gt; {
+                handle_key(app::event_key());
+                true
+            }
+            _ =&gt; false,
+        }
+    });
+
+    a.run().unwrap();
+}
+</code></pre></pre>
 
                     </main>
 

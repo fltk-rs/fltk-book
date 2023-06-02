@@ -390,7 +390,7 @@ RUN dpkg --add-architecture arm64 &amp;&amp; \
 dockerfile = &quot;./arm64-dockerfile&quot;
 </code></pre>
 <p>2- Configuring Cargo.toml:</p>
-<pre><code class="language-toml">[target.aarch64-unknown-linux-gnu]
+<pre><code class="language-toml">[package.metadata.cross.target.aarch64-unknown-linux-gnu]
 pre-build = [&quot;&quot;&quot; \
     dpkg --add-architecture arm64 &amp;&amp; \
     apt-get update &amp;&amp; \

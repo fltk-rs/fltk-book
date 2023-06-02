@@ -9,7 +9,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -34,14 +33,15 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -57,7 +57,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -69,12 +69,14 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -100,7 +102,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -133,7 +135,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -171,8 +173,7 @@ The library itself is written in C++98, which is highly-portable. The fltk crate
     let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Why choose FLTK?</p>
 <ul>
 <li>Lightweight. Small binary, around 1mb after stripping. <a href="https://szibele.com/memory-footprint-of-gui-toolkits/">Small memory footprint</a>.</li>
@@ -200,8 +201,7 @@ fn main() {
     let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>If you run the code sample, you might notice it does nothing. We actually need to run the event loop, this is equivalent to using <code>Fl::run()</code> in C++:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, prelude::*, window::Window};
 fn main() {
@@ -210,8 +210,7 @@ fn main() {
     wind.end();
     wind.show();
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>We instantiate the App struct, which initializes the runtime and styles, then at the end of main, we call the run() method.</p>
 <h2 id="contributing-to-the-book"><a class="header" href="#contributing-to-the-book">Contributing to the book</a></h2>
 <p>The book is generated using <a href="https://github.com/rust-lang/mdBook">mdbook</a> on the <a href="https://github.com/fltk-rs/fltk-book">fltk-book</a> repo.</p>
@@ -391,7 +390,7 @@ RUN dpkg --add-architecture arm64 &amp;&amp; \
 dockerfile = &quot;./arm64-dockerfile&quot;
 </code></pre>
 <p>2- Configuring Cargo.toml:</p>
-<pre><code class="language-toml">[package.metadata.cross.target.aarch64-unknown-linux-gnu]
+<pre><code class="language-toml">[target.aarch64-unknown-linux-gnu]
 pre-build = [&quot;&quot;&quot; \
     dpkg --add-architecture arm64 &amp;&amp; \
     apt-get update &amp;&amp; \
@@ -626,8 +625,7 @@ fn main() {
     let g = fl2rust::Generator::default();
     let out_path = PathBuf::from(env::var(&quot;OUT_DIR&quot;).unwrap());
     g.in_out(&quot;src/myuifile.fl&quot;, out_path.join(&quot;myuifile.rs&quot;).to_str().unwrap()).expect(&quot;Failed to generate rust from fl file!&quot;);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>We'll be naming our fluid file myuifile.fl. We tell cargo to rerun if that file is changed. We'll create the file in our source directory, but you can put it in its own directory if you wish. We tell the generator to take the fluid file and generate a myuifile.rs. This file is generated in the OUT_DIR, so you won't be seeing it in your src directory.
 However to include it, you need to create a Rust source file, it can be the same name as our outputted file, and put it in the src directory:</p>
 <pre><code>touch src/myuifile.rs
@@ -642,8 +640,7 @@ However to include it, you need to create a Rust source file, it can be the same
 #![allow(clippy::needless_update)]
 
 include!(concat!(env!(&quot;OUT_DIR&quot;), &quot;/myuifile.rs&quot;));
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Then we'll be able to use the contents in main.rs:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">// src/main.rs
 use fltk::{prelude::*, *};
@@ -652,14 +649,12 @@ mod myuifile;
 fn main() {
     let app = app::App::default();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Now comes the gui part. Open fluid:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fltk-fluid &amp; #or just fluid if installed from a package manager
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>The ampersand tells our shell to open it as a detached process, so we can still use our shell to compile our code.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146925955-ac778726-1398-4ea2-8e46-a2f8fff89804.png" alt="image" /></p>
 <p>We're greeted with an empty window along with a menu bar. Our first step here is to create a Class:
@@ -703,8 +698,7 @@ fn main() {
         println!(&quot;Works!&quot;);
     });
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-app-struct"><a class="header" href="#the-app-struct">The App struct</a></h1>
 <p>The crate offers an App struct in the app module. Initializing the App struct initializes all the internal styles, fonts and supported image types. It also initializes the multithreaded environment in which the app will run.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::*;
@@ -712,8 +706,7 @@ fn main() {
 fn main() {
     let app = app::App::default();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>The run methods runs the event loop of the gui application.
 To have fine grained control of events, you can use the wait() method.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::*;
@@ -723,16 +716,14 @@ fn main() {
     while app.wait() {
         // handle events
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Furthermore, the App struct allows you to set the global scheme of your application using the with_scheme() initializer:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::*;
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gtk);
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>This will give your application a Gtk app appearance. There are other built-in schemes: Basic, Plastic and Gleam.</p>
 <p>The App struct is also responsible for loading system fonts at the start of the application using the load_system_fonts() method. </p>
 <p>A typical fltk-rs application will construct the App struct prior to creating any widgets and showing the main window. </p>
@@ -751,8 +742,7 @@ fn main() {
     my_window.end();
     my_window.show();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937363-f82ffa80-3503-11eb-8f3a-9afe34bdad59.jpg" alt="img1" /></p>
 <p>The new() call takes 5 parameters:</p>
 <ul>
@@ -776,8 +766,7 @@ fn main() {
     my_window.end();
     my_window.show();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937446-139b0580-3504-11eb-8738-1e4161175d0b.jpg" alt="embed" /></p>
 <p>Here the 2nd window, my_window2, is embedded inside the 1st window, my_window. We've given it the color black so it appears to us. Notice that its parent is the first window. Creating the 2nd window outside of the parent will basically create 2 separate windows, and will require a call to show():</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -791,8 +780,7 @@ fn main() {
     my_window2.end();
     my_window2.show();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Windows can also be borderless using the my_window.set_border(false) method.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937639-565cdd80-3504-11eb-8cf6-e135243c38b0.png" alt="image" /></p>
 <p>The set_border(bool) method is part of the WindowExt trait, implemented by all window types in FLTK, in addition to the WidgetExt and GroupExt traits.
@@ -811,8 +799,7 @@ fn main() {
     my_window.end();
     my_window.show();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png" alt="image" /></p>
 <p>Notice that the button's parent is my_window since it's created between the implicit begin() and end() calls.
 Another way to add a widget is using the add(widget) method that's offered by widgets implementing the GroupExt trait:</p>
@@ -828,8 +815,7 @@ fn main() {
     my_window.add(&amp;but);
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Another thing to notice is the initialization of the button which basically has the same constructor as the Window, that's because it's part of the WidgetBase trait. However, although the Window's x and y coordinates are relative to the screen, the button's x and y coordinates are relative to the window which contains the button. This also applies to our embedded window in the previous page if you hadn't noticed.</p>
 <p>The button also implements the ButtonExt trait, which offers some helpful methods like setting shortcuts to trigger our button among other methods.</p>
 <p>Constructing widgets can also be done using a builder pattern:</p>
@@ -841,8 +827,7 @@ let but1 = Button::default()
     .with_pos(10, 10)
     .with_size(80, 40)
     .with_label(&quot;Button 1&quot;);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Which basically have the same effect.</p>
 <p>As it stands, our application shows a window with a button, the button is clickable but does nothing!
 So lets add some action in there in the next page! </p>
@@ -874,8 +859,7 @@ fn main() {
     but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>However other buttons can have other value.
 CheckButton, ToggleButton, LightButton for example hold their current value, i.e. whether they were toggled or not:</p>
 <p>Radio buttons (RadioRoundButton, RadioLightButton and RadioButton) also hold their value, but only one can be toggled in the parent group (any widget implementing GroupExt). So they are aware of the values of other radio buttons:</p>
@@ -892,8 +876,7 @@ fn main() {
     win.end();
     win.show();
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>(The focus box can be removed using the clear_visible_focus() method <code>btn1.clear_visible_focus()</code>).</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727291-8be40de6-8ec6-4e57-bb29-fa0f0ac3b251.png" alt="image" /></p>
 <p>Other toggle-able buttons don't have this property.</p>
@@ -921,8 +904,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>CheckButton also provides a convenience method is_checked(), while radio buttons provide an is_toggled().</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727325-7e5bb45f-674e-4bb2-81c8-27d0ee391d34.png" alt="image" /></p>
 <p>By default, toggle-able buttons are created untoggled, however this can be overridden using set_value(), or the convenience methods set_checked() (for CheckButton) and set_toggled() (for radio buttons):</p>
@@ -951,8 +933,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727352-bf6dba5c-1a0c-4da4-8296-093e10470f0c.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="labels"><a class="header" href="#labels">Labels</a></h1>
 <p>FLTK doesn't have a Label widget. So if you would just like to show text, you can use a Frame widget and give it a label. </p>
@@ -960,8 +941,7 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let btn = button::Button::new(160, 200, 80, 30, &quot;Click&quot;);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>This button has a label showing the text &quot;click&quot;.</p>
 <p>Similarly we can use set_label() or with_label():</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
@@ -970,15 +950,13 @@ fn main() {
 // or
 let mut btn = button::Button::default();
 btn.set_label(&quot;Click&quot;);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>However, the ::new() constructor takes in reality an optional to a static str, so the following would fail:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let label = String::from(&quot;Click&quot;); // label is not a static str
 let mut btn = button::Button::new(160, 200, 80, 30, &amp;label);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>You would want to use <code>btn.set_label(&amp;label);</code> in this case. The reason is that FLTK expects a <code>const char *</code> label, which is the equivalent of Rust's <code>&amp;'static str</code>. These strings live in the program's code segment. If you disassemble an application, it would show all these static strings. And since these have a static lifetime, FLTK by default doesn't store them. 
 While using set_label() and with_label() calls FLTK's Fl_Widget::copy_label() method which actually stores the string.</p>
 <p>You are also not limited to text labels, FLTK has predefined symbols which translate into images:</p>
@@ -1010,8 +988,7 @@ fn main() {
     win.end();
     win.show();
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>In the above example, the button <code>btn</code> will be parented by the window.
 After <code>end</code>ing such GroupExt widgets, any other widgets instantiated after the <code>end</code> call, will be instantiated outside.
 These can still be added using the <code>::add(&amp;other_widget)</code> method (or using <code>::insert</code>):</p>
@@ -1032,8 +1009,7 @@ fn main() {
     win.add(&amp;btn);
     
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Another option is to reopen the widget:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
     app,
@@ -1053,8 +1029,7 @@ fn main() {
     win.end();
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>While most GroupExt widgets require manual layouts, several have automatic layouting. The Flex widget was discussed in the <a href="Layouts.html">layouts page</a>. Packs require the widget or height of the child widget, depending on the Pack's orientation.</p>
 <p>A vertical Pack needs to know only the heights of its children:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -1075,8 +1050,7 @@ fn main() {
     wind.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727469-a7181ebf-a3a3-4675-af23-ec40d847a593.png" alt="image" /></p>
 <p>For a horizontal pack, we set the Pack type, then we only need to pass the widths of the children:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -1097,8 +1071,7 @@ fn main() {
     wind.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="menus"><a class="header" href="#menus">Menus</a></h1>
 <p>Menus in FLTK are widgets which implement the MenuExt trait. To that end, there are several types:</p>
 <ul>
@@ -1132,8 +1105,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png" alt="image" /></p>
 <p>Alternatively you can query the textual value of the selected item:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -1158,8 +1130,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>2- Adding choices via the add() method, you pass each choice's callback distinctively.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
@@ -1194,8 +1165,7 @@ fn main() {
     wind.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Also as mentioned in the <a href="Events">Events section</a>, you can use a function object instead of passing closures:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{enums::*, prelude::*, *};
 
@@ -1298,8 +1268,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Alternatively, you can use the add_emit() to pass a Sender and a message instead of passing callbacks:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
@@ -1353,8 +1322,7 @@ fn main() {
             }
         }
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>You might wonder, why go from a handful of lines in the first examples to a more complex manner of doing things. Each method has it's uses. 
 For simple drop down widgets, go with the first method. For an application's menu bar, go with the second. It allows you to specify Shortcuts and MenuFlags, and allows better decoupling of events, so you won't have to handle everything in the menu's callback. It's also easier to deal with submenus using the add() method, as in the <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">editor example</a>:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
@@ -1444,8 +1412,7 @@ For simple drop down widgets, go with the first method. For an application's men
         if let Some(mut item) = menu.find_item(&quot;&amp;File/Quit\t&quot;) {
             item.set_label_color(Color::Red);
         }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Also notice the last call, which uses find_item() to find an item in the menu, and we hence set its label color to red.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png" alt="image" /></p>
 <h2 id="system-menu-bar"><a class="header" href="#system-menu-bar">System Menu Bar</a></h2>
@@ -1481,8 +1448,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727249-2fa4d384-2bd3-41fd-bbae-61a3a33b12f6.png" alt="image" /></p>
 <p>Notice that we used an IntInput to limit ourselves to integral values. Even though for the user they can't enter strings, the return of value() is still a String as far as the developer is concerned.</p>
 <p>Output widgets don't allow the user to modify their values:</p>
@@ -1499,8 +1465,7 @@ fn main() {
     win.end();
     win.show();
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727261-88ec533f-200b-4df7-a570-76ebd2ba520a.png" alt="image" /></p>
 <p>Input widgets also support being made read-only using the InputExt::set_readonly(bool) method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -1522,8 +1487,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>This makes our input read-only once the user hits the button.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="valuators"><a class="header" href="#valuators">Valuators</a></h1>
 <p>Valuator widgets implement the ValuatorExt trait. These keep track (graphically and internally) of numerical values along with steps, ranges and bounds.
@@ -1565,9 +1529,162 @@ fn main() {
         println!(&quot;slider at {}&quot;, s.value());
     });
     a.run().unwrap();
-}
-</code></pre></pre>
-<p><img src="https://user-images.githubusercontent.com/37966791/145727188-4ac06d45-7fd1-44f7-9adc-366d9bb79d8f.png" alt="image" /></p>
+}</code></pre></pre>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/37966791/145727188-4ac06d45-7fd1-44f7-9adc-366d9bb79d8f.png" alt="HorNiceSlider" /></p>
+</div>
+<p>Below you can see the same example graphically in different widgets</p>
+<details>
+<summary><b>Look widgets examples</b></summary>
+<h2 id="adjuster-widget"><a class="header" href="#adjuster-widget">Adjuster widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242296674-1e126073-2c9f-443d-9dab-fccd66733e39.PNG" alt="Adjuster" /></p>
+</div>
+<h2 id="counter-widget"><a class="header" href="#counter-widget">Counter widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744205-f2729663-ed21-4e8b-a957-093c436fd00f.PNG" alt="Counter" /></p>
+</div>
+<h2 id="dial-widget"><a class="header" href="#dial-widget">Dial widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744149-cf050906-0be9-4212-9d0c-ae4f33bbef5a.PNG" alt="Dial" /></p>
+</div>
+<h2 id="filldial-widget"><a class="header" href="#filldial-widget">FillDial widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744161-7c210cc6-4869-4c17-8a8d-eb115c4a05b3.PNG" alt="FillDial" /></p>
+</div>
+<h2 id="fillslider-widget"><a class="header" href="#fillslider-widget">FillSlider widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744164-ad6cb154-82bc-4379-988a-205c0991071e.PNG" alt="FillSlider" /></p>
+</div>
+<h2 id="horfillslider-widget"><a class="header" href="#horfillslider-widget">HorFillSlider widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744166-34698d23-6ace-4971-8a46-5e41d9e03b7f.PNG" alt="HorFillSlider" /></p>
+</div>
+<h2 id="horniceslider-widget"><a class="header" href="#horniceslider-widget">HorNiceSlider widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744167-4975a80b-eee9-45e9-9655-ade47ac331c2.PNG" alt="HorNiceSlider" /></p>
+</div>
+<h2 id="horslider-widget"><a class="header" href="#horslider-widget">HorSlider widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744168-eaa87ef0-932a-48b0-9b39-1f35245e0dfe.PNG" alt="HorSlider" /></p>
+</div>
+<h2 id="horvalueslider-widget"><a class="header" href="#horvalueslider-widget">HorValueSlider widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744171-d17f2c12-aa65-4b95-b026-a501dd9d7112.PNG" alt="HorValueSlider" /></p>
+</div>
+<h2 id="linedial-widget"><a class="header" href="#linedial-widget">LineDial widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744174-57e1dee1-104e-4870-99b7-cd1bf8cb82a7.PNG" alt="LineDial" /></p>
+</div>
+<h2 id="niceslider-widget"><a class="header" href="#niceslider-widget">NiceSlider widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744175-b75f737d-5d93-4d98-9a17-700cd7d74fae.PNG" alt="NiceSlider" /></p>
+</div>
+<h2 id="roller-widget"><a class="header" href="#roller-widget">Roller widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744176-63fc716c-c0ac-45b2-b2ed-1ab79b62c64d.PNG" alt="Roller" /></p>
+</div>
+<h2 id="scrollbar-widget"><a class="header" href="#scrollbar-widget">Scrollbar widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744178-ed347599-b75a-41e9-8feb-8f87e3f65ec8.PNG" alt="Scrollbar" /></p>
+</div>
+<h2 id="slider-widget"><a class="header" href="#slider-widget">Slider widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744188-7115f63d-cd53-412a-a603-1f606a15d644.PNG" alt="Slider" /></p>
+</div>
+<h2 id="valueinput-widget"><a class="header" href="#valueinput-widget">ValueInput widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744198-85708994-2123-4d24-97ef-b3e9feb4392e.PNG" alt="ValueInput" /></p>
+</div>
+<h2 id="valueoutput-widget"><a class="header" href="#valueoutput-widget">ValueOutput widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744199-d62b300e-3661-4d0b-9eea-fd971cedb53e.PNG" alt="ValueOutput" /></p>
+</div>
+<h2 id="valueslider-widget"><a class="header" href="#valueslider-widget">ValueSlider widget</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744201-739d9730-c765-434e-a37e-00b89e7d9a10.PNG" alt="ValueSlider" /></p>
+</div>
+</details>
+<hr />
+<h1 id="valuator-enums"><a class="header" href="#valuator-enums">Valuator enums</a></h1>
+<p>To use the different features available in the valuator, the following lines of code must be added to the specific object:</p>
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut valuator_object = valuator::Counter::default().with_size(200, 50).center_of_parent();
+valuator_object.clone().with_type(fltk::valuator::CounterType::Simple);
+<span class="boring">}</span></code></pre></pre>
+<p>Below you will see the available features with the Counter, Dial, Scrollbar, and Slider objects.</p>
+<details>
+<summary><b>Look enums examples</b></summary>
+<h2 id="countertypenormal"><a class="header" href="#countertypenormal">CounterType::Normal</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744208-123e67c2-7d99-4e1e-ba18-961f6a045c3c.PNG" alt="CounterTypeNormal" /></p>
+</div>
+<h2 id="countertypesimple"><a class="header" href="#countertypesimple">CounterType::Simple</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744209-5a32155d-2481-420d-a4df-e65cb94c896b.PNG" alt="CounterTypeSimple" /></p>
+</div>
+<hr />
+<h2 id="dialtypenormal"><a class="header" href="#dialtypenormal">DialType::Normal</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744158-40daa466-d0ff-4829-a59e-ea53a828316a.PNG" alt="DialTypeNormal" /></p>
+</div>
+<h2 id="dialtypeline"><a class="header" href="#dialtypeline">DialType::Line</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744156-81aadbdd-349f-4e8f-9a18-aa3aab192384.PNG" alt="DialTypeLine" /></p>
+</div>
+<h2 id="dialtypefill"><a class="header" href="#dialtypefill">DialType::Fill</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744153-86da086c-e41d-474d-93a7-1a5724c1936b.PNG" alt="DialTypeFill" /></p>
+</div>
+<hr />
+<h2 id="scrollbartypevertical"><a class="header" href="#scrollbartypevertical">ScrollbarType::Vertical</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744185-f3d0d260-1d51-4818-8d5e-44a569de13fd.PNG" alt="ScrollbarTypeVertical" /></p>
+</div>
+<h2 id="scrollbartypehorizontal"><a class="header" href="#scrollbartypehorizontal">ScrollbarType::Horizontal</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744179-2c1ab7b0-3d0c-478b-8991-57e03c830cc2.PNG" alt="ScrollbarTypeHorizontal" /></p>
+</div>
+<h2 id="scrollbartypeverticalfill"><a class="header" href="#scrollbartypeverticalfill">ScrollbarType::VerticalFill</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744186-4e11a7a3-ead8-4662-a253-adec6f462fae.PNG" alt="ScrollbarTypeVerticalFill" /></p>
+</div>
+<h2 id="scrollbartypehorizontalfill"><a class="header" href="#scrollbartypehorizontalfill">ScrollbarType::HorizontalFill</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744181-a46e4e21-98b2-4ff8-82e0-2592c2bd6c36.PNG" alt="ScrollbarTypeHorizontalFill" /></p>
+</div>
+<h2 id="scrollbartypeverticalnice"><a class="header" href="#scrollbartypeverticalnice">ScrollbarType::VerticalNice</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744187-4cbb48c1-91e5-42e8-91c0-a207570ba02c.PNG" alt="ScrollbarTypeVerticalNice" /></p>
+</div>
+<h2 id="scrollbartypehorizontalnice"><a class="header" href="#scrollbartypehorizontalnice">ScrollbarType::HorizontalNice</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744183-64c40027-584a-496d-93f0-4909a3addf43.PNG" alt="ScrollbarTypeHorizontalNice" /></p>
+</div>
+<hr />
+<h2 id="slidertypevertical"><a class="header" href="#slidertypevertical">SliderType::Vertical</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744192-ca19a6e9-1221-4253-b357-cd4cf12a0801.PNG" alt="SliderTypeVertical" /></p>
+</div>
+<h2 id="slidertypeverticalfill"><a class="header" href="#slidertypeverticalfill">SliderType::VerticalFill</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744194-20b3c4a9-cd42-4c07-ae44-9753d7ab4393.PNG" alt="SliderTypeVerticalFill" /></p>
+</div>
+<h2 id="slidertypehorizontalfill"><a class="header" href="#slidertypehorizontalfill">SliderType::HorizontalFill</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744190-11f4f4f4-137a-4d10-8beb-13514c6e8357.PNG" alt="SliderTypeHorizontalFill" /></p>
+</div>
+<h2 id="slidertypeverticalnice"><a class="header" href="#slidertypeverticalnice">SliderType::VerticalNice</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744196-96dac4e1-bf0d-4622-ba45-84d20985ec89.PNG" alt="SliderTypeVerticalNice" /></p>
+</div>
+<h2 id="slidertypehorizontalnice"><a class="header" href="#slidertypehorizontalnice">SliderType::HorizontalNice</a></h2>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/242744191-83d3520d-c648-4372-8fc6-32ad29ec3162.PNG" alt="SliderTypeHorizontalNice" /></p>
+</div>
+</details>
+<hr />
 <div style="break-before: page; page-break-before: always;"></div><h1 id="text"><a class="header" href="#text">Text</a></h1>
 <p>Text widgets are those that implement the DisplayExt. There are 3 and these can be found in the text module:</p>
 <ul>
@@ -1593,8 +1710,7 @@ fn main() {
     buf.append(&quot;This is a text editor!&quot;);
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727101-175fe355-1383-4789-ae40-2945ef0c63e2.png" alt="image" /></p>
 <p>Most operations are done through the TextBuffer. Text can be appended using append() or the whole content can be set using set_text().
 You can get back a clone (reference type) of the buffer using the DisplayExt::buffer() method:</p>
@@ -1617,8 +1733,7 @@ fn main() {
     my_buf.append(&quot;This is a text editor!&quot;);
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>The DisplayExt offers other methods to manage the text properties such as wrapping, cursor position, font, color, size...etc:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{enums::Color, prelude::*, *};
 
@@ -1638,8 +1753,7 @@ fn main() {
     win.show();
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727121-8396c77e-836d-4406-abd1-92af32ff7242.png" alt="image" /></p>
 <p>The TextBuffer has also a second purpose, and that's to provide a style buffer. A style buffer mirrors your text buffer and uses a style table (containing font, color and size) to add granular styling to your text, the style table itself is indexed, so to speak, using the corresponding letter:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
@@ -1687,8 +1801,7 @@ fn main() {
     win.show();
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727157-be992344-763d-41f9-b3d8-2dfa13fbaab1.png" alt="image" /></p>
 <p>The terminal example uses the SimpleTerminal along with a style TextBuffer. It can be found <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/terminal.rs">here</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="browsers"><a class="header" href="#browsers">Browsers</a></h1>
@@ -1724,8 +1837,7 @@ fn main() {
     win.end();
     win.show();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145733437-e3061015-12fa-4f2e-a1e3-01f59c4b189d.png" alt="image" /></p>
 <p>To gain additional formatting, we can use special character <code>@</code> followed by a formatting specifier:</p>
 <ul>
@@ -1760,8 +1872,7 @@ fn main() {
     win.end();
     win.show();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145733713-2fe3207d-25f7-4acd-ae91-754679c5696a.png" alt="image" /></p>
 <p>The colors follow FLTK's colormap, which can be indexed from 0 to 255:</p>
 <p><img src="https://www.fltk.org/doc-1.4/fltk-colormap.png" alt="colormap" /></p>
@@ -1780,8 +1891,7 @@ fn main() {
     win.show();
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726958-f1f2a095-39c5-496f-b772-18d024dd609d.png" alt="image" /></p>
 <p>Sub-items are added by using the forward slash separator:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -1800,8 +1910,7 @@ fn main() {
     win.show();
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727026-bfcff44f-2b01-4679-937b-3e7d441dfdf0.png" alt="image" /></p>
 <p>If you try the above code, you'll see that the root item is always indicated by the label &quot;ROOT&quot;. This can be changed using the set_root_label() method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -1821,8 +1930,7 @@ fn main() {
     win.show();
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727045-a25be6bc-a514-4b4a-b7b9-0a7ee2e359b4.png" alt="image" /></p>
 <p>Or even hidden using the set_show_root(false) method.</p>
 <p>Items can be queried using the first_selected_item() method:</p>
@@ -1850,8 +1958,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727072-8596cf09-100c-4cb6-a427-0d3c66702b39.png" alt="image" /></p>
 <p>Currently our tree only allow single selection, let's change it to multiple (we'll also change the connector style while we're at it):</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -1881,8 +1988,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>The problem now is that we need to get the whole selection instead only of the first selected item, so we'll use the get_selected_items() method which returns an optional Vec, and instead of just getting the label, we'll get the whole path of the item:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
@@ -1913,8 +2019,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727000-4b881896-309d-465d-8305-9a7e0a92eaea.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tables"><a class="header" href="#tables">Tables</a></h1>
 <p>fltk offers a table widget, the use code for which can be found in the examples. However, using the <a href="https://crates.io/crates/fltk-table">fltk-table crate</a> would require much less boilerplate code and also offers an easier and more intuitive interface:</p>
@@ -1965,8 +2070,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://github.com/fltk-rs/fltk-table/raw/HEAD/screenshots/styled.jpg" alt="fltk-table" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="custom-widgets"><a class="header" href="#custom-widgets">Custom widgets</a></h1>
 <p>fltk-rs allows you to create custom widgets. We need to define a struct which extends an already existing widget and widget type. The most basic widget type being widget::Widget. 
@@ -1981,8 +2085,7 @@ struct MyCustomButton {
     inner: widget::Widget,
     num_clicks: Rc&lt;RefCell&lt;i32&gt;&gt;,
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>You'll notice 2 things, we're using an Rc RefCell for the data we're storing. This isn't necessary in the general case, however, since we need to move that data into a callback, while still having access to it after we mutate it, we'll wrap it in an Rc RefCell. We've imported the necessary modules.</p>
 <p>2- Define the implementation of your struct. The most important of these being the constructor since it's how we'll initialize the internal data as well:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
@@ -2023,15 +2126,13 @@ struct MyCustomButton {
         *self.num_clicks.borrow()
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>3- Apply the widget_extends! macro to our struct, the macro requires the base type, and the member via which our custom type is extended. This is done via implementing the Deref and DerefMut traits. The macro also adds other convenience constructors and anchoring methods:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Extend widget::Widget via the member `inner` and add other initializers and constructors
 widget_extends!(MyCustomButton, widget::Widget, inner);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Now we're ready to try out our struct:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
@@ -2050,8 +2151,7 @@ widget_extends!(MyCustomButton, widget::Widget, inner);
     
     // print the number our button was clicked on exit
     println!(&quot;Our button was clicked {} times&quot;, btn.num_clicks());
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Full code:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 use std::cell::RefCell;
@@ -2116,8 +2216,7 @@ fn main() {
     
     // print the number our button was clicked on exit
     println!(&quot;Our button was clicked {} times&quot;, btn.num_clicks());
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727718-fd0ee71f-f0c2-4438-a038-9b6950638a35.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dialogs"><a class="header" href="#dialogs">Dialogs</a></h1>
 <p>fltk offers several dialog types including file dialogs and others. </p>
@@ -2146,8 +2245,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/146625105-94b11a5d-0938-4962-96d1-aaff5424ffe8.png" alt="image" /></p>
 <p>This prints the Path of the chosen file. There are several types which can be passed as NativeFileChooserType, here we browse files, you can choose to BrowseDir instead, also enable mutli file/dir selection. If you select multiple files, you can get a Vec using the filenames() method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -2171,8 +2269,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>You can also add filter the files to show:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2182,8 +2279,7 @@ fn main() {
         dialog.show();
         println!(&quot;{:?}&quot;, dialog.filenames());
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>This will only show .txt, .rs and .toml files.</p>
 <h3 id="fltks-own-file-chooser"><a class="header" href="#fltks-own-file-chooser">FLTK's own file chooser</a></h3>
 <p>FLTK also offers its own file chooser:</p>
@@ -2220,8 +2316,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726912-600e4c58-32b7-4a1b-8e6a-44e640549722.png" alt="image" /></p>
 <p>A convenience function is also provided using file_chooser() and dir_chooser() functions:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -2251,8 +2346,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h3 id="help-dialog"><a class="header" href="#help-dialog">Help dialog</a></h3>
 <p>FLTK offers a help dialog which can show html 2 documents:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -2279,8 +2373,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>The html can also be loaded using the HelpDialog::load(path_to_html_file) method. </p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726889-442d0453-e1d0-4b41-8717-f121fdf860fa.png" alt="image" /></p>
 <h3 id="alert-dialogs"><a class="header" href="#alert-dialogs">Alert dialogs</a></h3>
@@ -2312,16 +2405,14 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>This shows a message at a default location (basically near the pointer). If you would like to enter coordinates manually, you can use the message() function:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    btn.set_callback(|_| {
         dialog::message(100, 100, &quot;Message&quot;);
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>All the previously mentioned functions have to variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
 Some dialogs return a value, like choice, input, and password. Input and password return the inputted text, while choice returns an index of the chosen value:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -2347,8 +2438,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726850-61fc17e4-cd6e-4821-a9b5-396203806066.png" alt="image" /></p>
 <p>An example with choice:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -2371,8 +2461,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>This will print the index, i.e. choosing No will print 0, Yes will print 1 and Cancel will print 2.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726775-d000a807-8bf5-439b-a991-8bf25fcd5049.png" alt="image" /></p>
 <p>You have noticed that all of these dialogs didn't have a title. You can add a title also using a free function called before the dialog:</p>
@@ -2380,8 +2469,7 @@ fn main() {
 </span><span class="boring">fn main() {
 </span>        dialog::message_title(&quot;Exit!&quot;);
         let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>You can also set the default title of all these dialog boxes using dialog::message_title_default(), you'll want to do this in the start of your app:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
@@ -2404,8 +2492,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726685-f086bde2-db63-4fa8-a579-954dbacbe44d.png" alt="image" /></p>
 <h2 id="custom-dialogs"><a class="header" href="#custom-dialogs">Custom dialogs</a></h2>
 <p>All these dialogs make assumptions about your app that might not be correct, especially regarding colors and fonts. If you have a heavily customized app you would probably also want custom dialogs. A dialog is basically a modal window which is spawned during the application. This can have the same styling as the rest of your app:</p>
@@ -2489,8 +2576,7 @@ fn main() {
         frame.set_label(&amp;d.value());
     });
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726727-a0018457-1d87-4519-9d6e-08d8f8030d1a.png" alt="image" /></p>
 <h2 id="printer-dialog"><a class="header" href="#printer-dialog">Printer dialog</a></h2>
 <p>FLTK also offers a printer dialog which uses your platform's native printer dialog:</p>
@@ -2513,8 +2599,7 @@ but.set_callback(|widget| {
         printer.end_job();
     }
 });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Here it's just printing the button's image and specifying where it shows on the paper. You can pass any widget (mostly like a TextEditor widget) as the printed widget.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="images"><a class="header" href="#images">Images</a></h1>
 <p>FLTK supports vector and raster graphics, and out of the box offers several image types, namely:</p>
@@ -2544,8 +2629,7 @@ let image = image::SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap()
 
 /// Takes data
 let image= image::SvgImage::from_data(&amp;data).unwrap();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Images can be used with widgets either via the WidgetExt::set_image()/set_image_scaled() or set_deimage()/set_deimage_scaled() (for deactivated/grayed image):</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
@@ -2564,8 +2648,7 @@ fn main() {
     wind.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Or via WidgetExt::draw() method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, enums::FrameType, frame::Frame, image::SvgImage, prelude::*, window::Window};
 
@@ -2586,8 +2669,7 @@ fn main() {
     wind.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/hello.jpg" alt="svg" /></p>
 <p>Using images in your app for icons and backgrounds also helps in giving your app its style.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="events"><a class="header" href="#events">Events</a></h1>
@@ -2611,8 +2693,7 @@ fn main() {
     my_window.show();
     but.set_callback(|_| println!(&quot;The button was clicked!&quot;));
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>The capture argument is the <code>&amp;mut Self</code> of the widget for which the callback is set:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
@@ -2624,8 +2705,7 @@ fn main() {
     my_window.show();
     but.set_callback(|b| b.set_label(&quot;Clicked!&quot;));
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>The set_callback() methods have default triggers varying by the type of the widget. For buttons it's clicking or pressing enter when the button has focus.
 This can be changed using the set_trigger() method. For buttons this might not make much sense, however for input widgets, the trigger can be set to &quot;CallbackTrigger::Changed&quot; and this will cause changes in the input widget to trigger the callback.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -2641,8 +2721,7 @@ fn main() {
     inp.set_trigger(enums::CallbackTrigger::Changed);
     inp.set_callback(|i| println!(&quot;{}&quot;, i.value()));
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>This will print on every character input by the user.</p>
 <p>The advanatage of using closures is the ability to &quot;close&quot; on scope arguments, i.e. you can also pass variables from the surrounding scope into the closure:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -2657,8 +2736,7 @@ fn main() {
         my_window.set_label(&quot;button was pressed&quot;);
     });
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>You will notice in the <a href="Menus">Menus section</a> that the handling is done on a per MenuItem basis.</p>
 <h4 id="using-function-objects"><a class="header" href="#using-function-objects">Using function objects</a></h4>
 <p>You can also use function objects directly if you prefer:</p>
@@ -2676,8 +2754,7 @@ fn main() {
     my_window.show();
     but.set_callback(button_cb);
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>We use <code>&amp;mut impl WidgetExt</code> to be able to reuse the function object with multiple different widget types, otherwise, you can use <code>&amp;mut button::Button</code> for the button.
 A disadvantage to this approach, is that to handle state, you would have to manage global state.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">extern crate lazy_static;
@@ -2716,8 +2793,7 @@ fn main() {
     but.set_callback(button_cb);
     
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Here we use lazy_static, there are also other crates to facilitate state management.</p>
 <p>Similary for menus, we can use <code>&amp;mut impl MenuExt</code> to be able to set the callback for menu widgets and menu items, in the <code>MenuExt::add()/insert()</code> or <code>MenuItem::add()/insert()</code> methods.</p>
 <h3 id="using-the-handle-method"><a class="header" href="#using-the-handle-method">Using the handle method</a></h3>
@@ -2738,8 +2814,7 @@ fn main() {
     });
     
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>This prints the event, and doesn't handle it since we return false. Obviously we would like to do something useful, so change the handle call to:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2750,8 +2825,7 @@ fn main() {
         },
         _ =&gt; false,
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Here we handle the Push event by doing something useful then  returning true, all other events are ignored and we return false.</p>
 <p>Another example:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
@@ -2763,8 +2837,7 @@ fn main() {
         },
         _ =&gt; false,
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h3 id="using-messages"><a class="header" href="#using-messages">Using messages</a></h3>
 <p>This allows us to create channels and a Sender and Receiver structs, we can then emit messages (which have to be Send + Sync safe) to be handled in our event loop. The advantage is that we avoid having to wrap our types in smart pointers when we need to pass them into closures or into spawned threads.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -2790,8 +2863,7 @@ fn main() {
             }
         }
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Messages can be received in the event loop like in the previous example, otherwise you can receive messages in a background thread or in app::add_idle()' s callback:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2803,8 +2875,7 @@ fn main() {
             }
         }
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>You're also not limited to using fltk channels, you can use any channel. For example, this uses the std channel:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2812,8 +2883,7 @@ fn main() {
 btn.set_callback(move |_| {
     s.send(Message::SomeMessage).unwrap();
 });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>You can also define a method which applies to all widgets, similar to the emit() method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use std::sync::mpsc::Sender;
 
@@ -2841,8 +2911,7 @@ fn main() {
     let btn = button::Button::default();
     let (s, r) = std::sync::mpsc::channel::&lt;Message&gt;();
     btn.send(s.clone(), Message::SomeMessage);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h3 id="creating-our-own-events"><a class="header" href="#creating-our-own-events">Creating our own events</a></h3>
 <p>FLTK recognizes 29 events which are listed in enums::Event. However it allows us to create our own events using the app::handle(impl Into<i32>, window) call. The handle function takes an arbitrary i32 (&gt; 30) value as a signal, ideally the values should be predefined, which can be handled within another widget's handle() method, the other widget needs to be within the window that was passed to app::handle.
 In the following example, we create a window with a frame and a button. The button's callback sends a CHANGED Event through the app::handle_main function. The CHANGED signal is queried in the frame's handle method.</p>
@@ -2918,8 +2987,7 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     });
 
     Ok(app.run()?)
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>The sent i32 signal can be created on the fly, or added to a const local or global, or within an enum. </p>
 <h4 id="advantages"><a class="header" href="#advantages">Advantages:</a></h4>
 <ul>
@@ -3006,8 +3074,7 @@ pub(crate) fn handle_key(key: Key) {
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Notice how fltk-rs doesn't have an enum for all character keys, instead we use key.to_char() when we have already matched the keys we're interested in. </p>
 <p>Now lets use our handle_key(). As stated previously, it can be used as part of the event-loop:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">// main.rs
@@ -3033,8 +3100,7 @@ fn main() {
             handle_key(key);
         }
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Otherwise we can use our main window's handle method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">// main.rs
 use fltk::{
@@ -3064,8 +3130,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="drag--drop"><a class="header" href="#drag--drop">Drag &amp; Drop</a></h1>
 <p>Drag and Drop are Event types supported by FLTK. You can drag widgets around if you implement these events, and you can drag outside files into an FLTK application. You might also want to implement drawing over widgets which would require handling Event::Drag at least.</p>
 <h2 id="dragging-widgets"><a class="header" href="#dragging-widgets">Dragging widgets</a></h2>
@@ -3099,8 +3164,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="dragging-files"><a class="header" href="#dragging-files">Dragging Files</a></h2>
 <p>Dragging a file into an application basically invokes the Paste event, and fills the app::event_text() with the path of the file. So when we handle dragging, we want to capture the path in Event::Paste, check if the file exists, read its content and fill our text widget:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, enums::Event, *};
@@ -3159,8 +3223,7 @@ fn main() {
         }
     });
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>If you're not interested in the contents of the file, you can just take the path and show it to the user:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, enums::Event, *};
 
@@ -3207,8 +3270,7 @@ fn main() {
         }
     });
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="dragging-to-draw"><a class="header" href="#dragging-to-draw">Dragging to draw</a></h2>
 <p>You can draw inside events, but you'll want to use offscreen drawing. In the widgets draw method, you just copy the offscreen content into the widget. A more detailed example can be seen here in the Offscreen drawing section in the <a href="Drawing.html#offscreen-drawing">Drawing page</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="state-management"><a class="header" href="#state-management">State management</a></h1>
@@ -3274,8 +3336,7 @@ impl MyApp {
 fn main() {
     let a = MyApp::new();
     a.run();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="helper-crates"><a class="header" href="#helper-crates">Helper crates</a></h2>
 <p>The crates ecosystem offers many crates which provide state management. Also there are 2 crates under the fltk-rs org which offer means of architecting your app and managing its state:</p>
 <ul>
@@ -3347,8 +3408,7 @@ impl Sandbox for Counter {
             .on_event(Message::DecrementPressed);
         col.end();
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="fltk-evented"><a class="header" href="#fltk-evented">fltk-evented</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, button::Button, frame::Frame, group::Flex, prelude::*, window::Window};
 use fltk_evented::Listener;
@@ -3386,8 +3446,7 @@ fn main() {
             frame.set_label(&amp;val.to_string());
         }
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="layouts"><a class="header" href="#layouts">Layouts</a></h1>
 <p>Out of the box, fltk-rs offers:</p>
 <ul>
@@ -3412,8 +3471,7 @@ fn main() {
     win.end();
     win.show();
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>The set_size method takes another widget and fixes its size to the value passed, in the example it's 30. Since this is a column, the 30 represents the height of the widget to be set.
 The other widget will be expandable since no size is set for it. A full example can be found here:</p>
 <p><a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs">Flex example</a></p>
@@ -3436,8 +3494,7 @@ fn main() {
     my_window.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>This creates a pack widget inside the window, and fills it with 2 buttons. Notice that the x and y coordinates are no longer needed for the buttons. You can also embed packs inside packs like in the calculator example in the repo. 
 You can also use the Pack::auto_layout() method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -3457,8 +3514,7 @@ fn main() {
     my_window.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>In which case we don't even need the size of the buttons.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/100937983-ef8bf400-3504-11eb-9da1-09c5ac1aade4.png" alt="image" /></p>
 <h3 id="grid"><a class="header" href="#grid">Grid</a></h3>
@@ -3481,8 +3537,7 @@ fn main() {
     win.end();
     win.show();
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><a href="https://github.com/fltk-rs/fltk-grid/blob/main/examples/form.rs">Grid example</a></p>
 <p><img src="https://user-images.githubusercontent.com/37966791/160347418-b8b54408-3dc9-4fc4-93e8-fb6c1c0282e9.png" alt="image" /></p>
 <h3 id="relative-positioning"><a class="header" href="#relative-positioning">Relative positioning</a></h3>
@@ -3510,8 +3565,7 @@ fn main() {
     wind.end();
     wind.show();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/counter.jpg" alt="counter" /></p>
 <p>(With some skipped theming)</p>
 <p>These methods are namely:</p>
@@ -3546,8 +3600,7 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let red = Color::by_index(88);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p><img src="https://www.fltk.org/doc-1.3/fltk-colormap.png" alt="colormap" /></p>
 <ul>
 <li>from_hex(). This takes a 24-bit hex value in the form RGB:</li>
@@ -3555,28 +3608,24 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const RED: Color = Color::from_hex(0xff0000); // notice it's a const functions
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <ul>
 <li>from_rgb(). This takes 3 values r, g, b:</li>
 </ul>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const RED: Color = Color::from_rgb(255, 0, 0); // notice it's a const functions
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>The Color enum also offers some convenience methods to generate different shades of the chosen color, using .darker(), .lighter(), .inactive() methods and others:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let col = Color::from_rgb(176, 100, 50).lighter();
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>If you prefer html hex string colors, you can use the from_hex_str() method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let col = Color::from_hex_str(&quot;#ff0000&quot;);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="frametypes"><a class="header" href="#frametypes">FrameTypes</a></h1>
 <p>FLTK has a wide range of frame types. These can be found under the enums module:
 <img src="https://github.com/fltk-rs/fltk-rs/raw/master/screenshots/frames.jpg" alt="image" /></p>
@@ -3598,8 +3647,7 @@ fn main() {
     wind.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://github.com/fltk-rs/fltk-rs/raw/master/screenshots/hello.jpg" alt="image" />
 Here we set the frame's FrameType to EngravedBox, which you can see around the image.</p>
 <p>ButtonExt supports set_down_frame():</p>
@@ -3607,8 +3655,7 @@ Here we set the frame's FrameType to EngravedBox, which you can see around the i
 </span><span class="boring">fn main() {
 </span>btn1.set_frame(enums::FrameType::RFlatBox);
 btn1.set_down_frame(enums::FrameType::RFlatBox);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Furthermore, we can change the draw routine for our FrameTypes using app::set_frame_type_cb():</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
     enums::{Color, FrameType},
@@ -3633,8 +3680,7 @@ fn main() {
     w.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/146932070-ae63fd63-3f37-4d97-978e-4604d2bc0e4b.png" alt="image" /></p>
 <p>This changes the default DownBox with a custom down_box routine. We can also ImageExt::draw() inside our draw routines to draw images (Like svg images to get scalable rounded borders).</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fonts"><a class="header" href="#fonts">Fonts</a></h1>
@@ -3685,8 +3731,7 @@ fn main() {
         app::sleep(0.5);
         i += 1;
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>If you would like to load a bundled font without it being in the system, you can alternatively use Font::load_font() and Font::set_font(), this allows you to replace one of FLTK's predefined fonts with a custom font:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, enums::Font, button::Button, frame::Frame, prelude::*, window::Window};
 
@@ -3706,8 +3751,7 @@ fn main() {
     but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>load_font() loads the font from the .ttf file, set_font() replaces Font::Helvetica (FLTK's default font) with our loaded font.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145735197-130f7dd6-a31f-4bc6-a362-90a13493a556.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="drawing-things"><a class="header" href="#drawing-things">Drawing things</a></h1>
@@ -3736,8 +3780,7 @@ fn main() {
     });
 
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145693473-defb2298-fc6b-4d2f-8a0c-3d4902b39dd3.jpg" alt="draw" /></p>
 <p>We've used the whole window as our canvas, but it can be any widget as well. Other available functions allow drawing lines, rects, arcs, pies, loops, polygons, even images.</p>
 <h2 id="offscreen-drawing"><a class="header" href="#offscreen-drawing">Offscreen drawing</a></h2>
@@ -3841,8 +3884,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Notice how we open an Offscreen context using offs.begin() then close it with offs.end(). This allows us to call drawing functions inside the Offscreen.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146173813-67038a94-7739-480e-a181-29498aac842a.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="styling"><a class="header" href="#styling">Styling</a></h1>
@@ -3914,8 +3956,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/flutter_like.jpg" alt="counter" /></p>
 <p>Widgets also support showing images within them, which is discussed more in the Images section.</p>
 <h2 id="global-styling"><a class="header" href="#global-styling">Global styling</a></h2>
@@ -3924,8 +3965,7 @@ fn main() {
 </span><span class="boring">fn main() {
 </span>use fltk::{prelude::*, enums::*, *};
 let app = app::App::default().with_scheme(app::Scheme::Plastic);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>There are four schemes:</p>
 <ul>
 <li>Base</li>
@@ -3954,8 +3994,7 @@ fn main() {
     but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727821-5923fcd4-3a57-4a15-b36f-574b3e5321ea.png" alt="image" /></p>
 <h3 id="custom-drawing"><a class="header" href="#custom-drawing">Custom Drawing</a></h3>
 <p>FLTK also offers drawing primitives which makes giving a widget a custom appearance quite easy. This is done using the draw() method which takes a closure. Lets draw our own button, even though FLTK offers a ShadowFrame FrameType, let's create our own:</p>
@@ -3991,8 +4030,7 @@ fn main() {
     my_window.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/100938232-62956a80-3505-11eb-888f-ffe655e7aadc.jpg" alt="draw" /></p>
 <p>The draw() method also supports drawing images inside of widgets as will be seen in the next section.</p>
 <h2 id="fltk-theme"><a class="header" href="#fltk-theme">fltk-theme</a></h2>
@@ -4010,8 +4048,7 @@ fn main() {
     win.end();
     win.show();
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://github.com/fltk-rs/fltk-theme/raw/main/screenshots/aqua_classic.jpg" alt="aqua-classic" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="animations"><a class="header" href="#animations">Animations</a></h1>
 <p>Animations can be shown in fltk-rs using several mechanism:</p>
@@ -4052,8 +4089,7 @@ fn style_btn(btn: &amp;mut button::Button) {
     btn.set_color(Color::from_hex(0x42A5F5));
     btn.set_selection_color(Color::from_hex(0x42A5F5));
     btn.set_frame(FrameType::FlatBox);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="spawning-threads"><a class="header" href="#spawning-threads">Spawning threads</a></h2>
 <p>This ensures we don't block the main/ui thread:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{enums::*, prelude::*, *};
@@ -4091,8 +4127,7 @@ fn style_btn(btn: &amp;mut button::Button) {
     btn.set_color(Color::from_hex(0x42A5F5));
     btn.set_selection_color(Color::from_hex(0x42A5F5));
     btn.set_frame(FrameType::FlatBox);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="timeouts"><a class="header" href="#timeouts">Timeouts</a></h2>
 <p>fltk offers timeouts for recurring operations. We can add a timeout, repeat it and remove it:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{enums::*, prelude::*, *};
@@ -4132,8 +4167,7 @@ fn style_btn(btn: &amp;mut button::Button) {
     btn.set_color(Color::from_hex(0x42A5F5));
     btn.set_selection_color(Color::from_hex(0x42A5F5));
     btn.set_frame(FrameType::FlatBox);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>We basically add the timeout when the user clicks the button, and depending on the size of the button we either repeat it or remove it.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="faq"><a class="header" href="#faq">FAQ</a></h1>
 <h2 id="build-issues"><a class="header" href="#build-issues">Build issues</a></h2>
@@ -4242,8 +4276,7 @@ But that should rarely be required.</p>
             app::quit(); // Which would close using the close button. You can also assign other keys to close the application
         }
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="panicscrashes"><a class="header" href="#panicscrashes">Panics/Crashes</a></h2>
 <h3 id="my-app-panics-when-i-try-to-handle-events-how-can-i-fix-it"><a class="header" href="#my-app-panics-when-i-try-to-handle-events-how-can-i-fix-it">My app panics when I try to handle events, how can I fix it?</a></h3>
 <p>This is due to a debug_assert which checks that the involved widget and the window are capable of handling events. Although most events would be handled correctly, some events require that the aforementioned conditions be met. Thus it is advisable to place your event handling code after the main drawing is done, i.e after calling your main window's show() method. Another point is that event handling and drawing should be done in the main thread. Panics accross FFI boundaries are undefined behavior, as such, the wrapper never throws. Furthermore, all panics which might arise in callbacks are caught on the Rust side using catch_unwind.</p>
@@ -4267,8 +4300,7 @@ An example of a leaking widget:</p>
     {
         button::Button::default(); // this leaks since it's not parented by the window, and has no handle in main
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>A more subtle cause of leaks, is removing a widget from a group, then the scope ends without it being added to another group or deleted:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">fn main() {
     let a = app::App::default();
@@ -4282,8 +4314,7 @@ An example of a leaking widget:</p>
     {
         win.remove_by_index(0); // the button leaks here since it's removed and we no longer have access to it
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h3 id="why-is-fltk-rs-using-so-much-unsafe-code"><a class="header" href="#why-is-fltk-rs-using-so-much-unsafe-code">Why is fltk-rs using so much unsafe code?</a></h3>
 <p>Interfacing with C++ or C code can't be reasoned about by the Rust compiler, so the unsafe keyword is needed.</p>
 <h3 id="is-fltk-rs-panicexception-safe"><a class="header" href="#is-fltk-rs-panicexception-safe">Is fltk-rs panic/exception-safe?</a></h3>
@@ -4320,26 +4351,27 @@ Also any function sending a string across FFI is checked for interal null bytes.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
 
+    </div>
     </body>
 </html>

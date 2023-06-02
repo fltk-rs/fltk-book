@@ -241,7 +241,7 @@ COPY --from=alpine_build target/release/<your binary name> .
 
 Another example to compile from amd64 linux-gnu to arm64 linux-gnu:
 ```dockerfile
-FROM ubuntu:20.04 AS ubuntu_build
+FROM ubuntu:bionic AS ubuntu_build
 
 ENV DEBIAN_FRONTEND=noninteractive
 

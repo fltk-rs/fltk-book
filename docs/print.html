@@ -536,7 +536,7 @@ FROM scratch AS export-stage
 COPY --from=alpine_build target/release/&lt;your binary name&gt; .
 </code></pre>
 <p>Another example to compile from amd64 linux-gnu to arm64 linux-gnu:</p>
-<pre><code class="language-dockerfile">FROM ubuntu:20.04 AS ubuntu_build
+<pre><code class="language-dockerfile">FROM ubuntu:bionic AS ubuntu_build
 
 ENV DEBIAN_FRONTEND=noninteractive
 

@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -33,14 +32,15 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -56,7 +56,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -68,12 +68,14 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -99,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -132,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -176,8 +178,7 @@ fn main() {
     let g = fl2rust::Generator::default();
     let out_path = PathBuf::from(env::var(&quot;OUT_DIR&quot;).unwrap());
     g.in_out(&quot;src/myuifile.fl&quot;, out_path.join(&quot;myuifile.rs&quot;).to_str().unwrap()).expect(&quot;Failed to generate rust from fl file!&quot;);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>We'll be naming our fluid file myuifile.fl. We tell cargo to rerun if that file is changed. We'll create the file in our source directory, but you can put it in its own directory if you wish. We tell the generator to take the fluid file and generate a myuifile.rs. This file is generated in the OUT_DIR, so you won't be seeing it in your src directory.
 However to include it, you need to create a Rust source file, it can be the same name as our outputted file, and put it in the src directory:</p>
 <pre><code>touch src/myuifile.rs
@@ -192,8 +193,7 @@ However to include it, you need to create a Rust source file, it can be the same
 #![allow(clippy::needless_update)]
 
 include!(concat!(env!(&quot;OUT_DIR&quot;), &quot;/myuifile.rs&quot;));
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Then we'll be able to use the contents in main.rs:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">// src/main.rs
 use fltk::{prelude::*, *};
@@ -202,14 +202,12 @@ mod myuifile;
 fn main() {
     let app = app::App::default();
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Now comes the gui part. Open fluid:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fltk-fluid &amp; #or just fluid if installed from a package manager
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>The ampersand tells our shell to open it as a detached process, so we can still use our shell to compile our code.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/146925955-ac778726-1398-4ea2-8e46-a2f8fff89804.png" alt="image" /></p>
 <p>We're greeted with an empty window along with a menu bar. Our first step here is to create a Class:
@@ -253,8 +251,7 @@ fn main() {
         println!(&quot;Works!&quot;);
     });
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 
                     </main>
 
@@ -288,21 +285,22 @@ fn main() {
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>

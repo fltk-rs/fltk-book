@@ -8,7 +8,6 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -33,14 +32,15 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -56,7 +56,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -68,12 +68,14 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -99,7 +101,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -132,7 +134,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -211,8 +213,7 @@ fn main() {
     });
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://github.com/MoAlyousef/fltk-rs/raw/master/screenshots/flutter_like.jpg" alt="counter" /></p>
 <p>Widgets also support showing images within them, which is discussed more in the Images section.</p>
 <h2 id="global-styling"><a class="header" href="#global-styling">Global styling</a></h2>
@@ -221,8 +222,7 @@ fn main() {
 </span><span class="boring">fn main() {
 </span>use fltk::{prelude::*, enums::*, *};
 let app = app::App::default().with_scheme(app::Scheme::Plastic);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>There are four schemes:</p>
 <ul>
 <li>Base</li>
@@ -251,8 +251,7 @@ fn main() {
     but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727821-5923fcd4-3a57-4a15-b36f-574b3e5321ea.png" alt="image" /></p>
 <h3 id="custom-drawing"><a class="header" href="#custom-drawing">Custom Drawing</a></h3>
 <p>FLTK also offers drawing primitives which makes giving a widget a custom appearance quite easy. This is done using the draw() method which takes a closure. Lets draw our own button, even though FLTK offers a ShadowFrame FrameType, let's create our own:</p>
@@ -288,8 +287,7 @@ fn main() {
     my_window.show();
 
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/100938232-62956a80-3505-11eb-888f-ffe655e7aadc.jpg" alt="draw" /></p>
 <p>The draw() method also supports drawing images inside of widgets as will be seen in the next section.</p>
 <h2 id="fltk-theme"><a class="header" href="#fltk-theme">fltk-theme</a></h2>
@@ -307,8 +305,7 @@ fn main() {
     win.end();
     win.show();
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p><img src="https://github.com/fltk-rs/fltk-theme/raw/main/screenshots/aqua_classic.jpg" alt="aqua-classic" /></p>
 
                     </main>
@@ -343,21 +340,22 @@ fn main() {
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>

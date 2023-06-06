@@ -65,7 +65,7 @@ fn main() {
 }
 ```
 
-While most GroupExt widgets require manual layouts, several have automatic layouting. The Flex widget was discussed in the [layouts page](Layouts.md). Packs require the widget or height of the child widget, depending on the Pack's orientation.
+While most GroupExt widgets require manual layouts, several have automatic layouting. The Flex widget was discussed in the [layouts page](Layouts.md). Packs require the width or height of the child widget, depending on the Pack's orientation.
 
 A vertical Pack needs to know only the heights of its children:
 ```rust

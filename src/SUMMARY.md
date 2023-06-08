@@ -6,6 +6,7 @@
     - [Fluid](Fluid.md)
 - [The App struct](The-App-struct.md)
 - [Windows](Windows.md)
+  - [GlutWindow](GlutWindow.md)
 - [Widgets](Widgets.md)
     - [Buttons](Buttons.md)
     - [Labels](Labels.md)
@@ -31,5 +32,4 @@
     - [Drawing things](Drawing.md)
     - [Styling](Styling.md)
 - [Animations](Animations.md)
-- [Accessibility](Accessibility.md)
 - [FAQ](FAQ.md)

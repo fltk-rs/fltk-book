@@ -32,4 +32,5 @@
     - [Drawing things](Drawing.md)
     - [Styling](Styling.md)
 - [Animations](Animations.md)
+- [Accessibility](Accessibility.md)
 - [FAQ](FAQ.md)

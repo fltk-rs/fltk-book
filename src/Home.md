@@ -12,7 +12,7 @@ This is an introductory book targeting the [fltk crate](https://crates.io/crates
 - [Demos](https://github.com/fltk-rs/demos)
 - [7guis-fltk-rs](https://github.com/tdryer/7guis-fltk-rs)
 - [FLTK-RS-Examples](https://github.com/wyhinton/FLTK-RS-Examples)
-- Erco's FLTK cheat [page](http://seriss.com/people/erco/fltk/), which is an excellent FLTK C++ reference. 
+- Erco's FLTK cheat [page](http://seriss.com/people/erco/fltk/), which is an excellent FLTK C++ reference.
 
 [FLTK](https://github.com/fltk/fltk) is a cross-platform lightweight gui library.
 The library itself is written in C++98, which is highly-portable. The fltk crate is written in Rust, and uses FFI to call into the FLTK wrapper, [cfltk](https://github.com/MoAlyousef/cfltk), which is written in C89 and C++11.
@@ -50,13 +50,13 @@ Why choose FLTK?
 Just add the following to your project's Cargo.toml file:
 ```toml
 [dependencies]
-fltk = "^1.2"
+fltk = "^1.4"
 ```
 
 To use the bundled libs (available for x64 windows (msvc & gnu (msys2)), x64 linux & macos):
 ```toml
 [dependencies]
-fltk = { version = "^1.2", features = ["fltk-bundled"] }
+fltk = { version = "^1.4", features = ["fltk-bundled"] }
 ```
 
 The library is automatically built and statically linked to your binary.

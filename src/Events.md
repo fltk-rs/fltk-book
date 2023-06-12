@@ -190,7 +190,7 @@ fn main() {
 ```
 
 ### 使用messages
-这允许我们创建Channel和`Sender` `Receiver`的结构，在触发后发送Message（Message必须是`Send + Sync`），并在`event loop`中处理。这样做的好处是，当我们需要将我们的一些量传递到闭包或线程中时，不必再使用智能指针来包装它们。
+这允许我们创建Channel和`Sender` `Receiver`的结构，在触发后发送Message（Message必须是`Send + Sync`），并在`event loop`中处理。这样做的好处是，当我们需要将我们的一些变量传递到闭包或线程中时，不必再使用智能指针来包装它们。
 ```rust
 use fltk::{prelude::*, *};
 

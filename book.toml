@@ -5,7 +5,7 @@ src = "src"
 title = "fltk book"
 
 [rust]
-edition = "2018"
+edition = "2021"
 
 [build]
 build-dir = "docs"
@@ -13,7 +13,6 @@ build-dir = "docs"
 [output.html]
 git-repository-url = "https://github.com/Flatigers/fltk-book-zh"
 edit-url-template = "https://github.com/Flatigers/fltk-book-zh/edit/main/{path}"
-
 
 [output.html.fold]
 enable = true

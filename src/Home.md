@@ -1,5 +1,6 @@
-翻译最近更新于：2023/3/9
-翻译质量更新已基本完成，有任何改进或错误，欢迎*提交Issue*或*PullRequest*！
+翻译最近更新于：2023/6/18
+
+翻译已基本完成，受限于译者水平，内容有错误和不足，欢迎大家提交Issue 和 PullRequest 一起改进！
 
 # 开始
 
@@ -13,7 +14,7 @@
 - [示范](https://github.com/fltk-rs/demos)
 - [7guis-fltk-rs](https://github.com/tdryer/7guis-fltk-rs)
 - [FLTK-RS-Examples](https://github.com/wyhinton/FLTK-RS-Examples)
-- Erco's FLTK cheat [page](http://seriss.com/people/erco/fltk/), which is an excellent FLTK C++ reference. 
+- Erco's FLTK cheat [page](http://seriss.com/people/erco/fltk/), 一份优秀的FLTK C++ 参考 
 
 [FLTK](https://github.com/fltk/fltk) 是一个跨平台的轻量级 GUI库。
 该库自身是使用 C++98编写的，具有高度可移植性。 fltk crate 是使用 rust 编写的，它是通过FFI来调用一个 使用C89和C++11编写的FLTK封装器 [cfltk](https://github.com/MoAlyousef/cfltk)。
@@ -53,13 +54,13 @@ fn main() {
 将以下代码添加到你的 Cargo.toml 文件:
 ```toml
 [dependencies]
-fltk = "^1.3"
+fltk = "^1.4"
 ```
 
 使用捆绑库（适用于 x64 windows (msvc & gnu (msys2)), x64 linux & macos）:
 ```toml
 [dependencies]
-fltk = { version = "^1.3", features = ["fltk-bundled"] }
+fltk = { version = "^1.4", features = ["fltk-bundled"] }
 ```
 
 该库提供了特定平台的绑定，它会自动编译,并使用静态链接的方式链接到你的二进制文件中。
@@ -92,3 +93,5 @@ fn main() {
 这本书是使用 [mdbook](https://github.com/rust-lang/mdBook)，根据 [fltk-book](https://github.com/fltk-rs/fltk-book) 仓库的内容生成的。本书的作者为 **Mohammed Alyousef**，由 **Flatig L** 翻译为中文
 
 你可能需要执行 `cargo install mdbook`. 更多说明可以在fltk-book的README文件和mdbook的 [用户指南](https://rust-lang.github.io/mdBook/) 中找到。
+
+你也可以在这里贡献中文翻译 [fltk-book-zh](https://github.com/Flatigers/fltk-book-zh)。

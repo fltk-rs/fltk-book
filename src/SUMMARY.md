@@ -6,6 +6,7 @@
     - [使用 Fluid](Fluid.md)
 - [App 结构](The-App-struct.md)
 - [窗口 Windows](Windows.md)
+    - [GlutWindow](GlutWindow.md)
 - [组件 Widgets](Widgets.md)
     - [按钮 Buttons](Buttons.md)
     - [标签 Labels](Labels.md)
@@ -31,4 +32,5 @@
     - [绘制 Drawing things](Drawing.md)
     - [自定义风格 Styling](Styling.md)
 - [动画 Animations](Animations.md)
+- [无障碍 Accessibility](Accessibility.md)
 - [FAQ](FAQ.md)

@@ -1,7 +1,7 @@
 # Valuators
 
 Valuator widgets implement the ValuatorExt trait. These keep track (graphically and internally) of numerical values along with steps, ranges and bounds.
-Such a valuator which you might be familiar with are scrollbars and sliders. The list offered by fltk is found in the valuator module:
+Such valuators which you might be familiar with are scrollbars and sliders. The list offered by fltk is found in the valuator module:
 - Slider
 - NiceSlider
 - ValueSlider
@@ -20,7 +20,7 @@ Such a valuator which you might be familiar with are scrollbars and sliders. The
 - HorNiceSlider
 - HorValueSlider
 
-Changing the valuators value in the gui triggers its callback. The current value of the valuator can be queried using the value() method. It can also be set using set_value(). The ranges and step can also be queried and changed to your use case:
+Changing the valuator's value in the gui triggers its callback. The current value of the valuator can be queried using the value() method. It can also be set using set_value(). The ranges and step can also be queried and changed to your use case:
 ```rust
 use fltk::{prelude::*, *};
 
@@ -46,10 +46,10 @@ fn main() {
 ![HorNiceSlider](https://user-images.githubusercontent.com/37966791/145727188-4ac06d45-7fd1-44f7-9adc-366d9bb79d8f.png)
 </div>
 
-Below you can see the same example graphically in different widgets
+Below you can see the same example using different valuator widgets.
 
 <details>
-<summary><b>Look widgets examples</b></summary>
+<summary><b>Valuator widgets examples</b></summary>
 
 ## Adjuster widget
 
@@ -174,17 +174,18 @@ Below you can see the same example graphically in different widgets
 ---
 
 # Valuator enums
-To use the different features available in the valuator, the following lines of code must be added to the specific object:
+Some valuators offer different types which can be set using the `set_type` method (or `with_type` builder function). The value passed is an enum value of `<Widget>Type` usually.
+In the following example, we instantiate a Counter, then set its type to a Simple counter.
 
 ```rust
-let mut valuator_object = valuator::Counter::default().with_size(200, 50).center_of_parent();
-valuator_object.clone().with_type(fltk::valuator::CounterType::Simple);
+let mut counter = valuator::Counter::default().with_size(200, 50).center_of_parent();
+counter.set_type(fltk::valuator::CounterType::Simple);
 ```
 
-Below you will see the available features with the Counter, Dial, Scrollbar, and Slider objects.
+Check below for more types associated with different valuator widgets.
 
 <details>
-<summary><b>Look enums examples</b></summary>
+<summary><b>Valuator type enums examples</b></summary>
 
 ## CounterType::Normal
 

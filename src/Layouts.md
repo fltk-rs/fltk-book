@@ -25,7 +25,7 @@ fn main() {
     a.run().unwrap();
 }
 ```
-The set_size method takes another widget and fixes its size to the value passed, in the example it's 30. Since this is a column, the 30 represents the height of the widget to be set.
+The `set_size` (and `fixed` in fltk > 1.4.6) method takes another widget and fixes its size to the value passed, in the example it's 30. Since this is a column, the 30 represents the height of the widget to be set.
 The other widget will be expandable since no size is set for it. A full example can be found here:
 
 [Flex example](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs)

@@ -152,7 +152,7 @@
                     <main>
                         <h1 id="valuators"><a class="header" href="#valuators">Valuators</a></h1>
 <p>Valuator widgets implement the ValuatorExt trait. These keep track (graphically and internally) of numerical values along with steps, ranges and bounds.
-Such a valuator which you might be familiar with are scrollbars and sliders. The list offered by fltk is found in the valuator module:</p>
+Such valuators which you might be familiar with are scrollbars and sliders. The list offered by fltk is found in the valuator module:</p>
 <ul>
 <li>Slider</li>
 <li>NiceSlider</li>
@@ -172,7 +172,7 @@ Such a valuator which you might be familiar with are scrollbars and sliders. The
 <li>HorNiceSlider</li>
 <li>HorValueSlider</li>
 </ul>
-<p>Changing the valuators value in the gui triggers its callback. The current value of the valuator can be queried using the value() method. It can also be set using set_value(). The ranges and step can also be queried and changed to your use case:</p>
+<p>Changing the valuator's value in the gui triggers its callback. The current value of the valuator can be queried using the value() method. It can also be set using set_value(). The ranges and step can also be queried and changed to your use case:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
@@ -194,9 +194,9 @@ fn main() {
 <div align="center">
 <p><img src="https://user-images.githubusercontent.com/37966791/145727188-4ac06d45-7fd1-44f7-9adc-366d9bb79d8f.png" alt="HorNiceSlider" /></p>
 </div>
-<p>Below you can see the same example graphically in different widgets</p>
+<p>Below you can see the same example using different valuator widgets.</p>
 <details>
-<summary><b>Look widgets examples</b></summary>
+<summary><b>Valuator widgets examples</b></summary>
 <h2 id="adjuster-widget"><a class="header" href="#adjuster-widget">Adjuster widget</a></h2>
 <div align="center">
 <p><img src="https://user-images.githubusercontent.com/98977436/242296674-1e126073-2c9f-443d-9dab-fccd66733e39.PNG" alt="Adjuster" /></p>
@@ -268,15 +268,16 @@ fn main() {
 </details>
 <hr />
 <h1 id="valuator-enums"><a class="header" href="#valuator-enums">Valuator enums</a></h1>
-<p>To use the different features available in the valuator, the following lines of code must be added to the specific object:</p>
+<p>Some valuators offer different types which can be set using the <code>set_type</code> method (or <code>with_type</code> builder function). The value passed is an enum value of <code>&lt;Widget&gt;Type</code> usually.
+In the following example, we instantiate a Counter, then set its type to a Simple counter.</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let mut valuator_object = valuator::Counter::default().with_size(200, 50).center_of_parent();
-valuator_object.clone().with_type(fltk::valuator::CounterType::Simple);
+</span>let mut counter = valuator::Counter::default().with_size(200, 50).center_of_parent();
+counter.set_type(fltk::valuator::CounterType::Simple);
 <span class="boring">}</span></code></pre></pre>
-<p>Below you will see the available features with the Counter, Dial, Scrollbar, and Slider objects.</p>
+<p>Check below for more types associated with different valuator widgets.</p>
 <details>
-<summary><b>Look enums examples</b></summary>
+<summary><b>Valuator type enums examples</b></summary>
 <h2 id="countertypenormal"><a class="header" href="#countertypenormal">CounterType::Normal</a></h2>
 <div align="center">
 <p><img src="https://user-images.githubusercontent.com/98977436/242744208-123e67c2-7d99-4e1e-ba18-961f6a045c3c.PNG" alt="CounterTypeNormal" /></p>

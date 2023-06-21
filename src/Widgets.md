@@ -16,7 +16,12 @@ fn main() {
     app.run().unwrap();
 }
 ```
-![image](https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png)
+
+<div align="center">
+
+![widgets](https://user-images.githubusercontent.com/98977436/245810501-0f385285-42c5-4bba-a7ce-5517e114b578.PNG)
+
+</div>
 
 Notice that the button's parent is my_window since it's created between the implicit begin() and end() calls.
 Another way to add a widget is using the add(widget) method that's offered by widgets implementing the GroupExt trait:
@@ -52,4 +57,4 @@ let but1 = Button::default()
 Which basically have the same effect.
 
 As it stands, our application shows a window with a button, the button is clickable but does nothing!
-So lets add some action in there in the next page! 
+So lets add some action in there in the next page!

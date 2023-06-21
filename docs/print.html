@@ -984,7 +984,9 @@ fn main() {
     my_window.show();
     app.run().unwrap();
 }</code></pre></pre>
-<p><img src="https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png" alt="image" /></p>
+<div align="center">
+<p><img src="https://user-images.githubusercontent.com/98977436/245810501-0f385285-42c5-4bba-a7ce-5517e114b578.PNG" alt="widgets" /></p>
+</div>
 <p>Notice that the button's parent is my_window since it's created between the implicit begin() and end() calls.
 Another way to add a widget is using the add(widget) method that's offered by widgets implementing the GroupExt trait:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -1014,19 +1016,21 @@ let but1 = Button::default()
 <span class="boring">}</span></code></pre></pre>
 <p>Which basically have the same effect.</p>
 <p>As it stands, our application shows a window with a button, the button is clickable but does nothing!
-So lets add some action in there in the next page! </p>
+So lets add some action in there in the next page!</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="buttons"><a class="header" href="#buttons">Buttons</a></h1>
 <p>Button widgets serve multiple purposes and come in several forms:</p>
 <ul>
-<li>Button</li>
-<li>RadioButton</li>
-<li>ToggleButton</li>
-<li>RoundButton</li>
-<li>CheckButton</li>
-<li>LightButton</li>
-<li>RepeatButton</li>
-<li>RadioLightButton</li>
-<li>RadioRoundButton</li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.Button.html">Button</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.CheckButton.html">CheckButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.LightButton.html">LightButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.RadioButton.html">RadioButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.RadioLightButton.html">RadioLightButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.RadioRoundButton.html">RadioRoundButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.RepeatButton.html">RepeatButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.ReturnButton.html">ReturnButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.RoundButton.html">RoundButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.ShortcutButton.html">ShortcutButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/button/struct.ToggleButton.html">ToggleButton</a></li>
 </ul>
 <p>These can be found in the button module.
 The simplest of which is the Button widget, which basically runs some action when clicked. This applies to all buttons as well:</p>
@@ -1045,8 +1049,8 @@ fn main() {
     app.run().unwrap();
 }</code></pre></pre>
 <p>However other buttons can have other value.
-CheckButton, ToggleButton, LightButton for example hold their current value, i.e. whether they were toggled or not:</p>
-<p>Radio buttons (RadioRoundButton, RadioLightButton and RadioButton) also hold their value, but only one can be toggled in the parent group (any widget implementing GroupExt). So they are aware of the values of other radio buttons:</p>
+<code>CheckButton</code>, <code>ToggleButton</code>, <code>LightButton</code> for example hold their current value, i.e. whether they were toggled or not:</p>
+<p>Radio buttons (<code>RadioRoundButton</code>, <code>RadioLightButton</code> and <code>RadioButton</code>) also hold their value, but only one can be toggled in the parent group (any widget implementing <code>GroupExt</code>). So they are aware of the values of other radio buttons:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1055,16 +1059,18 @@ fn main() {
     let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
     // only one can be toggled by the user at a time, the other will be automatically untoggled
     let btn1 = button::RadioRoundButton::default().with_label(&quot;Option 1&quot;);
-    let btn2 = button::RadioRoundButton::default().with_label(&quot;Option 2&quot;); 
+    let btn2 = button::RadioRoundButton::default().with_label(&quot;Option 2&quot;);
     flex.end();
     win.end();
     win.show();
     a.run().unwrap();
 }</code></pre></pre>
-<p>(The focus box can be removed using the clear_visible_focus() method <code>btn1.clear_visible_focus()</code>).</p>
+<p>The focus box can be removed using the clear_visible_focus() method <code>btn1.clear_visible_focus()</code>.</p>
+<div align="center">
 <p><img src="https://user-images.githubusercontent.com/37966791/145727291-8be40de6-8ec6-4e57-bb29-fa0f0ac3b251.png" alt="image" /></p>
+</div>
 <p>Other toggle-able buttons don't have this property.</p>
-<p>You can query whether a button is toggled or not using the ButtonExt::value() method:</p>
+<p>You can query whether a button is toggled or not using the <code>ButtonExt::value()</code> method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1090,8 +1096,10 @@ fn main() {
     a.run().unwrap();
 }</code></pre></pre>
 <p>CheckButton also provides a convenience method is_checked(), while radio buttons provide an is_toggled().</p>
+<div align="center">
 <p><img src="https://user-images.githubusercontent.com/37966791/145727325-7e5bb45f-674e-4bb2-81c8-27d0ee391d34.png" alt="image" /></p>
-<p>By default, toggle-able buttons are created untoggled, however this can be overridden using set_value(), or the convenience methods set_checked() (for CheckButton) and set_toggled() (for radio buttons):</p>
+</div>
+<p>By default, toggle-able buttons are created untoggled, however this can be overridden using <code>set_value()</code>, or the convenience methods <code>set_checked()</code> for CheckButton and <code>set_toggled()</code> for radio buttons:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1118,7 +1126,33 @@ fn main() {
 
     a.run().unwrap();
 }</code></pre></pre>
+<div align="center">
 <p><img src="https://user-images.githubusercontent.com/37966791/145727352-bf6dba5c-1a0c-4da4-8296-093e10470f0c.png" alt="image" /></p>
+</div>
+<hr />
+<h1 id="widgets-preview"><a class="header" href="#widgets-preview">Widgets preview</a></h1>
+<div align="center">
+<h3 id="button"><a class="header" href="#button">Button</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810478-9bb5dd60-714c-4407-b7b5-c3ab060af70b.PNG" alt="Button" /></p>
+<h3 id="checkbutton"><a class="header" href="#checkbutton">CheckButton</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810469-2414d2aa-8a7d-461e-ae39-768a5fe3e99d.PNG" alt="CheckButton" /></p>
+<h3 id="lightbutton"><a class="header" href="#lightbutton">LightButton</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810476-22dda4d2-c8b4-4f24-bd0a-da672877bb9b.PNG" alt="LightButton" /></p>
+<h3 id="radiobutton"><a class="header" href="#radiobutton">RadioButton</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810480-07a9c7b6-7578-4678-8b99-342a00dfb978.PNG" alt="RadioButton" /></p>
+<h3 id="radiolightbutton"><a class="header" href="#radiolightbutton">RadioLightButton</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810483-f5a4602a-34dd-4312-bdd3-9773d9207854.PNG" alt="RadioLightButton" /></p>
+<h3 id="radioroundbutton"><a class="header" href="#radioroundbutton">RadioRoundButton</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810485-e842f808-0be9-44ac-971e-4ea549cd5b23.PNG" alt="RadioRoundButton" /></p>
+<h3 id="repeatbutton"><a class="header" href="#repeatbutton">RepeatButton</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810489-d1c29b47-c51a-46c9-9948-179bc9802a76.PNG" alt="RepeatButton" /></p>
+<h3 id="roundbutton"><a class="header" href="#roundbutton">RoundButton</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810490-b5b9fcfd-38c8-4108-99d6-d22f50f7496e.PNG" alt="RoundButton" /></p>
+<h3 id="shortcutbutton"><a class="header" href="#shortcutbutton">ShortcutButton</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810494-88930640-862a-4825-9592-488046da8907.PNG" alt="ShortcutButton" /></p>
+<h3 id="togglebutton"><a class="header" href="#togglebutton">ToggleButton</a></h3>
+<p><img src="https://user-images.githubusercontent.com/98977436/245810496-25c7b144-fb9c-44de-b1f8-02b0586eb391.PNG" alt="ToggleButton" /></p>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="labels"><a class="header" href="#labels">Labels</a></h1>
 <p>FLTK doesn't have a Label widget. So if you would just like to show text, you can use a Frame widget and give it a label. </p>
 <p>All widgets takes a label in the ::new() constructor or using with_label() or set_label():</p>

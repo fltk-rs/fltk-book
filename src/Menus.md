@@ -1,13 +1,18 @@
 # Menus
 
-Menus in FLTK are widgets which implement the MenuExt trait. To that end, there are several types:
-- MenuBar
-- MenuItem
-- Choice (dropdown list)
-- SysMenuBar (MacOS menu bar which appears at the top of the screen)
+Menus in FLTK are widgets which implement the [MenuExt](https://docs.rs/fltk/latest/fltk/prelude/trait.MenuExt.html) trait. To that end, there are several types:
+
+- [MenuBar](https://docs.rs/fltk/latest/fltk/menu/struct.MenuBar.html)
+- [MenuButton](https://docs.rs/fltk/latest/fltk/menu/struct.MenuButton.html)
+- [MenuItem](https://docs.rs/fltk/latest/fltk/menu/struct.MenuItem.html)
+- [Choice](https://docs.rs/fltk/latest/fltk/menu/struct.Choice.html) *dropdown list*
+- [SysMenuBar](https://docs.rs/fltk/latest/fltk/menu/struct.SysMenuBar.html) *MacOS menu bar which appears at the top of the screen*
+- [MacAppMenu](https://docs.rs/fltk/latest/fltk/menu/struct.MacAppMenu.html)
 
 Menu types function in 2 main ways:
-1- Add choices using the add_choice() method, then handling the user's selection in the callback:
+
+**1-** Add choices using the [add_choice()](https://docs.rs/fltk/latest/fltk/prelude/trait.MenuExt.html#tymethod.add_choice) method, then handling the user's selection in the callback:
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -34,10 +39,14 @@ fn main() {
     app.run().unwrap();
 }
 ```
+<div align="center">
 
 ![image](https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png)
 
+</div>
+
 Alternatively you can query the textual value of the selected item:
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -64,7 +73,8 @@ fn main() {
 }
 ```
 
-2- Adding choices via the add() method, you pass each choice's callback distinctively.
+**2-** Adding choices via the [add()](https://docs.rs/fltk/latest/fltk/prelude/trait.MenuExt.html#tymethod.add) method, you pass each choice's callback distinctively.
+
 ```rust
 use fltk::{prelude::*, *};
 
@@ -101,7 +111,9 @@ fn main() {
     app.run().unwrap();
 }
 ```
+
 Also as mentioned in the [Events section](Events), you can use a function object instead of passing closures:
+
 ```rust
 use fltk::{enums::*, prelude::*, *};
 
@@ -264,8 +276,8 @@ fn main() {
 }
 ```
 
-You might wonder, why go from a handful of lines in the first examples to a more complex manner of doing things. Each method has it's uses. 
-For simple drop down widgets, go with the first method. For an application's menu bar, go with the second. It allows you to specify Shortcuts and MenuFlags, and allows better decoupling of events, so you won't have to handle everything in the menu's callback. It's also easier to deal with submenus using the add() method, as in the [editor example](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs):
+You might wonder, why go from a handful of lines in the first examples to a more complex manner of doing things. Each method has it's uses.
+For simple drop down widgets, go with the first method. For an application's menu bar, go with the second. It allows you to specify Shortcuts and [MenuFlags](https://docs.rs/fltk/latest/fltk/menu/struct.MenuFlag.html), and allows better decoupling of events, so you won't have to handle everything in the menu's callback. It's also easier to deal with submenus using the add() method, as in the [editor example](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs):
 ```rust
         let mut menu = menu::SysMenuBar::default().with_size(800, 35);
         menu.set_frame(FrameType::FlatBox);
@@ -355,7 +367,12 @@ For simple drop down widgets, go with the first method. For an application's men
 ```
 Also notice the last call, which uses find_item() to find an item in the menu, and we hence set its label color to red.
 
+<div align="center">
+
 ![image](https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png)
 
+</div>
+
 ## System Menu Bar
-On MacOS, you might prefer to use a system menu bar, which typically appears on the top of the screen. For that, you can use a SysMenuBar widget. This has the same api as all widgets implementing MenuExt, and it translates into a normal MenuBar when the app is compiled for other targets than a MacOS.
+
+On MacOS, you might prefer to use a system menu bar, which typically appears on the top of the screen. For that, you can use a [SysMenuBar](https://docs.rs/fltk/latest/fltk/menu/struct.SysMenuBar.html#) widget. This has the same api as all widgets implementing MenuExt, and it translates into a normal MenuBar when the app is compiled for other targets than a MacOS.

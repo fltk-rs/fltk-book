@@ -1154,7 +1154,7 @@ fn main() {
 <p><img src="https://user-images.githubusercontent.com/98977436/245810496-25c7b144-fb9c-44de-b1f8-02b0586eb391.PNG" alt="ToggleButton" /></p>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="labels"><a class="header" href="#labels">Labels</a></h1>
-<p>FLTK doesn't have a Label widget. So if you would just like to show text, you can use a Frame widget and give it a label. </p>
+<p>FLTK doesn't have a Label widget. So if you would just like to show text, you can use a Frame widget and give it a label.</p>
 <p>All widgets takes a label in the ::new() constructor or using with_label() or set_label():</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1175,10 +1175,12 @@ btn.set_label(&quot;Click&quot;);
 </span>let label = String::from(&quot;Click&quot;); // label is not a static str
 let mut btn = button::Button::new(160, 200, 80, 30, &amp;label);
 <span class="boring">}</span></code></pre></pre>
-<p>You would want to use <code>btn.set_label(&amp;label);</code> in this case. The reason is that FLTK expects a <code>const char *</code> label, which is the equivalent of Rust's <code>&amp;'static str</code>. These strings live in the program's code segment. If you disassemble an application, it would show all these static strings. And since these have a static lifetime, FLTK by default doesn't store them. 
+<p>You would want to use <code>btn.set_label(&amp;label);</code> in this case. The reason is that FLTK expects a <code>const char *</code> label, which is the equivalent of Rust's <code>&amp;'static str</code>. These strings live in the program's code segment. If you disassemble an application, it would show all these static strings. And since these have a static lifetime, FLTK by default doesn't store them.
 While using set_label() and with_label() calls FLTK's Fl_Widget::copy_label() method which actually stores the string.</p>
 <p>You are also not limited to text labels, FLTK has predefined symbols which translate into images:</p>
+<div align="center">
 <p><img src="https://www.fltk.org/doc-1.4/symbols.png" alt="symbols" /></p>
+</div>
 <p>The @ sign may also be followed by the following optional &quot;formatting&quot; characters, in this order:</p>
 <ul>
 <li>'#' forces square scaling, rather than distortion to the widget's shape.</li>
@@ -1188,7 +1190,9 @@ While using set_label() and with_label() calls FLTK's Fl_Widget::copy_label() me
 </ul>
 <p>Thus, to show a very large arrow pointing downward you would use the label string &quot;@+92-&gt;&quot;.</p>
 <p>Symbols and text can be combined in a label, however the symbol must be at the beginning and/or at the end of the text. If the text spans multiple lines, the symbol or symbols will scale up to match the height of all the lines:</p>
+<div align="center">
 <p><img src="https://www.fltk.org/doc-1.4/symbol-examples.png" alt="ex" /></p>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="group-widgets"><a class="header" href="#group-widgets">Group widgets</a></h1>
 <p>These widgets include Window types and others found in the group module: Group, Scroll, Pack, Tile, Flex ...etc.
 Widgets implementing the GroupExt trait, are characterized by having to call <code>::end()</code> method to basically close them.</p>
@@ -1291,15 +1295,17 @@ fn main() {
     app.run().unwrap();
 }</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="menus"><a class="header" href="#menus">Menus</a></h1>
-<p>Menus in FLTK are widgets which implement the MenuExt trait. To that end, there are several types:</p>
+<p>Menus in FLTK are widgets which implement the <a href="https://docs.rs/fltk/latest/fltk/prelude/trait.MenuExt.html">MenuExt</a> trait. To that end, there are several types:</p>
 <ul>
-<li>MenuBar</li>
-<li>MenuItem</li>
-<li>Choice (dropdown list)</li>
-<li>SysMenuBar (MacOS menu bar which appears at the top of the screen)</li>
+<li><a href="https://docs.rs/fltk/latest/fltk/menu/struct.MenuBar.html">MenuBar</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/menu/struct.MenuButton.html">MenuButton</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/menu/struct.MenuItem.html">MenuItem</a></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/menu/struct.Choice.html">Choice</a> <em>dropdown list</em></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/menu/struct.SysMenuBar.html">SysMenuBar</a> <em>MacOS menu bar which appears at the top of the screen</em></li>
+<li><a href="https://docs.rs/fltk/latest/fltk/menu/struct.MacAppMenu.html">MacAppMenu</a></li>
 </ul>
-<p>Menu types function in 2 main ways:
-1- Add choices using the add_choice() method, then handling the user's selection in the callback:</p>
+<p>Menu types function in 2 main ways:</p>
+<p><strong>1-</strong> Add choices using the <a href="https://docs.rs/fltk/latest/fltk/prelude/trait.MenuExt.html#tymethod.add_choice">add_choice()</a> method, then handling the user's selection in the callback:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1324,7 +1330,9 @@ fn main() {
 
     app.run().unwrap();
 }</code></pre></pre>
+<div align="center">
 <p><img src="https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png" alt="image" /></p>
+</div>
 <p>Alternatively you can query the textual value of the selected item:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
@@ -1349,7 +1357,7 @@ fn main() {
 
     app.run().unwrap();
 }</code></pre></pre>
-<p>2- Adding choices via the add() method, you pass each choice's callback distinctively.</p>
+<p><strong>2-</strong> Adding choices via the <a href="https://docs.rs/fltk/latest/fltk/prelude/trait.MenuExt.html#tymethod.add">add()</a> method, you pass each choice's callback distinctively.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
@@ -1541,8 +1549,8 @@ fn main() {
         }
     }
 }</code></pre></pre>
-<p>You might wonder, why go from a handful of lines in the first examples to a more complex manner of doing things. Each method has it's uses. 
-For simple drop down widgets, go with the first method. For an application's menu bar, go with the second. It allows you to specify Shortcuts and MenuFlags, and allows better decoupling of events, so you won't have to handle everything in the menu's callback. It's also easier to deal with submenus using the add() method, as in the <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">editor example</a>:</p>
+<p>You might wonder, why go from a handful of lines in the first examples to a more complex manner of doing things. Each method has it's uses.
+For simple drop down widgets, go with the first method. For an application's menu bar, go with the second. It allows you to specify Shortcuts and <a href="https://docs.rs/fltk/latest/fltk/menu/struct.MenuFlag.html">MenuFlags</a>, and allows better decoupling of events, so you won't have to handle everything in the menu's callback. It's also easier to deal with submenus using the add() method, as in the <a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs">editor example</a>:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>        let mut menu = menu::SysMenuBar::default().with_size(800, 35);
@@ -1632,9 +1640,11 @@ For simple drop down widgets, go with the first method. For an application's men
         }
 <span class="boring">}</span></code></pre></pre>
 <p>Also notice the last call, which uses find_item() to find an item in the menu, and we hence set its label color to red.</p>
+<div align="center">
 <p><img src="https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png" alt="image" /></p>
+</div>
 <h2 id="system-menu-bar"><a class="header" href="#system-menu-bar">System Menu Bar</a></h2>
-<p>On MacOS, you might prefer to use a system menu bar, which typically appears on the top of the screen. For that, you can use a SysMenuBar widget. This has the same api as all widgets implementing MenuExt, and it translates into a normal MenuBar when the app is compiled for other targets than a MacOS.</p>
+<p>On MacOS, you might prefer to use a system menu bar, which typically appears on the top of the screen. For that, you can use a <a href="https://docs.rs/fltk/latest/fltk/menu/struct.SysMenuBar.html#">SysMenuBar</a> widget. This has the same api as all widgets implementing MenuExt, and it translates into a normal MenuBar when the app is compiled for other targets than a MacOS.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="input--output"><a class="header" href="#input--output">Input &amp; Output</a></h1>
 <p>Input and Output widgets implement the InputExt trait. These are found between the input and output modules:</p>
 <ul>
@@ -4625,6 +4635,22 @@ Also any function sending a string across FFI is checked for interal null bytes.
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

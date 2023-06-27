@@ -27,7 +27,9 @@ let mut btn = button::Button::new(160, 200, 80, 30, &label);
 
 Label不限于文字，FLTK预定义了一些符号，在Label中可以转换成图像。
 
+<div align="center">
 ![symbols](https://www.fltk.org/doc-1.4/symbols.png)
+</div>
 
 `@`符号除了可以用来使用这些符号图像外，还可以加上下面这些格式化字符，其顺序和规则如下：
 
@@ -41,4 +43,7 @@ Label不限于文字，FLTK预定义了一些符号，在Label中可以转换成
 
 符号和文本可以结合在一个Label中，但是符号必须放在文本的开头或结尾处。如果有多行文本，那么符号将被按比例放大以匹配所有行的高度：
 
+<div align="center">
 ![ex](https://www.fltk.org/doc-1.4/symbol-examples.png)
+
+</div>

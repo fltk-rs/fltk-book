@@ -175,7 +175,9 @@ let mut btn = button::Button::new(160, 200, 80, 30, &amp;label);
 </span></code></pre></pre>
 <p>在这种情况下，你应该使用<code>btn.set_label(&amp;label);</code>。原因是FLTK本身要求传入的字符串是类型是<code>const char *</code> ，对应于Rust中则是<code>&amp;'static str</code>。这些字符串保存在程序的二进制代码中。如果你反汇编一个程序，是可以看到这些字符串的。这些字符串具有静态生命周期，因此FLTK在创建组件Label时默认不会保存下这些字符串。而当使用<code>set_label()</code>和<code>with_label()</code>时，FLTK将调用<code>Fl_Widget::copy_label()</code>，并将字符串进行存储。</p>
 <p>Label不限于文字，FLTK预定义了一些符号，在Label中可以转换成图像。</p>
-<p><img src="https://www.fltk.org/doc-1.4/symbols.png" alt="symbols" /></p>
+<div align="center">
+![symbols](https://www.fltk.org/doc-1.4/symbols.png)
+</div>
 <p><code>@</code>符号除了可以用来使用这些符号图像外，还可以加上下面这些格式化字符，其顺序和规则如下：</p>
 <ul>
 <li>'#'表示强制进行规则的缩放，因此可以避免组件的形状被扭曲。</li>
@@ -186,8 +188,9 @@ let mut btn = button::Button::new(160, 200, 80, 30, &amp;label);
 </ul>
 <p>因此，如果要显示一个非常大的指向下方的箭头，你可以使用标签字符串&quot;@+92-&gt;&quot;。</p>
 <p>符号和文本可以结合在一个Label中，但是符号必须放在文本的开头或结尾处。如果有多行文本，那么符号将被按比例放大以匹配所有行的高度：</p>
-<p><img src="https://www.fltk.org/doc-1.4/symbol-examples.png" alt="ex" /></p>
-
+<div align="center">
+![ex](https://www.fltk.org/doc-1.4/symbol-examples.png)
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

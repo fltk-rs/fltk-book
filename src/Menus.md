@@ -1,13 +1,15 @@
 # 菜单 Menus
 
-FLTK提供了菜单组件，它们均实现了`MenuExt trait`。Menu组件有下面这几种：
-- MenuBar
-- MenuItem
-- Choice (下拉列表)
-- SysMenuBar (在MacOS出现在屏幕顶部的menu bar)
+FLTK提供了菜单组件，它们均实现了 [MenuExt](https://docs.rs/fltk/latest/fltk/prelude/trait.MenuExt.html) trait。Menu组件有下面这几种：
+- [MenuBar](https://docs.rs/fltk/latest/fltk/menu/struct.MenuBar.html)
+- [MenuButton](https://docs.rs/fltk/latest/fltk/menu/struct.MenuButton.html)
+- [MenuItem](https://docs.rs/fltk/latest/fltk/menu/struct.MenuItem.html)
+- [Choice](https://docs.rs/fltk/latest/fltk/menu/struct.Choice.html) (下拉列表)
+- [SysMenuBar](https://docs.rs/fltk/latest/fltk/menu/struct.SysMenuBar.html) (在MacOS出现在屏幕顶部的menu bar)
+- [MacAppMenu](https://docs.rs/fltk/latest/fltk/menu/struct.MacAppMenu.html)
 
 Menu主要有两方面的作用：
-1. 使用`add_choice()`方法添加菜单选项，然后在设置回调处理不同选项执行的操作：
+1. 使用 [add_choice()](https://docs.rs/fltk/latest/fltk/prelude/trait.MenuExt.html#tymethod.add_choice) 方法添加菜单选项，然后在设置回调处理不同选项执行的操作：
 
     ```rust
     use fltk::{prelude::*, *};
@@ -36,7 +38,10 @@ Menu主要有两方面的作用：
     }
     ```
 
+<div align="center">
 ![image](https://user-images.githubusercontent.com/37966791/145727397-dd713782-9f8e-474b-b009-f2ebeb5170ea.png)
+
+</div>
 
 另外，你也可以解构出菜单选项的字符串来进行匹配：
 
@@ -66,7 +71,7 @@ Menu主要有两方面的作用：
     }
     ```
 
-2. 通过`add()`方法添加菜单选项，你需要在其中设置好每个选项的回调：
+2. 通过 [add()](https://docs.rs/fltk/latest/fltk/prelude/trait.MenuExt.html#tymethod.add) 方法添加菜单选项，你需要在其中设置好每个选项的回调：
 
     ```rust
     use fltk::{prelude::*, *};
@@ -270,7 +275,7 @@ Menu主要有两方面的作用：
     ```
 
 你可能会问，为什么不直接用第一个例子那样简单的代码，还要使用其他更复杂的方式完成回调方法。其实每种方法都有它的用途。
-对于简单的**下拉菜单**，用第一种方法会更加方便。对于程序的**菜单栏**，用第二种方法会更好，它可以让你为菜单选项设置快捷键`Shortcuts`和选项的类型`MenuFlags`（例如下拉菜单，选择选项，用于分隔的占位菜单等），另外你不用再像第一个例子一样，在菜单的回调中处理所有事件。使用`add_emit()`方法处理子菜单一样很容易，就像在[编辑器示例](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs)中那样：
+对于简单的**下拉菜单**，用第一种方法会更加方便。对于程序的**菜单栏**，用第二种方法会更好，它可以让你为菜单选项设置快捷键`Shortcuts`和选项的类型[MenuFlags](https://docs.rs/fltk/latest/fltk/menu/struct.MenuFlag.html)（例如下拉菜单，选择选项，用于分隔的占位菜单等），另外你不用再像第一个例子一样，在菜单的回调中处理所有事件。使用`add_emit()`方法处理子菜单一样很容易，就像在[编辑器示例](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/editor.rs)中那样：
 
 ```rust
     let mut menu = menu::SysMenuBar::default().with_size(800, 35);
@@ -362,7 +367,10 @@ Menu主要有两方面的作用：
 
 注意最后一个调用，它使用`find_item()`方法，在菜单中匹配到符合的选项，然后把它的Label颜色设为红色：
 
+<div align="center">
 ![image](https://user-images.githubusercontent.com/37966791/145727434-d66c6d55-018d-4341-9570-7c2864b5bf29.png)
 
+</div>
+
 ## 系统菜单栏
-在MacOS上，你可能更喜欢使用系统提供的菜单栏，它通常出现在屏幕的顶部。为此可以使用`SysMenuBar`组件。它与所有实现`MenuExt Trait`的组件具有相同的API，当程序为MacOS以外的其他目标平台编译时，该组件将变为一个普通的`MenuBar`。
+在MacOS上，你可能更喜欢使用系统提供的菜单栏，它通常出现在屏幕的顶部。为此可以使用 [SysMenuBar](https://docs.rs/fltk/latest/fltk/menu/struct.SysMenuBar.html#) 组件。它与所有实现`MenuExt Trait`的组件具有相同的API，当程序为MacOS以外的其他目标平台编译时，该组件将变为一个普通的`MenuBar`。

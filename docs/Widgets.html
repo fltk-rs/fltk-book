@@ -163,7 +163,9 @@ fn main() {
     app.run().unwrap();
 }
 </code></pre></pre>
-<p><img src="https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png" alt="image" /></p>
+<div align="center">
+![image](https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png)
+</div>
 <p>注意，这个按钮的父组件是my_window，因为它是在隐式调用的<code>begin()</code>和<code>end()</code>之间创建的。
 在程序中添加组件的另一种方法是，在实现了<code>GroupExt Trait</code>的Widget上调用该Trait提供的<code>add(widget)</code>方法。</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};

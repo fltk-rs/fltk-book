@@ -16,7 +16,11 @@ fn main() {
     app.run().unwrap();
 }
 ```
+
+<div align="center">
 ![image](https://user-images.githubusercontent.com/37966791/100937814-adfb4900-3504-11eb-8a6b-f42a4fb4e470.png)
+
+</div>
 
 注意，这个按钮的父组件是my_window，因为它是在隐式调用的`begin()`和`end()`之间创建的。
 在程序中添加组件的另一种方法是，在实现了`GroupExt Trait`的Widget上调用该Trait提供的`add(widget)`方法。

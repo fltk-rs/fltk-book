@@ -1223,7 +1223,7 @@ While using set_label() and with_label() calls FLTK's Fl_Widget::copy_label() me
 <p><img src="https://www.fltk.org/doc-1.4/symbol-examples.png" alt="ex" /></p>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="group-widgets"><a class="header" href="#group-widgets">Group widgets</a></h1>
-<p>These widgets include Window types and others found in the group module: Group, Scroll, Pack, Tile, Flex ...etc.
+<p>These are container widgets which include Window types and others found in the group module: Group, Scroll, Pack, Tile, Flex ...etc.
 Widgets implementing the GroupExt trait, are characterized by having to call <code>::end()</code> method to basically close them.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
     app,
@@ -3724,13 +3724,13 @@ fn main() {
     flex.set_type(group::FlexType::Column);
     let expanding = button::Button::default().with_label(&quot;Expanding&quot;);
     let mut normal = button::Button::default().with_label(&quot;Normal&quot;);
-    flex.set_size(&amp;mut normal, 30);
+    flex.fixed(&amp;mut normal, 30);
     flex.end();
     win.end();
     win.show();
     a.run().unwrap();
 }</code></pre></pre>
-<p>The <code>set_size</code> (and <code>fixed</code> in fltk &gt; 1.4.6) method takes another widget and fixes its size to the value passed, in the example it's 30. Since this is a column, the 30 represents the height of the widget to be set.
+<p>The <code>fixed</code> (and <code>set_size</code> in fltk &lt; 1.4.6) method takes another widget and fixes its size to the value passed, in the example it's 30. Since this is a column, the 30 represents the height of the widget to be set.
 The other widget will be expandable since no size is set for it. A full example can be found here:</p>
 <p><a href="https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs">Flex example</a></p>
 <p><img src="https://github.com/osen/FL_Flex/raw/main/doc/login.png" alt="image" /></p>

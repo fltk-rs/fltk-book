@@ -30,7 +30,6 @@ Then:
 cargo build --target=aarch64-unknown-linux-gnu --features=fltk-bundled
 ```
 
-
 ## Using cross
 If you have Docker installed, you can try [cross](https://github.com/cross-rs/cross).
 ```
@@ -300,3 +299,34 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 ```
 Note the CMAKE_SYSTEM_PROCESSOR is usually the value of `uname -m` on the target platform, other possible values can be found [here](https://stackoverflow.com/a/70498851/9698906). We set the triplet variable in this example to aarch64-linux-gnu, which is the prefix used for the gcc/g++ compilers, as well as the cross-compiling aware pkg-config. This triplet is also equivalent to the Rust triplet aarch64-unknown-linux-gnu. The PKG_CONFIG_PATH is set to the directories containing the .pc files for our target, since these are required for the cairo and pango dependencies on Linux/BSD.
 The last 4 options just tell CMake to not mix the include/library paths of both host/target.
+
+## Using cargo xwin
+If you need to target windows and the msvc compiler/abi, you can install [cargo-xwin](https://github.com/rust-cross/cargo-xwin):
+```
+cargo install cargo-xwin
+```
+
+And build your project using:
+```
+cargo xwin build --release --target x86_64-pc-windows-msvc
+```
+
+## Using the fltk-config feature:
+FLTK provides a script called `fltk-config` which acts like pkg-config. It tracks the installed FLTK lib paths and the necessary cflags and ldflags. Since fltk-rs requires FLTK 1.4, and most distros don't provide it at the time of writing this, you would have to build FLTK from source for the target you require. However, once distros start distributing FLTK 1.4, it should as simple as (targetting arm64 gnu linux):
+```
+dpkg --add-architecture arm64
+apt-get install libfltk1.4-dev:arm64
+
+cargo build --target=aarch64-unknown-linux-gnu --features=fltk-config
+```
+
+If you need to build FLTK for a different architecture, you would need to use a CMake toolchain file (using the one from before):
+```
+git clone https://github.com/fltk/fltk --depth=1
+cd fltk
+cmake -B bin -G Ninja -DFLTK_BUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=/full/path/to/toolchain/file.cmake
+cmake --build bin
+cmake --instal bin # might need sudo in a hosted env
+# then for your proj
+cargo build --target=aarch64-unknown-linux-gnu --features=fltk-config
+```

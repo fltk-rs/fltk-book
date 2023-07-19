@@ -12,7 +12,7 @@ This is an introductory book targeting the [fltk crate](https://crates.io/crates
 - [Demos](https://github.com/fltk-rs/demos)
 - [7guis-fltk-rs](https://github.com/tdryer/7guis-fltk-rs)
 - [FLTK-RS-Examples](https://github.com/wyhinton/FLTK-RS-Examples)
-- Erco's FLTK cheat [page](http://seriss.com/people/erco/fltk/), which is an excellent FLTK C++ reference.
+- Erco's FLTK cheat [page](http://seriss.com/people/erco/fltk/), which is an excellent FLTK C++ reference. 
 
 [FLTK](https://github.com/fltk/fltk) is a cross-platform lightweight gui library.
 The library itself is written in C++98, which is highly-portable. The fltk crate is written in Rust, and uses FFI to call into the FLTK wrapper, [cfltk](https://github.com/MoAlyousef/cfltk), which is written in C89 and C++11.
@@ -20,6 +20,8 @@ The library itself is written in C++98, which is highly-portable. The fltk crate
 The library has a minimalist architecture, and would be familiar to developers used to Object-Oriented gui libraries. The wrapper itself follows the same model which simplifies the documentation, since method names are identical or similar to their C++ equivalents. This makes referring the FLTK C++ documentation quite simpler since the methods basically map to each other.
 
 ```c++
+#include <FL/Fl_Window.H>
+
 int main() {
     auto wind = new Fl_Window(100, 100, 400, 300, "My Window");
     wind->end();
@@ -28,6 +30,8 @@ int main() {
 ```
 maps to:
 ```rust
+use fltk::{prelude::*, window};
+
 fn main() {
     let wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
@@ -64,8 +68,9 @@ The library is automatically built and statically linked to your binary.
 To make our first Rust code sample work, we need to import the necessary fltk modules:
 ```rust
 use fltk::{prelude::*, window::Window};
+
 fn main() {
-    let wind = window::Window::new(100, 100, 400, 300, "My Window");
+    let wind = Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }
@@ -74,9 +79,10 @@ fn main() {
 If you run the code sample, you might notice it does nothing. We actually need to run the event loop, this is equivalent to using `Fl::run()` in C++:
 ```rust
 use fltk::{app, prelude::*, window::Window};
+
 fn main() {
     let a = app::App::default();
-    let wind = window::Window::new(100, 100, 400, 300, "My Window");
+    let wind = Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
     a.run().unwrap();

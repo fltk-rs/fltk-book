@@ -160,19 +160,23 @@
 <li><a href="https://github.com/fltk-rs/demos">Demos</a></li>
 <li><a href="https://github.com/tdryer/7guis-fltk-rs">7guis-fltk-rs</a></li>
 <li><a href="https://github.com/wyhinton/FLTK-RS-Examples">FLTK-RS-Examples</a></li>
-<li>Erco's FLTK cheat <a href="http://seriss.com/people/erco/fltk/">page</a>, which is an excellent FLTK C++ reference.</li>
+<li>Erco's FLTK cheat <a href="http://seriss.com/people/erco/fltk/">page</a>, which is an excellent FLTK C++ reference. </li>
 </ul>
 <p><a href="https://github.com/fltk/fltk">FLTK</a> is a cross-platform lightweight gui library.
 The library itself is written in C++98, which is highly-portable. The fltk crate is written in Rust, and uses FFI to call into the FLTK wrapper, <a href="https://github.com/MoAlyousef/cfltk">cfltk</a>, which is written in C89 and C++11.</p>
 <p>The library has a minimalist architecture, and would be familiar to developers used to Object-Oriented gui libraries. The wrapper itself follows the same model which simplifies the documentation, since method names are identical or similar to their C++ equivalents. This makes referring the FLTK C++ documentation quite simpler since the methods basically map to each other.</p>
-<pre><code class="language-c++">int main() {
+<pre><code class="language-c++">#include &lt;FL/Fl_Window.H&gt;
+
+int main() {
     auto wind = new Fl_Window(100, 100, 400, 300, &quot;My Window&quot;);
     wind-&gt;end();
     wind-&gt;show();
 }
 </code></pre>
 <p>maps to:</p>
-<pre><pre class="playground"><code class="language-rust edition2021">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, window};
+
+fn main() {
     let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
@@ -200,16 +204,18 @@ fltk = { version = &quot;^1.4&quot;, features = [&quot;fltk-bundled&quot;] }
 <p>The library is automatically built and statically linked to your binary.</p>
 <p>To make our first Rust code sample work, we need to import the necessary fltk modules:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, window::Window};
+
 fn main() {
-    let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
 }</code></pre></pre>
 <p>If you run the code sample, you might notice it does nothing. We actually need to run the event loop, this is equivalent to using <code>Fl::run()</code> in C++:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, prelude::*, window::Window};
+
 fn main() {
     let a = app::App::default();
-    let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
     a.run().unwrap();
@@ -594,6 +600,29 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 </code></pre>
 <p>Note the CMAKE_SYSTEM_PROCESSOR is usually the value of <code>uname -m</code> on the target platform, other possible values can be found <a href="https://stackoverflow.com/a/70498851/9698906">here</a>. We set the triplet variable in this example to aarch64-linux-gnu, which is the prefix used for the gcc/g++ compilers, as well as the cross-compiling aware pkg-config. This triplet is also equivalent to the Rust triplet aarch64-unknown-linux-gnu. The PKG_CONFIG_PATH is set to the directories containing the .pc files for our target, since these are required for the cairo and pango dependencies on Linux/BSD.
 The last 4 options just tell CMake to not mix the include/library paths of both host/target.</p>
+<h2 id="using-cargo-xwin"><a class="header" href="#using-cargo-xwin">Using cargo xwin</a></h2>
+<p>If you need to target windows and the msvc compiler/abi, you can install <a href="https://github.com/rust-cross/cargo-xwin">cargo-xwin</a>:</p>
+<pre><code>cargo install cargo-xwin
+</code></pre>
+<p>And build your project using:</p>
+<pre><code>cargo xwin build --release --target x86_64-pc-windows-msvc
+</code></pre>
+<h2 id="using-the-fltk-config-feature"><a class="header" href="#using-the-fltk-config-feature">Using the fltk-config feature:</a></h2>
+<p>FLTK provides a script called <code>fltk-config</code> which acts like pkg-config. It tracks the installed FLTK lib paths and the necessary cflags and ldflags. Since fltk-rs requires FLTK 1.4, and most distros don't provide it at the time of writing this, you would have to build FLTK from source for the target you require. However, once distros start distributing FLTK 1.4, it should as simple as (targetting arm64 gnu linux):</p>
+<pre><code>dpkg --add-architecture arm64
+apt-get install libfltk1.4-dev:arm64
+
+cargo build --target=aarch64-unknown-linux-gnu --features=fltk-config
+</code></pre>
+<p>If you need to build FLTK for a different architecture, you would need to use a CMake toolchain file (using the one from before):</p>
+<pre><code>git clone https://github.com/fltk/fltk --depth=1
+cd fltk
+cmake -B bin -G Ninja -DFLTK_BUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=/full/path/to/toolchain/file.cmake
+cmake --build bin
+cmake --instal bin # might need sudo in a hosted env
+# then for your proj
+cargo build --target=aarch64-unknown-linux-gnu --features=fltk-config
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fluid"><a class="header" href="#fluid">Fluid</a></h1>
 <p>FLTK offers a GUI WYSIWYG rapid application development tool called FLUID which allows creating GUI applications.
 Currently there is a video tutorial on youtube on using it with Rust:
@@ -4635,22 +4664,6 @@ Also any function sending a string across FFI is checked for interal null bytes.
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

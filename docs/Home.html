@@ -162,19 +162,23 @@
 <li><a href="https://github.com/fltk-rs/demos">Demos</a></li>
 <li><a href="https://github.com/tdryer/7guis-fltk-rs">7guis-fltk-rs</a></li>
 <li><a href="https://github.com/wyhinton/FLTK-RS-Examples">FLTK-RS-Examples</a></li>
-<li>Erco's FLTK cheat <a href="http://seriss.com/people/erco/fltk/">page</a>, which is an excellent FLTK C++ reference.</li>
+<li>Erco's FLTK cheat <a href="http://seriss.com/people/erco/fltk/">page</a>, which is an excellent FLTK C++ reference. </li>
 </ul>
 <p><a href="https://github.com/fltk/fltk">FLTK</a> is a cross-platform lightweight gui library.
 The library itself is written in C++98, which is highly-portable. The fltk crate is written in Rust, and uses FFI to call into the FLTK wrapper, <a href="https://github.com/MoAlyousef/cfltk">cfltk</a>, which is written in C89 and C++11.</p>
 <p>The library has a minimalist architecture, and would be familiar to developers used to Object-Oriented gui libraries. The wrapper itself follows the same model which simplifies the documentation, since method names are identical or similar to their C++ equivalents. This makes referring the FLTK C++ documentation quite simpler since the methods basically map to each other.</p>
-<pre><code class="language-c++">int main() {
+<pre><code class="language-c++">#include &lt;FL/Fl_Window.H&gt;
+
+int main() {
     auto wind = new Fl_Window(100, 100, 400, 300, &quot;My Window&quot;);
     wind-&gt;end();
     wind-&gt;show();
 }
 </code></pre>
 <p>maps to:</p>
-<pre><pre class="playground"><code class="language-rust edition2021">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, window};
+
+fn main() {
     let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
@@ -202,16 +206,18 @@ fltk = { version = &quot;^1.4&quot;, features = [&quot;fltk-bundled&quot;] }
 <p>The library is automatically built and statically linked to your binary.</p>
 <p>To make our first Rust code sample work, we need to import the necessary fltk modules:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, window::Window};
+
 fn main() {
-    let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
 }</code></pre></pre>
 <p>If you run the code sample, you might notice it does nothing. We actually need to run the event loop, this is equivalent to using <code>Fl::run()</code> in C++:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, prelude::*, window::Window};
+
 fn main() {
     let a = app::App::default();
-    let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
     a.run().unwrap();
@@ -245,22 +251,6 @@ fn main() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

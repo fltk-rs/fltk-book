@@ -1,5 +1,6 @@
 # Setup
 
+## Build Dependencies
 Rust (version > 1.55), CMake (version > 3.11), Git and a C++11 compiler need to be installed and in your PATH for a crossplatform build from source. This crate also offers a bundled form of fltk on selected platforms, this can be enabled using the fltk-bundled feature flag (which requires curl and tar to download and unpack the bundled libraries). If you have ninja-build installed, you can enable it using the "use-ninja" feature. This should accelerate build times significantly.
 
 - Windows: 
@@ -25,6 +26,18 @@ For Alpine linux:
 apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 ```
 - Android: Android Studio, Android Sdk, Android Ndk.
+
+
+## Runtime Dependencies
+- Windows: None
+- MacOS: None
+- Linux: You need X11 libraries, as well as pango and cairo for drawing (and OpenGL if you want to enable the enable-glwindow feature):
+```
+apt-get install -qq --no-install-recommends libx11-6 libxinerama1 libxft2 libxext6 libxcursor1 libxrender1 libxfixes3 libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libpangoxft-1.0-0 libglib2.0-0 libfontconfig1 libglu1-mesa libgl1
+```
+Note that if you installed the build dependencies, it will also install the runtime dependencies automatically as well.
+
+Also note that most graphical desktop environments already have these libs already installed. This list can be useful if you want to build your app in CI/docker using the fltk-bundled feature or are testing your already built package in CI/docker (where there is not graphical user interface).
 
 ## Detailed setup
 This section assumes you don't even have Rust installed, and is separated into different environments:

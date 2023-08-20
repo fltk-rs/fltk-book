@@ -37,7 +37,7 @@ apt-get install -qq --no-install-recommends libx11-6 libxinerama1 libxft2 libxex
 ```
 Note that if you installed the build dependencies, it will also install the runtime dependencies automatically as well.
 
-Also note that most graphical desktop environments already have these libs already installed. This list can be useful if you want to build your app in CI/docker using the fltk-bundled feature or are testing your already built package in CI/docker (where there is not graphical user interface).
+Also note that most graphical desktop environments already have these libs already installed. This list can be useful if you are testing your already built package in CI/docker (where there is not graphical user interface).
 
 ## Detailed setup
 This section assumes you don't even have Rust installed, and is separated into different environments:

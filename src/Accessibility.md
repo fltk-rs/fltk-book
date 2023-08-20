@@ -1,11 +1,72 @@
 # Accessibility
 
 FLTK offers several accessibility features out of the box:
-- Keyboard navigation among and within ui elements.
-- Keyboard shortcuts.
-- Keyboard alternatives to pointer actions.
-- IME support.
-- The ability to customize key events for your widgets, even custom widgets.
+- Keyboard navigation among and within ui elements
+
+This is automatically enabled by FLTK.
+Depending on the order of widget creation, and whether a widget receives focus, you can use the arrow keys or the tab and shift-tab keys to navigate to the next/previous widget.
+Similarly for menu items, you can navigate using the keyboard.
+
+- Keyboard shortcuts
+
+Button widgets and Menu widgets provide a method which allows setting the keyboard shortcut:
+```rust
+use fltk::{prelude::*, *};
+
+let mut menu = menu::MenuBar::default().with_size(800, 35);
+menu.add(
+    "&File/New...\t",
+    Shortcut::Ctrl | 'n',
+    menu::MenuFlag::Normal,
+    |_m| {},
+);
+
+let mut btn = button::Button::new(100, 100, 80, 30, "Click me");
+btn.set_shortcut(enums::Shortcut::Ctrl | 'b');
+```
+- Keyboard alternatives to pointer actions
+
+This is automatically enabled by FLTK.
+Depending on whether an item has a by default CallbackTrigger::EnterKey trigger, or the trigger is set using `set_trigger`, it should fire the callback when the enter key is pressed.
+Buttons, for example, respond to the enter key automatically if they have focus. To change the trigger for a widget:
+```rust
+use fltk::{prelude::*, *};
+
+let mut inp = input::Input::new(10, 10, 160, 30, None);
+inp.set_trigger(enums::CallbackTrigger::EnterKey);
+inp.set_callback(|i| println!("You clicked enter, and the input's current text is: {}", i.value()));
+```
+
+- IME support
+
+ The input method editor is automatically enabled for languages which require it like Chinese, Japanese and Korean. FLTK uses the OS provided IME in this case.
+
+- The ability to customize key events for your widgets, even custom widgets
+
+Using the WidgetExt::handle method, you can customize how widgets handle events, including key events. 
+
+```rust
+use fltk::{prelude::*, *};
+
+let mut win = window::Window::default().with_size(400, 300);
+win.handle(|w, ev| {
+    enums::Event::KeyUp => {
+        match app::event_key() {
+            enums::Key::End => app::quit(),
+            _ => {
+                if let Some(k) = key.to_char() {
+                    match k {
+                        'q' => app::quit(),
+                        _ => (),
+                    }
+                }
+            },
+        }
+        true
+    }, 
+    _ => false,
+});
+```
 
 Screen reader support is currently implemented as an external crate:
 - [fltk-accesskit](https://github.com/fltk-rs/fltk-accesskit)

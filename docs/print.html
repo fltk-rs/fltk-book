@@ -262,7 +262,7 @@ fn main() {
 <pre><code>apt-get install -qq --no-install-recommends libx11-6 libxinerama1 libxft2 libxext6 libxcursor1 libxrender1 libxfixes3 libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libpangoxft-1.0-0 libglib2.0-0 libfontconfig1 libglu1-mesa libgl1
 </code></pre>
 <p>Note that if you installed the build dependencies, it will also install the runtime dependencies automatically as well.</p>
-<p>Also note that most graphical desktop environments already have these libs already installed. This list can be useful if you want to build your app in CI/docker using the fltk-bundled feature or are testing your already built package in CI/docker (where there is not graphical user interface).</p>
+<p>Also note that most graphical desktop environments already have these libs already installed. This list can be useful if you are testing your already built package in CI/docker (where there is not graphical user interface).</p>
 <h2 id="detailed-setup"><a class="header" href="#detailed-setup">Detailed setup</a></h2>
 <p>This section assumes you don't even have Rust installed, and is separated into different environments:</p>
 <h3 id="windows-msvc-toolchain"><a class="header" href="#windows-msvc-toolchain">Windows (MSVC toolchain)</a></h3>
@@ -4441,12 +4441,75 @@ fn style_btn(btn: &amp;mut button::Button) {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="accessibility"><a class="header" href="#accessibility">Accessibility</a></h1>
 <p>FLTK offers several accessibility features out of the box:</p>
 <ul>
-<li>Keyboard navigation among and within ui elements.</li>
-<li>Keyboard shortcuts.</li>
-<li>Keyboard alternatives to pointer actions.</li>
-<li>IME support.</li>
-<li>The ability to customize key events for your widgets, even custom widgets.</li>
+<li>Keyboard navigation among and within ui elements</li>
 </ul>
+<p>This is automatically enabled by FLTK.
+Depending on the order of widget creation, and whether a widget receives focus, you can use the arrow keys or the tab and shift-tab keys to navigate to the next/previous widget.
+Similarly for menu items, you can navigate using the keyboard.</p>
+<ul>
+<li>Keyboard shortcuts</li>
+</ul>
+<p>Button widgets and Menu widgets provide a method which allows setting the keyboard shortcut:</p>
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use fltk::{prelude::*, *};
+
+let mut menu = menu::MenuBar::default().with_size(800, 35);
+menu.add(
+    &quot;&amp;File/New...\t&quot;,
+    Shortcut::Ctrl | 'n',
+    menu::MenuFlag::Normal,
+    |_m| {},
+);
+
+let mut btn = button::Button::new(100, 100, 80, 30, &quot;Click me&quot;);
+btn.set_shortcut(enums::Shortcut::Ctrl | 'b');
+<span class="boring">}</span></code></pre></pre>
+<ul>
+<li>Keyboard alternatives to pointer actions</li>
+</ul>
+<p>This is automatically enabled by FLTK.
+Depending on whether an item has a by default CallbackTrigger::EnterKey trigger, or the trigger is set using <code>set_trigger</code>, it should fire the callback when the enter key is pressed.
+Buttons, for example, respond to the enter key automatically if they have focus. To change the trigger for a widget:</p>
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use fltk::{prelude::*, *};
+
+let mut inp = input::Input::new(10, 10, 160, 30, None);
+inp.set_trigger(enums::CallbackTrigger::EnterKey);
+inp.set_callback(|i| println!(&quot;You clicked enter, and the input's current text is: {}&quot;, i.value()));
+<span class="boring">}</span></code></pre></pre>
+<ul>
+<li>IME support</li>
+</ul>
+<p>The input method editor is automatically enabled for languages which require it like Chinese, Japanese and Korean. FLTK uses the OS provided IME in this case.</p>
+<ul>
+<li>The ability to customize key events for your widgets, even custom widgets</li>
+</ul>
+<p>Using the WidgetExt::handle method, you can customize how widgets handle events, including key events. </p>
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use fltk::{prelude::*, *};
+
+let mut win = window::Window::default().with_size(400, 300);
+win.handle(|w, ev| {
+    enums::Event::KeyUp =&gt; {
+        match app::event_key() {
+            enums::Key::End =&gt; app::quit(),
+            _ =&gt; {
+                if let Some(k) = key.to_char() {
+                    match k {
+                        'q' =&gt; app::quit(),
+                        _ =&gt; (),
+                    }
+                }
+            },
+        }
+        true
+    }, 
+    _ =&gt; false,
+});
+<span class="boring">}</span></code></pre></pre>
 <p>Screen reader support is currently implemented as an external crate:</p>
 <ul>
 <li><a href="https://github.com/fltk-rs/fltk-accesskit">fltk-accesskit</a></li>

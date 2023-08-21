@@ -152,15 +152,11 @@
                     <main>
                         <h1 id="accessibility"><a class="header" href="#accessibility">Accessibility</a></h1>
 <p>FLTK offers several accessibility features out of the box:</p>
-<ul>
-<li>Keyboard navigation among and within ui elements</li>
-</ul>
+<h2 id="keyboard-navigation-among-and-within-ui-elements"><a class="header" href="#keyboard-navigation-among-and-within-ui-elements">Keyboard navigation among and within ui elements</a></h2>
 <p>This is automatically enabled by FLTK.
 Depending on the order of widget creation, and whether a widget receives focus, you can use the arrow keys or the tab and shift-tab keys to navigate to the next/previous widget.
 Similarly for menu items, you can navigate using the keyboard.</p>
-<ul>
-<li>Keyboard shortcuts</li>
-</ul>
+<h2 id="keyboard-shortcuts"><a class="header" href="#keyboard-shortcuts">Keyboard shortcuts</a></h2>
 <p>Button widgets and Menu widgets provide a method which allows setting the keyboard shortcut:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -177,9 +173,7 @@ menu.add(
 let mut btn = button::Button::new(100, 100, 80, 30, &quot;Click me&quot;);
 btn.set_shortcut(enums::Shortcut::Ctrl | 'b');
 <span class="boring">}</span></code></pre></pre>
-<ul>
-<li>Keyboard alternatives to pointer actions</li>
-</ul>
+<h2 id="keyboard-alternatives-to-pointer-actions"><a class="header" href="#keyboard-alternatives-to-pointer-actions">Keyboard alternatives to pointer actions</a></h2>
 <p>This is automatically enabled by FLTK.
 Depending on whether an item has a by default CallbackTrigger::EnterKey trigger, or the trigger is set using <code>set_trigger</code>, it should fire the callback when the enter key is pressed.
 Buttons, for example, respond to the enter key automatically if they have focus. To change the trigger for a widget:</p>
@@ -191,13 +185,9 @@ let mut inp = input::Input::new(10, 10, 160, 30, None);
 inp.set_trigger(enums::CallbackTrigger::EnterKey);
 inp.set_callback(|i| println!(&quot;You clicked enter, and the input's current text is: {}&quot;, i.value()));
 <span class="boring">}</span></code></pre></pre>
-<ul>
-<li>IME support</li>
-</ul>
+<h2 id="ime-support"><a class="header" href="#ime-support">IME support</a></h2>
 <p>The input method editor is automatically enabled for languages which require it like Chinese, Japanese and Korean. FLTK uses the OS provided IME in this case.</p>
-<ul>
-<li>The ability to customize key events for your widgets, even custom widgets</li>
-</ul>
+<h2 id="the-ability-to-customize-key-events-for-your-widgets-even-custom-widgets"><a class="header" href="#the-ability-to-customize-key-events-for-your-widgets-even-custom-widgets">The ability to customize key events for your widgets, even custom widgets</a></h2>
 <p>Using the WidgetExt::handle method, you can customize how widgets handle events, including key events. </p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -206,8 +196,9 @@ inp.set_callback(|i| println!(&quot;You clicked enter, and the input's current t
 let mut win = window::Window::default().with_size(400, 300);
 win.handle(|w, ev| {
     enums::Event::KeyUp =&gt; {
-        match app::event_key() {
-            enums::Key::End =&gt; app::quit(),
+        let key = app::event_key();
+        match key {
+            enums::Key::End =&gt; app::quit(), // just an example
             _ =&gt; {
                 if let Some(k) = key.to_char() {
                     match k {
@@ -222,6 +213,7 @@ win.handle(|w, ev| {
     _ =&gt; false,
 });
 <span class="boring">}</span></code></pre></pre>
+<h2 id="screen-reader-support"><a class="header" href="#screen-reader-support">Screen reader support</a></h2>
 <p>Screen reader support is currently implemented as an external crate:</p>
 <ul>
 <li><a href="https://github.com/fltk-rs/fltk-accesskit">fltk-accesskit</a></li>
@@ -271,6 +263,7 @@ fn btn_callback(_btn: &amp;mut button::Button) {
 <p>The Accessible trait is implemented for several FLTK widgets.
 The example requires instantiating an fltk_accesskit::AccessibilityContext, in which you pass the root (main window) and the widgets you want recognized by the screen-reader. 
 Then you would run the App struct using the special method <code>run_with_accessibility</code>.</p>
+<p>A demonstration video can be found <a href="https://www.youtube.com/watch?v=x53Rxjg8IF8">here</a>.</p>
 
                     </main>
 

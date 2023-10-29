@@ -177,7 +177,7 @@ int main() {
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, window};
 
 fn main() {
-    let wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
 }</code></pre></pre>
@@ -206,7 +206,7 @@ fltk = { version = &quot;^1.4&quot;, features = [&quot;fltk-bundled&quot;] }
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, window::Window};
 
 fn main() {
-    let wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
 }</code></pre></pre>
@@ -215,7 +215,7 @@ fn main() {
 
 fn main() {
     let a = app::App::default();
-    let wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
     wind.end();
     wind.show();
     a.run().unwrap();

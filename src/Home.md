@@ -33,7 +33,7 @@ maps to:
 use fltk::{prelude::*, window};
 
 fn main() {
-    let wind = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }
@@ -70,7 +70,7 @@ To make our first Rust code sample work, we need to import the necessary fltk mo
 use fltk::{prelude::*, window::Window};
 
 fn main() {
-    let wind = Window::new(100, 100, 400, 300, "My Window");
+    let mut wind = Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }
@@ -82,7 +82,7 @@ use fltk::{app, prelude::*, window::Window};
 
 fn main() {
     let a = app::App::default();
-    let wind = Window::new(100, 100, 400, 300, "My Window");
+    let mut wind = Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
     a.run().unwrap();

@@ -303,6 +303,7 @@ The last 4 options just tell CMake to not mix the include/library paths of both 
 Another toolchain file targetting windows (using the mingw toolchain):
 ```cmake
 set(CMAKE_SYSTEM_NAME Windows)
+set(CMAKE_SYSTEM_PROCESSOR AMD64)
 
 set(triplet x86_64-w64-mingw32)
 set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)

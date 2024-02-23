@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>fltk book</title>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex">
 
 
         <!-- Custom HTML head -->
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -32,7 +32,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -62,42 +62,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">2.</strong> Setup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Cross-Compiling.html"><strong aria-hidden="true">2.1.</strong> Cross Compiling</a></li><li class="chapter-item "><a href="Fluid.html"><strong aria-hidden="true">2.2.</strong> Fluid</a></li></ol></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">3.</strong> The App struct</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">4.</strong> Windows</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="GlutWindow.html"><strong aria-hidden="true">4.1.</strong> GlutWindow</a></li></ol></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">5.</strong> Widgets</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Buttons.html"><strong aria-hidden="true">5.1.</strong> Buttons</a></li><li class="chapter-item "><a href="Labels.html"><strong aria-hidden="true">5.2.</strong> Labels</a></li><li class="chapter-item "><a href="Group-widgets.html"><strong aria-hidden="true">5.3.</strong> Group widgets</a></li><li class="chapter-item "><a href="Menus.html"><strong aria-hidden="true">5.4.</strong> Menus</a></li><li class="chapter-item "><a href="Input-&-Output.html"><strong aria-hidden="true">5.5.</strong> Input & Output</a></li><li class="chapter-item "><a href="Valuators.html"><strong aria-hidden="true">5.6.</strong> Valuators</a></li><li class="chapter-item "><a href="Text.html"><strong aria-hidden="true">5.7.</strong> Text</a></li><li class="chapter-item "><a href="Browsers.html"><strong aria-hidden="true">5.8.</strong> Browsers</a></li><li class="chapter-item "><a href="Trees.html"><strong aria-hidden="true">5.9.</strong> Trees</a></li><li class="chapter-item "><a href="Tables.html"><strong aria-hidden="true">5.10.</strong> Tables</a></li><li class="chapter-item "><a href="Custom-Widgets.html"><strong aria-hidden="true">5.11.</strong> Custom widgets</a></li></ol></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">6.</strong> Dialogs</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">7.</strong> Images</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">8.</strong> Events</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Drag-&-Drop.html"><strong aria-hidden="true">8.1.</strong> Drag & Drop</a></li><li class="chapter-item "><a href="State-Management.html"><strong aria-hidden="true">8.2.</strong> State Management</a></li></ol></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">9.</strong> Layouts</a></li><li class="chapter-item expanded "><a href="Style.html"><strong aria-hidden="true">10.</strong> Style</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Colors.html"><strong aria-hidden="true">10.1.</strong> Colors</a></li><li class="chapter-item "><a href="FrameTypes.html"><strong aria-hidden="true">10.2.</strong> FrameTypes</a></li><li class="chapter-item "><a href="Fonts.html"><strong aria-hidden="true">10.3.</strong> Fonts</a></li><li class="chapter-item "><a href="Drawing.html"><strong aria-hidden="true">10.4.</strong> Drawing things</a></li><li class="chapter-item "><a href="Styling.html"><strong aria-hidden="true">10.5.</strong> Styling</a></li></ol></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">11.</strong> Animations</a></li><li class="chapter-item expanded "><a href="Accessibility.html"><strong aria-hidden="true">12.</strong> Accessibility</a></li><li class="chapter-item expanded "><a href="FAQ.html"><strong aria-hidden="true">13.</strong> FAQ</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -160,7 +189,7 @@
 <li><a href="https://github.com/fltk-rs/demos">Demos</a></li>
 <li><a href="https://github.com/tdryer/7guis-fltk-rs">7guis-fltk-rs</a></li>
 <li><a href="https://github.com/wyhinton/FLTK-RS-Examples">FLTK-RS-Examples</a></li>
-<li>Erco's FLTK cheat <a href="http://seriss.com/people/erco/fltk/">page</a>, which is an excellent FLTK C++ reference. </li>
+<li>Erco's FLTK cheat <a href="http://seriss.com/people/erco/fltk/">page</a>, which is an excellent FLTK C++ reference.</li>
 </ul>
 <p><a href="https://github.com/fltk/fltk">FLTK</a> is a cross-platform lightweight gui library.
 The library itself is written in C++98, which is highly-portable. The fltk crate is written in Rust, and uses FFI to call into the FLTK wrapper, <a href="https://github.com/MoAlyousef/cfltk">cfltk</a>, which is written in C89 and C++11.</p>
@@ -168,7 +197,7 @@ The library itself is written in C++98, which is highly-portable. The fltk crate
 <pre><code class="language-c++">#include &lt;FL/Fl_Window.H&gt;
 
 int main() {
-    auto wind = new Fl_Window(100, 100, 400, 300, &quot;My Window&quot;);
+    auto wind = new Fl_Window(100, 100, 400, 300, "My Window");
     wind-&gt;end();
     wind-&gt;show();
 }
@@ -177,7 +206,7 @@ int main() {
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, window};
 
 fn main() {
-    let mut wind = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }</code></pre></pre>
@@ -195,18 +224,18 @@ fn main() {
 <h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
 <p>Just add the following to your project's Cargo.toml file:</p>
 <pre><code class="language-toml">[dependencies]
-fltk = &quot;^1.4&quot;
+fltk = "^1.4"
 </code></pre>
 <p>To use the bundled libs (available for x64 windows (msvc &amp; gnu (msys2)), x64 linux &amp; macos):</p>
 <pre><code class="language-toml">[dependencies]
-fltk = { version = &quot;^1.4&quot;, features = [&quot;fltk-bundled&quot;] }
+fltk = { version = "^1.4", features = ["fltk-bundled"] }
 </code></pre>
 <p>The library is automatically built and statically linked to your binary.</p>
 <p>To make our first Rust code sample work, we need to import the necessary fltk modules:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, window::Window};
 
 fn main() {
-    let mut wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut wind = Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }</code></pre></pre>
@@ -215,7 +244,7 @@ fn main() {
 
 fn main() {
     let a = app::App::default();
-    let mut wind = Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut wind = Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
     a.run().unwrap();
@@ -227,9 +256,9 @@ fn main() {
 <p>You can also contribute to the Chinese translation <a href="https://github.com/Flatigers/fltk-book-zh">here</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="setup"><a class="header" href="#setup">Setup</a></h1>
 <h2 id="build-dependencies"><a class="header" href="#build-dependencies">Build Dependencies</a></h2>
-<p>Rust (version &gt; 1.55), CMake (version &gt; 3.11), Git and a C++11 compiler need to be installed and in your PATH for a crossplatform build from source. This crate also offers a bundled form of fltk on selected platforms, this can be enabled using the fltk-bundled feature flag (which requires curl and tar to download and unpack the bundled libraries). If you have ninja-build installed, you can enable it using the &quot;use-ninja&quot; feature. This should accelerate build times significantly.</p>
+<p>Rust (version &gt; 1.55), CMake (version &gt; 3.11), Git and a C++11 compiler need to be installed and in your PATH for a crossplatform build from source. This crate also offers a bundled form of fltk on selected platforms, this can be enabled using the fltk-bundled feature flag (which requires curl and tar to download and unpack the bundled libraries). If you have ninja-build installed, you can enable it using the "use-ninja" feature. This should accelerate build times significantly.</p>
 <ul>
-<li>Windows: 
+<li>Windows:
 <ul>
 <li>MSVC: Windows SDK</li>
 <li>Gnu: No dependencies</li>
@@ -242,7 +271,7 @@ fn main() {
 <pre><code>sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
 </code></pre>
 <p>For RHEL-based GUI distributions, that means running:</p>
-<pre><code>sudo yum groupinstall &quot;X Software Development&quot; &amp;&amp; yum install pango-devel libXinerama-devel libstdc++-static
+<pre><code>sudo yum groupinstall "X Software Development" &amp;&amp; yum install pango-devel libXinerama-devel libstdc++-static
 </code></pre>
 <p>For Arch-based GUI distributions, that means running:</p>
 <pre><code>sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
@@ -283,7 +312,7 @@ fn main() {
 <h3 id="windows-gnu-toolchain"><a class="header" href="#windows-gnu-toolchain">Windows (gnu toolchain)</a></h3>
 <p>If you don't already have msys2, you can get it from <a href="https://www.msys2.org/">here</a>.</p>
 <ul>
-<li>You can get the Rust toolchain via the pacman package manager, or via rustup as described previously. The installation process however would require specifying the use of the gnu toolchain (not choosing the default which would install the MSVC toolchain). 
+<li>You can get the Rust toolchain via the pacman package manager, or via rustup as described previously. The installation process however would require specifying the use of the gnu toolchain (not choosing the default which would install the MSVC toolchain).
 The toolchain should also reflect the architecture of your machine. For example, a 64bit machine should install the x86_64-pc-windows-gnu toolchain.
 If you decide to get Rust via the package manager, make sure you're getting the mingw variant, and with the correct MINGW_PACKAGE_PREFIX (for 64bits, that env variable would equate to mingw-w64-x86_64).</li>
 <li>Assuming you're installing everything via pacman, open the mingw shell (not the msys2 shell, it can be found bundled in the msys2 install directory, or via <code>source shell mingw64</code>) and run the following:</li>
@@ -330,7 +359,7 @@ For Debian-based GUI distributions, that means running:</li>
 <pre><code>sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
 </code></pre>
 <p>For RHEL-based GUI distributions, that means running:</p>
-<pre><code>sudo yum groupinstall &quot;X Software Development&quot; &amp;&amp; yum install pango-devel libXinerama-devel libstdc++-static
+<pre><code>sudo yum groupinstall "X Software Development" &amp;&amp; yum install pango-devel libXinerama-devel libstdc++-static
 </code></pre>
 <p>For Arch-based GUI distributions, that means running:</p>
 <pre><code>sudo pacman -S libx11 libxext libxft libxinerama libxcursor libxrender libxfixes pango cairo libgl mesa --needed
@@ -368,7 +397,7 @@ cargo build --target=&lt;your target&gt; --features=fltk-bundled
 <p>You can specify the linker in a .cargo/config.toml file so you won't have to pass it to the build command:</p>
 <pre><code class="language-toml"># .cargo/config.toml
 [target.aarch64-unknown-linux-gnu]
-linker = &quot;aarch64-linux-gnu-gcc&quot;
+linker = "aarch64-linux-gnu-gcc"
 </code></pre>
 <p>Then:</p>
 <pre><code>cargo build --target=aarch64-unknown-linux-gnu --features=fltk-bundled
@@ -407,11 +436,11 @@ RUN dpkg --add-architecture arm64 &amp;&amp; \
 <p>Notice the architecture appended to the library package's name like: libx11-dev:arm64.</p>
 <p>The Cross.toml contents:</p>
 <pre><code class="language-toml">[target.aarch64-unknown-linux-gnu]
-dockerfile = &quot;./arm64-dockerfile&quot;
+dockerfile = "./arm64-dockerfile"
 </code></pre>
 <p>2- Configuring Cargo.toml:</p>
 <pre><code class="language-toml">[package.metadata.cross.target.aarch64-unknown-linux-gnu]
-pre-build = [&quot;&quot;&quot; \
+pre-build = [""" \
     dpkg --add-architecture arm64 &amp;&amp; \
     apt-get update &amp;&amp; \
     apt-get install --assume-yes --no-install-recommends \
@@ -419,7 +448,7 @@ pre-build = [&quot;&quot;&quot; \
     libxinerama-dev:arm64 libxcursor-dev:arm64 \
     libxrender-dev:arm64  libxfixes-dev:arm64  libgl1-mesa-dev:arm64 \
     libglu1-mesa-dev:arm64 libasound2-dev:arm64 libpango1.0-dev:arm64 \
-    &quot;&quot;&quot;]
+    """]
 </code></pre>
 <p>Then run cross:</p>
 <pre><code>cross build --target=aarch64-unknown-linux-gnu
@@ -457,8 +486,8 @@ cargo build --target=arch64-apple-darwin
 </ul>
 <pre><code class="language-toml"># .cargo/config.toml
 [target.x86_64-pc-windows-gnu]
-linker = &quot;x86_64-w64-mingw32-gcc&quot;
-ar = &quot;x86_64-w64-mingw32-gcc-ar&quot;
+linker = "x86_64-w64-mingw32-gcc"
+ar = "x86_64-w64-mingw32-gcc-ar"
 </code></pre>
 <ul>
 <li>Run the build:</li>
@@ -486,11 +515,11 @@ Assuming you already have cmake already installed.</p>
 <ul>
 <li>You might need to add the following mirrors to /etc/apt/sources.list:</li>
 </ul>
-<pre><code>sudo sed -i &quot;s/deb http/deb [arch=amd64] http/&quot; /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
+<pre><code>sudo sed -i "s/deb http/deb [arch=amd64] http/" /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe" | sudo tee -a /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe" | sudo tee -a /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe" | sudo tee -a /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe" | sudo tee -a /etc/apt/sources.list
 </code></pre>
 <p>The first command changes the current mirrors to reflect your current amd64 system. The others add the arm64 ports to your /etc/apt/sources.list file.</p>
 <ul>
@@ -512,7 +541,7 @@ echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-update
 <p>You can specify the linker in a .cargo/config.toml file so you won't have to pass it to the build command:</p>
 <pre><code class="language-toml"># .cargo/config.toml
 [target.aarch64-unknown-linux-gnu]
-linker = &quot;aarch64-linux-gnu-gcc&quot;
+linker = "aarch64-linux-gnu-gcc"
 </code></pre>
 <p>Then:</p>
 <pre><code>cargo build --target=aarch64-unknown-linux-gnu
@@ -537,11 +566,11 @@ COPY --from=alpine_build target/release/&lt;your binary name&gt; .
 <pre><code class="language-dockerfile">RUN ln -s /usr/bin/x86_64-alpine-linux-musl-gcc /usr/bin/musl-gcc
 RUN ln -s /usr/bin/x86_64-alpine-linux-musl-g++ /usr/bin/musl-g++
 </code></pre>
-<p>You would also need to add &quot;-C target-feature=-crt-static&quot; to RUSTFLAGS due to this rust toolchain issue:
+<p>You would also need to add "-C target-feature=-crt-static" to RUSTFLAGS due to this rust toolchain issue:
 https://github.com/rust-lang/rust/issues/61328</p>
 <p>i.e.</p>
 <pre><code class="language-dockerfile">FROM alpine:latest AS alpine_build
-ENV RUSTUP_HOME=&quot;/usr/local/rustup&quot; CARGO_HOME=&quot;/usr/local/cargo&quot; PATH=&quot;/usr/local/cargo/bin:$PATH&quot; RUSTFLAGS=&quot;-C target-feature=-crt-static&quot;
+ENV RUSTUP_HOME="/usr/local/rustup" CARGO_HOME="/usr/local/cargo" PATH="/usr/local/cargo/bin:$PATH" RUSTFLAGS="-C target-feature=-crt-static"
 RUN apk add git curl cmake make g++ pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 
 RUN ln -s /usr/bin/x86_64-alpine-linux-musl-gcc /usr/bin/musl-gcc
@@ -564,20 +593,20 @@ RUN apt-get update -qq
 RUN	apt-get install -y --no-install-recommends lsb-release g++-aarch64-linux-gnu g++ cmake curl tar git make
 RUN apt-get install -y ca-certificates &amp;&amp; update-ca-certificates --fresh &amp;&amp; export SSL_CERT_DIR=/etc/ssl/certs
 RUN	dpkg --add-architecture arm64 
-RUN sed -i &quot;s/deb http/deb [arch=amd64] http/&quot; /etc/apt/sources.list
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe&quot; | tee -a /etc/apt/sources.list 
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe&quot; | tee -a /etc/apt/sources.list 
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe&quot; | tee -a /etc/apt/sources.list 
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe&quot; | tee -a /etc/apt/sources.list 
+RUN sed -i "s/deb http/deb [arch=amd64] http/" /etc/apt/sources.list
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe" | tee -a /etc/apt/sources.list 
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe" | tee -a /etc/apt/sources.list 
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe" | tee -a /etc/apt/sources.list 
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe" | tee -a /etc/apt/sources.list 
 RUN	apt-get update -qq &amp;&amp; apt-get install -y --no-install-recommends -o APT::Immediate-Configure=0 libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64
 RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable --profile minimal -y
 
-ENV PATH=&quot;/root/.cargo/bin:$PATH&quot; \
+ENV PATH="/root/.cargo/bin:$PATH" \
 	CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ \
 	CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc \
     CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc \
     CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++ \
-    PKG_CONFIG_PATH=&quot;/usr/lib/aarch64-linux-gnu/pkgconfig/:${PKG_CONFIG_PATH}&quot;
+    PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig/:${PKG_CONFIG_PATH}"
 
 RUN rustup target add aarch64-unknown-linux-gnu
 
@@ -596,13 +625,13 @@ COPY --from=ubuntu_build target/aarch64-unknown-linux-gnu/release/&lt;your binar
 <p>The contents of the CMake toolchain file usually set the CMAKE_SYSTEM_NAME as well as the cross-compilers. Another thing which needs to be set on Linux/BSD is the PKG_CONFIG_EXECUTABLE and PKG_CONFIG_PATH.
 A sample toolchain file:</p>
 <pre><code class="language-cmake">set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR arm64)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 set(triplet aarch64-linux-gnu)
 set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)
 set(CMAKE_CXX_COMPILER /usr/bin/${triplet}-g++)
 set(ENV{PKG_CONFIG_EXECUTABLE} /usr/bin/${triplet}-pkg-config)
-set(ENV{PKG_CONFIG_PATH} &quot;$ENV{PKG_CONFIG_PATH}:/usr/lib/${triplet}/pkgconfig&quot;)
+set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/usr/lib/${triplet}/pkgconfig")
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
@@ -611,6 +640,18 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 </code></pre>
 <p>Note the CMAKE_SYSTEM_PROCESSOR is usually the value of <code>uname -m</code> on the target platform, other possible values can be found <a href="https://stackoverflow.com/a/70498851/9698906">here</a>. We set the triplet variable in this example to aarch64-linux-gnu, which is the prefix used for the gcc/g++ compilers, as well as the cross-compiling aware pkg-config. This triplet is also equivalent to the Rust triplet aarch64-unknown-linux-gnu. The PKG_CONFIG_PATH is set to the directories containing the .pc files for our target, since these are required for the cairo and pango dependencies on Linux/BSD.
 The last 4 options just tell CMake to not mix the include/library paths of both host/target.</p>
+<p>Another toolchain file targetting windows (using the mingw toolchain):</p>
+<pre><code class="language-cmake">set(CMAKE_SYSTEM_NAME Windows)
+
+set(triplet x86_64-w64-mingw32)
+set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)
+set(CMAKE_CXX_COMPILER /usr/bin/${triplet}-g++)
+
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+</code></pre>
 <h2 id="using-cargo-xwin"><a class="header" href="#using-cargo-xwin">Using cargo xwin</a></h2>
 <p>If you need to target windows and the msvc compiler/abi, you can install <a href="https://github.com/rust-cross/cargo-xwin">cargo-xwin</a>:</p>
 <pre><code>cargo install cargo-xwin
@@ -654,20 +695,20 @@ cargo install fl2rust
 fl2rust is added as a build-dependency to your project:</p>
 <pre><code class="language-toml"># Cargo.toml
 [dependencies]
-fltk = &quot;1&quot;
+fltk = "1"
 
 [build-dependencies]
-fl2rust = &quot;0.4&quot;
+fl2rust = "0.4"
 </code></pre>
 <p>Then it can be used in the build.rs file (which is run pre-build) to generate Rust code:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">// build.rs
 fn main() {
     use std::path::PathBuf;
     use std::env;
-    println!(&quot;cargo:rerun-if-changed=src/myuifile.fl&quot;);
+    println!("cargo:rerun-if-changed=src/myuifile.fl");
     let g = fl2rust::Generator::default();
-    let out_path = PathBuf::from(env::var(&quot;OUT_DIR&quot;).unwrap());
-    g.in_out(&quot;src/myuifile.fl&quot;, out_path.join(&quot;myuifile.rs&quot;).to_str().unwrap()).expect(&quot;Failed to generate rust from fl file!&quot;);
+    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
+    g.in_out("src/myuifile.fl", out_path.join("myuifile.rs").to_str().unwrap()).expect("Failed to generate rust from fl file!");
 }</code></pre></pre>
 <p>We'll be naming our fluid file myuifile.fl. We tell cargo to rerun if that file is changed. We'll create the file in our source directory, but you can put it in its own directory if you wish. We tell the generator to take the fluid file and generate a myuifile.rs. This file is generated in the OUT_DIR, so you won't be seeing it in your src directory.
 However to include it, you need to create a Rust source file, it can be the same name as our outputted file, and put it in the src directory:</p>
@@ -682,7 +723,7 @@ However to include it, you need to create a Rust source file, it can be the same
 #![allow(unused_imports)]
 #![allow(clippy::needless_update)]
 
-include!(concat!(env!(&quot;OUT_DIR&quot;), &quot;/myuifile.rs&quot;));
+include!(concat!(env!("OUT_DIR"), "/myuifile.rs"));
 <span class="boring">}</span></code></pre></pre>
 <p>Then we'll be able to use the contents in main.rs:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">// src/main.rs
@@ -721,7 +762,7 @@ We'll also accept the default name which is <code>make_window()</code>.</p>
 <p>Our window will now be accessible via <code>myuifile::UserInterface::my_win</code>.</p>
 <p>We'll add a button by left clicking the window and adding a Button:
 <img src="https://user-images.githubusercontent.com/37966791/146928089-ad0454de-252e-4e81-9079-db0ef5c67c8f.png" alt="image" /></p>
-<p>This will open the same dialog as before but for the button. Under C++, we'll give it the variable name <code>btn</code>. Under style we'll change the color and label color. Then under Gui we'll give it the label &quot;click me&quot;:
+<p>This will open the same dialog as before but for the button. Under C++, we'll give it the variable name <code>btn</code>. Under style we'll change the color and label color. Then under Gui we'll give it the label "click me":
 <img src="https://user-images.githubusercontent.com/37966791/146928419-a1a96e03-5b90-4aaa-8f70-9b17f76f9b9f.png" alt="image" /></p>
 <p>We'll drag the border to resize and drag the button to any position we want. Fluid has a layout menu where we can modify a number of widgets (if we had multiple buttons for example) to have the same layout/size ...etc:
 <img src="https://user-images.githubusercontent.com/37966791/146928654-43838e2a-aba8-4a24-8d70-1e25e1717c58.png" alt="image" /></p>
@@ -736,9 +777,9 @@ fn main() {
     let mut ui = myuifile::UserInterface::make_window();
     let mut win = ui.my_win.clone();
     ui.btn.set_callback(move |b| {
-        b.set_label(&quot;clicked&quot;);
-        win.set_label(&quot;Button clicked&quot;);
-        println!(&quot;Works!&quot;);
+        b.set_label("clicked");
+        win.set_label("Button clicked");
+        println!("Works!");
     });
     app.run().unwrap();
 }</code></pre></pre>
@@ -768,11 +809,11 @@ fn main() {
     app.run().unwrap();
 }</code></pre></pre>
 <p>This will give your application a Gtk app appearance. There are other built-in schemes: Basic, Plastic and Gleam.</p>
-<p>The App struct is also responsible for loading system fonts at the start of the application using the load_system_fonts() method. </p>
-<p>A typical fltk-rs application will construct the App struct prior to creating any widgets and showing the main window. </p>
-<p>Any logic added after calling the run() method, will be executed after the event loop is terminated (typically by closing the all windows of your application, or by calling the quit() method). That logic could include respawning the app if needed. </p>
-<p>In addition to the App struct, the app module itself contains structs and free functions pertaining to the global state of your app. These include visuals like setting background and foreground colors and default fontface and size, screen functions, clipboard functions, global handlers, app events, channels (Sender and Receiver) and timeouts. </p>
-<p>Some of these will be discussed elsewhere in the book. </p>
+<p>The App struct is also responsible for loading system fonts at the start of the application using the load_system_fonts() method.</p>
+<p>A typical fltk-rs application will construct the App struct prior to creating any widgets and showing the main window.</p>
+<p>Any logic added after calling the run() method, will be executed after the event loop is terminated (typically by closing the all windows of your application, or by calling the quit() method). That logic could include respawning the app if needed.</p>
+<p>In addition to the App struct, the app module itself contains structs and free functions pertaining to the global state of your app. These include visuals like setting background and foreground colors and default fontface and size, screen functions, clipboard functions, global handlers, app events, channels (Sender and Receiver) and timeouts.</p>
+<p>Some of these will be discussed elsewhere in the book.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="windows"><a class="header" href="#windows">Windows</a></h1>
 <p>FLTK calls the native window on each platform it supports, then basically does its own drawing. This means it calls an HWND on windows, NSWindow on MacOS and an XWindow on X11 systems (linux, BSD).</p>
 <p>The windows themselves have the same interface as the other widgets provided by FLTK, the WidgetExt trait, which will be discussed in the next page.</p>
@@ -781,7 +822,7 @@ fn main() {
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
     my_window.end();
     my_window.show();
     app.run().unwrap();
@@ -806,7 +847,7 @@ The next call <a href="https://docs.rs/fltk/latest/fltk/prelude/trait.WidgetExt.
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
     let mut my_window2 = window::Window::new(10, 10, 380, 280, None);
     my_window2.set_color(Color::Black);
     my_window2.end();
@@ -822,7 +863,7 @@ fn main() {
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
     my_window.end();
     my_window.show();
     let mut my_window2 = window::Window::new(10, 10, 380, 280, None);
@@ -846,7 +887,7 @@ The list of traits can be found in the prelude module of the crate:</p>
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
     my_window.fullscreen(true);
     my_window.end();
     my_window.show();
@@ -874,7 +915,7 @@ fn main() {
 <li>Ensure correct dependencies: Double-check that you have the correct dependencies specified in your project's <code>Cargo.toml</code> file. Make sure you have the <code>fltk</code> and <code>fltk-sys</code> dependencies included with their appropriate versions. Here's an example of how it should look:</li>
 </ol>
 <pre><code class="language-toml">[dependencies]
-fltk = { version = &quot;1.4.4&quot;, features = [&quot;enable-glwindow&quot;] }
+fltk = { version = "1.4.4", features = ["enable-glwindow"] }
 </code></pre>
 <ol start="5">
 <li>Clean and rebuild: If the above steps do not resolve the issue, you can try cleaning the build artifacts and rebuilding the project. Use the following command to clean the project:</li>
@@ -924,7 +965,7 @@ fn main() {
 
     let app = app::App::default();
     let mut win = window::GlWindow::default().with_size(800, 600);
-    let icon: IcoImage = IcoImage::load(&amp;std::path::Path::new(&quot;src/fltk.ico&quot;)).unwrap();
+    let icon: IcoImage = IcoImage::load(&amp;std::path::Path::new("src/fltk.ico")).unwrap();
     win.make_resizable(true);
     win.set_icon(Some(icon));
     win.set_mode(enums::Mode::Opengl3);
@@ -938,13 +979,13 @@ fn main() {
 
         let vertex_array = gl
             .create_vertex_array()
-            .expect(&quot;Cannot create vertex array&quot;);
+            .expect("Cannot create vertex array");
         gl.bind_vertex_array(Some(vertex_array));
 
-        let program = gl.create_program().expect(&quot;Cannot create program&quot;);
+        let program = gl.create_program().expect("Cannot create program");
 
         let (vertex_shader_source, fragment_shader_source) = (
-            r#&quot;const vec2 verts[3] = vec2[3](
+            r#"const vec2 verts[3] = vec2[3](
                 vec2(0.5f, 1.0f),
                 vec2(0.0f, 0.0f),
                 vec2(1.0f, 0.0f)
@@ -953,13 +994,13 @@ fn main() {
             void main() {
                 vert = verts[gl_VertexID];
                 gl_Position = vec4(vert - 0.5, 0.0, 1.0);
-            }&quot;#,
-            r#&quot;precision mediump float;
+            }"#,
+            r#"precision mediump float;
             in vec2 vert;
             out vec4 color;
             void main() {
                 color = vec4(vert, 0.5, 1.0);
-            }&quot;#,
+            }"#,
         );
 
         let shader_sources = [
@@ -972,11 +1013,11 @@ fn main() {
         for (shader_type, shader_source) in shader_sources.iter() {
             let shader = gl
                 .create_shader(*shader_type)
-                .expect(&quot;Cannot create shader&quot;);
-            gl.shader_source(shader, &amp;format!(&quot;#version 410\n{}&quot;, shader_source));
+                .expect("Cannot create shader");
+            gl.shader_source(shader, &amp;format!("#version 410\n{}", shader_source));
             gl.compile_shader(shader);
             if !gl.get_shader_compile_status(shader) {
-                panic!(&quot;{}&quot;, gl.get_shader_info_log(shader));
+                panic!("{}", gl.get_shader_info_log(shader));
             }
             gl.attach_shader(program, shader);
             shaders.push(shader);
@@ -984,7 +1025,7 @@ fn main() {
 
         gl.link_program(program);
         if !gl.get_program_link_status(program) {
-            panic!(&quot;{}&quot;, gl.get_program_info_log(program));
+            panic!("{}", gl.get_program_info_log(program));
         }
 
         for shader in shaders {
@@ -1018,8 +1059,8 @@ Lets add a button to our previous example.</p>
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
     app.run().unwrap();
@@ -1033,11 +1074,11 @@ Another way to add a widget is using the add(widget) method that's offered by wi
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
     my_window.end();
     my_window.show();
 
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.add(&amp;but);
 
     app.run().unwrap();
@@ -1047,12 +1088,12 @@ fn main() {
 <p>Constructing widgets can also be done using a builder pattern:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let but1 = Button::new(10, 10, 80, 40, &quot;Button 1&quot;);
+</span>let but1 = Button::new(10, 10, 80, 40, "Button 1");
 // OR
 let but1 = Button::default()
     .with_pos(10, 10)
     .with_size(80, 40)
-    .with_label(&quot;Button 1&quot;);
+    .with_label("Button 1");
 <span class="boring">}</span></code></pre></pre>
 <p>Which basically have the same effect.</p>
 <p>As it stands, our application shows a window with a button, the button is clickable but does nothing!
@@ -1080,11 +1121,11 @@ fn main() {
     let app = app::App::default();
     let mut wind = Window::default().with_size(400, 300);
     let mut frame = Frame::default().with_size(200, 100).center_of(&amp;wind);
-    let mut but = Button::new(160, 210, 80, 40, &quot;Click me!&quot;);
+    let mut but = Button::new(160, 210, 80, 40, "Click me!");
     wind.end();
     wind.show();
 
-    but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
+    but.set_callback(move |_| frame.set_label("Hello world"));
 
     app.run().unwrap();
 }</code></pre></pre>
@@ -1098,8 +1139,8 @@ fn main() {
     let mut win = window::Window::default().with_size(400, 300);
     let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
     // only one can be toggled by the user at a time, the other will be automatically untoggled
-    let btn1 = button::RadioRoundButton::default().with_label(&quot;Option 1&quot;);
-    let btn2 = button::RadioRoundButton::default().with_label(&quot;Option 2&quot;);
+    let btn1 = button::RadioRoundButton::default().with_label("Option 1");
+    let btn2 = button::RadioRoundButton::default().with_label("Option 2");
     flex.end();
     win.end();
     win.show();
@@ -1117,19 +1158,19 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
-    let btn1 = button::CheckButton::default().with_label(&quot;Option 1&quot;);
-    let btn2 = button::CheckButton::default().with_label(&quot;Option 2&quot;);
-    let mut btn3 = button::Button::default().with_label(&quot;Submit&quot;);
+    let btn1 = button::CheckButton::default().with_label("Option 1");
+    let btn2 = button::CheckButton::default().with_label("Option 2");
+    let mut btn3 = button::Button::default().with_label("Submit");
     flex.end();
     win.end();
     win.show();
 
     btn3.set_callback(move |btn3| {
         if btn1.value() {
-            println!(&quot;btn1 is checked&quot;);
+            println!("btn1 is checked");
         }
         if btn2.value() {
-            println!(&quot;btn2 is checked&quot;);
+            println!("btn2 is checked");
         }
     });
 
@@ -1146,21 +1187,21 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let flex = group::Flex::default().with_size(100, 200).column().center_of_parent();
-    let mut btn1 = button::CheckButton::default().with_label(&quot;Option 1&quot;);
+    let mut btn1 = button::CheckButton::default().with_label("Option 1");
     btn1.set_value(true);
     // Similarly you can use btn1.set_checked(true)
-    let btn2 = button::CheckButton::default().with_label(&quot;Option 2&quot;);
-    let mut btn3 = button::Button::default().with_label(&quot;Submit&quot;);
+    let btn2 = button::CheckButton::default().with_label("Option 2");
+    let mut btn3 = button::Button::default().with_label("Submit");
     flex.end();
     win.end();
     win.show();
 
     btn3.set_callback(move |btn3| {
         if btn1.value() {
-            println!(&quot;btn1 is checked&quot;);
+            println!("btn1 is checked");
         }
         if btn2.value() {
-            println!(&quot;btn2 is checked&quot;);
+            println!("btn2 is checked");
         }
     });
 
@@ -1198,21 +1239,21 @@ fn main() {
 <p>All widgets takes a label in the ::new() constructor or using with_label() or set_label():</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let btn = button::Button::new(160, 200, 80, 30, &quot;Click&quot;);
+</span>let btn = button::Button::new(160, 200, 80, 30, "Click");
 <span class="boring">}</span></code></pre></pre>
-<p>This button has a label showing the text &quot;click&quot;.</p>
+<p>This button has a label showing the text "click".</p>
 <p>Similarly we can use set_label() or with_label():</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let btn = button::Button::default().with_label(&quot;Click&quot;);
+</span>let btn = button::Button::default().with_label("Click");
 // or
 let mut btn = button::Button::default();
-btn.set_label(&quot;Click&quot;);
+btn.set_label("Click");
 <span class="boring">}</span></code></pre></pre>
 <p>However, the ::new() constructor takes in reality an optional to a static str, so the following would fail:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let label = String::from(&quot;Click&quot;); // label is not a static str
+</span>let label = String::from("Click"); // label is not a static str
 let mut btn = button::Button::new(160, 200, 80, 30, &amp;label);
 <span class="boring">}</span></code></pre></pre>
 <p>You would want to use <code>btn.set_label(&amp;label);</code> in this case. The reason is that FLTK expects a <code>const char *</code> label, which is the equivalent of Rust's <code>&amp;'static str</code>. These strings live in the program's code segment. If you disassemble an application, it would show all these static strings. And since these have a static lifetime, FLTK by default doesn't store them.
@@ -1221,14 +1262,14 @@ While using set_label() and with_label() calls FLTK's Fl_Widget::copy_label() me
 <div align="center">
 <p><img src="https://www.fltk.org/doc-1.4/symbols.png" alt="symbols" /></p>
 </div>
-<p>The @ sign may also be followed by the following optional &quot;formatting&quot; characters, in this order:</p>
+<p>The @ sign may also be followed by the following optional "formatting" characters, in this order:</p>
 <ul>
 <li>'#' forces square scaling, rather than distortion to the widget's shape.</li>
 <li>+[1-9] or -[1-9] tweaks the scaling a little bigger or smaller.</li>
 <li>'$' flips the symbol horizontally, '%' flips it vertically.</li>
 <li>[0-9] - rotates by a multiple of 45 degrees. '5' and '6' do no rotation while the others point in the direction of that key on a numeric keypad. '0', followed by four more digits rotates the symbol by that amount in degrees.</li>
 </ul>
-<p>Thus, to show a very large arrow pointing downward you would use the label string &quot;@+92-&gt;&quot;.</p>
+<p>Thus, to show a very large arrow pointing downward you would use the label string "@+92-&gt;".</p>
 <p>Symbols and text can be combined in a label, however the symbol must be at the beginning and/or at the end of the text. If the text spans multiple lines, the symbol or symbols will scale up to match the height of all the lines:</p>
 <div align="center">
 <p><img src="https://www.fltk.org/doc-1.4/symbol-examples.png" alt="ex" /></p>
@@ -1246,7 +1287,7 @@ Widgets implementing the GroupExt trait, are characterized by having to call <co
 fn main() {
     let a = app::App::default();
     let mut win = Window::default().with_size(400, 300);
-    let _btn = Button::new(160, 200, 80, 30, &quot;Click&quot;);
+    let _btn = Button::new(160, 200, 80, 30, "Click");
     win.end();
     win.show();
     a.run().unwrap();
@@ -1267,7 +1308,7 @@ fn main() {
     win.end();
     win.show();
 
-    let btn = Button::new(160, 200, 80, 30, &quot;Click&quot;);
+    let btn = Button::new(160, 200, 80, 30, "Click");
     win.add(&amp;btn);
     
     a.run().unwrap();
@@ -1287,7 +1328,7 @@ fn main() {
     win.show();
 
     win.begin();
-    let _btn = Button::new(160, 200, 80, 30, &quot;Click&quot;);
+    let _btn = Button::new(160, 200, 80, 30, "Click");
     win.end();
 
     a.run().unwrap();
@@ -1302,11 +1343,11 @@ fn main() {
     let mut pack = group::Pack::default_fill();
     pack.set_spacing(5);
     for i in 0..2 {
-        frame::Frame::default().with_size(0, 40).with_label(&amp;format!(&quot;field {}&quot;, i));
+        frame::Frame::default().with_size(0, 40).with_label(&amp;format!("field {}", i));
         input::Input::default().with_size(0, 40);
     }
     frame::Frame::default().with_size(0, 40); // a filler
-    button::Button::default().with_size(0, 40).with_label(&quot;Submit&quot;);
+    button::Button::default().with_size(0, 40).with_label("Submit");
     pack.end();
     wind.end();
     wind.show();
@@ -1323,11 +1364,11 @@ fn main() {
     let mut pack = group::Pack::default_fill().with_type(group::PackType::Horizontal);
     pack.set_spacing(5);
     for i in 0..2 {
-        frame::Frame::default().with_size(40, 0).with_label(&amp;format!(&quot;field {}&quot;, i));
+        frame::Frame::default().with_size(40, 0).with_label(&amp;format!("field {}", i));
         input::Input::default().with_size(40, 0);
     }
     frame::Frame::default().with_size(40, 0); // a filler
-    button::Button::default().with_size(40, 0).with_label(&quot;Submit&quot;);
+    button::Button::default().with_size(40, 0).with_label("Submit");
     pack.end();
     wind.end();
     wind.show();
@@ -1351,19 +1392,19 @@ fn main() {
 fn main() {
     let app = app::App::default();
     let mut wind = window::Window::default().with_size(400, 300);
-    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
-    choice.add_choice(&quot;Choice 1&quot;);
-    choice.add_choice(&quot;Choice 2&quot;);
-    choice.add_choice(&quot;Choice 3&quot;);
-    // You can also simply type choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label("Select item");
+    choice.add_choice("Choice 1");
+    choice.add_choice("Choice 2");
+    choice.add_choice("Choice 3");
+    // You can also simply type choice.add_choice("Choice 1|Choice 2|Choice 3");
     wind.end();
     wind.show();
 
     choice.set_callback(|c| {
         match c.value() {
-            0 =&gt; println!(&quot;choice 1 selected&quot;),
-            1 =&gt; println!(&quot;choice 2 selected&quot;),
-            2 =&gt; println!(&quot;choice 3 selected&quot;),
+            0 =&gt; println!("choice 1 selected"),
+            1 =&gt; println!("choice 2 selected"),
+            2 =&gt; println!("choice 3 selected"),
             _ =&gt; unreachable!(),
         }
     });
@@ -1379,17 +1420,17 @@ fn main() {
 fn main() {
     let app = app::App::default();
     let mut wind = window::Window::default().with_size(400, 300);
-    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
-    choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label("Select item");
+    choice.add_choice("Choice 1|Choice 2|Choice 3");
     wind.end();
     wind.show();
 
     choice.set_callback(|c| {
         if let Some(choice) = c.choice() {
             match choice.as_str() {
-                &quot;Choice 1&quot; =&gt; println!(&quot;choice 1 selected&quot;),
-                &quot;Choice 2&quot; =&gt; println!(&quot;choice 2 selected&quot;),
-                &quot;Choice 3&quot; =&gt; println!(&quot;choice 3 selected&quot;),
+                "Choice 1" =&gt; println!("choice 1 selected"),
+                "Choice 2" =&gt; println!("choice 2 selected"),
+                "Choice 3" =&gt; println!("choice 3 selected"),
                 _ =&gt; unreachable!(),
             }
         }
@@ -1406,25 +1447,25 @@ fn main() {
     let mut choice = menu::Choice::default()
         .with_size(80, 30)
         .center_of_parent()
-        .with_label(&quot;Select item&quot;);
+        .with_label("Select item");
 
     choice.add(
-        &quot;Choice 1&quot;,
+        "Choice 1",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
-        |_| println!(&quot;choice 1 selected&quot;),
+        |_| println!("choice 1 selected"),
     );
     choice.add(
-        &quot;Choice 2&quot;,
+        "Choice 2",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
-        |_| println!(&quot;choice 2 selected&quot;),
+        |_| println!("choice 2 selected"),
     );
     choice.add(
-        &quot;Choice 3&quot;,
+        "Choice 3",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
-        |_| println!(&quot;choice 3 selected&quot;),
+        |_| println!("choice 3 selected"),
     );
 
     wind.end();
@@ -1438,14 +1479,14 @@ fn main() {
 fn menu_cb(m: &amp;mut impl MenuExt) {
     if let Some(choice) = m.choice() {
         match choice.as_str() {
-            &quot;New\t&quot; =&gt; println!(&quot;New&quot;),
-            &quot;Open\t&quot; =&gt; println!(&quot;Open&quot;),
-            &quot;Third&quot; =&gt; println!(&quot;Third&quot;),
-            &quot;Quit\t&quot; =&gt; {
-                println!(&quot;Quitting&quot;);
+            "New\t" =&gt; println!("New"),
+            "Open\t" =&gt; println!("Open"),
+            "Third" =&gt; println!("Third"),
+            "Quit\t" =&gt; {
+                println!("Quitting");
                 app::quit();
             },
-            _ =&gt; println!(&quot;{}&quot;, choice),
+            _ =&gt; println!("{}", choice),
         }
     }
 }
@@ -1453,56 +1494,56 @@ fn menu_cb(m: &amp;mut impl MenuExt) {
 fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
-    let mut menubar = menu::MenuBar::new(0, 0, 400, 40, &quot;rew&quot;);
-    menubar.add(&quot;File/New\t&quot;, Shortcut::None, menu::MenuFlag::Normal, menu_cb);
+    let mut menubar = menu::MenuBar::new(0, 0, 400, 40, "rew");
+    menubar.add("File/New\t", Shortcut::None, menu::MenuFlag::Normal, menu_cb);
     menubar.add(
-        &quot;File/Open\t&quot;,
+        "File/Open\t",
         Shortcut::None,
         menu::MenuFlag::Normal,
         menu_cb,
     );
     let idx = menubar.add(
-        &quot;File/Recent&quot;,
+        "File/Recent",
         Shortcut::None,
         menu::MenuFlag::Submenu,
         menu_cb,
     );
     menubar.add(
-        &quot;File/Recent/First\t&quot;,
+        "File/Recent/First\t",
         Shortcut::None,
         menu::MenuFlag::Normal,
         menu_cb,
     );
     menubar.add(
-        &quot;File/Recent/Second\t&quot;,
+        "File/Recent/Second\t",
         Shortcut::None,
         menu::MenuFlag::Normal,
         menu_cb,
     );
     menubar.add(
-        &quot;File/Quit\t&quot;,
+        "File/Quit\t",
         Shortcut::None,
         menu::MenuFlag::Normal,
         menu_cb,
     );
-    let mut btn1 = button::Button::new(160, 150, 80, 30, &quot;Modify 1&quot;);
-    let mut btn2 = button::Button::new(160, 200, 80, 30, &quot;Modify 2&quot;);
-    let mut clear = button::Button::new(160, 250, 80, 30, &quot;Clear&quot;);
+    let mut btn1 = button::Button::new(160, 150, 80, 30, "Modify 1");
+    let mut btn2 = button::Button::new(160, 200, 80, 30, "Modify 2");
+    let mut clear = button::Button::new(160, 250, 80, 30, "Clear");
     win.end();
     win.show();
 
     btn1.set_callback({
         let menubar = menubar.clone();
         move |_| {
-            if let Some(mut item) = menubar.find_item(&quot;File/Recent&quot;) {
+            if let Some(mut item) = menubar.find_item("File/Recent") {
                 item.add(
-                    &quot;Recent/Third&quot;,
+                    "Recent/Third",
                     Shortcut::None,
                     menu::MenuFlag::Normal,
                     menu_cb,
                 );
                 item.add(
-                    &quot;Recent/Fourth&quot;,
+                    "Recent/Fourth",
                     Shortcut::None,
                     menu::MenuFlag::Normal,
                     menu_cb,
@@ -1515,13 +1556,13 @@ fn main() {
         let mut menubar = menubar.clone();
         move |_| {
             menubar.add(
-                &quot;File/Recent/Fifth\t&quot;,
+                "File/Recent/Fifth\t",
                 Shortcut::None,
                 menu::MenuFlag::Normal,
                 menu_cb,
             );
             menubar.add(
-                &quot;File/Recent/Sixth\t&quot;,
+                "File/Recent/Sixth\t",
                 Shortcut::None,
                 menu::MenuFlag::Normal,
                 menu_cb,
@@ -1552,24 +1593,24 @@ fn main() {
     let mut choice = menu::Choice::default()
         .with_size(80, 30)
         .center_of_parent()
-        .with_label(&quot;Select item&quot;);
+        .with_label("Select item");
 
     choice.add_emit(
-        &quot;Choice 1&quot;,
+        "Choice 1",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         s.clone(),
         Message::Choice1,
     );
     choice.add_emit(
-        &quot;Choice 2&quot;,
+        "Choice 2",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         s.clone(),
         Message::Choice2,
     );
     choice.add_emit(
-        &quot;Choice 3&quot;,
+        "Choice 3",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         s,
@@ -1582,9 +1623,9 @@ fn main() {
     while a.wait() {
         if let Some(msg) = r.recv() {
             match msg {
-                Message::Choice1 =&gt; println!(&quot;choice 1 selected&quot;),
-                Message::Choice2 =&gt; println!(&quot;choice 2 selected&quot;),
-                Message::Choice3 =&gt; println!(&quot;choice 3 selected&quot;),
+                Message::Choice1 =&gt; println!("choice 1 selected"),
+                Message::Choice2 =&gt; println!("choice 2 selected"),
+                Message::Choice3 =&gt; println!("choice 3 selected"),
             }
         }
     }
@@ -1596,7 +1637,7 @@ For simple drop down widgets, go with the first method. For an application's men
 </span>        let mut menu = menu::SysMenuBar::default().with_size(800, 35);
         menu.set_frame(FrameType::FlatBox);
         menu.add_emit(
-            &quot;&amp;File/New...\t&quot;,
+            "&amp;File/New...\t",
             Shortcut::Ctrl | 'n',
             menu::MenuFlag::Normal,
             *s,
@@ -1604,7 +1645,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Open...\t&quot;,
+            "&amp;File/Open...\t",
             Shortcut::Ctrl | 'o',
             menu::MenuFlag::Normal,
             *s,
@@ -1612,7 +1653,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Save\t&quot;,
+            "&amp;File/Save\t",
             Shortcut::Ctrl | 's',
             menu::MenuFlag::Normal,
             *s,
@@ -1620,7 +1661,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Save as...\t&quot;,
+            "&amp;File/Save as...\t",
             Shortcut::Ctrl | 'w',
             menu::MenuFlag::Normal,
             *s,
@@ -1628,7 +1669,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Print...\t&quot;,
+            "&amp;File/Print...\t",
             Shortcut::Ctrl | 'p',
             menu::MenuFlag::MenuDivider,
             *s,
@@ -1636,7 +1677,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Quit\t&quot;,
+            "&amp;File/Quit\t",
             Shortcut::Ctrl | 'q',
             menu::MenuFlag::Normal,
             *s,
@@ -1644,7 +1685,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;Edit/Cut\t&quot;,
+            "&amp;Edit/Cut\t",
             Shortcut::Ctrl | 'x',
             menu::MenuFlag::Normal,
             *s,
@@ -1652,7 +1693,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;Edit/Copy\t&quot;,
+            "&amp;Edit/Copy\t",
             Shortcut::Ctrl | 'c',
             menu::MenuFlag::Normal,
             *s,
@@ -1660,7 +1701,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;Edit/Paste\t&quot;,
+            "&amp;Edit/Paste\t",
             Shortcut::Ctrl | 'v',
             menu::MenuFlag::Normal,
             *s,
@@ -1668,14 +1709,14 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;Help/About\t&quot;,
+            "&amp;Help/About\t",
             Shortcut::None,
             menu::MenuFlag::Normal,
             *s,
             Message::About,
         );
 
-        if let Some(mut item) = menu.find_item(&quot;&amp;File/Quit\t&quot;) {
+        if let Some(mut item) = menu.find_item("&amp;File/Quit\t") {
             item.set_label_color(Color::Red);
         }
 <span class="boring">}</span></code></pre></pre>
@@ -1704,15 +1745,15 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let flex = group::Flex::default().with_size(100, 100).column().center_of_parent();
-    let label = frame::Frame::default().with_label(&quot;Enter age&quot;);
+    let label = frame::Frame::default().with_label("Enter age");
     let input = input::IntInput::default();
-    let mut btn = button::Button::default().with_label(&quot;Submit&quot;);
+    let mut btn = button::Button::default().with_label("Submit");
     flex.end();
     win.end();
     win.show();
 
     btn.set_callback(move |btn| {
-        println!(&quot;your age is {}&quot;, input.value());
+        println!("your age is {}", input.value());
     });
 
     a.run().unwrap();
@@ -1726,9 +1767,9 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let flex = group::Flex::default().with_size(200, 50).column().center_of_parent();
-    let label = frame::Frame::default().with_label(&quot;Check this text:&quot;);
+    let label = frame::Frame::default().with_label("Check this text:");
     let mut output = output::Output::default();
-    output.set_value(&quot;You can't edit this!&quot;);
+    output.set_value("You can't edit this!");
     flex.end();
     win.end();
     win.show();
@@ -1742,15 +1783,15 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let flex = group::Flex::default().with_size(100, 100).column().center_of_parent();
-    let label = frame::Frame::default().with_label(&quot;Enter age&quot;);
+    let label = frame::Frame::default().with_label("Enter age");
     let mut input = input::IntInput::default();
-    let mut btn = button::Button::default().with_label(&quot;Submit&quot;);
+    let mut btn = button::Button::default().with_label("Submit");
     flex.end();
     win.end();
     win.show();
 
     btn.set_callback(move |btn| {
-        println!(&quot;your age is {}&quot;, input.value());
+        println!("your age is {}", input.value());
         input.set_readonly(true);
     });
 
@@ -1794,7 +1835,7 @@ fn main() {
     win.show();
 
     slider.set_callback(|s| {
-        println!(&quot;slider at {}&quot;, s.value());
+        println!("slider at {}", s.value());
     });
     a.run().unwrap();
 }</code></pre></pre>
@@ -1974,9 +2015,9 @@ fn main() {
     win.end();
     win.show();
 
-    buf.set_text(&quot;Hello world!&quot;);
-    buf.append(&quot;\n&quot;);
-    buf.append(&quot;This is a text editor!&quot;);
+    buf.set_text("Hello world!");
+    buf.append("\n");
+    buf.append("This is a text editor!");
 
     a.run().unwrap();
 }</code></pre></pre>
@@ -1997,9 +2038,9 @@ fn main() {
 
     let mut my_buf = txt.buffer().unwrap();
 
-    my_buf.set_text(&quot;Hello world!&quot;);
-    my_buf.append(&quot;\n&quot;);
-    my_buf.append(&quot;This is a text editor!&quot;);
+    my_buf.set_text("Hello world!");
+    my_buf.append("\n");
+    my_buf.append("This is a text editor!");
 
     a.run().unwrap();
 }</code></pre></pre>
@@ -2009,9 +2050,9 @@ fn main() {
 fn main() {
     let a = app::App::default();
     let mut buf = text::TextBuffer::default();
-    buf.set_text(&quot;Hello world!&quot;);
-    buf.append(&quot;\n&quot;);
-    buf.append(&quot;This is a text editor!&quot;);
+    buf.set_text("Hello world!");
+    buf.append("\n");
+    buf.append("This is a text editor!");
 
     let mut win = window::Window::default().with_size(400, 300);
     let mut txt = text::TextDisplay::default().with_size(390, 290).center_of_parent();
@@ -2053,12 +2094,12 @@ fn main() {
     let a = app::App::default();
     let mut buf = text::TextBuffer::default();
     let mut sbuf = text::TextBuffer::default();
-    buf.set_text(&quot;Hello world!&quot;);
-    sbuf.set_text(&amp;&quot;A&quot;.repeat(&quot;Hello world!&quot;.len())); // A represents the first entry in the table, repeated for every letter
-    buf.append(&quot;\n&quot;); 
-    sbuf.append(&quot;B&quot;); // Although a new line and the style might not apply, but it's needed to avoid messing out subsequent entries
-    buf.append(&quot;This is a text editor!&quot;);
-    sbuf.append(&amp;&quot;C&quot;.repeat(&quot;This is a text editor!&quot;.len()));
+    buf.set_text("Hello world!");
+    sbuf.set_text(&amp;"A".repeat("Hello world!".len())); // A represents the first entry in the table, repeated for every letter
+    buf.append("\n"); 
+    sbuf.append("B"); // Although a new line and the style might not apply, but it's needed to avoid messing out subsequent entries
+    buf.append("This is a text editor!");
+    sbuf.append(&amp;"C".repeat("This is a text editor!".len()));
 
     let mut win = window::Window::default().with_size(400, 300);
     let mut txt = text::TextDisplay::default()
@@ -2090,18 +2131,18 @@ fn main() {
 fn main() {
     let app = app::App::default();
     let mut win = window::Window::default().with_size(900, 300);
-    let mut b = browser::Browser::new(10, 10, 900 - 20, 300 - 20, &quot;&quot;);
+    let mut b = browser::Browser::new(10, 10, 900 - 20, 300 - 20, "");
     let widths = &amp;[50, 50, 50, 70, 70, 40, 40, 70, 70, 50];
     b.set_column_widths(widths);
     b.set_column_char('\t');
     // we can now use the '\t' char in our add method.
-    b.add(&quot;USER\tPID\t%CPU\t%MEM\tVSZ\tRSS\tTTY\tSTAT\tSTART\tTIME\tCOMMAND&quot;);
-    b.add(&quot;root\t2888\t0.0\t0.0\t1352\t0\ttty3\tSW\tAug15\t0:00\t@b@f/sbin/mingetty tty3&quot;);
-    b.add(&quot;erco\t2889\t0.0\t13.0\t221352\t0\ttty3\tR\tAug15\t1:34\t@b@f/usr/local/bin/render a35 0004&quot;);
-    b.add(&quot;uucp\t2892\t0.0\t0.0\t1352\t0\tttyS0\tSW\tAug15\t0:00\t@b@f/sbin/agetty -h 19200 ttyS0 vt100&quot;);
-    b.add(&quot;root\t13115\t0.0\t0.0\t1352\t0\ttty2\tSW\tAug30\t0:00\t@b@f/sbin/mingetty tty2&quot;);
+    b.add("USER\tPID\t%CPU\t%MEM\tVSZ\tRSS\tTTY\tSTAT\tSTART\tTIME\tCOMMAND");
+    b.add("root\t2888\t0.0\t0.0\t1352\t0\ttty3\tSW\tAug15\t0:00\t@b@f/sbin/mingetty tty3");
+    b.add("erco\t2889\t0.0\t13.0\t221352\t0\ttty3\tR\tAug15\t1:34\t@b@f/usr/local/bin/render a35 0004");
+    b.add("uucp\t2892\t0.0\t0.0\t1352\t0\tttyS0\tSW\tAug15\t0:00\t@b@f/sbin/agetty -h 19200 ttyS0 vt100");
+    b.add("root\t13115\t0.0\t0.0\t1352\t0\ttty2\tSW\tAug30\t0:00\t@b@f/sbin/mingetty tty2");
     b.add(
-        &quot;root\t13464\t0.0\t0.0\t1352\t0\ttty1\tSW\tAug30\t0:00\t@b@f/sbin/mingetty tty1 --noclear&quot;,
+        "root\t13464\t0.0\t0.0\t1352\t0\ttty1\tSW\tAug30\t0:00\t@b@f/sbin/mingetty tty1 --noclear",
     );
     win.end();
     win.show();
@@ -2133,11 +2174,11 @@ fn main() {
 fn main() {
     let app = app::App::default();
     let mut win = window::Window::default().with_size(900, 300);
-    let mut b = browser::Browser::new(10, 10, 900 - 20, 300 - 20, &quot;&quot;);
+    let mut b = browser::Browser::new(10, 10, 900 - 20, 300 - 20, "");
     let widths = &amp;[50, 50, 50, 70, 70, 40, 40, 70, 70, 50];
     b.set_column_widths(widths);
     b.set_column_char('\t');
-    b.add(&quot;USER\tPID\t@C88%CPU\t%MEM\tVSZ\tRSS\tTTY\tSTAT\tSTART\tTIME\tCOMMAND&quot;);
+    b.add("USER\tPID\t@C88%CPU\t%MEM\tVSZ\tRSS\tTTY\tSTAT\tSTART\tTIME\tCOMMAND");
     win.end();
     win.show();
     app.run().unwrap();
@@ -2153,9 +2194,9 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
-    tree.add(&quot;Item 1&quot;);
-    tree.add(&quot;Item 2&quot;);
-    tree.add(&quot;Item 3&quot;);
+    tree.add("Item 1");
+    tree.add("Item 2");
+    tree.add("Item 3");
     win.end();
     win.show();
 
@@ -2169,32 +2210,32 @@ fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
-    tree.add(&quot;Item 1&quot;);
-    tree.add(&quot;Item 2&quot;);
-    tree.add(&quot;Item 3&quot;);
-    tree.add(&quot;Item 3/Subitem 1&quot;);
-    tree.add(&quot;Item 3/Subitem 2&quot;);
-    tree.add(&quot;Item 3/Subitem 3&quot;);
+    tree.add("Item 1");
+    tree.add("Item 2");
+    tree.add("Item 3");
+    tree.add("Item 3/Subitem 1");
+    tree.add("Item 3/Subitem 2");
+    tree.add("Item 3/Subitem 3");
     win.end();
     win.show();
 
     a.run().unwrap();
 }</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727026-bfcff44f-2b01-4679-937b-3e7d441dfdf0.png" alt="image" /></p>
-<p>If you try the above code, you'll see that the root item is always indicated by the label &quot;ROOT&quot;. This can be changed using the set_root_label() method:</p>
+<p>If you try the above code, you'll see that the root item is always indicated by the label "ROOT". This can be changed using the set_root_label() method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
     let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
-    tree.set_root_label(&quot;My Tree&quot;);
-    tree.add(&quot;Item 1&quot;);
-    tree.add(&quot;Item 2&quot;);
-    tree.add(&quot;Item 3&quot;);
-    tree.add(&quot;Item 3/Subitem 1&quot;);
-    tree.add(&quot;Item 3/Subitem 2&quot;);
-    tree.add(&quot;Item 3/Subitem 3&quot;);
+    tree.set_root_label("My Tree");
+    tree.add("Item 1");
+    tree.add("Item 2");
+    tree.add("Item 3");
+    tree.add("Item 3/Subitem 1");
+    tree.add("Item 3/Subitem 2");
+    tree.add("Item 3/Subitem 3");
     win.end();
     win.show();
 
@@ -2210,19 +2251,19 @@ fn main() {
     let mut win = window::Window::default().with_size(400, 300);
     let mut tree = tree::Tree::default().with_size(390, 290).center_of_parent();
     tree.set_show_root(false);
-    tree.add(&quot;Item 1&quot;);
-    tree.add(&quot;Item 2&quot;);
-    tree.add(&quot;Item 3&quot;);
-    tree.add(&quot;Item 3/Subitem 1&quot;);
-    tree.add(&quot;Item 3/Subitem 2&quot;);
-    tree.add(&quot;Item 3/Subitem 3&quot;);
+    tree.add("Item 1");
+    tree.add("Item 2");
+    tree.add("Item 3");
+    tree.add("Item 3/Subitem 1");
+    tree.add("Item 3/Subitem 2");
+    tree.add("Item 3/Subitem 3");
     win.end();
     win.show();
 
     
     tree.set_callback(|t| {
         if let Some(item) = t.first_selected_item() {
-            println!(&quot;{} selected&quot;, item.label().unwrap());
+            println!("{} selected", item.label().unwrap());
         }
     });
 
@@ -2240,19 +2281,19 @@ fn main() {
     tree.set_connector_style(tree::TreeConnectorStyle::Solid);
     tree.set_connector_color(enums::Color::Red.inactive());
     tree.set_show_root(false);
-    tree.add(&quot;Item 1&quot;);
-    tree.add(&quot;Item 2&quot;);
-    tree.add(&quot;Item 3&quot;);
-    tree.add(&quot;Item 3/Subitem 1&quot;);
-    tree.add(&quot;Item 3/Subitem 2&quot;);
-    tree.add(&quot;Item 3/Subitem 3&quot;);
+    tree.add("Item 1");
+    tree.add("Item 2");
+    tree.add("Item 3");
+    tree.add("Item 3/Subitem 1");
+    tree.add("Item 3/Subitem 2");
+    tree.add("Item 3/Subitem 3");
     win.end();
     win.show();
 
     
     tree.set_callback(|t| {
         if let Some(item) = t.first_selected_item() {
-            println!(&quot;{} selected&quot;, item.label().unwrap());
+            println!("{} selected", item.label().unwrap());
         }
     });
 
@@ -2269,12 +2310,12 @@ fn main() {
     tree.set_connector_style(tree::TreeConnectorStyle::Solid);
     tree.set_connector_color(enums::Color::Red.inactive());
     tree.set_show_root(false);
-    tree.add(&quot;Item 1&quot;);
-    tree.add(&quot;Item 2&quot;);
-    tree.add(&quot;Item 3&quot;);
-    tree.add(&quot;Item 3/Subitem 1&quot;);
-    tree.add(&quot;Item 3/Subitem 2&quot;);
-    tree.add(&quot;Item 3/Subitem 3&quot;);
+    tree.add("Item 1");
+    tree.add("Item 2");
+    tree.add("Item 3");
+    tree.add("Item 3/Subitem 1");
+    tree.add("Item 3/Subitem 2");
+    tree.add("Item 3/Subitem 3");
     win.end();
     win.show();
 
@@ -2282,7 +2323,7 @@ fn main() {
     tree.set_callback(|t| {
         if let Some(items) = t.get_selected_items() {
             for i in items {
-                println!(&quot;{} selected&quot;, t.item_pathname(&amp;i).unwrap());
+                println!("{} selected", t.item_pathname(&amp;i).unwrap());
             }
         }
     });
@@ -2326,10 +2367,10 @@ fn main() {
         }
     }
 
-    // set the value at the row,column 4,5 to &quot;another&quot;, notice that indices start at 0
-    table.set_cell_value(3, 4, &quot;another&quot;);
+    // set the value at the row,column 4,5 to "another", notice that indices start at 0
+    table.set_cell_value(3, 4, "another");
 
-    assert_eq!(table.cell_value(3, 4), &quot;another&quot;);
+    assert_eq!(table.cell_value(3, 4), "another");
 
     // To avoid closing the window on hitting the escape key
     wind.set_callback(move |_| {
@@ -2342,7 +2383,7 @@ fn main() {
 }</code></pre></pre>
 <p><img src="https://github.com/fltk-rs/fltk-table/raw/HEAD/screenshots/styled.jpg" alt="fltk-table" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="custom-widgets"><a class="header" href="#custom-widgets">Custom widgets</a></h1>
-<p>fltk-rs allows you to create custom widgets. We need to define a struct which extends an already existing widget and widget type. The most basic widget type being widget::Widget. 
+<p>fltk-rs allows you to create custom widgets. We need to define a struct which extends an already existing widget and widget type. The most basic widget type being widget::Widget.
 1- Define your struct and whatever other internal data needs to be stored in it.</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2406,12 +2447,12 @@ widget_extends!(MyCustomButton, widget::Widget, inner);
 <pre><pre class="playground"><code class="language-rust edition2021">fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
     app::background(255, 255, 255); // make the background white
-    let mut wind = window::Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
+    let mut wind = window::Window::new(100, 100, 400, 300, "Hello from rust");
     
-    let mut btn = MyCustomButton::new(50, &quot;Click&quot;);
+    let mut btn = MyCustomButton::new(50, "Click");
     // notice that set_color and set_callback are automatically implemented for us!
     btn.set_color(enums::Color::Cyan);
-    btn.set_callback(|_| println!(&quot;Clicked&quot;));
+    btn.set_callback(|_| println!("Clicked"));
     
     wind.end();
     wind.show();
@@ -2419,7 +2460,7 @@ widget_extends!(MyCustomButton, widget::Widget, inner);
     app.run().unwrap();
     
     // print the number our button was clicked on exit
-    println!(&quot;Our button was clicked {} times&quot;, btn.num_clicks());
+    println!("Our button was clicked {} times", btn.num_clicks());
 }</code></pre></pre>
 <p>Full code:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -2474,21 +2515,21 @@ widget_extends!(MyCustomButton, widget::Widget, inner);
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
     app::background(255, 255, 255); // make the background white
-    let mut wind = window::Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
-    let mut btn = MyCustomButton::new(50, &quot;Click&quot;);
+    let mut wind = window::Window::new(100, 100, 400, 300, "Hello from rust");
+    let mut btn = MyCustomButton::new(50, "Click");
     btn.set_color(enums::Color::Cyan);
-    btn.set_callback(|_| println!(&quot;Clicked&quot;));
+    btn.set_callback(|_| println!("Clicked"));
     wind.end();
     wind.show();
 
     app.run().unwrap();
     
     // print the number our button was clicked on exit
-    println!(&quot;Our button was clicked {} times&quot;, btn.num_clicks());
+    println!("Our button was clicked {} times", btn.num_clicks());
 }</code></pre></pre>
 <p><img src="https://user-images.githubusercontent.com/37966791/145727718-fd0ee71f-f0c2-4438-a038-9b6950638a35.png" alt="image" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dialogs"><a class="header" href="#dialogs">Dialogs</a></h1>
-<p>fltk offers several dialog types including file dialogs and others. </p>
+<p>fltk offers several dialog types including file dialogs and others.</p>
 <h2 id="file-dialogs"><a class="header" href="#file-dialogs">File dialogs</a></h2>
 <p>There are 2 types, the native file dialog and FLTK's own file dialog. Native dialogs just show a the OS's own dialog. For windows, that's the win32 dialog, for MacOS, that's the Cocoa dialog, and for other posix systems, it depends on what you're running. On GNOME and other gtk-based desktops, it shows the gtk dialog and on KDE it shows kdialog.</p>
 <h3 id="native-dialogs"><a class="header" href="#native-dialogs">Native dialogs</a></h3>
@@ -2501,7 +2542,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(80, 30)
-        .with_label(&quot;Select file&quot;)
+        .with_label("Select file")
         .center_of_parent();
 
     wind.end();
@@ -2510,7 +2551,7 @@ fn main() {
     btn.set_callback(|_| {
         let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseFile);
         dialog.show();
-        println!(&quot;{:?}&quot;, dialog.filename());
+        println!("{:?}", dialog.filename());
     });
 
     app.run().unwrap();
@@ -2525,7 +2566,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Select files&quot;)
+        .with_label("Select files")
         .center_of_parent();
 
     wind.end();
@@ -2534,7 +2575,7 @@ fn main() {
     btn.set_callback(|_| {
         let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseMultiFile);
         dialog.show();
-        println!(&quot;{:?}&quot;, dialog.filenames());
+        println!("{:?}", dialog.filenames());
     });
 
     app.run().unwrap();
@@ -2544,9 +2585,9 @@ fn main() {
 </span><span class="boring">fn main() {
 </span>    btn.set_callback(|_| {
         let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseMultiFile);
-        dialog.set_filter(&quot;*.{txt,rs,toml}&quot;);
+        dialog.set_filter("*.{txt,rs,toml}");
         dialog.show();
-        println!(&quot;{:?}&quot;, dialog.filenames());
+        println!("{:?}", dialog.filenames());
     });
 <span class="boring">}</span></code></pre></pre>
 <p>This will only show .txt, .rs and .toml files.</p>
@@ -2560,7 +2601,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Select file&quot;)
+        .with_label("Select file")
         .center_of_parent();
 
     wind.end();
@@ -2568,10 +2609,10 @@ fn main() {
 
     btn.set_callback(|_| {
         let mut dialog = dialog::FileChooser::new(
-            /*start dir*/ &quot;.&quot;,
-            /*pattern*/ &quot;*.{txt,rs,toml}&quot;,
+            /*start dir*/ ".",
+            /*pattern*/ "*.{txt,rs,toml}",
             /*type*/ dialog::FileChooserType::Multi,
-            /*title*/ &quot;Select file:&quot;,
+            /*title*/ "Select file:",
         );
         dialog.show();
         while dialog.shown() {
@@ -2579,7 +2620,7 @@ fn main() {
         }
         if dialog.count() &gt; 1 {
             for i in 1..=dialog.count() { // values start at 1
-                println!(&quot; VALUE[{}]: '{}'&quot;, i, dialog.value(i).unwrap());
+                println!(" VALUE[{}]: '{}'", i, dialog.value(i).unwrap());
             }
         }
     });
@@ -2596,7 +2637,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Select file&quot;)
+        .with_label("Select file")
         .center_of_parent();
 
     wind.end();
@@ -2604,13 +2645,13 @@ fn main() {
 
     btn.set_callback(|_| {
         let file = dialog::file_chooser(
-            &quot;Choose File&quot;,
-            &quot;*.rs&quot;,
-            /*start dir*/ &quot;.&quot;,
+            "Choose File",
+            "*.rs",
+            /*start dir*/ ".",
             /*relative*/ true,
         );
         if let Some(file) = file {
-            println!(&quot;{}&quot;, file);
+            println!("{}", file);
         }
     });
 
@@ -2626,7 +2667,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
@@ -2634,7 +2675,7 @@ fn main() {
 
     btn.set_callback(|_| {
         let mut help = dialog::HelpDialog::new(100, 100, 400, 300);
-        help.set_value(&quot;&lt;h2&gt;Hello world&lt;/h2&gt;&quot;); // this takes html
+        help.set_value("&lt;h2&gt;Hello world&lt;/h2&gt;"); // this takes html
         help.show();
         while help.shown() {
             app::wait();
@@ -2643,7 +2684,7 @@ fn main() {
 
     app.run().unwrap();
 }</code></pre></pre>
-<p>The html can also be loaded using the HelpDialog::load(path_to_html_file) method. </p>
+<p>The html can also be loaded using the HelpDialog::load(path_to_html_file) method.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726889-442d0453-e1d0-4b41-8717-f121fdf860fa.png" alt="image" /></p>
 <h3 id="alert-dialogs"><a class="header" href="#alert-dialogs">Alert dialogs</a></h3>
 <p>FLTK also offers several dialog types which can be conveniently shown using free functions:</p>
@@ -2663,14 +2704,14 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
     wind.show();
 
     btn.set_callback(|_| {
-        dialog::message_default(&quot;Message&quot;);
+        dialog::message_default("Message");
     });
 
     app.run().unwrap();
@@ -2679,7 +2720,7 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    btn.set_callback(|_| {
-        dialog::message(100, 100, &quot;Message&quot;);
+        dialog::message(100, 100, "Message");
     });
 <span class="boring">}</span></code></pre></pre>
 <p>All the previously mentioned functions have to variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
@@ -2692,7 +2733,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
@@ -2700,9 +2741,9 @@ fn main() {
 
     btn.set_callback(|_| {
         // password and input also takes a second arg which is the default value
-        let pass = dialog::password_default(&quot;Enter password:&quot;, &quot;&quot;);
+        let pass = dialog::password_default("Enter password:", "");
         if let Some(pass) = pass {
-            println!(&quot;{}&quot;, pass);
+            println!("{}", pass);
         }
     });
 
@@ -2718,15 +2759,15 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
     wind.show();
 
     btn.set_callback(|_| {
-        let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
-        println!(&quot;{}&quot;, choice);
+        let choice = dialog::choice_default("Would you like to save", "No", "Yes", "Cancel");
+        println!("{}", choice);
     });
 
     app.run().unwrap();
@@ -2736,28 +2777,28 @@ fn main() {
 <p>You have noticed that all of these dialogs didn't have a title. You can add a title also using a free function called before the dialog:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>        dialog::message_title(&quot;Exit!&quot;);
-        let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
+</span>        dialog::message_title("Exit!");
+        let choice = dialog::choice_default("Would you like to save", "No", "Yes", "Cancel");
 <span class="boring">}</span></code></pre></pre>
 <p>You can also set the default title of all these dialog boxes using dialog::message_title_default(), you'll want to do this in the start of your app:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
-    dialog::message_title_default(&quot;My App!&quot;);
+    dialog::message_title_default("My App!");
     let mut wind = window::Window::default().with_size(400, 300);
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
     wind.show();
 
     btn.set_callback(|_| {
-        let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
-        println!(&quot;{}&quot;, choice);
+        let choice = dialog::choice_default("Would you like to save", "No", "Yes", "Cancel");
+        println!("{}", choice);
     });
 
     app.run().unwrap();
@@ -2791,7 +2832,7 @@ impl MyDialog {
     pub fn default() -&gt; Self {
         let mut win = window::Window::default()
             .with_size(400, 100)
-            .with_label(&quot;My Dialog&quot;);
+            .with_label("My Dialog");
         win.set_color(Color::from_rgb(240, 240, 240));
         let mut pack = group::Pack::default()
             .with_size(300, 30)
@@ -2800,10 +2841,10 @@ impl MyDialog {
         pack.set_spacing(20);
         frame::Frame::default()
             .with_size(80, 0)
-            .with_label(&quot;Enter name:&quot;);
+            .with_label("Enter name:");
         let mut inp = input::Input::default().with_size(100, 0);
         inp.set_frame(FrameType::FlatBox);
-        let mut ok = button::Button::default().with_size(80, 0).with_label(&quot;Ok&quot;);
+        let mut ok = button::Button::default().with_size(80, 0).with_label("Ok");
         style_button(&amp;mut ok);
         pack.end();
         win.end();
@@ -2832,7 +2873,7 @@ fn main() {
     win.set_color(Color::from_rgb(240, 240, 240));
     let mut btn = button::Button::default()
         .with_size(80, 30)
-        .with_label(&quot;Click&quot;)
+        .with_label("Click")
         .center_of_parent();
     style_button(&amp;mut btn);
     let mut frame = frame::Frame::new(btn.x() - 40, btn.y() - 100, btn.w() + 80, 30, None);
@@ -2889,12 +2930,12 @@ but.set_callback(|widget| {
 <li>SharedImage: which wraps all the previous types so you don't need to specify the image type.</li>
 <li>TiledImage: which offers a tiled image of any of the concrete types.</li>
 </ul>
-<p>Image types implement the ImageExt trait which offers methods to allow scaling, and retrieving image metadata. 
+<p>Image types implement the ImageExt trait which offers methods to allow scaling, and retrieving image metadata.
 Images can be constructed by passing a path to the image's load() constructor, or for some types, by using a from_data() constructor which accepts image data.</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Takes a path
-let image = image::SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
+let image = image::SvgImage::load("screenshots/RustLogo.svg").unwrap();
 
 /// Takes data
 let image= image::SvgImage::from_data(&amp;data).unwrap();
@@ -2904,11 +2945,11 @@ let image= image::SvgImage::from_data(&amp;data).unwrap();
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
-    let mut wind = Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
+    let mut wind = Window::new(100, 100, 400, 300, "Hello from rust");
 
     let mut frame = Frame::default().with_size(360, 260).center_of(&amp;wind);
     frame.set_frame(FrameType::EngravedBox);
-    let mut image = SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
+    let mut image = SvgImage::load("screenshots/RustLogo.svg").unwrap();
     image.scale(200, 200, true, true);
     frame.set_image(Some(image));
 
@@ -2923,11 +2964,11 @@ fn main() {
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
-    let mut wind = Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
+    let mut wind = Window::new(100, 100, 400, 300, "Hello from rust");
 
     let mut frame = Frame::default().with_size(360, 260).center_of(&amp;wind);
     frame.set_frame(FrameType::EngravedBox);
-    let mut image = SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
+    let mut image = SvgImage::load("screenshots/RustLogo.svg").unwrap();
     frame.draw(move |f| {
         image.scale(f.w(), f.h(), true, true);
         image.draw(f.x() + 40, f.y(), f.w(), f.h());
@@ -2956,11 +2997,11 @@ fn main() {
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
-    but.set_callback(|_| println!(&quot;The button was clicked!&quot;));
+    but.set_callback(|_| println!("The button was clicked!"));
     app.run().unwrap();
 }</code></pre></pre>
 <p>The capture argument is the <code>&amp;mut Self</code> of the widget for which the callback is set:</p>
@@ -2968,15 +3009,15 @@ fn main() {
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
-    but.set_callback(|b| b.set_label(&quot;Clicked!&quot;));
+    but.set_callback(|b| b.set_label("Clicked!"));
     app.run().unwrap();
 }</code></pre></pre>
 <p>The set_callback() methods have default triggers varying by the type of the widget. For buttons it's clicking or pressing enter when the button has focus.
-This can be changed using the set_trigger() method. For buttons this might not make much sense, however for input widgets, the trigger can be set to &quot;CallbackTrigger::Changed&quot; and this will cause changes in the input widget to trigger the callback.</p>
+This can be changed using the set_trigger() method. For buttons this might not make much sense, however for input widgets, the trigger can be set to "CallbackTrigger::Changed" and this will cause changes in the input widget to trigger the callback.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
@@ -2988,21 +3029,21 @@ fn main() {
     win.end();
     win.show();
     inp.set_trigger(enums::CallbackTrigger::Changed);
-    inp.set_callback(|i| println!(&quot;{}&quot;, i.value()));
+    inp.set_callback(|i| println!("{}", i.value()));
     a.run().unwrap();
 }</code></pre></pre>
 <p>This will print on every character input by the user.</p>
-<p>The advanatage of using closures is the ability to &quot;close&quot; on scope arguments, i.e. you can also pass variables from the surrounding scope into the closure:</p>
+<p>The advanatage of using closures is the ability to "close" on scope arguments, i.e. you can also pass variables from the surrounding scope into the closure:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
     but.set_callback(move |_| {
-        my_window.set_label(&quot;button was pressed&quot;);
+        my_window.set_label("button was pressed");
     });
     app.run().unwrap();
 }</code></pre></pre>
@@ -3012,13 +3053,13 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn button_cb(w: &amp;mut impl WidgetExt) {
-    w.set_label(&quot;Clicked&quot;);
+    w.set_label("Clicked");
 }
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
     but.set_callback(button_cb);
@@ -3054,8 +3095,8 @@ fn button_cb(_w: &amp;mut button::Button) {
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Increment!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Increment!");
     my_window.end();
     my_window.show();
     
@@ -3072,13 +3113,13 @@ The call looks like this:</p>
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
 
     but.handle(|_, event| {
-        println!(&quot;The event: {:?}&quot;, event);
+        println!("The event: {:?}", event);
         false
     });
     
@@ -3089,7 +3130,7 @@ fn main() {
 </span><span class="boring">fn main() {
 </span>    but.handle(|_, event| match event {
         Event::Push =&gt; {
-            println!(&quot;I was pushed!&quot;);
+            println!("I was pushed!");
             true
         },
         _ =&gt; false,
@@ -3101,7 +3142,7 @@ fn main() {
 </span><span class="boring">fn main() {
 </span>    but.handle(|b, event| match event {
         Event::Push =&gt; {
-            b.set_label(&quot;Pushed&quot;);
+            b.set_label("Pushed");
             true
         },
         _ =&gt; false,
@@ -3114,8 +3155,8 @@ fn main() {
 fn main() {
     let app = app::App::default();
     
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
 
@@ -3127,7 +3168,7 @@ fn main() {
     while app.wait() {
         if let Some(msg) = r.recv() {
             match msg {
-                true =&gt; println!(&quot;Clicked&quot;),
+                true =&gt; println!("Clicked"),
                 false =&gt; (), // Here we basically do nothing
             }
         }
@@ -3139,7 +3180,7 @@ fn main() {
 </span>    app::add_idle(move || {
         if let Some(msg) = r.recv() {
             match msg {
-                true =&gt; println!(&quot;Clicked&quot;),
+                true =&gt; println!("Clicked"),
                 false =&gt; (), // Here we basically do nothing
             }
         }
@@ -3224,14 +3265,14 @@ impl Counter {
 fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     let app = app::App::default();
     let counter = Counter::new(0);
-    let mut wind = Window::default().with_size(160, 200).with_label(&quot;Counter&quot;);
+    let mut wind = Window::default().with_size(160, 200).with_label("Counter");
     let mut pack = Pack::default().with_size(120, 140).center_of(&amp;wind);
     pack.set_spacing(10);
-    let mut but_inc = Button::default().with_size(0, 40).with_label(&quot;+&quot;);
+    let mut but_inc = Button::default().with_size(0, 40).with_label("+");
     let mut frame = Frame::default()
         .with_size(0, 40)
         .with_label(&amp;counter.clone().value().to_string());
-    let mut but_dec = Button::default().with_size(0, 40).with_label(&quot;-&quot;);
+    let mut but_dec = Button::default().with_size(0, 40).with_label("-");
     pack.end();
     wind.end();
     wind.show();
@@ -3257,7 +3298,7 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 
     Ok(app.run()?)
 }</code></pre></pre>
-<p>The sent i32 signal can be created on the fly, or added to a const local or global, or within an enum. </p>
+<p>The sent i32 signal can be created on the fly, or added to a const local or global, or within an enum.</p>
 <h4 id="advantages"><a class="header" href="#advantages">Advantages:</a></h4>
 <ul>
 <li>No overhead.</li>
@@ -3269,7 +3310,7 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 <h4 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages:</a></h4>
 <ul>
 <li>The signal can only be handled in a widget's handle method.</li>
-<li>The signal is inaccessible within the event loop (for that, you might want to use WidgetExt::emit or channels described previously in this page). </li>
+<li>The signal is inaccessible within the event loop (for that, you might want to use WidgetExt::emit or channels described previously in this page).</li>
 </ul>
 <h2 id="handling-top-level-events"><a class="header" href="#handling-top-level-events">Handling top-level events</a></h2>
 <p>Lets say our app wants to deal with certain key strokes, we can either handle it in our event-loop or as part of our app window's handle method:</p>
@@ -3281,70 +3322,70 @@ use fltk::enums::Key;
 
 pub(crate) fn handle_key(key: Key) {
     match key {
-        Key::Left =&gt; println!(&quot;ArrowLeft&quot;),
-        Key::Up =&gt; println!(&quot;ArrowUp&quot;),
-        Key::Right =&gt; println!(&quot;ArrowRight&quot;),
-        Key::Down =&gt; println!(&quot;ArrowDown&quot;),
-        Key::Escape =&gt; println!(&quot;Escape&quot;),
-        Key::Tab =&gt; println!(&quot;Tab&quot;),
-        Key::BackSpace =&gt; println!(&quot;Backspace&quot;),
-        Key::Insert =&gt; println!(&quot;Insert&quot;),
-        Key::Home =&gt; println!(&quot;Home&quot;),
-        Key::Delete =&gt; println!(&quot;Delete&quot;),
-        Key::End =&gt; println!(&quot;End&quot;),
-        Key::PageDown =&gt; println!(&quot;PageDown&quot;),
-        Key::PageUp =&gt; println!(&quot;PageUp&quot;),
-        Key::Enter =&gt; println!(&quot;Enter&quot;),
+        Key::Left =&gt; println!("ArrowLeft"),
+        Key::Up =&gt; println!("ArrowUp"),
+        Key::Right =&gt; println!("ArrowRight"),
+        Key::Down =&gt; println!("ArrowDown"),
+        Key::Escape =&gt; println!("Escape"),
+        Key::Tab =&gt; println!("Tab"),
+        Key::BackSpace =&gt; println!("Backspace"),
+        Key::Insert =&gt; println!("Insert"),
+        Key::Home =&gt; println!("Home"),
+        Key::Delete =&gt; println!("Delete"),
+        Key::End =&gt; println!("End"),
+        Key::PageDown =&gt; println!("PageDown"),
+        Key::PageUp =&gt; println!("PageUp"),
+        Key::Enter =&gt; println!("Enter"),
         _ =&gt; {
             if let Some(k) = key.to_char() {
                 match k {
-                    ' ' =&gt; println!(&quot;Space&quot;),
-                    'a' =&gt; println!(&quot;A&quot;),
-                    'b' =&gt; println!(&quot;B&quot;),
-                    'c' =&gt; println!(&quot;C&quot;),
-                    'd' =&gt; println!(&quot;D&quot;),
-                    'e' =&gt; println!(&quot;E&quot;),
-                    'f' =&gt; println!(&quot;F&quot;),
-                    'g' =&gt; println!(&quot;G&quot;),
-                    'h' =&gt; println!(&quot;H&quot;),
-                    'i' =&gt; println!(&quot;I&quot;),
-                    'j' =&gt; println!(&quot;J&quot;),
-                    'k' =&gt; println!(&quot;K&quot;),
-                    'l' =&gt; println!(&quot;L&quot;),
-                    'm' =&gt; println!(&quot;M&quot;),
-                    'n' =&gt; println!(&quot;N&quot;),
-                    'o' =&gt; println!(&quot;O&quot;),
-                    'p' =&gt; println!(&quot;P&quot;),
-                    'q' =&gt; println!(&quot;Q&quot;),
-                    'r' =&gt; println!(&quot;R&quot;),
-                    's' =&gt; println!(&quot;S&quot;),
-                    't' =&gt; println!(&quot;T&quot;),
-                    'u' =&gt; println!(&quot;U&quot;),
-                    'v' =&gt; println!(&quot;V&quot;),
-                    'w' =&gt; println!(&quot;W&quot;),
-                    'x' =&gt; println!(&quot;X&quot;),
-                    'y' =&gt; println!(&quot;Y&quot;),
-                    'z' =&gt; println!(&quot;Z&quot;),
-                    '0' =&gt; println!(&quot;Num0&quot;),
-                    '1' =&gt; println!(&quot;Num1&quot;),
-                    '2' =&gt; println!(&quot;Num2&quot;),
-                    '3' =&gt; println!(&quot;Num3&quot;),
-                    '4' =&gt; println!(&quot;Num4&quot;),
-                    '5' =&gt; println!(&quot;Num5&quot;),
-                    '6' =&gt; println!(&quot;Num6&quot;),
-                    '7' =&gt; println!(&quot;Num7&quot;),
-                    '8' =&gt; println!(&quot;Num8&quot;),
-                    '9' =&gt; println!(&quot;Num9&quot;),
-                    _ =&gt; println!(&quot;Ignored char!&quot;),
+                    ' ' =&gt; println!("Space"),
+                    'a' =&gt; println!("A"),
+                    'b' =&gt; println!("B"),
+                    'c' =&gt; println!("C"),
+                    'd' =&gt; println!("D"),
+                    'e' =&gt; println!("E"),
+                    'f' =&gt; println!("F"),
+                    'g' =&gt; println!("G"),
+                    'h' =&gt; println!("H"),
+                    'i' =&gt; println!("I"),
+                    'j' =&gt; println!("J"),
+                    'k' =&gt; println!("K"),
+                    'l' =&gt; println!("L"),
+                    'm' =&gt; println!("M"),
+                    'n' =&gt; println!("N"),
+                    'o' =&gt; println!("O"),
+                    'p' =&gt; println!("P"),
+                    'q' =&gt; println!("Q"),
+                    'r' =&gt; println!("R"),
+                    's' =&gt; println!("S"),
+                    't' =&gt; println!("T"),
+                    'u' =&gt; println!("U"),
+                    'v' =&gt; println!("V"),
+                    'w' =&gt; println!("W"),
+                    'x' =&gt; println!("X"),
+                    'y' =&gt; println!("Y"),
+                    'z' =&gt; println!("Z"),
+                    '0' =&gt; println!("Num0"),
+                    '1' =&gt; println!("Num1"),
+                    '2' =&gt; println!("Num2"),
+                    '3' =&gt; println!("Num3"),
+                    '4' =&gt; println!("Num4"),
+                    '5' =&gt; println!("Num5"),
+                    '6' =&gt; println!("Num6"),
+                    '7' =&gt; println!("Num7"),
+                    '8' =&gt; println!("Num8"),
+                    '9' =&gt; println!("Num9"),
+                    _ =&gt; println!("Ignored char!"),
                 }
             } else {
-                println!(&quot;Ignored key!&quot;);
+                println!("Ignored key!");
             }
         }
     }
 }
 <span class="boring">}</span></code></pre></pre>
-<p>Notice how fltk-rs doesn't have an enum for all character keys, instead we use key.to_char() when we have already matched the keys we're interested in. </p>
+<p>Notice how fltk-rs doesn't have an enum for all character keys, instead we use key.to_char() when we have already matched the keys we're interested in.</p>
 <p>Now lets use our handle_key(). As stated previously, it can be used as part of the event-loop:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">// main.rs
 use fltk::{
@@ -3465,7 +3506,7 @@ fn main() {
                 if dnd &amp;&amp; released {
                     let path = app::event_text();
                     let path = path.trim();
-                    let path = path.replace(&quot;file://&quot;, &quot;&quot;);
+                    let path = path.replace("file://", "");
                     let path = std::path::PathBuf::from(&amp;path);
                     if path.exists() {
                         // we use a timeout to avoid pasting the path into the buffer
@@ -3572,10 +3613,10 @@ impl MyApp {
             .with_size(100, 200)
             .column()
             .center_of_parent();
-        let mut inc = button::Button::default().with_label(&quot;+&quot;);
+        let mut inc = button::Button::default().with_label("+");
         inc.emit(s, Message::Inc);
         let frame = frame::Frame::default().with_label(&amp;count.to_string());
-        let mut dec = button::Button::default().with_label(&quot;-&quot;);
+        let mut dec = button::Button::default().with_label("-");
         dec.emit(s, Message::Dec);
         col.end();
         main_win.end();
@@ -3652,7 +3693,7 @@ impl Sandbox for Counter {
     }
 
     fn title(&amp;self) -&gt; String {
-        String::from(&quot;Counter - fltk-rs&quot;)
+        String::from("Counter - fltk-rs")
     }
 
     fn update(&amp;mut self, message: Message) {
@@ -3669,11 +3710,11 @@ impl Sandbox for Counter {
     fn view(&amp;mut self) {
         let col = Flex::default_fill().column();
         Button::default()
-            .with_label(&quot;Increment&quot;)
+            .with_label("Increment")
             .on_event(Message::IncrementPressed);
         Frame::default().with_label(&amp;self.value.to_string());
         Button::default()
-            .with_label(&quot;Decrement&quot;)
+            .with_label("Decrement")
             .on_event(Message::DecrementPressed);
         col.end();
     }
@@ -3689,14 +3730,14 @@ fn main() {
     let mut wind = Window::default()
         .with_size(160, 200)
         .center_screen()
-        .with_label(&quot;Counter&quot;);
+        .with_label("Counter");
     let flex = Flex::default()
         .with_size(120, 160)
         .center_of_parent()
         .column();
-    let but_inc: Listener&lt;_&gt; = Button::default().with_label(&quot;+&quot;).into();
+    let but_inc: Listener&lt;_&gt; = Button::default().with_label("+").into();
     let mut frame = Frame::default();
-    let but_dec: Listener&lt;_&gt; = Button::default().with_label(&quot;-&quot;).into();
+    let but_dec: Listener&lt;_&gt; = Button::default().with_label("-").into();
     flex.end();
     wind.end();
     wind.show();
@@ -3733,8 +3774,8 @@ fn main() {
     let mut win = window::Window::default().with_size(400, 300);
     let mut flex = Flex::new(0, 0, 400, 300, None);
     flex.set_type(group::FlexType::Column);
-    let expanding = button::Button::default().with_label(&quot;Expanding&quot;);
-    let mut normal = button::Button::default().with_label(&quot;Normal&quot;);
+    let expanding = button::Button::default().with_label("Expanding");
+    let mut normal = button::Button::default().with_label("Normal");
     flex.fixed(&amp;mut normal, 30);
     flex.end();
     win.end();
@@ -3756,15 +3797,15 @@ fn main() {
     let mut hpack = group::Pack::default().with_size(190, 40).center_of(&amp;my_window);
     hpack.set_type(group::PackType::Horizontal);
     hpack.set_spacing(30);
-    let _but1 = button::Button::default().with_size(80, 0).with_label(&quot;Button1&quot;);
-    let _but2 = button::Button::default().with_size(80, 0).with_label(&quot;Button2&quot;);
+    let _but1 = button::Button::default().with_size(80, 0).with_label("Button1");
+    let _but2 = button::Button::default().with_size(80, 0).with_label("Button2");
     hpack.end();
     my_window.end();
     my_window.show();
 
     app.run().unwrap();
 }</code></pre></pre>
-<p>This creates a pack widget inside the window, and fills it with 2 buttons. Notice that the x and y coordinates are no longer needed for the buttons. You can also embed packs inside packs like in the calculator example in the repo. 
+<p>This creates a pack widget inside the window, and fills it with 2 buttons. Notice that the x and y coordinates are no longer needed for the buttons. You can also embed packs inside packs like in the calculator example in the repo.
 You can also use the Pack::auto_layout() method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
@@ -3772,11 +3813,11 @@ fn main() {
     let app = app::App::default();
     
     let mut my_window = window::Window::default().with_size(400, 300);
-    let mut hpack = group::Pack::new(0, 200, 400, 100, &quot;&quot;);
+    let mut hpack = group::Pack::new(0, 200, 400, 100, "");
     hpack.set_type(group::PackType::Horizontal);
     hpack.set_spacing(30);
-    let _but1 = button::Button::default().with_label(&quot;Button1&quot;);
-    let _but2 = button::Button::default().with_label(&quot;Button2&quot;);
+    let _but1 = button::Button::default().with_label("Button1");
+    let _but2 = button::Button::default().with_label("Button2");
     hpack.end();
     hpack.auto_layout();
     my_window.end();
@@ -3800,9 +3841,9 @@ fn main() {
     // 5 rows, 5 columns
     grid.set_layout(5, 5); 
     // widget, row, col
-    grid.insert(&amp;mut button::Button::default().with_label(&quot;Click&quot;), 0, 1); 
+    grid.insert(&amp;mut button::Button::default().with_label("Click"), 0, 1); 
     // widget, row, col, row_span, col_span
-    grid.insert_ext(&amp;mut button::Button::default().with_label(&quot;Button 2&quot;), 2, 1, 3, 1); 
+    grid.insert_ext(&amp;mut button::Button::default().with_label("Button 2"), 2, 1, 3, 1); 
     win.end();
     win.show();
     a.run().unwrap();
@@ -3818,19 +3859,19 @@ fn main() {
     let mut wind = window::Window::default()
         .with_size(160, 200)
         .center_screen()
-        .with_label(&quot;Counter&quot;);
+        .with_label("Counter");
     let mut frame = frame::Frame::default()
         .with_size(100, 40)
         .center_of(&amp;wind)
-        .with_label(&quot;0&quot;);
+        .with_label("0");
     let mut but_inc = button::Button::default()
         .size_of(&amp;frame)
         .above_of(&amp;frame, 0)
-        .with_label(&quot;+&quot;);
+        .with_label("+");
     let mut but_dec = button::Button::default()
         .size_of(&amp;frame)
         .below_of(&amp;frame, 0)
-        .with_label(&quot;-&quot;);
+        .with_label("-");
     wind.end();
     wind.show();
     app.run().unwrap();
@@ -3893,7 +3934,7 @@ fn main() {
 <p>If you prefer html hex string colors, you can use the from_hex_str() method:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let col = Color::from_hex_str(&quot;#ff0000&quot;);
+</span>let col = Color::from_hex_str("#ff0000");
 <span class="boring">}</span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="frametypes"><a class="header" href="#frametypes">FrameTypes</a></h1>
 <p>FLTK has a wide range of frame types. These can be found under the enums module:
@@ -3903,11 +3944,11 @@ fn main() {
 
 fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gleam);
-    let mut wind = Window::new(100, 100, 400, 300, &quot;Hello from rust&quot;);
+    let mut wind = Window::new(100, 100, 400, 300, "Hello from rust");
 
     let mut frame = Frame::default().with_size(360, 260).center_of(&amp;wind);
     frame.set_frame(FrameType::EngravedBox);
-    let mut image = SvgImage::load(&quot;screenshots/RustLogo.svg&quot;).unwrap();
+    let mut image = SvgImage::load("screenshots/RustLogo.svg").unwrap();
     image.scale(200, 200, true, true);
     frame.set_image(Some(image));
 
@@ -3940,7 +3981,7 @@ fn down_box(x: i32, y: i32, w: i32, h: i32, c: Color) {
 fn main() {
     let app = app::App::default();
     app::set_frame_type_cb(FrameType::DownBox, down_box, 0, 0, 0, 0);
-    let mut w = window::Window::default().with_size(480, 230).with_label(&quot;Gui&quot;);
+    let mut w = window::Window::default().with_size(480, 230).with_label("Gui");
     w.set_color(Color::from_u32(0xf5f5f5));
 
     let mut txf = input::Input::default().with_size(160, 30).center_of_parent();    
@@ -3965,11 +4006,11 @@ fn main() {
 <li>CourierBoldItalic</li>
 <li>Times</li>
 <li>TimesBold</li>
-<li>TimesItalic </li>
-<li>TimesBoldItalic </li>
-<li>Symbol </li>
-<li>Screen </li>
-<li>ScreenBold </li>
+<li>TimesItalic</li>
+<li>TimesBoldItalic</li>
+<li>Symbol</li>
+<li>Screen</li>
+<li>ScreenBold</li>
 <li>Zapfdingbats</li>
 </ul>
 <p>It also allows loading system and bundled fonts.</p>
@@ -3982,20 +4023,20 @@ fn main() {
     let app = app::App::default().load_system_fonts();
     // To load a font by path, check the App::load_font() method
     let fonts = app::fonts();
-    // println!(&quot;{:?}&quot;, fonts);
+    // println!("{:?}", fonts);
     let mut wind = window::Window::default().with_size(400, 300);
     let mut frame = frame::Frame::default().size_of(&amp;wind);
     frame.set_label_size(30);
     wind.set_color(enums::Color::White);
     wind.end();
     wind.show();
-    println!(&quot;The system has {} fonts!\nStarting slideshow!&quot;, fonts.len());
+    println!("The system has {} fonts!\nStarting slideshow!", fonts.len());
     let mut i = 0;
     while app.wait() {
         if i == fonts.len() {
             i = 0;
         }
-        frame.set_label(&amp;format!(&quot;[{}]&quot;, fonts[i]));
+        frame.set_label(&amp;format!("[{}]", fonts[i]));
         frame.set_label_font(enums::Font::by_index(i));
         app::sleep(0.5);
         i += 1;
@@ -4007,17 +4048,17 @@ fn main() {
 fn main() {
     let app = app::App::default();
 
-    let font = Font::load_font(&quot;angelina.ttf&quot;).unwrap();
+    let font = Font::load_font("angelina.ttf").unwrap();
     Font::set_font(Font::Helvetica, &amp;font);
     app::set_font_size(24);
 
     let mut wind = Window::default().with_size(400, 300);
     let mut frame = Frame::default().with_size(200, 100).center_of(&amp;wind);
-    let mut but = Button::new(160, 210, 80, 40, &quot;Click me!&quot;);
+    let mut but = Button::new(160, 210, 80, 40, "Click me!");
     wind.end();
     wind.show();
 
-    but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
+    but.set_callback(move |_| frame.set_label("Hello world"));
 
     app.run().unwrap();
 }</code></pre></pre>
@@ -4045,7 +4086,7 @@ fn main() {
         // draw angled red text
         set_draw_color(enums::Color::Red);
         set_font(enums::Font::Courier, 16);
-        draw_text_angled(45, &quot;Hello World&quot;, w.w() / 2, w.h() / 2);
+        draw_text_angled(45, "Hello World", w.w() / 2, w.h() / 2);
     });
 
     a.run().unwrap();
@@ -4075,7 +4116,7 @@ fn main() {
 
     let mut wind = Window::default()
         .with_size(WIDTH, HEIGHT)
-        .with_label(&quot;RustyPainter&quot;);
+        .with_label("RustyPainter");
     let mut frame = Frame::default()
         .with_size(WIDTH - 10, HEIGHT - 10)
         .center_of(&amp;wind);
@@ -4087,7 +4128,7 @@ fn main() {
 
     // We fill our offscreen with white
     let offs = Offscreen::new(frame.width(), frame.height()).unwrap();
-    #[cfg(not(target_os = &quot;macos&quot;))]
+    #[cfg(not(target_os = "macos"))]
     {
         offs.begin();
         draw_rect_fill(0, 0, WIDTH - 10, HEIGHT - 10, Color::White);
@@ -4116,9 +4157,9 @@ fn main() {
         let mut x = 0;
         let mut y = 0;
         move |f, ev| {
-            // println!(&quot;{}&quot;, ev);
-            // println!(&quot;coords {:?}&quot;, app::event_coords());
-            // println!(&quot;get mouse {:?}&quot;, app::get_mouse());
+            // println!("{}", ev);
+            // println!("coords {:?}", app::event_coords());
+            // println!("get mouse {:?}", app::get_mouse());
             let offs = offs.borrow_mut();
             match ev {
                 Event::Push =&gt; {
@@ -4178,18 +4219,18 @@ fn main() {
     let app = app::App::default();
     let mut win = window::Window::default()
         .with_size(WIDTH, HEIGHT)
-        .with_label(&quot;Flutter-like!&quot;);
+        .with_label("Flutter-like!");
     let mut bar =
-        frame::Frame::new(0, 0, WIDTH, 60, &quot;  FLTK App!&quot;).with_align(Align::Left | Align::Inside);
+        frame::Frame::new(0, 0, WIDTH, 60, "  FLTK App!").with_align(Align::Left | Align::Inside);
     let mut text = frame::Frame::default()
         .with_size(100, 40)
         .center_of(&amp;win)
-        .with_label(&quot;You have pushed the button this many times:&quot;);
+        .with_label("You have pushed the button this many times:");
     let mut count = frame::Frame::default()
         .size_of(&amp;text)
         .below_of(&amp;text, 0)
-        .with_label(&quot;0&quot;);
-    let mut but = button::Button::new(WIDTH - 100, HEIGHT - 100, 60, 60, &quot;@+6plus&quot;);
+        .with_label("0");
+    let mut but = button::Button::new(WIDTH - 100, HEIGHT - 100, 60, 60, "@+6plus");
     win.end();
     win.make_resizable(true);
     win.show();
@@ -4256,11 +4297,11 @@ fn main() {
     
     let mut wind = Window::default().with_size(400, 300);
     let mut frame = Frame::default().with_size(200, 100).center_of(&amp;wind);
-    let mut but = Button::new(160, 210, 80, 40, &quot;Click me!&quot;);
+    let mut but = Button::new(160, 210, 80, 40, "Click me!");
     wind.end();
     wind.show();
 
-    but.set_callback(move |_| frame.set_label(&quot;Hello world&quot;));
+    but.set_callback(move |_| frame.set_label("Hello world"));
 
     app.run().unwrap();
 }</code></pre></pre>
@@ -4272,12 +4313,12 @@ fn main() {
 fn main() {
     let app = app::App::default();
     app::set_color(255, 255, 255); // white
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
 
     let mut but = button::Button::default()
         .with_pos(160, 210)
         .with_size(80, 40)
-        .with_label(&quot;Button1&quot;);
+        .with_label("Button1");
 
     but.draw2(|b| {
         draw::set_draw_color(Color::Gray0);
@@ -4312,7 +4353,7 @@ fn main() {
     let widget_theme = WidgetTheme::new(ThemeType::Aero);
     widget_theme.apply();
     let mut win = window::Window::default().with_size(400, 300);
-    let mut btn = button::Button::new(160, 200, 80, 30, &quot;Hello&quot;);
+    let mut btn = button::Button::new(160, 200, 80, 30, "Hello");
     btn.set_frame(widget_themes::OS_DEFAULT_BUTTON_UP_BOX);
     win.end();
     win.show();
@@ -4452,13 +4493,13 @@ Similarly for menu items, you can navigate using the keyboard.</p>
 
 let mut menu = menu::MenuBar::default().with_size(800, 35);
 menu.add(
-    &quot;&amp;File/New...\t&quot;,
+    "&amp;File/New...\t",
     Shortcut::Ctrl | 'n',
     menu::MenuFlag::Normal,
     |_m| {},
 );
 
-let mut btn = button::Button::new(100, 100, 80, 30, &quot;Click me&quot;);
+let mut btn = button::Button::new(100, 100, 80, 30, "Click me");
 btn.set_shortcut(enums::Shortcut::Ctrl | 'b');
 <span class="boring">}</span></code></pre></pre>
 <h2 id="keyboard-alternatives-to-pointer-actions"><a class="header" href="#keyboard-alternatives-to-pointer-actions">Keyboard alternatives to pointer actions</a></h2>
@@ -4471,12 +4512,12 @@ Buttons, for example, respond to the enter key automatically if they have focus.
 
 let mut inp = input::Input::new(10, 10, 160, 30, None);
 inp.set_trigger(enums::CallbackTrigger::EnterKey);
-inp.set_callback(|i| println!(&quot;You clicked enter, and the input's current text is: {}&quot;, i.value()));
+inp.set_callback(|i| println!("You clicked enter, and the input's current text is: {}", i.value()));
 <span class="boring">}</span></code></pre></pre>
 <h2 id="ime-support"><a class="header" href="#ime-support">IME support</a></h2>
 <p>The input method editor is automatically enabled for languages which require it like Chinese, Japanese and Korean. FLTK uses the OS provided IME in this case.</p>
 <h2 id="the-ability-to-customize-key-events-for-your-widgets-even-custom-widgets"><a class="header" href="#the-ability-to-customize-key-events-for-your-widgets-even-custom-widgets">The ability to customize key events for your widgets, even custom widgets</a></h2>
-<p>Using the WidgetExt::handle method, you can customize how widgets handle events, including key events. </p>
+<p>Using the WidgetExt::handle method, you can customize how widgets handle events, including key events.</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use fltk::{prelude::*, *};
@@ -4508,7 +4549,7 @@ win.handle(|w, ev| {
 </ul>
 <p>This uses the accesskit crate to complete the accessibility story for FLTK.</p>
 <p>Example:</p>
-<pre><pre class="playground"><code class="language-rust edition2021">#![windows_subsystem = &quot;windows&quot;]
+<pre><pre class="playground"><code class="language-rust edition2021">#![windows_subsystem = "windows"]
 use fltk::{prelude::*, *};
 use fltk_accesskit::{AccessibilityContext, AccessibleApp};
 
@@ -4516,14 +4557,14 @@ fn main() {
     let a = app::App::default().with_scheme(app::Scheme::Oxy);
     let mut w = window::Window::default()
         .with_size(400, 300)
-        .with_label(&quot;Hello fltk-accesskit&quot;);
+        .with_label("Hello fltk-accesskit");
     let col = group::Flex::default()
         .with_size(200, 100)
         .center_of_parent()
         .column();
-    let inp = input::Input::default().with_id(&quot;inp&quot;).with_label(&quot;Enter name:&quot;);
-    let mut btn = button::Button::default().with_label(&quot;Greet&quot;);
-    let out = output::Output::default().with_id(&quot;out&quot;);
+    let inp = input::Input::default().with_id("inp").with_label("Enter name:");
+    let mut btn = button::Button::default().with_label("Greet");
+    let out = output::Output::default().with_id("out");
     col.end();
     w.end();
     w.make_resizable(true);
@@ -4540,16 +4581,16 @@ fn main() {
 }
 
 fn btn_callback(_btn: &amp;mut button::Button) {
-    let inp: input::Input = app::widget_from_id(&quot;inp&quot;).unwrap();
-    let mut out: output::Output = app::widget_from_id(&quot;out&quot;).unwrap();
+    let inp: input::Input = app::widget_from_id("inp").unwrap();
+    let mut out: output::Output = app::widget_from_id("out").unwrap();
     let name = inp.value();
     if name.is_empty() {
         return;
     }
-    out.set_value(&amp;format!(&quot;Hello {}&quot;, name));
+    out.set_value(&amp;format!("Hello {}", name));
 }</code></pre></pre>
 <p>The Accessible trait is implemented for several FLTK widgets.
-The example requires instantiating an fltk_accesskit::AccessibilityContext, in which you pass the root (main window) and the widgets you want recognized by the screen-reader. 
+The example requires instantiating an fltk_accesskit::AccessibilityContext, in which you pass the root (main window) and the widgets you want recognized by the screen-reader.
 Then you would run the App struct using the special method <code>run_with_accessibility</code>.</p>
 <p>A demonstration video can be found <a href="https://www.youtube.com/watch?v=x53Rxjg8IF8">here</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="faq"><a class="header" href="#faq">FAQ</a></h1>
@@ -4563,18 +4604,18 @@ Then you would run the App struct using the special method <code>run_with_access
 </ul>
 <p>If you're not running one of the aforementioned platforms, you'll have to remove the fltk-bundled feature flag in your Cargo.toml file:</p>
 <pre><code class="language-toml">[dependencies]
-fltk = &quot;^1.4&quot;
+fltk = "^1.4"
 </code></pre>
 <p>Furthermore, the fltk-bundled flag assumes you have curl and tar installed (for Windows, they're available in the Native Tools Command Prompt).</p>
 <h3 id="build-fails-on-windows-why-cant-cmake-find-my-toolchain"><a class="header" href="#build-fails-on-windows-why-cant-cmake-find-my-toolchain">Build fails on windows, why can't CMake find my toolchain?</a></h3>
-<p>If you're building using the MSVC toolchain, make sure you run your build (at least your initial build) using the Native Tools Command Prompt, which should appear once you start typing &quot;native&quot; in the start menu, choose the version corresponding to your installed Rust toolchain (x86 or x64). The Native Tools Command Prompt has all the environment variables set correctly for native development. <a href="https://github.com/alexcrichton/cmake-rs">cmake-rs</a> which the bindings use might not be able to find the Visual Studio 2022 generator, in which case, you can try to use the fltk-bundled feature, or use ninja via the use-ninja feature. This requires installing <a href="https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages">Ninja</a> which can be installed with Chocolatey, Scoop or manually.</p>
+<p>If you're building using the MSVC toolchain, make sure you run your build (at least your initial build) using the Native Tools Command Prompt, which should appear once you start typing "native" in the start menu, choose the version corresponding to your installed Rust toolchain (x86 or x64). The Native Tools Command Prompt has all the environment variables set correctly for native development. <a href="https://github.com/alexcrichton/cmake-rs">cmake-rs</a> which the bindings use might not be able to find the Visual Studio 2022 generator, in which case, you can try to use the fltk-bundled feature, or use ninja via the use-ninja feature. This requires installing <a href="https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages">Ninja</a> which can be installed with Chocolatey, Scoop or manually.</p>
 <p>If you're building for the GNU toolchain, make sure that Make is also installed, which usually comes installed in mingw64 toolchain.</p>
 <h3 id="build-fails-on-macos-11-with-an-apple-m1-chip-what-can-i-do"><a class="header" href="#build-fails-on-macos-11-with-an-apple-m1-chip-what-can-i-do">Build fails on MacOS 11 with an Apple M1 chip, what can I do?</a></h3>
-<p>If you're getting &quot;file too small to be an archive&quot; error, you might be hitting this <a href="https://github.com/rust-lang/cargo/issues/8875">issues</a> or this <a href="https://github.com/rust-lang/rust/issues/50220">issue</a>. MacOS's native C/C++ toolchain shouldn't have this issue, and can be installed by running <code>xcode-select --install</code> or by installing XCode. Make sure the corresponding Rust toolchain (aarch64-apple-darwin) is installed as well. You can uninstall other Rust apple-darwin toolchains or use cargo-lipo instead if you need universal/fat binaries.</p>
+<p>If you're getting "file too small to be an archive" error, you might be hitting this <a href="https://github.com/rust-lang/cargo/issues/8875">issues</a> or this <a href="https://github.com/rust-lang/rust/issues/50220">issue</a>. MacOS's native C/C++ toolchain shouldn't have this issue, and can be installed by running <code>xcode-select --install</code> or by installing XCode. Make sure the corresponding Rust toolchain (aarch64-apple-darwin) is installed as well. You can uninstall other Rust apple-darwin toolchains or use cargo-lipo instead if you need universal/fat binaries.</p>
 <h3 id="why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows"><a class="header" href="#why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows">Why do I get a Link error while using the mingw toolchain on windows?</a></h3>
 <p>If the linking fails because of this <a href="https://github.com/rust-lang/rust/issues/47048">issue</a> with older toolchains, it should work by using the fltk-shared feature (an issue with older compilers). Which would also generate a dynamic library which would need to be deployed with your application.</p>
 <pre><code class="language-toml">[dependencies]
-fltk = { version = &quot;^1.4&quot;, features = [&quot;fltk-shared&quot;] }
+fltk = { version = "^1.4", features = ["fltk-shared"] }
 </code></pre>
 <h3 id="why-does-my-msys2-mingw-built-fltk-app-using-fltk-bundled-isnt-self-contained-and-requires-several-dlls"><a class="header" href="#why-does-my-msys2-mingw-built-fltk-app-using-fltk-bundled-isnt-self-contained-and-requires-several-dlls">Why does my msys2 mingw built fltk app using, fltk-bundled, isn't self-contained and requires several dlls?</a></h3>
 <p>If you have installed libgdiplus via pacman, it would require those dependencies on other systems. If you're using the windows sdk-provided libgdiplus, it shouldn't require extra dlls. You can either uninstall libgdiplus that was installed via pacman, or or you can build using the feature flag: <code>no-gdiplus</code>.</p>
@@ -4586,8 +4627,8 @@ fltk = { version = &quot;^1.4&quot;, features = [&quot;fltk-shared&quot;] }
 <li>Use the no-pango feature. Downsides: loss of rtl and cjk language support.</li>
 <li>Set the CFLAGS and CXXFLAGS to correct the global include paths.</li>
 </ul>
-<pre><code>export CFLAGS=&quot;-isystem /usr/include/harfbuzz -isystem /usr/include/cairo&quot;
-export CXXFLAGS=&quot;-isystem /usr/include/harfbuzz -isystem /usr/include/cairo&quot;
+<pre><code>export CFLAGS="-isystem /usr/include/harfbuzz -isystem /usr/include/cairo"
+export CXXFLAGS="-isystem /usr/include/harfbuzz -isystem /usr/include/cairo"
 </code></pre>
 <h3 id="how-do-i-force-cmake-to-use-a-certain-c-compiler"><a class="header" href="#how-do-i-force-cmake-to-use-a-certain-c-compiler">How do I force CMake to use a certain C++ compiler?</a></h3>
 <p>FLTK works with all 3 major compilers. If you would like to change the C++ compiler that's chosen by default by CMake, you can change the CXX environment variable before running the build:</p>
@@ -4596,36 +4637,36 @@ cargo run
 </code></pre>
 <p>CMake caches the C++ compiler variable after it's first run, so if the above failed because of a previous run, you would have to run <code>cargo clean</code> or you can manually delete the CMakeCache.txt file in the build directory.</p>
 <h3 id="can-i-accelerate-the-build-speed"><a class="header" href="#can-i-accelerate-the-build-speed">Can I accelerate the build speed?</a></h3>
-<p>You can use the &quot;use-ninja&quot; feature flag if you have ninja installed. </p>
+<p>You can use the "use-ninja" feature flag if you have ninja installed.</p>
 <h3 id="can-i-cache-a-previous-build-of-the-fltk-library"><a class="header" href="#can-i-cache-a-previous-build-of-the-fltk-library">Can I cache a previous build of the FLTK library?</a></h3>
 <p>You can use the fltk-bundled feature and use either the CFLTK_BUNDLE_DIR or CFLTK_BUNDLE_URL to point to the location of your cached cfltk and fltk libraries.</p>
 <h2 id="deployment"><a class="header" href="#deployment">Deployment</a></h2>
 <h3 id="how-do-i-deploy-my-application"><a class="header" href="#how-do-i-deploy-my-application">How do I deploy my application?</a></h3>
 <p>Rust, by default, statically links your application. FLTK is built also for static linking. That means that the resulting executable can be directly deployed without the need to deploy other files along with it. If you want to create a WIN32 application, Mac OS Bundle or Linux AppImage, please check the question just below!</p>
 <h3 id="why-do-i-get-a-console-window-whenever-i-start-my-gui-app"><a class="header" href="#why-do-i-get-a-console-window-whenever-i-start-my-gui-app">Why do I get a console window whenever I start my GUI app?</a></h3>
-<p>This is the default behavior of the toolchain, and is helpful for debugging purposes. It can be turned off easily by adding <code>#![windows_subsystem = &quot;windows&quot;]</code> at the beginning of your main.rs file if you're on windows. 
-If you would like to keep the console window on debug builds, but not on release builds, you can use <code>#![cfg_attr(not(debug_assertions), windows_subsystem = &quot;windows&quot;)]</code> instead.</p>
+<p>This is the default behavior of the toolchain, and is helpful for debugging purposes. It can be turned off easily by adding <code>#![windows_subsystem = "windows"]</code> at the beginning of your main.rs file if you're on windows.
+If you would like to keep the console window on debug builds, but not on release builds, you can use <code>#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]</code> instead.</p>
 <p>For Mac OS and Linux, this is done by a post-build process to create a Mac OS Bundle or Linux AppImage respectively.</p>
-<p>See <a href="https://github.com/burtonageo/cargo-bundle">cargo-bundle</a> for an automated tool for creating Mac OS app bundles. </p>
+<p>See <a href="https://github.com/burtonageo/cargo-bundle">cargo-bundle</a> for an automated tool for creating Mac OS app bundles.</p>
 <p>See <a href="https://docs.appimage.org/packaging-guide/overview.html#converting-existing-binary-packages">here</a> for directions on creating an AppImage for Linux.</p>
 <h3 id="why-is-the-size-of-my-resulting-executable-larger-than-i-had-expected"><a class="header" href="#why-is-the-size-of-my-resulting-executable-larger-than-i-had-expected">Why is the size of my resulting executable larger than I had expected?</a></h3>
 <p>FLTK is known for it's small applications. Make sure you're building in release, and make sure symbols are stripped using the strip command in Unix-like systems. On Windows it's unnecessary since symbols would end up in the pdb file (which shouldn't be deployed).</p>
-<p>If you need an even smaller size, try using opt-level=&quot;z&quot;:</p>
+<p>If you need an even smaller size, try using opt-level="z":</p>
 <pre><code class="language-toml">[profile.release]
-opt-level = &quot;z&quot;
+opt-level = "z"
 lto = true
 codegen-units = 1
-panic = &quot;abort&quot;
+panic = "abort"
 </code></pre>
 <p>Newer versions of cargo (&gt;1.55) support automatically stripping binaries in the post-build phase:</p>
-<pre><code class="language-toml">cargo-features = [&quot;strip&quot;]
+<pre><code class="language-toml">cargo-features = ["strip"]
 
 [profile.release]
 strip = true
-opt-level = &quot;z&quot;
+opt-level = "z"
 lto = true
 codegen-units = 1
-panic = &quot;abort&quot;
+panic = "abort"
 </code></pre>
 <p>Furthermore, you can build Rust's stdlib optimized for size (it comes optimized for speed by default). More info on that <a href="https://github.com/johnthagen/min-sized-rust">here</a></p>
 <h3 id="can-i-cross-compile-my-application-to-a-mobile-platform-or-wasm"><a class="header" href="#can-i-cross-compile-my-application-to-a-mobile-platform-or-wasm">Can I cross-compile my application to a mobile platform or WASM?</a></h3>
@@ -4644,10 +4685,10 @@ panic = &quot;abort&quot;
 <h3 id="do-you-plan-on-supporting-multithreading-or-asyncawait"><a class="header" href="#do-you-plan-on-supporting-multithreading-or-asyncawait">Do you plan on supporting multithreading or async/await?</a></h3>
 <p>FLTK supports multithreaded and concurrent applications. See the examples dir and the <a href="https://github.com/fltk-rs/demos">fltk-rs demos repo</a> for examples on usage with threads, messages, async_std and tokio (web-todo examples).</p>
 <h3 id="should-i-explicitly-call-applock-and-appunlock"><a class="header" href="#should-i-explicitly-call-applock-and-appunlock">Should I explicitly call app::lock() and app::unlock()?</a></h3>
-<p>fltk-rs surrounds all mutating calls to widgets with a lock on the C++ wrapper side. Normally you wouldn't have to call app::lock() and app::unlock(). 
-This depends however on the support of recursive mutexes in your system. 
-If you notice haning in multithreaded applications, you might have to initialize threads (like xlib threads) by calling app::lock() once in your main thread. 
-In that case, you can wrap widgets in an Arc<Mutex> or surround widget-mutating functions/methods with an app::lock and app::unlock. 
+<p>fltk-rs surrounds all mutating calls to widgets with a lock on the C++ wrapper side. Normally you wouldn't have to call app::lock() and app::unlock().
+This depends however on the support of recursive mutexes in your system.
+If you notice haning in multithreaded applications, you might have to initialize threads (like xlib threads) by calling app::lock() once in your main thread.
+In that case, you can wrap widgets in an Arc<Mutex> or surround widget-mutating functions/methods with an app::lock and app::unlock.
 But that should rarely be required.</p>
 <h2 id="windowing"><a class="header" href="#windowing">Windowing</a></h2>
 <h3 id="why-does-fltk-exit-when-i-hit-the-escape-key"><a class="header" href="#why-does-fltk-exit-when-i-hit-the-escape-key">Why does FLTK exit when I hit the escape key?</a></h3>
@@ -4709,7 +4750,7 @@ Also any function sending a string across FFI is checked for interal null bytes.
 <li><code>CFLTK_WAYLAND_ONLY=&lt;1 or 0&gt;</code> allows building for wayland only without directly linking X11 libs nor relying on their headers for the build process. This only works with the <code>use-wayland</code> feature flag.</li>
 <li><code>CFLTK_BUNDLE_DIR=&lt;path&gt;</code> allows passing a path of prebuilt cfltk and fltk static libs, useful for when a customized build of fltk is needed, or for targetting other arches when building with the <code>fltk-bundled</code> flag.</li>
 <li><code>CFLTK_BUNDLE_URL=&lt;url&gt;</code> similar to above but allows passing a url which will directs the build script to download from the passed url.</li>
-<li><code>FLTK_BACKEND=&lt;x11 or wayland&gt;</code> allows choosing the backend of your hybrid X11/wayland FLTK app. This only works for apps built with <code>use-wayland</code> feature flag. </li>
+<li><code>FLTK_BACKEND=&lt;x11 or wayland&gt;</code> allows choosing the backend of your hybrid X11/wayland FLTK app. This only works for apps built with <code>use-wayland</code> feature flag.</li>
 </ul>
 <h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
 <p>Please refer to the <a href="https://github.com/fltk-rs/fltk-rs/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> page for further information.</p>

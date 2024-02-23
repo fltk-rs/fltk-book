@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -31,7 +31,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -61,42 +61,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">2.</strong> Setup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Cross-Compiling.html"><strong aria-hidden="true">2.1.</strong> Cross Compiling</a></li><li class="chapter-item "><a href="Fluid.html"><strong aria-hidden="true">2.2.</strong> Fluid</a></li></ol></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">3.</strong> The App struct</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">4.</strong> Windows</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="GlutWindow.html"><strong aria-hidden="true">4.1.</strong> GlutWindow</a></li></ol></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">5.</strong> Widgets</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Buttons.html"><strong aria-hidden="true">5.1.</strong> Buttons</a></li><li class="chapter-item "><a href="Labels.html"><strong aria-hidden="true">5.2.</strong> Labels</a></li><li class="chapter-item "><a href="Group-widgets.html"><strong aria-hidden="true">5.3.</strong> Group widgets</a></li><li class="chapter-item "><a href="Menus.html"><strong aria-hidden="true">5.4.</strong> Menus</a></li><li class="chapter-item "><a href="Input-&-Output.html"><strong aria-hidden="true">5.5.</strong> Input & Output</a></li><li class="chapter-item "><a href="Valuators.html"><strong aria-hidden="true">5.6.</strong> Valuators</a></li><li class="chapter-item "><a href="Text.html"><strong aria-hidden="true">5.7.</strong> Text</a></li><li class="chapter-item "><a href="Browsers.html"><strong aria-hidden="true">5.8.</strong> Browsers</a></li><li class="chapter-item "><a href="Trees.html"><strong aria-hidden="true">5.9.</strong> Trees</a></li><li class="chapter-item "><a href="Tables.html"><strong aria-hidden="true">5.10.</strong> Tables</a></li><li class="chapter-item "><a href="Custom-Widgets.html"><strong aria-hidden="true">5.11.</strong> Custom widgets</a></li></ol></li><li class="chapter-item expanded "><a href="Dialogs.html" class="active"><strong aria-hidden="true">6.</strong> Dialogs</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">7.</strong> Images</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">8.</strong> Events</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Drag-&-Drop.html"><strong aria-hidden="true">8.1.</strong> Drag & Drop</a></li><li class="chapter-item "><a href="State-Management.html"><strong aria-hidden="true">8.2.</strong> State Management</a></li></ol></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">9.</strong> Layouts</a></li><li class="chapter-item expanded "><a href="Style.html"><strong aria-hidden="true">10.</strong> Style</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Colors.html"><strong aria-hidden="true">10.1.</strong> Colors</a></li><li class="chapter-item "><a href="FrameTypes.html"><strong aria-hidden="true">10.2.</strong> FrameTypes</a></li><li class="chapter-item "><a href="Fonts.html"><strong aria-hidden="true">10.3.</strong> Fonts</a></li><li class="chapter-item "><a href="Drawing.html"><strong aria-hidden="true">10.4.</strong> Drawing things</a></li><li class="chapter-item "><a href="Styling.html"><strong aria-hidden="true">10.5.</strong> Styling</a></li></ol></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">11.</strong> Animations</a></li><li class="chapter-item expanded "><a href="Accessibility.html"><strong aria-hidden="true">12.</strong> Accessibility</a></li><li class="chapter-item expanded "><a href="FAQ.html"><strong aria-hidden="true">13.</strong> FAQ</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -151,7 +180,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dialogs"><a class="header" href="#dialogs">Dialogs</a></h1>
-<p>fltk offers several dialog types including file dialogs and others. </p>
+<p>fltk offers several dialog types including file dialogs and others.</p>
 <h2 id="file-dialogs"><a class="header" href="#file-dialogs">File dialogs</a></h2>
 <p>There are 2 types, the native file dialog and FLTK's own file dialog. Native dialogs just show a the OS's own dialog. For windows, that's the win32 dialog, for MacOS, that's the Cocoa dialog, and for other posix systems, it depends on what you're running. On GNOME and other gtk-based desktops, it shows the gtk dialog and on KDE it shows kdialog.</p>
 <h3 id="native-dialogs"><a class="header" href="#native-dialogs">Native dialogs</a></h3>
@@ -164,7 +193,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(80, 30)
-        .with_label(&quot;Select file&quot;)
+        .with_label("Select file")
         .center_of_parent();
 
     wind.end();
@@ -173,7 +202,7 @@ fn main() {
     btn.set_callback(|_| {
         let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseFile);
         dialog.show();
-        println!(&quot;{:?}&quot;, dialog.filename());
+        println!("{:?}", dialog.filename());
     });
 
     app.run().unwrap();
@@ -188,7 +217,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Select files&quot;)
+        .with_label("Select files")
         .center_of_parent();
 
     wind.end();
@@ -197,7 +226,7 @@ fn main() {
     btn.set_callback(|_| {
         let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseMultiFile);
         dialog.show();
-        println!(&quot;{:?}&quot;, dialog.filenames());
+        println!("{:?}", dialog.filenames());
     });
 
     app.run().unwrap();
@@ -207,9 +236,9 @@ fn main() {
 </span><span class="boring">fn main() {
 </span>    btn.set_callback(|_| {
         let mut dialog = dialog::NativeFileChooser::new(dialog::NativeFileChooserType::BrowseMultiFile);
-        dialog.set_filter(&quot;*.{txt,rs,toml}&quot;);
+        dialog.set_filter("*.{txt,rs,toml}");
         dialog.show();
-        println!(&quot;{:?}&quot;, dialog.filenames());
+        println!("{:?}", dialog.filenames());
     });
 <span class="boring">}</span></code></pre></pre>
 <p>This will only show .txt, .rs and .toml files.</p>
@@ -223,7 +252,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Select file&quot;)
+        .with_label("Select file")
         .center_of_parent();
 
     wind.end();
@@ -231,10 +260,10 @@ fn main() {
 
     btn.set_callback(|_| {
         let mut dialog = dialog::FileChooser::new(
-            /*start dir*/ &quot;.&quot;,
-            /*pattern*/ &quot;*.{txt,rs,toml}&quot;,
+            /*start dir*/ ".",
+            /*pattern*/ "*.{txt,rs,toml}",
             /*type*/ dialog::FileChooserType::Multi,
-            /*title*/ &quot;Select file:&quot;,
+            /*title*/ "Select file:",
         );
         dialog.show();
         while dialog.shown() {
@@ -242,7 +271,7 @@ fn main() {
         }
         if dialog.count() &gt; 1 {
             for i in 1..=dialog.count() { // values start at 1
-                println!(&quot; VALUE[{}]: '{}'&quot;, i, dialog.value(i).unwrap());
+                println!(" VALUE[{}]: '{}'", i, dialog.value(i).unwrap());
             }
         }
     });
@@ -259,7 +288,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Select file&quot;)
+        .with_label("Select file")
         .center_of_parent();
 
     wind.end();
@@ -267,13 +296,13 @@ fn main() {
 
     btn.set_callback(|_| {
         let file = dialog::file_chooser(
-            &quot;Choose File&quot;,
-            &quot;*.rs&quot;,
-            /*start dir*/ &quot;.&quot;,
+            "Choose File",
+            "*.rs",
+            /*start dir*/ ".",
             /*relative*/ true,
         );
         if let Some(file) = file {
-            println!(&quot;{}&quot;, file);
+            println!("{}", file);
         }
     });
 
@@ -289,7 +318,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
@@ -297,7 +326,7 @@ fn main() {
 
     btn.set_callback(|_| {
         let mut help = dialog::HelpDialog::new(100, 100, 400, 300);
-        help.set_value(&quot;&lt;h2&gt;Hello world&lt;/h2&gt;&quot;); // this takes html
+        help.set_value("&lt;h2&gt;Hello world&lt;/h2&gt;"); // this takes html
         help.show();
         while help.shown() {
             app::wait();
@@ -306,7 +335,7 @@ fn main() {
 
     app.run().unwrap();
 }</code></pre></pre>
-<p>The html can also be loaded using the HelpDialog::load(path_to_html_file) method. </p>
+<p>The html can also be loaded using the HelpDialog::load(path_to_html_file) method.</p>
 <p><img src="https://user-images.githubusercontent.com/37966791/145726889-442d0453-e1d0-4b41-8717-f121fdf860fa.png" alt="image" /></p>
 <h3 id="alert-dialogs"><a class="header" href="#alert-dialogs">Alert dialogs</a></h3>
 <p>FLTK also offers several dialog types which can be conveniently shown using free functions:</p>
@@ -326,14 +355,14 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
     wind.show();
 
     btn.set_callback(|_| {
-        dialog::message_default(&quot;Message&quot;);
+        dialog::message_default("Message");
     });
 
     app.run().unwrap();
@@ -342,7 +371,7 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    btn.set_callback(|_| {
-        dialog::message(100, 100, &quot;Message&quot;);
+        dialog::message(100, 100, "Message");
     });
 <span class="boring">}</span></code></pre></pre>
 <p>All the previously mentioned functions have to variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
@@ -355,7 +384,7 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
@@ -363,9 +392,9 @@ fn main() {
 
     btn.set_callback(|_| {
         // password and input also takes a second arg which is the default value
-        let pass = dialog::password_default(&quot;Enter password:&quot;, &quot;&quot;);
+        let pass = dialog::password_default("Enter password:", "");
         if let Some(pass) = pass {
-            println!(&quot;{}&quot;, pass);
+            println!("{}", pass);
         }
     });
 
@@ -381,15 +410,15 @@ fn main() {
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
     wind.show();
 
     btn.set_callback(|_| {
-        let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
-        println!(&quot;{}&quot;, choice);
+        let choice = dialog::choice_default("Would you like to save", "No", "Yes", "Cancel");
+        println!("{}", choice);
     });
 
     app.run().unwrap();
@@ -399,28 +428,28 @@ fn main() {
 <p>You have noticed that all of these dialogs didn't have a title. You can add a title also using a free function called before the dialog:</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>        dialog::message_title(&quot;Exit!&quot;);
-        let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
+</span>        dialog::message_title("Exit!");
+        let choice = dialog::choice_default("Would you like to save", "No", "Yes", "Cancel");
 <span class="boring">}</span></code></pre></pre>
 <p>You can also set the default title of all these dialog boxes using dialog::message_title_default(), you'll want to do this in the start of your app:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
-    dialog::message_title_default(&quot;My App!&quot;);
+    dialog::message_title_default("My App!");
     let mut wind = window::Window::default().with_size(400, 300);
 
     let mut btn = button::Button::default()
         .with_size(100, 30)
-        .with_label(&quot;Show dialog&quot;)
+        .with_label("Show dialog")
         .center_of_parent();
 
     wind.end();
     wind.show();
 
     btn.set_callback(|_| {
-        let choice = dialog::choice_default(&quot;Would you like to save&quot;, &quot;No&quot;, &quot;Yes&quot;, &quot;Cancel&quot;);
-        println!(&quot;{}&quot;, choice);
+        let choice = dialog::choice_default("Would you like to save", "No", "Yes", "Cancel");
+        println!("{}", choice);
     });
 
     app.run().unwrap();
@@ -454,7 +483,7 @@ impl MyDialog {
     pub fn default() -&gt; Self {
         let mut win = window::Window::default()
             .with_size(400, 100)
-            .with_label(&quot;My Dialog&quot;);
+            .with_label("My Dialog");
         win.set_color(Color::from_rgb(240, 240, 240));
         let mut pack = group::Pack::default()
             .with_size(300, 30)
@@ -463,10 +492,10 @@ impl MyDialog {
         pack.set_spacing(20);
         frame::Frame::default()
             .with_size(80, 0)
-            .with_label(&quot;Enter name:&quot;);
+            .with_label("Enter name:");
         let mut inp = input::Input::default().with_size(100, 0);
         inp.set_frame(FrameType::FlatBox);
-        let mut ok = button::Button::default().with_size(80, 0).with_label(&quot;Ok&quot;);
+        let mut ok = button::Button::default().with_size(80, 0).with_label("Ok");
         style_button(&amp;mut ok);
         pack.end();
         win.end();
@@ -495,7 +524,7 @@ fn main() {
     win.set_color(Color::from_rgb(240, 240, 240));
     let mut btn = button::Button::default()
         .with_size(80, 30)
-        .with_label(&quot;Click&quot;)
+        .with_label("Click")
         .center_of_parent();
     style_button(&amp;mut btn);
     let mut frame = frame::Frame::new(btn.x() - 40, btn.y() - 100, btn.w() + 80, 30, None);
@@ -542,7 +571,7 @@ but.set_callback(|widget| {
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="Images.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="Images.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -556,7 +585,7 @@ but.set_callback(|widget| {
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="Images.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="Images.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

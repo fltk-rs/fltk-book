@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -31,7 +31,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -61,42 +61,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">2.</strong> Setup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Cross-Compiling.html"><strong aria-hidden="true">2.1.</strong> Cross Compiling</a></li><li class="chapter-item "><a href="Fluid.html"><strong aria-hidden="true">2.2.</strong> Fluid</a></li></ol></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">3.</strong> The App struct</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">4.</strong> Windows</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="GlutWindow.html"><strong aria-hidden="true">4.1.</strong> GlutWindow</a></li></ol></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">5.</strong> Widgets</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Buttons.html"><strong aria-hidden="true">5.1.</strong> Buttons</a></li><li class="chapter-item "><a href="Labels.html"><strong aria-hidden="true">5.2.</strong> Labels</a></li><li class="chapter-item "><a href="Group-widgets.html"><strong aria-hidden="true">5.3.</strong> Group widgets</a></li><li class="chapter-item expanded "><a href="Menus.html" class="active"><strong aria-hidden="true">5.4.</strong> Menus</a></li><li class="chapter-item "><a href="Input-&-Output.html"><strong aria-hidden="true">5.5.</strong> Input & Output</a></li><li class="chapter-item "><a href="Valuators.html"><strong aria-hidden="true">5.6.</strong> Valuators</a></li><li class="chapter-item "><a href="Text.html"><strong aria-hidden="true">5.7.</strong> Text</a></li><li class="chapter-item "><a href="Browsers.html"><strong aria-hidden="true">5.8.</strong> Browsers</a></li><li class="chapter-item "><a href="Trees.html"><strong aria-hidden="true">5.9.</strong> Trees</a></li><li class="chapter-item "><a href="Tables.html"><strong aria-hidden="true">5.10.</strong> Tables</a></li><li class="chapter-item "><a href="Custom-Widgets.html"><strong aria-hidden="true">5.11.</strong> Custom widgets</a></li></ol></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">6.</strong> Dialogs</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">7.</strong> Images</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">8.</strong> Events</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Drag-&-Drop.html"><strong aria-hidden="true">8.1.</strong> Drag & Drop</a></li><li class="chapter-item "><a href="State-Management.html"><strong aria-hidden="true">8.2.</strong> State Management</a></li></ol></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">9.</strong> Layouts</a></li><li class="chapter-item expanded "><a href="Style.html"><strong aria-hidden="true">10.</strong> Style</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Colors.html"><strong aria-hidden="true">10.1.</strong> Colors</a></li><li class="chapter-item "><a href="FrameTypes.html"><strong aria-hidden="true">10.2.</strong> FrameTypes</a></li><li class="chapter-item "><a href="Fonts.html"><strong aria-hidden="true">10.3.</strong> Fonts</a></li><li class="chapter-item "><a href="Drawing.html"><strong aria-hidden="true">10.4.</strong> Drawing things</a></li><li class="chapter-item "><a href="Styling.html"><strong aria-hidden="true">10.5.</strong> Styling</a></li></ol></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">11.</strong> Animations</a></li><li class="chapter-item expanded "><a href="Accessibility.html"><strong aria-hidden="true">12.</strong> Accessibility</a></li><li class="chapter-item expanded "><a href="FAQ.html"><strong aria-hidden="true">13.</strong> FAQ</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -167,19 +196,19 @@
 fn main() {
     let app = app::App::default();
     let mut wind = window::Window::default().with_size(400, 300);
-    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
-    choice.add_choice(&quot;Choice 1&quot;);
-    choice.add_choice(&quot;Choice 2&quot;);
-    choice.add_choice(&quot;Choice 3&quot;);
-    // You can also simply type choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label("Select item");
+    choice.add_choice("Choice 1");
+    choice.add_choice("Choice 2");
+    choice.add_choice("Choice 3");
+    // You can also simply type choice.add_choice("Choice 1|Choice 2|Choice 3");
     wind.end();
     wind.show();
 
     choice.set_callback(|c| {
         match c.value() {
-            0 =&gt; println!(&quot;choice 1 selected&quot;),
-            1 =&gt; println!(&quot;choice 2 selected&quot;),
-            2 =&gt; println!(&quot;choice 3 selected&quot;),
+            0 =&gt; println!("choice 1 selected"),
+            1 =&gt; println!("choice 2 selected"),
+            2 =&gt; println!("choice 3 selected"),
             _ =&gt; unreachable!(),
         }
     });
@@ -195,17 +224,17 @@ fn main() {
 fn main() {
     let app = app::App::default();
     let mut wind = window::Window::default().with_size(400, 300);
-    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label(&quot;Select item&quot;);
-    choice.add_choice(&quot;Choice 1|Choice 2|Choice 3&quot;);
+    let mut choice = menu::Choice::default().with_size(80, 30).center_of_parent().with_label("Select item");
+    choice.add_choice("Choice 1|Choice 2|Choice 3");
     wind.end();
     wind.show();
 
     choice.set_callback(|c| {
         if let Some(choice) = c.choice() {
             match choice.as_str() {
-                &quot;Choice 1&quot; =&gt; println!(&quot;choice 1 selected&quot;),
-                &quot;Choice 2&quot; =&gt; println!(&quot;choice 2 selected&quot;),
-                &quot;Choice 3&quot; =&gt; println!(&quot;choice 3 selected&quot;),
+                "Choice 1" =&gt; println!("choice 1 selected"),
+                "Choice 2" =&gt; println!("choice 2 selected"),
+                "Choice 3" =&gt; println!("choice 3 selected"),
                 _ =&gt; unreachable!(),
             }
         }
@@ -222,25 +251,25 @@ fn main() {
     let mut choice = menu::Choice::default()
         .with_size(80, 30)
         .center_of_parent()
-        .with_label(&quot;Select item&quot;);
+        .with_label("Select item");
 
     choice.add(
-        &quot;Choice 1&quot;,
+        "Choice 1",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
-        |_| println!(&quot;choice 1 selected&quot;),
+        |_| println!("choice 1 selected"),
     );
     choice.add(
-        &quot;Choice 2&quot;,
+        "Choice 2",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
-        |_| println!(&quot;choice 2 selected&quot;),
+        |_| println!("choice 2 selected"),
     );
     choice.add(
-        &quot;Choice 3&quot;,
+        "Choice 3",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
-        |_| println!(&quot;choice 3 selected&quot;),
+        |_| println!("choice 3 selected"),
     );
 
     wind.end();
@@ -254,14 +283,14 @@ fn main() {
 fn menu_cb(m: &amp;mut impl MenuExt) {
     if let Some(choice) = m.choice() {
         match choice.as_str() {
-            &quot;New\t&quot; =&gt; println!(&quot;New&quot;),
-            &quot;Open\t&quot; =&gt; println!(&quot;Open&quot;),
-            &quot;Third&quot; =&gt; println!(&quot;Third&quot;),
-            &quot;Quit\t&quot; =&gt; {
-                println!(&quot;Quitting&quot;);
+            "New\t" =&gt; println!("New"),
+            "Open\t" =&gt; println!("Open"),
+            "Third" =&gt; println!("Third"),
+            "Quit\t" =&gt; {
+                println!("Quitting");
                 app::quit();
             },
-            _ =&gt; println!(&quot;{}&quot;, choice),
+            _ =&gt; println!("{}", choice),
         }
     }
 }
@@ -269,56 +298,56 @@ fn menu_cb(m: &amp;mut impl MenuExt) {
 fn main() {
     let a = app::App::default();
     let mut win = window::Window::default().with_size(400, 300);
-    let mut menubar = menu::MenuBar::new(0, 0, 400, 40, &quot;rew&quot;);
-    menubar.add(&quot;File/New\t&quot;, Shortcut::None, menu::MenuFlag::Normal, menu_cb);
+    let mut menubar = menu::MenuBar::new(0, 0, 400, 40, "rew");
+    menubar.add("File/New\t", Shortcut::None, menu::MenuFlag::Normal, menu_cb);
     menubar.add(
-        &quot;File/Open\t&quot;,
+        "File/Open\t",
         Shortcut::None,
         menu::MenuFlag::Normal,
         menu_cb,
     );
     let idx = menubar.add(
-        &quot;File/Recent&quot;,
+        "File/Recent",
         Shortcut::None,
         menu::MenuFlag::Submenu,
         menu_cb,
     );
     menubar.add(
-        &quot;File/Recent/First\t&quot;,
+        "File/Recent/First\t",
         Shortcut::None,
         menu::MenuFlag::Normal,
         menu_cb,
     );
     menubar.add(
-        &quot;File/Recent/Second\t&quot;,
+        "File/Recent/Second\t",
         Shortcut::None,
         menu::MenuFlag::Normal,
         menu_cb,
     );
     menubar.add(
-        &quot;File/Quit\t&quot;,
+        "File/Quit\t",
         Shortcut::None,
         menu::MenuFlag::Normal,
         menu_cb,
     );
-    let mut btn1 = button::Button::new(160, 150, 80, 30, &quot;Modify 1&quot;);
-    let mut btn2 = button::Button::new(160, 200, 80, 30, &quot;Modify 2&quot;);
-    let mut clear = button::Button::new(160, 250, 80, 30, &quot;Clear&quot;);
+    let mut btn1 = button::Button::new(160, 150, 80, 30, "Modify 1");
+    let mut btn2 = button::Button::new(160, 200, 80, 30, "Modify 2");
+    let mut clear = button::Button::new(160, 250, 80, 30, "Clear");
     win.end();
     win.show();
 
     btn1.set_callback({
         let menubar = menubar.clone();
         move |_| {
-            if let Some(mut item) = menubar.find_item(&quot;File/Recent&quot;) {
+            if let Some(mut item) = menubar.find_item("File/Recent") {
                 item.add(
-                    &quot;Recent/Third&quot;,
+                    "Recent/Third",
                     Shortcut::None,
                     menu::MenuFlag::Normal,
                     menu_cb,
                 );
                 item.add(
-                    &quot;Recent/Fourth&quot;,
+                    "Recent/Fourth",
                     Shortcut::None,
                     menu::MenuFlag::Normal,
                     menu_cb,
@@ -331,13 +360,13 @@ fn main() {
         let mut menubar = menubar.clone();
         move |_| {
             menubar.add(
-                &quot;File/Recent/Fifth\t&quot;,
+                "File/Recent/Fifth\t",
                 Shortcut::None,
                 menu::MenuFlag::Normal,
                 menu_cb,
             );
             menubar.add(
-                &quot;File/Recent/Sixth\t&quot;,
+                "File/Recent/Sixth\t",
                 Shortcut::None,
                 menu::MenuFlag::Normal,
                 menu_cb,
@@ -368,24 +397,24 @@ fn main() {
     let mut choice = menu::Choice::default()
         .with_size(80, 30)
         .center_of_parent()
-        .with_label(&quot;Select item&quot;);
+        .with_label("Select item");
 
     choice.add_emit(
-        &quot;Choice 1&quot;,
+        "Choice 1",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         s.clone(),
         Message::Choice1,
     );
     choice.add_emit(
-        &quot;Choice 2&quot;,
+        "Choice 2",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         s.clone(),
         Message::Choice2,
     );
     choice.add_emit(
-        &quot;Choice 3&quot;,
+        "Choice 3",
         enums::Shortcut::None,
         menu::MenuFlag::Normal,
         s,
@@ -398,9 +427,9 @@ fn main() {
     while a.wait() {
         if let Some(msg) = r.recv() {
             match msg {
-                Message::Choice1 =&gt; println!(&quot;choice 1 selected&quot;),
-                Message::Choice2 =&gt; println!(&quot;choice 2 selected&quot;),
-                Message::Choice3 =&gt; println!(&quot;choice 3 selected&quot;),
+                Message::Choice1 =&gt; println!("choice 1 selected"),
+                Message::Choice2 =&gt; println!("choice 2 selected"),
+                Message::Choice3 =&gt; println!("choice 3 selected"),
             }
         }
     }
@@ -412,7 +441,7 @@ For simple drop down widgets, go with the first method. For an application's men
 </span>        let mut menu = menu::SysMenuBar::default().with_size(800, 35);
         menu.set_frame(FrameType::FlatBox);
         menu.add_emit(
-            &quot;&amp;File/New...\t&quot;,
+            "&amp;File/New...\t",
             Shortcut::Ctrl | 'n',
             menu::MenuFlag::Normal,
             *s,
@@ -420,7 +449,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Open...\t&quot;,
+            "&amp;File/Open...\t",
             Shortcut::Ctrl | 'o',
             menu::MenuFlag::Normal,
             *s,
@@ -428,7 +457,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Save\t&quot;,
+            "&amp;File/Save\t",
             Shortcut::Ctrl | 's',
             menu::MenuFlag::Normal,
             *s,
@@ -436,7 +465,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Save as...\t&quot;,
+            "&amp;File/Save as...\t",
             Shortcut::Ctrl | 'w',
             menu::MenuFlag::Normal,
             *s,
@@ -444,7 +473,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Print...\t&quot;,
+            "&amp;File/Print...\t",
             Shortcut::Ctrl | 'p',
             menu::MenuFlag::MenuDivider,
             *s,
@@ -452,7 +481,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;File/Quit\t&quot;,
+            "&amp;File/Quit\t",
             Shortcut::Ctrl | 'q',
             menu::MenuFlag::Normal,
             *s,
@@ -460,7 +489,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;Edit/Cut\t&quot;,
+            "&amp;Edit/Cut\t",
             Shortcut::Ctrl | 'x',
             menu::MenuFlag::Normal,
             *s,
@@ -468,7 +497,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;Edit/Copy\t&quot;,
+            "&amp;Edit/Copy\t",
             Shortcut::Ctrl | 'c',
             menu::MenuFlag::Normal,
             *s,
@@ -476,7 +505,7 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;Edit/Paste\t&quot;,
+            "&amp;Edit/Paste\t",
             Shortcut::Ctrl | 'v',
             menu::MenuFlag::Normal,
             *s,
@@ -484,14 +513,14 @@ For simple drop down widgets, go with the first method. For an application's men
         );
 
         menu.add_emit(
-            &quot;&amp;Help/About\t&quot;,
+            "&amp;Help/About\t",
             Shortcut::None,
             menu::MenuFlag::Normal,
             *s,
             Message::About,
         );
 
-        if let Some(mut item) = menu.find_item(&quot;&amp;File/Quit\t&quot;) {
+        if let Some(mut item) = menu.find_item("&amp;File/Quit\t") {
             item.set_label_color(Color::Red);
         }
 <span class="boring">}</span></code></pre></pre>
@@ -510,7 +539,7 @@ For simple drop down widgets, go with the first method. For an application's men
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="Input-&amp;-Output.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="Input-&amp;-Output.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -524,7 +553,7 @@ For simple drop down widgets, go with the first method. For an application's men
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="Input-&amp;-Output.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="Input-&amp;-Output.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -31,7 +31,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -61,42 +61,71 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> Home</a></li><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">2.</strong> Setup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Cross-Compiling.html" class="active"><strong aria-hidden="true">2.1.</strong> Cross Compiling</a></li><li class="chapter-item "><a href="Fluid.html"><strong aria-hidden="true">2.2.</strong> Fluid</a></li></ol></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">3.</strong> The App struct</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">4.</strong> Windows</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="GlutWindow.html"><strong aria-hidden="true">4.1.</strong> GlutWindow</a></li></ol></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">5.</strong> Widgets</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Buttons.html"><strong aria-hidden="true">5.1.</strong> Buttons</a></li><li class="chapter-item "><a href="Labels.html"><strong aria-hidden="true">5.2.</strong> Labels</a></li><li class="chapter-item "><a href="Group-widgets.html"><strong aria-hidden="true">5.3.</strong> Group widgets</a></li><li class="chapter-item "><a href="Menus.html"><strong aria-hidden="true">5.4.</strong> Menus</a></li><li class="chapter-item "><a href="Input-&-Output.html"><strong aria-hidden="true">5.5.</strong> Input & Output</a></li><li class="chapter-item "><a href="Valuators.html"><strong aria-hidden="true">5.6.</strong> Valuators</a></li><li class="chapter-item "><a href="Text.html"><strong aria-hidden="true">5.7.</strong> Text</a></li><li class="chapter-item "><a href="Browsers.html"><strong aria-hidden="true">5.8.</strong> Browsers</a></li><li class="chapter-item "><a href="Trees.html"><strong aria-hidden="true">5.9.</strong> Trees</a></li><li class="chapter-item "><a href="Tables.html"><strong aria-hidden="true">5.10.</strong> Tables</a></li><li class="chapter-item "><a href="Custom-Widgets.html"><strong aria-hidden="true">5.11.</strong> Custom widgets</a></li></ol></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">6.</strong> Dialogs</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">7.</strong> Images</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">8.</strong> Events</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Drag-&-Drop.html"><strong aria-hidden="true">8.1.</strong> Drag & Drop</a></li><li class="chapter-item "><a href="State-Management.html"><strong aria-hidden="true">8.2.</strong> State Management</a></li></ol></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">9.</strong> Layouts</a></li><li class="chapter-item expanded "><a href="Style.html"><strong aria-hidden="true">10.</strong> Style</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Colors.html"><strong aria-hidden="true">10.1.</strong> Colors</a></li><li class="chapter-item "><a href="FrameTypes.html"><strong aria-hidden="true">10.2.</strong> FrameTypes</a></li><li class="chapter-item "><a href="Fonts.html"><strong aria-hidden="true">10.3.</strong> Fonts</a></li><li class="chapter-item "><a href="Drawing.html"><strong aria-hidden="true">10.4.</strong> Drawing things</a></li><li class="chapter-item "><a href="Styling.html"><strong aria-hidden="true">10.5.</strong> Styling</a></li></ol></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">11.</strong> Animations</a></li><li class="chapter-item expanded "><a href="Accessibility.html"><strong aria-hidden="true">12.</strong> Accessibility</a></li><li class="chapter-item expanded "><a href="FAQ.html"><strong aria-hidden="true">13.</strong> FAQ</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -171,7 +200,7 @@ cargo build --target=&lt;your target&gt; --features=fltk-bundled
 <p>You can specify the linker in a .cargo/config.toml file so you won't have to pass it to the build command:</p>
 <pre><code class="language-toml"># .cargo/config.toml
 [target.aarch64-unknown-linux-gnu]
-linker = &quot;aarch64-linux-gnu-gcc&quot;
+linker = "aarch64-linux-gnu-gcc"
 </code></pre>
 <p>Then:</p>
 <pre><code>cargo build --target=aarch64-unknown-linux-gnu --features=fltk-bundled
@@ -210,11 +239,11 @@ RUN dpkg --add-architecture arm64 &amp;&amp; \
 <p>Notice the architecture appended to the library package's name like: libx11-dev:arm64.</p>
 <p>The Cross.toml contents:</p>
 <pre><code class="language-toml">[target.aarch64-unknown-linux-gnu]
-dockerfile = &quot;./arm64-dockerfile&quot;
+dockerfile = "./arm64-dockerfile"
 </code></pre>
 <p>2- Configuring Cargo.toml:</p>
 <pre><code class="language-toml">[package.metadata.cross.target.aarch64-unknown-linux-gnu]
-pre-build = [&quot;&quot;&quot; \
+pre-build = [""" \
     dpkg --add-architecture arm64 &amp;&amp; \
     apt-get update &amp;&amp; \
     apt-get install --assume-yes --no-install-recommends \
@@ -222,7 +251,7 @@ pre-build = [&quot;&quot;&quot; \
     libxinerama-dev:arm64 libxcursor-dev:arm64 \
     libxrender-dev:arm64  libxfixes-dev:arm64  libgl1-mesa-dev:arm64 \
     libglu1-mesa-dev:arm64 libasound2-dev:arm64 libpango1.0-dev:arm64 \
-    &quot;&quot;&quot;]
+    """]
 </code></pre>
 <p>Then run cross:</p>
 <pre><code>cross build --target=aarch64-unknown-linux-gnu
@@ -260,8 +289,8 @@ cargo build --target=arch64-apple-darwin
 </ul>
 <pre><code class="language-toml"># .cargo/config.toml
 [target.x86_64-pc-windows-gnu]
-linker = &quot;x86_64-w64-mingw32-gcc&quot;
-ar = &quot;x86_64-w64-mingw32-gcc-ar&quot;
+linker = "x86_64-w64-mingw32-gcc"
+ar = "x86_64-w64-mingw32-gcc-ar"
 </code></pre>
 <ul>
 <li>Run the build:</li>
@@ -289,11 +318,11 @@ Assuming you already have cmake already installed.</p>
 <ul>
 <li>You might need to add the following mirrors to /etc/apt/sources.list:</li>
 </ul>
-<pre><code>sudo sed -i &quot;s/deb http/deb [arch=amd64] http/&quot; /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
+<pre><code>sudo sed -i "s/deb http/deb [arch=amd64] http/" /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe" | sudo tee -a /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe" | sudo tee -a /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe" | sudo tee -a /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe" | sudo tee -a /etc/apt/sources.list
 </code></pre>
 <p>The first command changes the current mirrors to reflect your current amd64 system. The others add the arm64 ports to your /etc/apt/sources.list file.</p>
 <ul>
@@ -315,7 +344,7 @@ echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-update
 <p>You can specify the linker in a .cargo/config.toml file so you won't have to pass it to the build command:</p>
 <pre><code class="language-toml"># .cargo/config.toml
 [target.aarch64-unknown-linux-gnu]
-linker = &quot;aarch64-linux-gnu-gcc&quot;
+linker = "aarch64-linux-gnu-gcc"
 </code></pre>
 <p>Then:</p>
 <pre><code>cargo build --target=aarch64-unknown-linux-gnu
@@ -340,11 +369,11 @@ COPY --from=alpine_build target/release/&lt;your binary name&gt; .
 <pre><code class="language-dockerfile">RUN ln -s /usr/bin/x86_64-alpine-linux-musl-gcc /usr/bin/musl-gcc
 RUN ln -s /usr/bin/x86_64-alpine-linux-musl-g++ /usr/bin/musl-g++
 </code></pre>
-<p>You would also need to add &quot;-C target-feature=-crt-static&quot; to RUSTFLAGS due to this rust toolchain issue:
+<p>You would also need to add "-C target-feature=-crt-static" to RUSTFLAGS due to this rust toolchain issue:
 https://github.com/rust-lang/rust/issues/61328</p>
 <p>i.e.</p>
 <pre><code class="language-dockerfile">FROM alpine:latest AS alpine_build
-ENV RUSTUP_HOME=&quot;/usr/local/rustup&quot; CARGO_HOME=&quot;/usr/local/cargo&quot; PATH=&quot;/usr/local/cargo/bin:$PATH&quot; RUSTFLAGS=&quot;-C target-feature=-crt-static&quot;
+ENV RUSTUP_HOME="/usr/local/rustup" CARGO_HOME="/usr/local/cargo" PATH="/usr/local/cargo/bin:$PATH" RUSTFLAGS="-C target-feature=-crt-static"
 RUN apk add git curl cmake make g++ pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
 
 RUN ln -s /usr/bin/x86_64-alpine-linux-musl-gcc /usr/bin/musl-gcc
@@ -367,20 +396,20 @@ RUN apt-get update -qq
 RUN	apt-get install -y --no-install-recommends lsb-release g++-aarch64-linux-gnu g++ cmake curl tar git make
 RUN apt-get install -y ca-certificates &amp;&amp; update-ca-certificates --fresh &amp;&amp; export SSL_CERT_DIR=/etc/ssl/certs
 RUN	dpkg --add-architecture arm64 
-RUN sed -i &quot;s/deb http/deb [arch=amd64] http/&quot; /etc/apt/sources.list
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe&quot; | tee -a /etc/apt/sources.list 
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe&quot; | tee -a /etc/apt/sources.list 
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe&quot; | tee -a /etc/apt/sources.list 
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe&quot; | tee -a /etc/apt/sources.list 
+RUN sed -i "s/deb http/deb [arch=amd64] http/" /etc/apt/sources.list
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe" | tee -a /etc/apt/sources.list 
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe" | tee -a /etc/apt/sources.list 
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe" | tee -a /etc/apt/sources.list 
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe" | tee -a /etc/apt/sources.list 
 RUN	apt-get update -qq &amp;&amp; apt-get install -y --no-install-recommends -o APT::Immediate-Configure=0 libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64
 RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable --profile minimal -y
 
-ENV PATH=&quot;/root/.cargo/bin:$PATH&quot; \
+ENV PATH="/root/.cargo/bin:$PATH" \
 	CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ \
 	CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc \
     CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc \
     CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++ \
-    PKG_CONFIG_PATH=&quot;/usr/lib/aarch64-linux-gnu/pkgconfig/:${PKG_CONFIG_PATH}&quot;
+    PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig/:${PKG_CONFIG_PATH}"
 
 RUN rustup target add aarch64-unknown-linux-gnu
 
@@ -399,13 +428,13 @@ COPY --from=ubuntu_build target/aarch64-unknown-linux-gnu/release/&lt;your binar
 <p>The contents of the CMake toolchain file usually set the CMAKE_SYSTEM_NAME as well as the cross-compilers. Another thing which needs to be set on Linux/BSD is the PKG_CONFIG_EXECUTABLE and PKG_CONFIG_PATH.
 A sample toolchain file:</p>
 <pre><code class="language-cmake">set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR arm64)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 set(triplet aarch64-linux-gnu)
 set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)
 set(CMAKE_CXX_COMPILER /usr/bin/${triplet}-g++)
 set(ENV{PKG_CONFIG_EXECUTABLE} /usr/bin/${triplet}-pkg-config)
-set(ENV{PKG_CONFIG_PATH} &quot;$ENV{PKG_CONFIG_PATH}:/usr/lib/${triplet}/pkgconfig&quot;)
+set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/usr/lib/${triplet}/pkgconfig")
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
@@ -414,6 +443,18 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 </code></pre>
 <p>Note the CMAKE_SYSTEM_PROCESSOR is usually the value of <code>uname -m</code> on the target platform, other possible values can be found <a href="https://stackoverflow.com/a/70498851/9698906">here</a>. We set the triplet variable in this example to aarch64-linux-gnu, which is the prefix used for the gcc/g++ compilers, as well as the cross-compiling aware pkg-config. This triplet is also equivalent to the Rust triplet aarch64-unknown-linux-gnu. The PKG_CONFIG_PATH is set to the directories containing the .pc files for our target, since these are required for the cairo and pango dependencies on Linux/BSD.
 The last 4 options just tell CMake to not mix the include/library paths of both host/target.</p>
+<p>Another toolchain file targetting windows (using the mingw toolchain):</p>
+<pre><code class="language-cmake">set(CMAKE_SYSTEM_NAME Windows)
+
+set(triplet x86_64-w64-mingw32)
+set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)
+set(CMAKE_CXX_COMPILER /usr/bin/${triplet}-g++)
+
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+</code></pre>
 <h2 id="using-cargo-xwin"><a class="header" href="#using-cargo-xwin">Using cargo xwin</a></h2>
 <p>If you need to target windows and the msvc compiler/abi, you can install <a href="https://github.com/rust-cross/cargo-xwin">cargo-xwin</a>:</p>
 <pre><code>cargo install cargo-xwin
@@ -446,7 +487,7 @@ cargo build --target=aarch64-unknown-linux-gnu --features=fltk-config
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="Fluid.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="Fluid.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -460,7 +501,7 @@ cargo build --target=aarch64-unknown-linux-gnu --features=fltk-config
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="Fluid.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="Fluid.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

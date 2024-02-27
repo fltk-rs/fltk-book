@@ -215,7 +215,7 @@ This shows a message at a default location (basically near the pointer). If you 
     });
 ```
 
-All the previously mentioned functions have to variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
+All the previously mentioned functions have 2 variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
 Some dialogs return a value, like choice, input, and password. Input and password return the inputted text, while choice returns an index of the chosen value:
 ```rust
 use fltk::{prelude::*, *};

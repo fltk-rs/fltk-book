@@ -2724,7 +2724,7 @@ fn main() {
         dialog::message(100, 100, "Message");
     });
 <span class="boring">}</span></code></pre></pre>
-<p>All the previously mentioned functions have to variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
+<p>All the previously mentioned functions have 2 variants, one with _default() suffix which doesn't require coordinates, and the other without which requires coordinates.
 Some dialogs return a value, like choice, input, and password. Input and password return the inputted text, while choice returns an index of the chosen value:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
@@ -3773,11 +3773,11 @@ fn main() {
 fn main() {
     let a = app::App::default().with_scheme(app::Scheme::Gtk);
     let mut win = window::Window::default().with_size(400, 300);
-    let mut flex = Flex::new(0, 0, 400, 300, None);
+    let mut flex = group::Flex::new(0, 0, 400, 300, None);
     flex.set_type(group::FlexType::Column);
     let expanding = button::Button::default().with_label("Expanding");
-    let mut normal = button::Button::default().with_label("Normal");
-    flex.fixed(&amp;mut normal, 30);
+    let normal = button::Button::default().with_label("Normal");
+    flex.fixed(&amp;normal, 30);
     flex.end();
     win.end();
     win.show();

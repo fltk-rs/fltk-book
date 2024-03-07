@@ -33,7 +33,7 @@ int main() {
 映射为Rust后：
 ```rust
 fn main() {
-    let wind = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }
@@ -68,9 +68,9 @@ fltk = { version = "^1.4", features = ["fltk-bundled"] }
 现在编写我们的第一个示例，导入必要的 fltk 模块：
 
 ```rust
-use fltk::{prelude::*, window::Window};
+use fltk::{prelude::*, window};
 fn main() {
-    let wind = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }
@@ -78,10 +78,10 @@ fn main() {
 
 运行这段示例，你会发现并没有什么反应。我们还需要使用一行代码运行事件循环（event loop），这相当于在C++中使用`Fl::run()`：
 ```rust
-use fltk::{app, prelude::*, window::Window};
+use fltk::{app, prelude::*, window};
 fn main() {
     let a = app::App::default();
-    let wind = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
     a.run().unwrap();

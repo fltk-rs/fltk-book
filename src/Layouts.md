@@ -18,14 +18,14 @@ fn main() {
     flex.set_type(group::FlexType::Column);
     let expanding = button::Button::default().with_label("Expanding");
     let mut normal = button::Button::default().with_label("Normal");
-    flex.set_size(&mut normal, 30);
+    flex.fixed(&mut normal, 30);
     flex.end();
     win.end();
     win.show();
     a.run().unwrap();
 }
 ```
-`set_size`方法接收一个放在Flex内部的组件，将其大小（高度或宽度）设置为传递的值，示例中设置高度为30。因为这是一个Column类型的Flex，所以传入的值代表组件的高度。
+`fixed`方法 (在1.4.6版本前是 `set_size`)方法 接收一个放在Flex内部的组件，将其大小（高度或宽度）设置为传递的值，示例中设置高度为30。因为这是一个Column类型的Flex，所以传入的值代表组件的高度。
 示例中另一个按钮大小是变的，因为没有为它设置尺寸。参见这个完整的例子：
 
 [示例1](https://github.com/fltk-rs/fltk-rs/blob/master/fltk/examples/flex.rs)

@@ -1,5 +1,6 @@
 # 配置
 
+## 编译依赖
 请确保你的电脑上配置了 Rust (version > 1.45)，CMake (version > 3.11)，Git， C++11 编译工具链，并设置好了PATH，这样便可以方便地构建跨平台程序。我们还提供了特定平台上fltk的捆绑库形式，可以通过启用fltk-bundle这个feature来启用（这里会用到curl来下载库，tar来解包）。如果你安装了 ninja-build 构建工具，你可以使用 "use-ninja" feature来启用。它可能会加快构建速度。
 
 - Windows: 
@@ -25,6 +26,19 @@
     apk add pango-dev fontconfig-dev libxinerama-dev libxfixes-dev libxcursor-dev
     ```
 - Android： Android Studio，Android Sdk， Android Ndk。
+
+## 运行时依赖
+- Windows: None
+- MacOS: None
+- Linux: 您需要 X11 库以及用于绘图的 pango 和 cairo（如果要启用启用-glwindow 功能，还需要 OpenGL）:
+```
+apt-get install -qq --no-install-recommends libx11-6 libxinerama1 libxft2 libxext6 libxcursor1 libxrender1 libxfixes3 libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libpangoxft-1.0-0 libglib2.0-0 libfontconfig1 libglu1-mesa libgl1
+```
+
+注意，如果您安装了编译依赖项（上一个标题），它也会自动安装运行时依赖项。
+
+另外请注意，大多数图形桌面环境已经安装了这些库。如果你想在 CI/docker 中测试已构建的软件包（该环境下没有图形用户界面），上述这个清单将很有用。
+
 
 ## 配置细节
 这一部分将假设你没有安装Rust，分几个不同的环境进行讨论：

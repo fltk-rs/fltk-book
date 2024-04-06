@@ -1,6 +1,6 @@
 # 组控件 Group widgets
 
-组控件包括窗口类型和在`Group` mod中的其他组件，如：Group，Scroll，Pack，Tile，Flex ...等等。
+这里介绍的是fltk中的容器控件，包括窗口类型和在`Group` mod中的其他组件，如：Group，Scroll，Pack，Tile，Flex ...等等。
 它们都实现了`GroupExt Trait`，该Trait中定义了`end()`方法，这些控件必须调用`::end()`方法来表示其包含的范围结束：
 
 ```rust

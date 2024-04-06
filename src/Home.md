@@ -37,7 +37,7 @@ int main() {
 use fltk::{prelude::*, window};
 
 fn main() {
-    let mut wind = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut mut wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }
@@ -75,7 +75,7 @@ fltk = { version = "^1.4", features = ["fltk-bundled"] }
 use fltk::{prelude::*, window::Window};
 
 fn main() {
-    let wind = Window::new(100, 100, 400, 300, "My Window");
+    let mut wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }
@@ -87,7 +87,7 @@ use fltk::{app, prelude::*, window::Window};
 
 fn main() {
     let a = app::App::default();
-    let wind = Window::new(100, 100, 400, 300, "My Window");
+    let mut wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
     a.run().unwrap();

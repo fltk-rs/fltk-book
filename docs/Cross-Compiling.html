@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh-CN" class="sidebar-visible no-js light">
+<html lang="zh-CN" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -8,10 +8,9 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -32,15 +31,16 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -56,50 +56,81 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> 开始</a></li><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">2.</strong> 配置</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Cross-Compiling.html" class="active"><strong aria-hidden="true">2.1.</strong> 交叉编译</a></li><li class="chapter-item "><a href="Fluid.html"><strong aria-hidden="true">2.2.</strong> 使用 Fluid</a></li></ol></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">3.</strong> App 结构</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">4.</strong> 窗口 Windows</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="GlutWindow.html"><strong aria-hidden="true">4.1.</strong> GlutWindow</a></li></ol></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">5.</strong> 组件 Widgets</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Buttons.html"><strong aria-hidden="true">5.1.</strong> 按钮 Buttons</a></li><li class="chapter-item "><a href="Labels.html"><strong aria-hidden="true">5.2.</strong> 标签 Labels</a></li><li class="chapter-item "><a href="Group-widgets.html"><strong aria-hidden="true">5.3.</strong> 组控件 Group widgets</a></li><li class="chapter-item "><a href="Menus.html"><strong aria-hidden="true">5.4.</strong> 菜单 Menus</a></li><li class="chapter-item "><a href="Input-&-Output.html"><strong aria-hidden="true">5.5.</strong> 输入输出 Input & Output</a></li><li class="chapter-item "><a href="Valuators.html"><strong aria-hidden="true">5.6.</strong> 估值器 Valuators</a></li><li class="chapter-item "><a href="Text.html"><strong aria-hidden="true">5.7.</strong> 文字 Text</a></li><li class="chapter-item "><a href="Browsers.html"><strong aria-hidden="true">5.8.</strong> 阅览器 Browsers</a></li><li class="chapter-item "><a href="Trees.html"><strong aria-hidden="true">5.9.</strong> 树 Trees</a></li><li class="chapter-item "><a href="Tables.html"><strong aria-hidden="true">5.10.</strong> 表格 Tables</a></li><li class="chapter-item "><a href="Custom-Widgets.html"><strong aria-hidden="true">5.11.</strong> 自定义组件 Custom widgets</a></li></ol></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">6.</strong> 对话框 Dialogs</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">7.</strong> 图像 Images</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">8.</strong> 事件 Events</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Drag-&-Drop.html"><strong aria-hidden="true">8.1.</strong> 拖放 Drag & Drop</a></li><li class="chapter-item "><a href="State-Management.html"><strong aria-hidden="true">8.2.</strong> 状态管理器 State Management</a></li></ol></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">9.</strong> 布局 Layouts</a></li><li class="chapter-item expanded "><a href="Style.html"><strong aria-hidden="true">10.</strong> 样式 Style</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Colors.html"><strong aria-hidden="true">10.1.</strong> 颜色 Colors</a></li><li class="chapter-item "><a href="FrameTypes.html"><strong aria-hidden="true">10.2.</strong> 边框类型 FrameTypes</a></li><li class="chapter-item "><a href="Fonts.html"><strong aria-hidden="true">10.3.</strong> 字体 Fonts</a></li><li class="chapter-item "><a href="Drawing.html"><strong aria-hidden="true">10.4.</strong> 绘制 Drawing things</a></li><li class="chapter-item "><a href="Styling.html"><strong aria-hidden="true">10.5.</strong> 自定义风格 Styling</a></li></ol></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">11.</strong> 动画 Animations</a></li><li class="chapter-item expanded "><a href="Accessibility.html"><strong aria-hidden="true">12.</strong> 无障碍 Accessibility</a></li><li class="chapter-item expanded "><a href="FAQ.html"><strong aria-hidden="true">13.</strong> FAQ</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -138,7 +169,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -169,7 +200,7 @@ cargo build --target=&lt;your target&gt; --features=fltk-bundled
 <p>你可以在 <code>.cargo/config.toml</code> （HOME下全局配置或在项目根目录下局部配置）中指定好链接器，这样你就不需要在命令中使用了：</p>
 <pre><code># .cargo/config.toml
 [target.aarch64-unknown-linux-gnu]
-linker = &quot;aarch64-linux-gnu-gcc&quot;
+linker = "aarch64-linux-gnu-gcc"
 </code></pre>
 <p>之后便可以直接编译了：</p>
 <pre><code>cargo build --target=aarch64-unknown-linux-gnu --features=fltk-bundled
@@ -210,13 +241,13 @@ RUN dpkg --add-architecture arm64 &amp;&amp; \
 <p>注意库包名称后面的架构，如：libx11-dev:arm64。</p>
 <p>Cross.toml的内容：</p>
 <pre><code class="language-toml">[target.aarch64-unknown-linux-gnu]
-dockerfile = &quot;./arm64-dockerfile&quot;
+dockerfile = "./arm64-dockerfile"
 </code></pre>
 </li>
 <li>
 <p>配置<code>Cargo.toml</code>文件：</p>
 <pre><code class="language-toml">[target.aarch64-unknown-linux-gnu]
-pre-build = [&quot;&quot;&quot; \
+pre-build = [""" \
 dpkg --add-architecture arm64 &amp;&amp; \
 apt-get update &amp;&amp; \
 apt-get install --assume-yes --no-install-recommends \
@@ -224,7 +255,7 @@ libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 \
 libxinerama-dev:arm64 libxcursor-dev:arm64 \
 libxrender-dev:arm64  libxfixes-dev:arm64  libgl1-mesa-dev:arm64 \
 libglu1-mesa-dev:arm64 libasound2-dev:arm64 libpango1.0-dev:arm64 \
-&quot;&quot;&quot;]
+"""]
 </code></pre>
 </li>
 <li>
@@ -263,8 +294,8 @@ cargo build --target=arch64-apple-darwin
 <li>在项目根目录添加<code>.cargo/config.toml</code> （如果你想全局设置的话，也可以修改HOME目录下的相应文件），并指定链接器和打包工具：
 <pre><code class="language-toml"># .cargo/config.toml
 [target.x86_64-pc-windows-gnu]
-linker = &quot;x86_64-w64-mingw32-gcc&quot;
-ar = &quot;x86_64-w64-mingw32-gcc-ar&quot;
+linker = "x86_64-w64-mingw32-gcc"
+ar = "x86_64-w64-mingw32-gcc-ar"
 </code></pre>
 </li>
 <li>运行build：
@@ -289,11 +320,11 @@ ar = &quot;x86_64-w64-mingw32-gcc-ar&quot;
 </code></pre>
 </li>
 <li>你可能需要将下列镜像添加到<code>/etc/apt/sources.list</code>以便下载：
-<pre><code>sudo sed -i &quot;s/deb http/deb [arch=amd64] http/&quot; /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
-echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe&quot; | sudo tee -a /etc/apt/sources.list
+<pre><code>sudo sed -i "s/deb http/deb [arch=amd64] http/" /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe" | sudo tee -a /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe" | sudo tee -a /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe" | sudo tee -a /etc/apt/sources.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe" | sudo tee -a /etc/apt/sources.list
 </code></pre>
 第一条命令改变当前镜像为该系统的 amd64 架构的镜像。其他命令则将 arm64 部分添加到 /etc/apt/sources.list 文件中。</li>
 <li>更新程序清单：
@@ -310,7 +341,7 @@ echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-update
 你可以在 <code>.cargo/config.toml</code> （HOME下全局配置或在项目根目录下局部配置）中指定好链接器，这样你就不需要在命令中使用了：
 <pre><code># .cargo/config.toml
 [target.aarch64-unknown-linux-gnu]
-linker = &quot;aarch64-linux-gnu-gcc&quot;
+linker = "aarch64-linux-gnu-gcc"
 </code></pre>
 之后便可以运行：
 <pre><code>cargo build --target=aarch64-unknown-linux-gnu
@@ -347,20 +378,20 @@ RUN apt-get update -qq
 RUN	apt-get install -y --no-install-recommends lsb-release g++-aarch64-linux-gnu g++ cmake curl tar git make
 RUN apt-get install -y ca-certificates &amp;&amp; update-ca-certificates --fresh &amp;&amp; export SSL_CERT_DIR=/etc/ssl/certs
 RUN	dpkg --add-architecture arm64 
-RUN sed -i &quot;s/deb http/deb [arch=amd64] http/&quot; /etc/apt/sources.list
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe&quot; | tee -a /etc/apt/sources.list 
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe&quot; | tee -a /etc/apt/sources.list 
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe&quot; | tee -a /etc/apt/sources.list 
-RUN echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe&quot; | tee -a /etc/apt/sources.list 
+RUN sed -i "s/deb http/deb [arch=amd64] http/" /etc/apt/sources.list
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s) main multiverse universe" | tee -a /etc/apt/sources.list 
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-security main multiverse universe" | tee -a /etc/apt/sources.list 
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-backports main multiverse universe" | tee -a /etc/apt/sources.list 
+RUN echo "deb [arch=arm64] http://ports.ubuntu.com/ $(lsb_release -c -s)-updates main multiverse universe" | tee -a /etc/apt/sources.list 
 RUN	apt-get update -qq &amp;&amp; apt-get install -y --no-install-recommends -o APT::Immediate-Configure=0 libx11-dev:arm64 libxext-dev:arm64 libxft-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxrender-dev:arm64 libxfixes-dev:arm64 libpango1.0-dev:arm64 libgl1-mesa-dev:arm64 libglu1-mesa-dev:arm64 libasound2-dev:arm64
 RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable --profile minimal -y
 
-ENV PATH=&quot;/root/.cargo/bin:$PATH&quot; \
+ENV PATH="/root/.cargo/bin:$PATH" \
 	CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ \
 	CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc \
     CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc \
     CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++ \
-    PKG_CONFIG_PATH=&quot;/usr/lib/aarch64-linux-gnu/pkgconfig/:${PKG_CONFIG_PATH}&quot;
+    PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig/:${PKG_CONFIG_PATH}"
 
 RUN rustup target add aarch64-unknown-linux-gnu
 
@@ -378,13 +409,13 @@ COPY --from=ubuntu_build target/aarch64-unknown-linux-gnu/release/&lt;your binar
 <p>在较新版本的 CMake（3.20 以上）中，可以直接设置 CMAKE_TOOLCHAIN_FILE 环境变量。</p>
 <p>CMake 文件的内容通常是，设置 CMAKE_SYSTEM_NAME 以及交叉编译器。 在 Linux/BSD 上还需要设置 PKG_CONFIG_EXECUTABLE 和 PKG_CONFIG_PATH。一个示例：</p>
 <pre><code class="language-cmake">set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR arm64)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 set(triplet aarch64-linux-gnu)
 set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)
 set(CMAKE_CXX_COMPILER /usr/bin/${triplet}-g++)
 set(ENV{PKG_CONFIG_EXECUTABLE} /usr/bin/${triplet}-pkg-config)
-set(ENV{PKG_CONFIG_PATH} &quot;$ENV{PKG_CONFIG_PATH}:/usr/lib/${triplet}/pkgconfig&quot;)
+set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/usr/lib/${triplet}/pkgconfig")
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
@@ -392,7 +423,40 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
 </code></pre>
-<p>注意 CMAKE_SYSTEM_PROCESSOR 通常是目标平台上 uname -m 的值，其他可能的值参见<a href="https://stackoverflow.com/questions/70475665/what-are-the-possible-values-of-cmake-system-processor/70498851#70498851">Possible Values</a>。 我们将此示例中的<code>triplet</code>变量设置为 aarch64-linux-gnu，这是用于 gcc/g++ 编译器以及 pkg-config 的前缀。 这个<code>triplet</code>也等同于 Rust <code>triplet</code> aarch64-unknown-linux-gnu。 PKG_CONFIG_PATH 设置为包含我们target的 <code>.pc</code> 文件的目录，这些是 Linux/BSD 上的 cairo 和 pango 依赖项所必需的。 最后 4 个选项可以防止CMake混淆host/taregt（当前机器和交叉编译的目标机器）的include/library的路径。</p>
+<p>注意 CMAKE_SYSTEM_PROCESSOR 通常是目标平台上 <code>uname -m</code> 的值，其他可能的值参见<a href="https://stackoverflow.com/questions/70475665/what-are-the-possible-values-of-cmake-system-processor/70498851#70498851">Possible Values</a>。 我们将此示例中的<code>triplet</code>变量设置为 aarch64-linux-gnu，这是用于 gcc/g++ 编译器以及 pkg-config 的前缀。 这个<code>triplet</code>也等同于 Rust <code>triplet</code> aarch64-unknown-linux-gnu。 PKG_CONFIG_PATH 设置为包含我们target的 <code>.pc</code> 文件的目录，这些是 Linux/BSD 上的 cairo 和 pango 依赖项所必需的。 最后 4 个选项可以防止CMake混淆host/taregt（当前机器和交叉编译的目标机器）的 include/library 路径。</p>
+<p>一个以Windows为target 的示例(使用 mingw 工具链):</p>
+<pre><code class="language-cmake">set(CMAKE_SYSTEM_NAME Windows)
+set(CMAKE_SYSTEM_PROCESSOR AMD64)
+set(triplet x86_64-w64-mingw32)
+set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)
+set(CMAKE_CXX_COMPILER /usr/bin/${triplet}-g++)
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+</code></pre>
+<h2 id="使用-cargo-xwin"><a class="header" href="#使用-cargo-xwin">使用 cargo-xwin</a></h2>
+<p>如果要以 Windows 和 MSVC编译器/ABI 为 target，你可以安装 <a href="https://github.com/rust-cross/cargo-xwin">cargo-xwin</a> ：</p>
+<pre><code>cargo install cargo-xwin
+</code></pre>
+<p>然后就可以通过下面的命令编译你的项目:</p>
+<pre><code>cargo xwin build --release --target x86_64-pc-windows-msvc
+</code></pre>
+<h2 id="使用-fltk-config-feature"><a class="header" href="#使用-fltk-config-feature">使用 fltk-config feature</a></h2>
+<p>fltk 提供了一个叫做 <code>fltk-config</code> 的脚本，它有点像 <code>pkg-config</code>。它会跟踪已安装的 FLTK 库路径以及必要的 <code>cflags</code> 和 <code>ldflags</code>。由于 fltk-rs 需要 FLTK 1.4 版本，而在撰写本文时，大多数发行版还没有提供<code>libfltk1.4</code>，因此你必须从源码中为你所需目标手动构建。不过，一旦发行版开始提供 FLTK 1.4，使用起来就会变得非常简单（针对 arm64 gnu linux）：</p>
+<pre><code>dpkg --add-architecture arm64
+apt-get install libfltk1.4-dev:arm64
+cargo build --target=aarch64-unknown-linux-gnu --features=fltk-config
+</code></pre>
+<p>如果您需要为不同的架构构建 FLTK，则需要使用 CMake 工具链（使用之前的文件）：</p>
+<pre><code>git clone https://github.com/fltk/fltk --depth=1
+cd fltk
+cmake -B bin -G Ninja -DFLTK_BUILD_TEST=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=/full/path/to/toolchain/file.cmake
+cmake --build bin
+cmake --instal bin # 在托管环境下可能需要 sudo
+# 对你的项目
+cargo build --target=aarch64-unknown-linux-gnu --features=fltk-config
+</code></pre>
 
                     </main>
 
@@ -402,7 +466,7 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="Fluid.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="Fluid.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -416,7 +480,7 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="Fluid.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="Fluid.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -426,21 +490,22 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>

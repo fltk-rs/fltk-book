@@ -1,4 +1,4 @@
-翻译最近更新于：2023/6/28
+翻译最近更新于：2024/05/07
 
 翻译已基本完成，受限于译者水平，内容有错误和不足，欢迎大家提交Issue 和 PullRequest 一起改进！
 
@@ -37,7 +37,7 @@ int main() {
 use fltk::{prelude::*, window};
 
 fn main() {
-    let mut mut wind = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut wind = window::Window::new(100, 100, 400, 300, "My Window");
     wind.end();
     wind.show();
 }

@@ -2,6 +2,7 @@
 
 
 ## 使用预编译包
+
 如果你要为以下平台编译fltk程序的话，很幸运，它们已经有预编译包了：
 - x86_64-pc-windows-gnu
 - x86_64-pc-windows-msvc
@@ -35,6 +36,7 @@ cargo build --target=aarch64-unknown-linux-gnu --features=fltk-bundled
 
 
 ## 使用cross
+
 如果你安装了docker，可以试试用 [cross](https://github.com/cross-rs/cross)：
 ```
 cargo install cross
@@ -196,6 +198,7 @@ cargo build --target=arch64-apple-darwin
 
 
 ## 使用docker
+
 直接使用目标平台的docker镜像可以让你免去使用cross交叉编译到不同linux target的麻烦。
 你需要一个Dockerfile，来拉取你需要的target，并安装Rust和C++工具链以及所需的依赖。
 例如，为allpine linux构建：
@@ -269,7 +272,7 @@ CFLTK_TOOLCHAIN=$(pwd)/toolchain.cmake cargo build --target=<your target>
 CMake 文件的内容通常是，设置 CMAKE_SYSTEM_NAME 以及交叉编译器。 在 Linux/BSD 上还需要设置 PKG_CONFIG_EXECUTABLE 和 PKG_CONFIG_PATH。一个示例：
 ```cmake
 set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR arm64)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 set(triplet aarch64-linux-gnu)
 set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)
@@ -283,9 +286,25 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
 ```
-注意 CMAKE_SYSTEM_PROCESSOR 通常是目标平台上 uname -m 的值，其他可能的值参见[Possible Values](https://stackoverflow.com/questions/70475665/what-are-the-possible-values-of-cmake-system-processor/70498851#70498851)。 我们将此示例中的`triplet`变量设置为 aarch64-linux-gnu，这是用于 gcc/g++ 编译器以及 pkg-config 的前缀。 这个`triplet`也等同于 Rust `triplet` aarch64-unknown-linux-gnu。 PKG_CONFIG_PATH 设置为包含我们target的 `.pc` 文件的目录，这些是 Linux/BSD 上的 cairo 和 pango 依赖项所必需的。 最后 4 个选项可以防止CMake混淆host/taregt（当前机器和交叉编译的目标机器）的include/library的路径。
+
+注意 CMAKE_SYSTEM_PROCESSOR 通常是目标平台上 `uname -m` 的值，其他可能的值参见[Possible Values](https://stackoverflow.com/questions/70475665/what-are-the-possible-values-of-cmake-system-processor/70498851#70498851)。 我们将此示例中的`triplet`变量设置为 aarch64-linux-gnu，这是用于 gcc/g++ 编译器以及 pkg-config 的前缀。 这个`triplet`也等同于 Rust `triplet` aarch64-unknown-linux-gnu。 PKG_CONFIG_PATH 设置为包含我们target的 `.pc` 文件的目录，这些是 Linux/BSD 上的 cairo 和 pango 依赖项所必需的。 最后 4 个选项可以防止CMake混淆host/taregt（当前机器和交叉编译的目标机器）的 include/library 路径。
+
+一个以Windows为target 的示例(使用 mingw 工具链):
+
+```cmake
+set(CMAKE_SYSTEM_NAME Windows)
+set(CMAKE_SYSTEM_PROCESSOR AMD64)
+set(triplet x86_64-w64-mingw32)
+set(CMAKE_C_COMPILER /usr/bin/${triplet}-gcc)
+set(CMAKE_CXX_COMPILER /usr/bin/${triplet}-g++)
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+```
 
 ## 使用 cargo-xwin
+
 如果要以 Windows 和 MSVC编译器/ABI 为 target，你可以安装 [cargo-xwin](https://github.com/rust-cross/cargo-xwin) ：
 ```
 cargo install cargo-xwin
@@ -296,6 +315,7 @@ cargo xwin build --release --target x86_64-pc-windows-msvc
 ```
 
 ## 使用 fltk-config feature
+
 fltk 提供了一个叫做 `fltk-config` 的脚本，它有点像 `pkg-config`。它会跟踪已安装的 FLTK 库路径以及必要的 `cflags` 和 `ldflags`。由于 fltk-rs 需要 FLTK 1.4 版本，而在撰写本文时，大多数发行版还没有提供`libfltk1.4`，因此你必须从源码中为你所需目标手动构建。不过，一旦发行版开始提供 FLTK 1.4，使用起来就会变得非常简单（针对 arm64 gnu linux）：
 
 ```

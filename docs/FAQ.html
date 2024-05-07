@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh-CN" class="sidebar-visible no-js light">
+<html lang="zh-CN" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -8,10 +8,9 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -32,15 +31,16 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -56,50 +56,81 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> 开始</a></li><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">2.</strong> 配置</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Cross-Compiling.html"><strong aria-hidden="true">2.1.</strong> 交叉编译</a></li><li class="chapter-item "><a href="Fluid.html"><strong aria-hidden="true">2.2.</strong> 使用 Fluid</a></li></ol></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">3.</strong> App 结构</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">4.</strong> 窗口 Windows</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="GlutWindow.html"><strong aria-hidden="true">4.1.</strong> GlutWindow</a></li></ol></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">5.</strong> 组件 Widgets</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Buttons.html"><strong aria-hidden="true">5.1.</strong> 按钮 Buttons</a></li><li class="chapter-item "><a href="Labels.html"><strong aria-hidden="true">5.2.</strong> 标签 Labels</a></li><li class="chapter-item "><a href="Group-widgets.html"><strong aria-hidden="true">5.3.</strong> 组控件 Group widgets</a></li><li class="chapter-item "><a href="Menus.html"><strong aria-hidden="true">5.4.</strong> 菜单 Menus</a></li><li class="chapter-item "><a href="Input-&-Output.html"><strong aria-hidden="true">5.5.</strong> 输入输出 Input & Output</a></li><li class="chapter-item "><a href="Valuators.html"><strong aria-hidden="true">5.6.</strong> 估值器 Valuators</a></li><li class="chapter-item "><a href="Text.html"><strong aria-hidden="true">5.7.</strong> 文字 Text</a></li><li class="chapter-item "><a href="Browsers.html"><strong aria-hidden="true">5.8.</strong> 阅览器 Browsers</a></li><li class="chapter-item "><a href="Trees.html"><strong aria-hidden="true">5.9.</strong> 树 Trees</a></li><li class="chapter-item "><a href="Tables.html"><strong aria-hidden="true">5.10.</strong> 表格 Tables</a></li><li class="chapter-item "><a href="Custom-Widgets.html"><strong aria-hidden="true">5.11.</strong> 自定义组件 Custom widgets</a></li></ol></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">6.</strong> 对话框 Dialogs</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">7.</strong> 图像 Images</a></li><li class="chapter-item expanded "><a href="Events.html"><strong aria-hidden="true">8.</strong> 事件 Events</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Drag-&-Drop.html"><strong aria-hidden="true">8.1.</strong> 拖放 Drag & Drop</a></li><li class="chapter-item "><a href="State-Management.html"><strong aria-hidden="true">8.2.</strong> 状态管理器 State Management</a></li></ol></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">9.</strong> 布局 Layouts</a></li><li class="chapter-item expanded "><a href="Style.html"><strong aria-hidden="true">10.</strong> 样式 Style</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Colors.html"><strong aria-hidden="true">10.1.</strong> 颜色 Colors</a></li><li class="chapter-item "><a href="FrameTypes.html"><strong aria-hidden="true">10.2.</strong> 边框类型 FrameTypes</a></li><li class="chapter-item "><a href="Fonts.html"><strong aria-hidden="true">10.3.</strong> 字体 Fonts</a></li><li class="chapter-item "><a href="Drawing.html"><strong aria-hidden="true">10.4.</strong> 绘制 Drawing things</a></li><li class="chapter-item "><a href="Styling.html"><strong aria-hidden="true">10.5.</strong> 自定义风格 Styling</a></li></ol></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">11.</strong> 动画 Animations</a></li><li class="chapter-item expanded "><a href="Accessibility.html"><strong aria-hidden="true">12.</strong> 无障碍 Accessibility</a></li><li class="chapter-item expanded "><a href="FAQ.html" class="active"><strong aria-hidden="true">13.</strong> FAQ</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -138,7 +169,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -159,18 +190,18 @@
 </ul>
 <p>If you're not running one of the aforementioned platforms, you'll have to remove the fltk-bundled feature flag in your Cargo.toml file:</p>
 <pre><code class="language-toml">[dependencies]
-fltk = &quot;^1.3&quot;
+fltk = "^1.3"
 </code></pre>
 <p>Furthermore, the fltk-bundled flag assumes you have curl and tar installed (for Windows, they're available in the Native Tools Command Prompt).</p>
 <h3 id="build-fails-on-windows-why-cant-cmake-find-my-toolchain"><a class="header" href="#build-fails-on-windows-why-cant-cmake-find-my-toolchain">Build fails on windows, why can't CMake find my toolchain?</a></h3>
-<p>If you're building using the MSVC toolchain, make sure you run your build (at least your initial build) using the Native Tools Command Prompt, which should appear once you start typing &quot;native&quot; in the start menu, choose the version corresponding to your installed Rust toolchain (x86 or x64). The Native Tools Command Prompt has all the environment variables set correctly for native development. <a href="https://github.com/alexcrichton/cmake-rs">cmake-rs</a> which the bindings use might not be able to find the Visual Studio 2022 generator, in which case, you can try to use the fltk-bundled feature, or use ninja via the use-ninja feature. This requires installing <a href="https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages">Ninja</a> which can be installed with Chocolatey, Scoop or manually.</p>
+<p>If you're building using the MSVC toolchain, make sure you run your build (at least your initial build) using the Native Tools Command Prompt, which should appear once you start typing "native" in the start menu, choose the version corresponding to your installed Rust toolchain (x86 or x64). The Native Tools Command Prompt has all the environment variables set correctly for native development. <a href="https://github.com/alexcrichton/cmake-rs">cmake-rs</a> which the bindings use might not be able to find the Visual Studio 2022 generator, in which case, you can try to use the fltk-bundled feature, or use ninja via the use-ninja feature. This requires installing <a href="https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages">Ninja</a> which can be installed with Chocolatey, Scoop or manually.</p>
 <p>If you're building for the GNU toolchain, make sure that Make is also installed, which usually comes installed in mingw64 toolchain.</p>
 <h3 id="build-fails-on-macos-11-with-an-apple-m1-chip-what-can-i-do"><a class="header" href="#build-fails-on-macos-11-with-an-apple-m1-chip-what-can-i-do">Build fails on MacOS 11 with an Apple M1 chip, what can I do?</a></h3>
-<p>If you're getting &quot;file too small to be an archive&quot; error, you might be hitting this <a href="https://github.com/rust-lang/cargo/issues/8875">issues</a> or this <a href="https://github.com/rust-lang/rust/issues/50220">issue</a>. MacOS's native C/C++ toolchain shouldn't have this issue, and can be installed by running <code>xcode-select --install</code> or by installing XCode. Make sure the corresponding Rust toolchain (aarch64-apple-darwin) is installed as well. You can uninstall other Rust apple-darwin toolchains or use cargo-lipo instead if you need universal/fat binaries.</p>
+<p>If you're getting "file too small to be an archive" error, you might be hitting this <a href="https://github.com/rust-lang/cargo/issues/8875">issues</a> or this <a href="https://github.com/rust-lang/rust/issues/50220">issue</a>. MacOS's native C/C++ toolchain shouldn't have this issue, and can be installed by running <code>xcode-select --install</code> or by installing XCode. Make sure the corresponding Rust toolchain (aarch64-apple-darwin) is installed as well. You can uninstall other Rust apple-darwin toolchains or use cargo-lipo instead if you need universal/fat binaries.</p>
 <h3 id="why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows"><a class="header" href="#why-do-i-get-a-link-error-while-using-the-mingw-toolchain-on-windows">Why do I get a Link error while using the mingw toolchain on windows?</a></h3>
 <p>If the linking fails because of this <a href="https://github.com/rust-lang/rust/issues/47048">issue</a> with older toolchains, it should work by using the fltk-shared feature (an issue with older compilers). Which would also generate a dynamic library which would need to be deployed with your application.</p>
 <pre><code class="language-toml">[dependencies]
-fltk = { version = &quot;^1.3&quot;, features = [&quot;fltk-shared&quot;] }
+fltk = { version = "^1.3", features = ["fltk-shared"] }
 </code></pre>
 <h3 id="why-does-my-msys2-mingw-built-fltk-app-using-fltk-bundled-isnt-self-contained-and-requires-several-dlls"><a class="header" href="#why-does-my-msys2-mingw-built-fltk-app-using-fltk-bundled-isnt-self-contained-and-requires-several-dlls">Why does my msys2 mingw built fltk app using, fltk-bundled, isn't self-contained and requires several dlls?</a></h3>
 <p>If you have installed libgdiplus via pacman, it would require those dependencies on other systems. If you're using the windows sdk-provided libgdiplus, it shouldn't require extra dlls. You can either uninstall libgdiplus that was installed via pacman, or or you can build using the feature flag: <code>no-gdiplus</code>.</p>
@@ -182,8 +213,8 @@ fltk = { version = &quot;^1.3&quot;, features = [&quot;fltk-shared&quot;] }
 <li>Use the no-pango feature. Downsides: loss of rtl and cjk language support.</li>
 <li>Set the CFLAGS and CXXFLAGS to correct the global include paths.</li>
 </ul>
-<pre><code>export CFLAGS=&quot;-isystem /usr/include/harfbuzz -isystem /usr/include/cairo&quot;
-export CXXFLAGS=&quot;-isystem /usr/include/harfbuzz -isystem /usr/include/cairo&quot;
+<pre><code>export CFLAGS="-isystem /usr/include/harfbuzz -isystem /usr/include/cairo"
+export CXXFLAGS="-isystem /usr/include/harfbuzz -isystem /usr/include/cairo"
 </code></pre>
 <h3 id="how-do-i-force-cmake-to-use-a-certain-c-compiler"><a class="header" href="#how-do-i-force-cmake-to-use-a-certain-c-compiler">How do I force CMake to use a certain C++ compiler?</a></h3>
 <p>FLTK works with all 3 major compilers. If you would like to change the C++ compiler that's chosen by default by CMake, you can change the CXX environment variable before running the build:</p>
@@ -192,36 +223,36 @@ cargo run
 </code></pre>
 <p>CMake caches the C++ compiler variable after it's first run, so if the above failed because of a previous run, you would have to run <code>cargo clean</code> or you can manually delete the CMakeCache.txt file in the build directory.</p>
 <h3 id="can-i-accelerate-the-build-speed"><a class="header" href="#can-i-accelerate-the-build-speed">Can I accelerate the build speed?</a></h3>
-<p>You can use the &quot;use-ninja&quot; feature flag if you have ninja installed. </p>
+<p>You can use the "use-ninja" feature flag if you have ninja installed.</p>
 <h3 id="can-i-cache-a-previous-build-of-the-fltk-library"><a class="header" href="#can-i-cache-a-previous-build-of-the-fltk-library">Can I cache a previous build of the FLTK library?</a></h3>
 <p>You can use the fltk-bundled feature and use either the CFLTK_BUNDLE_DIR or CFLTK_BUNDLE_URL to point to the location of your cached cfltk and fltk libraries.</p>
 <h2 id="deployment"><a class="header" href="#deployment">Deployment</a></h2>
 <h3 id="how-do-i-deploy-my-application"><a class="header" href="#how-do-i-deploy-my-application">How do I deploy my application?</a></h3>
 <p>Rust, by default, statically links your application. FLTK is built also for static linking. That means that the resulting executable can be directly deployed without the need to deploy other files along with it. If you want to create a WIN32 application, Mac OS Bundle or Linux AppImage, please check the question just below!</p>
 <h3 id="why-do-i-get-a-console-window-whenever-i-start-my-gui-app"><a class="header" href="#why-do-i-get-a-console-window-whenever-i-start-my-gui-app">Why do I get a console window whenever I start my GUI app?</a></h3>
-<p>This is the default behavior of the toolchain, and is helpful for debugging purposes. It can be turned off easily by adding <code>#![windows_subsystem = &quot;windows&quot;]</code> at the beginning of your main.rs file if you're on windows. 
-If you would like to keep the console window on debug builds, but not on release builds, you can use <code>#![cfg_attr(not(debug_assertions), windows_subsystem = &quot;windows&quot;)]</code> instead.</p>
+<p>This is the default behavior of the toolchain, and is helpful for debugging purposes. It can be turned off easily by adding <code>#![windows_subsystem = "windows"]</code> at the beginning of your main.rs file if you're on windows.
+If you would like to keep the console window on debug builds, but not on release builds, you can use <code>#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]</code> instead.</p>
 <p>For Mac OS and Linux, this is done by a post-build process to create a Mac OS Bundle or Linux AppImage respectively.</p>
-<p>See <a href="https://github.com/burtonageo/cargo-bundle">cargo-bundle</a> for an automated tool for creating Mac OS app bundles. </p>
+<p>See <a href="https://github.com/burtonageo/cargo-bundle">cargo-bundle</a> for an automated tool for creating Mac OS app bundles.</p>
 <p>See <a href="https://docs.appimage.org/packaging-guide/overview.html#converting-existing-binary-packages">here</a> for directions on creating an AppImage for Linux.</p>
 <h3 id="why-is-the-size-of-my-resulting-executable-larger-than-i-had-expected"><a class="header" href="#why-is-the-size-of-my-resulting-executable-larger-than-i-had-expected">Why is the size of my resulting executable larger than I had expected?</a></h3>
 <p>FLTK is known for it's small applications. Make sure you're building in release, and make sure symbols are stripped using the strip command in Unix-like systems. On Windows it's unnecessary since symbols would end up in the pdb file (which shouldn't be deployed).</p>
-<p>If you need an even smaller size, try using opt-level=&quot;z&quot;:</p>
+<p>If you need an even smaller size, try using opt-level="z":</p>
 <pre><code class="language-toml">[profile.release]
-opt-level = &quot;z&quot;
+opt-level = "z"
 lto = true
 codegen-units = 1
-panic = &quot;abort&quot;
+panic = "abort"
 </code></pre>
 <p>Newer versions of cargo (&gt;1.46) support automatically stripping binaries in the post-build phase:</p>
-<pre><code class="language-toml">cargo-features = [&quot;strip&quot;]
+<pre><code class="language-toml">cargo-features = ["strip"]
 
 [profile.release]
 strip = true
-opt-level = &quot;z&quot;
+opt-level = "z"
 lto = true
 codegen-units = 1
-panic = &quot;abort&quot;
+panic = "abort"
 </code></pre>
 <p>Furthermore, you can build Rust's stdlib optimized for size (it comes optimized for speed by default). More info on that <a href="https://github.com/johnthagen/min-sized-rust">here</a></p>
 <h3 id="can-i-cross-compile-my-application-to-a-mobile-platform-or-wasm"><a class="header" href="#can-i-cross-compile-my-application-to-a-mobile-platform-or-wasm">Can I cross-compile my application to a mobile platform or WASM?</a></h3>
@@ -240,10 +271,10 @@ panic = &quot;abort&quot;
 <h3 id="do-you-plan-on-supporting-multithreading-or-asyncawait"><a class="header" href="#do-you-plan-on-supporting-multithreading-or-asyncawait">Do you plan on supporting multithreading or async/await?</a></h3>
 <p>FLTK supports multithreaded and concurrent applications. See the examples dir and the <a href="https://github.com/fltk-rs/demos">fltk-rs demos repo</a> for examples on usage with threads, messages, async_std and tokio (web-todo examples).</p>
 <h3 id="should-i-explicitly-call-applock-and-appunlock"><a class="header" href="#should-i-explicitly-call-applock-and-appunlock">Should I explicitly call app::lock() and app::unlock()?</a></h3>
-<p>fltk-rs surrounds all mutating calls to widgets with a lock on the C++ wrapper side. Normally you wouldn't have to call app::lock() and app::unlock(). 
-This depends however on the support of recursive mutexes in your system. 
-If you notice haning in multithreaded applications, you might have to initialize threads (like xlib threads) by calling app::lock() once in your main thread. 
-In that case, you can wrap widgets in an Arc<Mutex> or surround widget-mutating functions/methods with an app::lock and app::unlock. 
+<p>fltk-rs surrounds all mutating calls to widgets with a lock on the C++ wrapper side. Normally you wouldn't have to call app::lock() and app::unlock().
+This depends however on the support of recursive mutexes in your system.
+If you notice haning in multithreaded applications, you might have to initialize threads (like xlib threads) by calling app::lock() once in your main thread.
+In that case, you can wrap widgets in an Arc<Mutex> or surround widget-mutating functions/methods with an app::lock and app::unlock.
 But that should rarely be required.</p>
 <h2 id="windowing"><a class="header" href="#windowing">Windowing</a></h2>
 <h3 id="why-does-fltk-exit-when-i-hit-the-escape-key"><a class="header" href="#why-does-fltk-exit-when-i-hit-the-escape-key">Why does FLTK exit when I hit the escape key?</a></h3>
@@ -255,8 +286,7 @@ But that should rarely be required.</p>
             app::quit(); // Which would close using the close button. You can also assign other keys to close the application
         }
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="panicscrashes"><a class="header" href="#panicscrashes">Panics/Crashes</a></h2>
 <h3 id="my-app-panics-when-i-try-to-handle-events-how-can-i-fix-it"><a class="header" href="#my-app-panics-when-i-try-to-handle-events-how-can-i-fix-it">My app panics when I try to handle events, how can I fix it?</a></h3>
 <p>This is due to a debug_assert which checks that the involved widget and the window are capable of handling events. Although most events would be handled correctly, some events require that the aforementioned conditions be met. Thus it is advisable to place your event handling code after the main drawing is done, i.e after calling your main window's show() method. Another point is that event handling and drawing should be done in the main thread. Panics accross FFI boundaries are undefined behavior, as such, the wrapper never throws. Furthermore, all panics which might arise in callbacks are caught on the Rust side using catch_unwind.</p>
@@ -280,8 +310,7 @@ An example of a leaking widget:</p>
     {
         button::Button::default(); // this leaks since it's not parented by the window, and has no handle in main
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>A more subtle cause of leaks, is removing a widget from a group, then the scope ends without it being added to another group or deleted:</p>
 <pre><pre class="playground"><code class="language-rust edition2021">fn main() {
     let a = app::App::default();
@@ -295,8 +324,7 @@ An example of a leaking widget:</p>
     {
         win.remove_by_index(0); // the button leaks here since it's removed and we no longer have access to it
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h3 id="why-is-fltk-rs-using-so-much-unsafe-code"><a class="header" href="#why-is-fltk-rs-using-so-much-unsafe-code">Why is fltk-rs using so much unsafe code?</a></h3>
 <p>Interfacing with C++ or C code can't be reasoned about by the Rust compiler, so the unsafe keyword is needed.</p>
 <h3 id="is-fltk-rs-panicexception-safe"><a class="header" href="#is-fltk-rs-panicexception-safe">Is fltk-rs panic/exception-safe?</a></h3>
@@ -308,7 +336,7 @@ Also any function sending a string across FFI is checked for interal null bytes.
 <li><code>CFLTK_WAYLAND_ONLY=&lt;1 or 0&gt;</code> allows building for wayland only without directly linking X11 libs nor relying on their headers for the build process. This only works with the <code>use-wayland</code> feature flag.</li>
 <li><code>CFLTK_BUNDLE_DIR=&lt;path&gt;</code> allows passing a path of prebuilt cfltk and fltk static libs, useful for when a customized build of fltk is needed, or for targetting other arches when building with the <code>fltk-bundled</code> flag.</li>
 <li><code>CFLTK_BUNDLE_URL=&lt;url&gt;</code> similar to above but allows passing a url which will directs the build script to download from the passed url.</li>
-<li><code>FLTK_BACKEND=&lt;x11 or wayland&gt;</code> allows choosing the backend of your hybrid X11/wayland FLTK app. This only works for apps built with <code>use-wayland</code> feature flag. </li>
+<li><code>FLTK_BACKEND=&lt;x11 or wayland&gt;</code> allows choosing the backend of your hybrid X11/wayland FLTK app. This only works for apps built with <code>use-wayland</code> feature flag.</li>
 </ul>
 <h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
 <p>Please refer to the <a href="https://github.com/fltk-rs/fltk-rs/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> page for further information.</p>
@@ -339,21 +367,22 @@ Also any function sending a string across FFI is checked for interal null bytes.
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>

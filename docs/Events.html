@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh-CN" class="sidebar-visible no-js light">
+<html lang="zh-CN" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -8,10 +8,9 @@
 
         <!-- Custom HTML head -->
         
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -32,15 +31,16 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -56,50 +56,81 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 <ol class="chapter"><li class="chapter-item expanded "><a href="Home.html"><strong aria-hidden="true">1.</strong> 开始</a></li><li class="chapter-item expanded "><a href="Setup.html"><strong aria-hidden="true">2.</strong> 配置</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Cross-Compiling.html"><strong aria-hidden="true">2.1.</strong> 交叉编译</a></li><li class="chapter-item "><a href="Fluid.html"><strong aria-hidden="true">2.2.</strong> 使用 Fluid</a></li></ol></li><li class="chapter-item expanded "><a href="The-App-struct.html"><strong aria-hidden="true">3.</strong> App 结构</a></li><li class="chapter-item expanded "><a href="Windows.html"><strong aria-hidden="true">4.</strong> 窗口 Windows</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="GlutWindow.html"><strong aria-hidden="true">4.1.</strong> GlutWindow</a></li></ol></li><li class="chapter-item expanded "><a href="Widgets.html"><strong aria-hidden="true">5.</strong> 组件 Widgets</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Buttons.html"><strong aria-hidden="true">5.1.</strong> 按钮 Buttons</a></li><li class="chapter-item "><a href="Labels.html"><strong aria-hidden="true">5.2.</strong> 标签 Labels</a></li><li class="chapter-item "><a href="Group-widgets.html"><strong aria-hidden="true">5.3.</strong> 组控件 Group widgets</a></li><li class="chapter-item "><a href="Menus.html"><strong aria-hidden="true">5.4.</strong> 菜单 Menus</a></li><li class="chapter-item "><a href="Input-&-Output.html"><strong aria-hidden="true">5.5.</strong> 输入输出 Input & Output</a></li><li class="chapter-item "><a href="Valuators.html"><strong aria-hidden="true">5.6.</strong> 估值器 Valuators</a></li><li class="chapter-item "><a href="Text.html"><strong aria-hidden="true">5.7.</strong> 文字 Text</a></li><li class="chapter-item "><a href="Browsers.html"><strong aria-hidden="true">5.8.</strong> 阅览器 Browsers</a></li><li class="chapter-item "><a href="Trees.html"><strong aria-hidden="true">5.9.</strong> 树 Trees</a></li><li class="chapter-item "><a href="Tables.html"><strong aria-hidden="true">5.10.</strong> 表格 Tables</a></li><li class="chapter-item "><a href="Custom-Widgets.html"><strong aria-hidden="true">5.11.</strong> 自定义组件 Custom widgets</a></li></ol></li><li class="chapter-item expanded "><a href="Dialogs.html"><strong aria-hidden="true">6.</strong> 对话框 Dialogs</a></li><li class="chapter-item expanded "><a href="Images.html"><strong aria-hidden="true">7.</strong> 图像 Images</a></li><li class="chapter-item expanded "><a href="Events.html" class="active"><strong aria-hidden="true">8.</strong> 事件 Events</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Drag-&-Drop.html"><strong aria-hidden="true">8.1.</strong> 拖放 Drag & Drop</a></li><li class="chapter-item "><a href="State-Management.html"><strong aria-hidden="true">8.2.</strong> 状态管理器 State Management</a></li></ol></li><li class="chapter-item expanded "><a href="Layouts.html"><strong aria-hidden="true">9.</strong> 布局 Layouts</a></li><li class="chapter-item expanded "><a href="Style.html"><strong aria-hidden="true">10.</strong> 样式 Style</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="Colors.html"><strong aria-hidden="true">10.1.</strong> 颜色 Colors</a></li><li class="chapter-item "><a href="FrameTypes.html"><strong aria-hidden="true">10.2.</strong> 边框类型 FrameTypes</a></li><li class="chapter-item "><a href="Fonts.html"><strong aria-hidden="true">10.3.</strong> 字体 Fonts</a></li><li class="chapter-item "><a href="Drawing.html"><strong aria-hidden="true">10.4.</strong> 绘制 Drawing things</a></li><li class="chapter-item "><a href="Styling.html"><strong aria-hidden="true">10.5.</strong> 自定义风格 Styling</a></li></ol></li><li class="chapter-item expanded "><a href="Animations.html"><strong aria-hidden="true">11.</strong> 动画 Animations</a></li><li class="chapter-item expanded "><a href="Accessibility.html"><strong aria-hidden="true">12.</strong> 无障碍 Accessibility</a></li><li class="chapter-item expanded "><a href="FAQ.html"><strong aria-hidden="true">13.</strong> FAQ</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -138,7 +169,7 @@
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -163,27 +194,25 @@
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
-    but.set_callback(|_| println!(&quot;The button was clicked!&quot;));
+    but.set_callback(|_| println!("The button was clicked!"));
     app.run().unwrap();
-}
-</code></pre></pre>
-<p>这里闭包捕获的环境是设置回调的组件自身的<code>&amp;mut self</code>： </p>
+}</code></pre></pre>
+<p>这里闭包捕获的环境是设置回调的组件自身的<code>&amp;mut self</code>：</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
-    but.set_callback(|b| b.set_label(&quot;Clicked!&quot;));
+    but.set_callback(|b| b.set_label("Clicked!"));
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>你的按钮何时执行回调方法，点击时？还是鼠标松开时？你需要设置触发器来决定何时执行回调，<code>set_callback()</code>方法会设置默认的触发器，不同组件的触发器可能不同。例如按钮组件的触发器便是，当它具有鼠标焦点时的点击或按下回车。
 某个组件的触发器是可以通过<code>set_trigger()</code>方法改变的。改变按钮的触发方式可能没有意义，但是对于<code>Input</code>组建来说，触发器可以被设置为<code>CallbackTrigger::Changed</code>，这可以使<code>Input</code>组件在状态改变时就触发回调：</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
@@ -197,45 +226,42 @@ fn main() {
     win.end();
     win.show();
     inp.set_trigger(enums::CallbackTrigger::Changed);
-    inp.set_callback(|i| println!(&quot;{}&quot;, i.value()));
+    inp.set_callback(|i| println!("{}", i.value()));
     a.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>在这个示例中，用户每输入一个字符都会打印一次。</p>
 <p>使用闭包的好处便是因为它能够捕获环境，你可以将闭包环境作用域中的其他变量传递进去：</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
     but.set_callback(move |_| {
-        my_window.set_label(&quot;button was pressed&quot;);
+        my_window.set_label("button was pressed");
     });
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>在<a href="Menus">菜单</a>中，事件处理是在每个<code>MenuItem</code>上进行的。</p>
 <h4 id="使用方法对象-function-object"><a class="header" href="#使用方法对象-function-object">使用方法对象 Function Object</a></h4>
 <p>如果你喜欢的话你也可以直接传递函数对象：</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn button_cb(w: &amp;mut impl WidgetExt) {
-    w.set_label(&quot;Clicked&quot;);
+    w.set_label("Clicked");
 }
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
     but.set_callback(button_cb);
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>我们使用<code>&amp;mut impl WidgetExt</code>，以便让所有组件都能使用这个回调。或者，你可以直接使用<code>&amp;mut button::Button</code>只让<code>Button</code>使用。
 这种方法的一个缺点是，有时候你必须维护全局状态：</p>
 <pre><pre class="playground"><code class="language-rust edition2021">extern crate lazy_static;
@@ -266,16 +292,15 @@ fn button_cb(_w: &amp;mut button::Button) {
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Increment!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Increment!");
     my_window.end();
     my_window.show();
     
     but.set_callback(button_cb);
     
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>这里我们用了<code>lazy_static</code>，当然也有其他的<code>crate</code>来用来进行状态管理。</p>
 <p>同样，对菜单来说，在<code>MenuExt::add()/insert()</code>或<code>MenuItem::add()/insert()</code>方法中，我们可以使用<code>&amp;mut impl MenuExt</code>来设置<code>Menu</code>和<code>Menu Item</code>的回调。</p>
 <h3 id="使用处理方法-handle-method"><a class="header" href="#使用处理方法-handle-method">使用处理方法 handle method</a></h3>
@@ -285,53 +310,50 @@ fn main() {
 
 fn main() {
     let app = app::App::default();
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
 
     but.handle(|_, event| {
-        println!(&quot;The event: {:?}&quot;, event);
+        println!("The event: {:?}", event);
         false
     });
     
     app.run().unwrap();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>这段代码将打印出<code>event</code>，但并不做其他处理，所以我们返回false。很明显，我们应该做一些有用的处理，所以我们把它改成这样：</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    but.handle(|_, event| match event {
         Event::Push =&gt; {
-            println!(&quot;I was pushed!&quot;);
+            println!("I was pushed!");
             true
         },
         _ =&gt; false,
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>在这里，我们处理事件<code>Event</code>然后返回<code>true</code>，将其他事件将被忽略并返回<code>false</code>。</p>
 <p>另一个例子：</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    but.handle(|b, event| match event {
         Event::Push =&gt; {
-            b.set_label(&quot;Pushed&quot;);
+            b.set_label("Pushed");
             true
         },
         _ =&gt; false,
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h3 id="使用messages"><a class="header" href="#使用messages">使用messages</a></h3>
-<p>这允许我们创建Channel和<code>Sender</code> <code>Receiver</code>的结构，在触发后发送Message（Message必须是<code>Send + Sync</code>），并在<code>event loop</code>中处理。这样做的好处是，当我们需要将我们的一些量传递到闭包或线程中时，不必再使用智能指针来包装它们。</p>
+<p>这允许我们创建Channel和<code>Sender</code> <code>Receiver</code>的结构，在触发后发送Message（Message必须是<code>Send + Sync</code>），并在<code>event loop</code>中处理。这样做的好处是，当我们需要将我们的一些变量传递到闭包或线程中时，不必再使用智能指针来包装它们。</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 
 fn main() {
     let app = app::App::default();
     
-    let mut my_window = window::Window::new(100, 100, 400, 300, &quot;My Window&quot;);
-    let mut but = button::Button::new(160, 200, 80, 40, &quot;Click me!&quot;);
+    let mut my_window = window::Window::new(100, 100, 400, 300, "My Window");
+    let mut but = button::Button::new(160, 200, 80, 40, "Click me!");
     my_window.end();
     my_window.show();
 
@@ -343,26 +365,24 @@ fn main() {
     while app.wait() {
         if let Some(msg) = r.recv() {
             match msg {
-                true =&gt; println!(&quot;Clicked&quot;),
+                true =&gt; println!("Clicked"),
                 false =&gt; (), // 什么都不做
             }
         }
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>跟之前的例子一样，Messages 可以在<code>event loop</code>中被接受，另外你也可以在后台线程或<code>app::add_idle()</code>的回调中接收<code>Message</code>：</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>    app::add_idle(move || {
         if let Some(msg) = r.recv() {
             match msg {
-                true =&gt; println!(&quot;Clicked&quot;),
+                true =&gt; println!("Clicked"),
                 false =&gt; (), // 这里不做任何事
             }
         }
     });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>这里也不限于使用<code>fltk channel</code>，你可以使用任何channel。例如，这个例子用使用了<code>std channel</code>：</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -370,8 +390,7 @@ fn main() {
 btn.set_callback(move |_| {
     s.send(Message::SomeMessage).unwrap();
 });
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>类似于<code>emit()</code>方法，你也可以定义一个适用于所有组件的<code>send()</code>方法，：</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use std::sync::mpsc::Sender;
 
@@ -399,8 +418,7 @@ fn main() {
     let btn = button::Button::default();
     let (s, r) = std::sync::mpsc::channel::&lt;Message&gt;();
     btn.send(s.clone(), Message::SomeMessage);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h3 id="创建自己的事件"><a class="header" href="#创建自己的事件">创建自己的事件</a></h3>
 <p>FLTK在<code>enums::Event</code>中预先定义了29个事件。我们还可以使用调用<code>app::handle(impl Into&lt;i32&gt;, window)</code>创建我们自己的事件。<code>handle</code>函数以任意一个大于30的<code>i32</code>类型值作为信号标识，最好提前定义好信号标识。我们可以在另一个组件的<code>handle()</code>方法中处理事件，注意这个组件需要放在传递给<code>app::handle</code>的那个窗口内部。
 在下面的例子中，我们创建了一个带有<code>Frame</code>和<code>Button</code>的窗口。<code>Button</code>的回调函数在执行时，通过<code>app::handle_main</code>函数发送一个<code>CHANGED</code>事件。该<code>CHANGED</code>信号在<code>Frame</code>的<code>handle</code>方法中被接收到并做出处理：</p>
@@ -444,14 +462,14 @@ impl Counter {
 fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     let app = app::App::default();
     let counter = Counter::new(0);
-    let mut wind = Window::default().with_size(160, 200).with_label(&quot;Counter&quot;);
+    let mut wind = Window::default().with_size(160, 200).with_label("Counter");
     let mut pack = Pack::default().with_size(120, 140).center_of(&amp;wind);
     pack.set_spacing(10);
-    let mut but_inc = Button::default().with_size(0, 40).with_label(&quot;+&quot;);
+    let mut but_inc = Button::default().with_size(0, 40).with_label("+");
     let mut frame = Frame::default()
         .with_size(0, 40)
         .with_label(&amp;counter.clone().value().to_string());
-    let mut but_dec = Button::default().with_size(0, 40).with_label(&quot;-&quot;);
+    let mut but_dec = Button::default().with_size(0, 40).with_label("-");
     pack.end();
     wind.end();
     wind.show();
@@ -476,8 +494,7 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
     });
 
     Ok(app.run()?)
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>发送的<code>i32</code>信号可以是动态创建的，也可以把它存在一个局部或全局常量中，或者存放在一个枚举中。</p>
 <h4 id="优点"><a class="header" href="#优点">优点</a></h4>
 <ul>
@@ -501,7 +518,7 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="Drag-&amp;-Drop.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="Drag-&amp;-Drop.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -515,7 +532,7 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="Drag-&amp;-Drop.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="Drag-&amp;-Drop.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -525,21 +542,22 @@ fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
 
 
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
 
 
+    </div>
     </body>
 </html>

@@ -40,7 +40,11 @@ inp.set_callback(|i| println!("You clicked enter, and the input's current text i
 
 ## IME support
 
- The input method editor is automatically enabled for languages which require it like Chinese, Japanese and Korean. FLTK uses the OS provided IME in this case.
+The input method editor is automatically enabled for languages which require it like Chinese, Japanese and Korean. FLTK uses the OS provided IME in this case.
+
+## Keyboard screen scaling
+
+Similar to many web browsers, FLTK has 3 default global shortcuts (Ctrl/+/-/0/ [Cmd/+/-/0/ under macOS]) that change the value of the GUI scaling factor. Ctrl+ zooms-in all app windows of the focussed display (all displays under macOS); Ctrl- zooms-out these windows; Ctrl 0 restores the initial value of the scaling factor.
 
 ## The ability to customize key events for your widgets, even custom widgets
 

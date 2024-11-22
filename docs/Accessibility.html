@@ -216,6 +216,8 @@ inp.set_callback(|i| println!("You clicked enter, and the input's current text i
 <span class="boring">}</span></code></pre></pre>
 <h2 id="ime-support"><a class="header" href="#ime-support">IME support</a></h2>
 <p>The input method editor is automatically enabled for languages which require it like Chinese, Japanese and Korean. FLTK uses the OS provided IME in this case.</p>
+<h2 id="keyboard-screen-scaling"><a class="header" href="#keyboard-screen-scaling">Keyboard screen scaling</a></h2>
+<p>Similar to many web browsers, FLTK has 3 default global shortcuts (Ctrl/+/-/0/ [Cmd/+/-/0/ under macOS]) that change the value of the GUI scaling factor. Ctrl+ zooms-in all app windows of the focussed display (all displays under macOS); Ctrl- zooms-out these windows; Ctrl 0 restores the initial value of the scaling factor.</p>
 <h2 id="the-ability-to-customize-key-events-for-your-widgets-even-custom-widgets"><a class="header" href="#the-ability-to-customize-key-events-for-your-widgets-even-custom-widgets">The ability to customize key events for your widgets, even custom widgets</a></h2>
 <p>Using the WidgetExt::handle method, you can customize how widgets handle events, including key events.</p>
 <pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]

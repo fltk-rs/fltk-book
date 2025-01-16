@@ -54,13 +54,13 @@ Why choose FLTK?
 Just add the following to your project's Cargo.toml file:
 ```toml
 [dependencies]
-fltk = "^1.4"
+fltk = "^1.5"
 ```
 
 To use the bundled libs (available for x64 windows (msvc & gnu (msys2)), x64 linux & macos):
 ```toml
 [dependencies]
-fltk = { version = "^1.4", features = ["fltk-bundled"] }
+fltk = { version = "^1.5", features = ["fltk-bundled"] }
 ```
 
 The library is automatically built and statically linked to your binary.

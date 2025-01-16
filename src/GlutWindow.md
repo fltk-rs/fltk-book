@@ -22,7 +22,7 @@ Replace `/path/to/fltk_gl/library` with the actual path to the `fltk_gl` library
 
 ```toml
 [dependencies]
-fltk = { version = "1.4.4", features = ["enable-glwindow"] }
+fltk = { version = "1.5.2", features = ["enable-glwindow"] }
 ```
 
 5. Clean and rebuild: If the above steps do not resolve the issue, you can try cleaning the build artifacts and rebuilding the project. Use the following command to clean the project:
@@ -72,29 +72,27 @@ For more detailed information of GlWindow, please refer to the official document
 
 ### OpenGL Triangle
 
+The dependencies section in  your project's Cargo.toml file should be:
 ```rust
-use fltk::{
-    prelude::*,
-    *,
-    image::IcoImage
-};
+[dependencies]
+fltk = { version = "^1.5", features = ["enable-glwindow"] }
+glow = "0.16.0"
+```
+main.rs
+```rust
+use fltk::{prelude::*, *};
 use glow::*;
 
 fn main() {
-
     let app = app::App::default();
     let mut win = window::GlWindow::default().with_size(800, 600);
-    let icon: IcoImage = IcoImage::load(&std::path::Path::new("src/fltk.ico")).unwrap();
     win.make_resizable(true);
-    win.set_icon(Some(icon));
     win.set_mode(enums::Mode::Opengl3);
     win.end();
     win.show();
 
     unsafe {
-        let gl = glow::Context::from_loader_function(|s| {
-            win.get_proc_address(s) as *const _
-        });
+        let gl = glow::Context::from_loader_function(|s| win.get_proc_address(s) as *const _);
 
         let vertex_array = gl
             .create_vertex_array()

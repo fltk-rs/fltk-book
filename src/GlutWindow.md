@@ -22,7 +22,7 @@ Replace `/path/to/fltk_gl/library` with the actual path to the `fltk_gl` library
 
 ```toml
 [dependencies]
-fltk = { version = "1.4.4", features = ["enable-glwindow"] }
+fltk = { version = "1.5.2", features = ["enable-glwindow"] }
 ```
 
 5. Clean and rebuild: If the above steps do not resolve the issue, you can try cleaning the build artifacts and rebuilding the project. Use the following command to clean the project:

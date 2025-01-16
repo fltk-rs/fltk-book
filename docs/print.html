@@ -823,8 +823,7 @@ The next call <a href="https://docs.rs/fltk/latest/fltk/prelude/trait.WidgetExt.
 <hr />
 <h2 id="embedded-windows"><a class="header" href="#embedded-windows">Embedded windows</a></h2>
 <p>Windows can be embedded inside other windows:</p>
-<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
-use crate::enums::Color;
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, enums::Color, *};
 
 fn main() {
     let app = app::App::default();
@@ -4754,22 +4753,6 @@ Also any function sending a string across FFI is checked for interal null bytes.
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

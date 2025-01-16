@@ -39,8 +39,7 @@ The next call [show()](https://docs.rs/fltk/latest/fltk/prelude/trait.WidgetExt.
 
 Windows can be embedded inside other windows:
 ```rust
-use fltk::{prelude::*, *};
-use crate::enums::Color;
+use fltk::{prelude::*, enums::Color, *};
 
 fn main() {
     let app = app::App::default();

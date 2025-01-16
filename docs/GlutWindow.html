@@ -219,28 +219,27 @@ fltk = { version = "1.5.2", features = ["enable-glwindow"] }
 <hr />
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <h3 id="opengl-triangle"><a class="header" href="#opengl-triangle">OpenGL Triangle</a></h3>
-<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{
-    prelude::*,
-    *,
-    image::IcoImage
-};
+<p>The dependencies section in  your project's Cargo.toml file should be:</p>
+<pre><pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>[dependencies]
+fltk = { version = "^1.5", features = ["enable-glwindow"] }
+glow = "0.16.0"
+<span class="boring">}</span></code></pre></pre>
+<p>main.rs</p>
+<pre><pre class="playground"><code class="language-rust edition2021">use fltk::{prelude::*, *};
 use glow::*;
 
 fn main() {
-
     let app = app::App::default();
     let mut win = window::GlWindow::default().with_size(800, 600);
-    let icon: IcoImage = IcoImage::load(&amp;std::path::Path::new("src/fltk.ico")).unwrap();
     win.make_resizable(true);
-    win.set_icon(Some(icon));
     win.set_mode(enums::Mode::Opengl3);
     win.end();
     win.show();
 
     unsafe {
-        let gl = glow::Context::from_loader_function(|s| {
-            win.get_proc_address(s) as *const _
-        });
+        let gl = glow::Context::from_loader_function(|s| win.get_proc_address(s) as *const _);
 
         let vertex_array = gl
             .create_vertex_array()

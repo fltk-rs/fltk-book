@@ -31,7 +31,7 @@ fn main() {
     app.run().unwrap();
 }
 ```
-This will give your application a Gtk app appearance. There are other built-in schemes: Basic, Plastic and Gleam.
+This will give your application a Gtk app appearance. There are other built-in schemes: Basic, Plastic, Gleam and Oxy.
 
 The App struct is also responsible for loading system fonts at the start of the application using the load_system_fonts() method. 
 

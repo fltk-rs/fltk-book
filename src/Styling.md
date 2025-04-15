@@ -90,6 +90,7 @@ There are four schemes:
 - Gtk
 - Gleam
 - Plastic
+- Oxy
 
 To setting the app's colors, default font, default frame type and whether to show focus on widgets.
 ```rust

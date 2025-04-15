@@ -196,7 +196,7 @@ fn main() {
 <li>Single executable. No DLLs to deploy.</li>
 <li>Supports old architectures.</li>
 <li>FLTK's permissive license which allows static linking for closed-source applications.</li>
-<li>Themeability (4 supported schemes: Base, GTK, Plastic and Gleam), and additional theming using <a href="https://crates.io/crates/fltk-theme">fltk-theme</a>.</li>
+<li>Themeability (4 supported schemes: Base, GTK, Plastic, Gleam and Oxy), and additional theming using <a href="https://crates.io/crates/fltk-theme">fltk-theme</a>.</li>
 <li>Provides around 80 customizable widgets.</li>
 <li>Has inbuilt image support.</li>
 </ul>
@@ -788,7 +788,7 @@ fn main() {
     let app = app::App::default().with_scheme(app::Scheme::Gtk);
     app.run().unwrap();
 }</code></pre></pre>
-<p>This will give your application a Gtk app appearance. There are other built-in schemes: Basic, Plastic and Gleam.</p>
+<p>This will give your application a Gtk app appearance. There are other built-in schemes: Basic, Plastic, Gleam and Oxy.</p>
 <p>The App struct is also responsible for loading system fonts at the start of the application using the load_system_fonts() method.</p>
 <p>A typical fltk-rs application will construct the App struct prior to creating any widgets and showing the main window.</p>
 <p>Any logic added after calling the run() method, will be executed after the event loop is terminated (typically by closing the all windows of your application, or by calling the quit() method). That logic could include respawning the app if needed.</p>
@@ -4428,6 +4428,7 @@ let app = app::App::default().with_scheme(app::Scheme::Plastic);
 <li>Gtk</li>
 <li>Gleam</li>
 <li>Plastic</li>
+<li>Oxy</li>
 </ul>
 <p>To setting the app's colors, default font, default frame type and whether to show focus on widgets.</p>
 <pre><pre class="playground"><code class="language-rust edition2021">use fltk::{app, button::Button, enums, frame::Frame, prelude::*, window::Window};
